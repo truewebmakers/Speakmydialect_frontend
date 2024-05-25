@@ -112,7 +112,6 @@ function App() {
           ) && <Header11 />}
 
           <SearchModal1 />
-
           <div className="body_content">
             {/* {children} */}
             <Routes />

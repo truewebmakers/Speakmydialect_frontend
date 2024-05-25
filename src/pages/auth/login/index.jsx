@@ -1,6 +1,70 @@
+import { apiMethods, routes } from "@/constants/constant";
+import UseApi from "@/hook/useApi";
+import { handleValidations } from "@/utils/handleValidations";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+  const [disable, setDisable] = useState(false);
+  const [error, setError] = useState({ email: "", password: "" });
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setLoginData({ ...loginData, [name]: value });
+    if (disable) {
+      const newErr = handleValidations(name, value);
+      setError((prevError) => ({ ...prevError, ...newErr }));
+    }
+  };
+
+  const hasErrors = (error) => {
+    return Object.values(error).some((err) => err);
+  };
+
+  const areAllFieldsFilled = (data) => {
+    return Object.values(data).every((field) => field);
+  };
+
+  useEffect(() => {
+    if (error?.email?.length || error?.password?.length) {
+      setDisable(true);
+      return;
+    }
+    setDisable(false);
+  }, [error]);
+
+  const handleClick = async () => {
+    let newErr = {};
+    for (let key in loginData) {
+      newErr = { ...newErr, ...handleValidations(key, loginData[key]) };
+    }
+    setError(newErr);
+    if (!hasErrors(error) && areAllFieldsFilled(loginData)) {
+      try {
+        // Prepare data for signup API
+        const bodyData = {
+          email: loginData.email,
+          password: loginData.password,
+        };
+        // Call signup API
+        const response = await UseApi(routes.login, apiMethods.POST, bodyData);
+        if (response?.status == 201) {
+          toast.success(response?.message);
+          return;
+        } else {
+          toast.error(response?.data?.message);
+        }
+      } catch (err) {
+        toast.error(err);
+      }
+    }
+  };
+
   return (
     <>
       <section className="our-login">
@@ -38,33 +102,50 @@ export default function LoginPage() {
                   <input
                     type="email"
                     className="form-control"
-                    placeholder="alitfn58@gmail.com"
+                    placeholder="Enter your email"
+                    name="email"
+                    value={loginData.email}
+                    onChange={handleChange}
                   />
+                  {error?.email && (
+                    <p style={{ color: "red" }}>{error?.email}</p>
+                  )}
                 </div>
                 <div className="mb15">
                   <label className="form-label fw600 dark-color">
                     Password
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
-                    placeholder="*******"
+                    placeholder="Enter your password"
+                    name="password"
+                    value={loginData.password}
+                    onChange={handleChange}
                   />
+                  {error?.password && (
+                    <p style={{ color: "red" }}>{error?.password}</p>
+                  )}
                 </div>
-                <div className="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb20">
+                {/* <div className="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb20">
                   <label className="custom_checkbox fz14 ff-heading">
                     Remember me
                     <input type="checkbox" defaultChecked="checked" />
                     <span className="checkmark" />
                   </label>
                   <a className="fz14 ff-heading">Lost your password?</a>
-                </div>
+                </div> */}
                 <div className="d-grid mb20">
-                  <button className="ud-btn btn-thm" type="button">
+                  <button
+                    className="ud-btn btn-thm"
+                    type="button"
+                    onClick={handleClick}
+                    disabled={disable}
+                  >
                     Log In <i className="fal fa-arrow-right-long" />
                   </button>
                 </div>
-                <div className="hr_content mb20">
+                {/* <div className="hr_content mb20">
                   <hr />
                   <span className="hr_top_text">OR</span>
                 </div>
@@ -84,7 +165,7 @@ export default function LoginPage() {
                   <button className="ud-btn btn-apple fz14 fw400" type="button">
                     <i className="fab fa-apple" /> Continue Apple
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

@@ -1,10 +1,87 @@
 import { Link } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
+import { useEffect, useState } from "react";
+import { handleValidations } from "@/utils/handleValidations";
+import UseApi from "@/hook/useApi";
+import { apiMethods, env, routes } from "@/constants/constant";
+import { toast } from "react-toastify";
+
 const metadata = {
   title: "Freeio - Freelance Marketplace ReactJs Template | Register",
 };
 export default function RegisterPage() {
   <MetaComponent meta={metadata} />;
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    password: "",
+  });
+  const [disable, setDisable] = useState(false);
+  const [error, setError] = useState({
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setData({ ...data, [name]: value });
+    if (disable) {
+      const newErr = handleValidations(name, value);
+      setError((prevError) => ({ ...prevError, ...newErr }));
+    }
+  };
+
+  const hasErrors = (error) => {
+    return Object.values(error).some((err) => err);
+  };
+
+  const areAllFieldsFilled = (data) => {
+    return Object.values(data).every((field) => field);
+  };
+
+  useEffect(() => {
+    if (hasErrors(error)) {
+      setDisable(true);
+      return;
+    }
+    setDisable(false);
+  }, [error]);
+
+  const handleClick = async () => {
+    let newErr = {};
+    for (let key in data) {
+      newErr = { ...newErr, ...handleValidations(key, data[key]) };
+    }
+    setError(newErr);
+    if (!hasErrors(error) && areAllFieldsFilled(data)) {
+      try {
+        // Prepare data for signup API
+        const bodyData = {
+          fname: data.firstName,
+          lname: data.lastName,
+          username: data.userName,
+          email: data.email,
+          password: data.password,
+        };
+        // Call signup API
+        const response = await UseApi(routes.signup, apiMethods.POST, bodyData);
+        if (response?.status == 201) {
+          toast.success(response?.message);
+          return;
+        } else {
+          toast.error(response?.data?.message);
+        }
+      } catch (err) {
+        toast.error(err);
+      }
+    }
+  };
+
   return (
     <>
       <section className="our-register">
@@ -37,13 +114,35 @@ export default function RegisterPage() {
                 </div>
                 <div className="mb25">
                   <label className="form-label fw500 dark-color">
-                    Display Name
+                    First Name
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="ali"
+                    placeholder="Enter your first name"
+                    name="firstName"
+                    value={data.firstName}
+                    onChange={handleChange}
                   />
+                  {error?.firstName && (
+                    <p style={{ color: "red" }}>{error?.firstName}</p>
+                  )}
+                </div>
+                <div className="mb25">
+                  <label className="form-label fw500 dark-color">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter your last name"
+                    name="lastName"
+                    value={data.lastName}
+                    onChange={handleChange}
+                  />
+                  {error?.lastName && (
+                    <p style={{ color: "red" }}>{error?.lastName}</p>
+                  )}
                 </div>
                 <div className="mb25">
                   <label className="form-label fw500 dark-color">
@@ -52,16 +151,28 @@ export default function RegisterPage() {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="alitf"
+                    placeholder="Enter your username"
+                    name="userName"
+                    value={data.userName}
+                    onChange={handleChange}
                   />
+                  {error?.userName && (
+                    <p style={{ color: "red" }}>{error?.userName}</p>
+                  )}
                 </div>
                 <div className="mb25">
                   <label className="form-label fw500 dark-color">Email</label>
                   <input
                     type="email"
                     className="form-control"
-                    placeholder="alitfn58@gmail.com"
+                    placeholder="abc@xyz.com"
+                    name="email"
+                    value={data.email}
+                    onChange={handleChange}
                   />
+                  {error?.email && (
+                    <p style={{ color: "red" }}>{error?.email}</p>
+                  )}
                 </div>
                 <div className="mb15">
                   <label className="form-label fw500 dark-color">
@@ -71,17 +182,25 @@ export default function RegisterPage() {
                     type="text"
                     className="form-control"
                     placeholder="*******"
+                    name="password"
+                    value={data.password}
+                    onChange={handleChange}
                   />
+                  {error?.password && (
+                    <p style={{ color: "red" }}>{error?.password}</p>
+                  )}
                 </div>
                 <div className="d-grid mb20">
                   <button
                     className="ud-btn btn-thm default-box-shadow2"
                     type="button"
+                    onClick={handleClick}
+                    disabled={disable}
                   >
                     Creat Account <i className="fal fa-arrow-right-long" />
                   </button>
                 </div>
-                <div className="hr_content mb20">
+                {/* <div className="hr_content mb20">
                   <hr />
                   <span className="hr_top_text">OR</span>
                 </div>
@@ -101,7 +220,7 @@ export default function RegisterPage() {
                   <button className="ud-btn btn-apple fz14 fw400" type="button">
                     <i className="fab fa-apple" /> Continue Apple
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
