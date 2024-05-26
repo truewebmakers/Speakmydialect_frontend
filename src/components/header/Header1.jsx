@@ -45,16 +45,22 @@ export default function Header1() {
                   </a>
                   <Link
                     className={`login-info mx15-lg mx30`}
-                    to="/become-seller"
+                    to="/register-translator"
                   >
-                    <span className="d-none d-xl-inline-block">Become a</span>{" "}
-                    Seller
+                    <span className="d-none d-xl-inline-block">
+                      Become a Translator
+                    </span>
+                  </Link>
+                  <Link
+                    className={`login-info mx15-lg mx30`}
+                    to="/register-client"
+                  >
+                    <span className="d-none d-xl-inline-block">
+                      Hire a Translator
+                    </span>
                   </Link>
                   <Link className={`login-info mr15-lg mr30`} to="/login">
                     Sign in
-                  </Link>
-                  <Link className="ud-btn btn-white add-joining" to="/register">
-                    Join
                   </Link>
                 </div>
               </div>

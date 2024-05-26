@@ -33,7 +33,9 @@ export function App() {
   return (
     <div
       className={` ${
-        pathname === "/register" || pathname === "/login"
+        pathname === "/register-translator" ||
+        pathname === "/register-client" ||
+        pathname === "/login"
           ? "bgc-thm4 mm-wrapper mm-wrapper--position-left-front"
           : sidebarEnable.includes(pathname)
           ? isListingActive

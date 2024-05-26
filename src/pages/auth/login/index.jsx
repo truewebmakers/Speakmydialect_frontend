@@ -82,9 +82,16 @@ export default function LoginPage() {
                   <h4>We're glad to see you again!</h4>
                   <p className="text">
                     Don't have an account?{" "}
-                    <Link to="/register" className="text-thm">
-                      Sign Up!
-                    </Link>
+                    <span>
+                      Sign up as a{" "}
+                      <Link to="/register-translator" className="text-thm">
+                        Translator
+                      </Link>{" "}
+                      or{" "}
+                      <Link to="/register-client" className="text-thm">
+                        Hire one!
+                      </Link>
+                    </span>
                   </p>
                 </div>
                 <div className="mb20">

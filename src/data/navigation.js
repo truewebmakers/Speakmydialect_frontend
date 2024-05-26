@@ -224,7 +224,12 @@ const menus = [
       {
         id: 11,
         name: "Register",
-        path: "/register",
+        path: "/register-translator",
+      },
+      {
+        id: 11,
+        name: "Register",
+        path: "/register-client",
       },
       {
         id: 12,

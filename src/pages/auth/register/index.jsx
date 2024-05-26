@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import { useEffect, useState } from "react";
 import { handleValidations } from "@/utils/handleValidations";
@@ -27,6 +27,7 @@ export default function RegisterPage() {
     password: "",
   });
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -59,18 +60,22 @@ export default function RegisterPage() {
       newErr = { ...newErr, ...handleValidations(key, data[key]) };
     }
     setError(newErr);
+    console.log(areAllFieldsFilled(data), data);
     if (!hasErrors(error) && areAllFieldsFilled(data)) {
       try {
         // Prepare data for signup API
+        let route = pathname.split("-");
         const bodyData = {
           fname: data.firstName,
           lname: data.lastName,
           username: data.userName,
           email: data.email,
           password: data.password,
+          user_type: route[1], // it is coming from the routes
         };
         // Call signup API
         const response = await UseApi(routes.signup, apiMethods.POST, bodyData);
+        console.log(response, "response");
         if (response?.status == 201) {
           toast.success(response?.data?.message);
           navigate("/login");

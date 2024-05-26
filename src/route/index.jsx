@@ -16,8 +16,6 @@ import RedirectRoute from "./redirectionRoutes";
 
 const AppRoutes = () => {
   const { token } = useAuth();
-  console.log(token);
-
   const routesForPublic = [
     { path: "/", element: <HomePage1 /> },
     { path: "/terms", element: <TermsPage /> },
@@ -35,7 +33,8 @@ const AppRoutes = () => {
 
   const routesForNotAuthenticatedOnly = [
     { path: "/login", element: <LoginPage /> },
-    { path: "/register", element: <RegisterPage /> },
+    { path: "/register-translator", element: <RegisterPage /> },
+    { path: "/register-client", element: <RegisterPage /> },
   ];
 
   return (
