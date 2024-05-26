@@ -39,7 +39,7 @@ export default function BestServiceCard1({ data }) {
           </div>
           <hr className="my-2" />
           <div className="list-meta d-flex justify-content-between align-items-center mt15">
-            <Link className="d-flex" to="/">
+            <Link className="d-flex" to="speakmydialect/">
               <span className="position-relative mr10">
                 <img
                   className="rounded-circle wa"

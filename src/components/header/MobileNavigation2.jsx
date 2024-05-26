@@ -8,7 +8,7 @@ export default function MobileNavigation2() {
           <div className="header bdrb1">
             <div className="menu_and_widgets">
               <div className="mobile_menu_bar d-flex justify-content-between align-items-center">
-                <Link className="mobile_logo" to="/home-2">
+                <Link className="mobile_logo" to="/">
                   <img src="/images/header-logo3.svg" alt="Header Logo" />
                 </Link>
                 <div className="right-side text-end">

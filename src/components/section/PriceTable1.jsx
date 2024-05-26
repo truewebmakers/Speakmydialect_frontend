@@ -21,11 +21,7 @@ export default function PriceTable1() {
     <>
       <section
         className={`our-pricing ${
-          pathname === "/home-2"
-            ? "pb90"
-            : pathname === "/about-1"
-            ? "pt0 pb0"
-            : ""
+          pathname === "/" ? "pb90" : pathname === "/about-1" ? "pt0 pb0" : ""
         }`}
       >
         <div className="container">

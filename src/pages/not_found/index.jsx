@@ -1,10 +1,10 @@
-import Header3 from "@/components/header/Header3";
+import Header1 from "@/components/header/Header1";
 import PageNotFound from "@/components/section/PageNotFound";
 
 export default function NotFound() {
   return (
     <>
-      <Header3 />
+      <Header1 />
       <PageNotFound />
     </>
   );

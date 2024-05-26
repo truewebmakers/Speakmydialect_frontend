@@ -12,19 +12,7 @@ export default function Footer() {
     <>
       <section
         className={`footer-style1 pt25 pb-0 
-                ${
-                  pathname === "/home-2"
-                    ? "at-home6 home2-footer-radius"
-                    : pathname === "/home-4"
-                    ? "at-home7"
-                    : pathname === "/home-6"
-                    ? "at-home6"
-                    : pathname === "/home-10"
-                    ? "at-home10"
-                    : pathname === "/home-11"
-                    ? "at-home11"
-                    : ""
-                }
+                ${pathname === "/" ? "at-home6 home2-footer-radius" : ""}
                  `}
       >
         <div className="container">

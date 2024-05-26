@@ -1,24 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import HomePage1 from "./pages/home";
-import HomePage2 from "./pages/home/home-2";
-import HomePage3 from "./pages/home/home-3";
-import HomePage4 from "./pages/home/home-4";
-import HomePage5 from "./pages/home/home-5";
-import HomePage6 from "./pages/home/home-6";
-import HomePage7 from "./pages/home/home-7";
-import HomePage8 from "./pages/home/home-8";
-import HomePage9 from "./pages/home/home-9";
-import HomePage10 from "./pages/home/home-10";
-import HomePage11 from "./pages/home/home-11";
-import HomePage12 from "./pages/home/home-12";
-import HomePage13 from "./pages/home/home-13";
-import HomePage14 from "./pages/home/home-14";
-import HomePage15 from "./pages/home/home-15";
-import HomePage16 from "./pages/home/home-16";
-import HomePage17 from "./pages/home/home-17";
-import HomePage18 from "./pages/home/home-18";
-import HomePage19 from "./pages/home/home-19";
-import HomePage20 from "./pages/home/home-20";
 import ServicePage1 from "./pages/service/service-1";
 import ServicePage2 from "./pages/service/service-2";
 import ServicePage4 from "./pages/service/service-4";
@@ -98,33 +78,16 @@ import PricingPage from "./pages/pricing";
 import RegisterPage from "./pages/auth/register";
 import TermsPage from "./pages/terms";
 import UIElementsPage from "./pages/ui-elements";
+import HomePage1 from "./pages/home";
 
 export default function RoutesComponent() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<NotFound />} />
         <Route path="/">
           <Route index element={<HomePage1 />} />
-          <Route path="home-1" element={<HomePage1 />} />
-          <Route path="home-2" element={<HomePage2 />} />
-          <Route path="home-3" element={<HomePage3 />} />
-          <Route path="home-4" element={<HomePage4 />} />
-          <Route path="home-5" element={<HomePage5 />} />
-          <Route path="home-6" element={<HomePage6 />} />
-          <Route path="home-7" element={<HomePage7 />} />
-          <Route path="home-8" element={<HomePage8 />} />
-          <Route path="home-9" element={<HomePage9 />} />
-          <Route path="home-10" element={<HomePage10 />} />
-          <Route path="home-11" element={<HomePage11 />} />
-          <Route path="home-12" element={<HomePage12 />} />
-          <Route path="home-13" element={<HomePage13 />} />
-          <Route path="home-14" element={<HomePage14 />} />
-          <Route path="home-15" element={<HomePage15 />} />
-          <Route path="home-16" element={<HomePage16 />} />
-          <Route path="home-17" element={<HomePage17 />} />
-          <Route path="home-18" element={<HomePage18 />} />
-          <Route path="home-19" element={<HomePage19 />} />
-          <Route path="home-20" element={<HomePage20 />} />
+          <Route path="/" element={<HomePage1 />} />
           <Route path="service-1" element={<ServicePage1 />} />
           <Route path="service-2" element={<ServicePage2 />} />
           <Route path="service-3" element={<ServicePage3 />} />

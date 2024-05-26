@@ -21,14 +21,7 @@ export default function PopularServiceSlideCard1({
     <>
       <div
         className={`listing-style1 ${pathname === "/home-7" ? "style5" : ""} 
-                ${
-                  pathname === "/home-2" ||
-                  pathname === "/home-9" ||
-                  pathname === "/home-16" ||
-                  pathname === "/home-14"
-                    ? "default-box-shadow1 bdrs16"
-                    : ""
-                } 
+                ${pathname === "/" ? "default-box-shadow1 bdrs16" : ""} 
                 ${style}`}
         style={
           pathname === "/home-20" ? { border: "none", boxShadow: "none" } : {}

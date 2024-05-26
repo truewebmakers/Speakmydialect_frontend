@@ -14,14 +14,9 @@ export default function PopularServiceCard1({
   return (
     <>
       <div
-        className={`listing-style1 ${
-          pathname === "/home-2" ||
-          pathname === "/home-9" ||
-          pathname === "/home-16" ||
-          pathname === "/home-14"
-            ? "bdrs16"
-            : ""
-        } ${pathname === "/home-7" ? "style5" : ""} ${style}`}
+        className={`listing-style1 ${pathname === "/" ? "bdrs16" : ""} ${
+          pathname === "/home-7" ? "style5" : ""
+        } ${style}`}
         style={
           pathname === "/home-20" ? { border: "none", boxShadow: "none" } : {}
         }
