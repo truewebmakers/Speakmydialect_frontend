@@ -11,15 +11,15 @@ import "react-tooltip/dist/react-tooltip.css";
 import NavSidebar from "@/components/sidebar/NavSidebar";
 import WOW from "wow.js";
 
-import Routes from "./Routes";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehaviour";
 import Header1 from "./components/header/Header1";
+import AppRoutes from "./route";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
 }
 
-function App() {
+export function App() {
   const isListingActive = toggleStore((state) => state.isListingActive);
 
   const { pathname } = useLocation();
@@ -51,7 +51,7 @@ function App() {
           <SearchModal1 />
           <div className="body_content">
             {/* {children} */}
-            <Routes />
+            <AppRoutes />
             {/* footer */}
             {/* {pathname === "/home-4" ||
             pathname === "/home-7" ||
@@ -85,7 +85,7 @@ function App() {
         </div>
       ) : (
         <div className="wrapper mm-page mm-slideout">
-          <Routes />
+          <AppRoutes />
           {/* {children} */}
           {/* bottom to top */}
           <BottomToTop />
@@ -98,5 +98,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

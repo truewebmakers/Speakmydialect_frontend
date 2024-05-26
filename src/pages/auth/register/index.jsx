@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import { useEffect, useState } from "react";
 import { handleValidations } from "@/utils/handleValidations";
@@ -26,6 +26,7 @@ export default function RegisterPage() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -71,7 +72,8 @@ export default function RegisterPage() {
         // Call signup API
         const response = await UseApi(routes.signup, apiMethods.POST, bodyData);
         if (response?.status == 201) {
-          toast.success(response?.message);
+          toast.success(response?.data?.message);
+          navigate("/login");
           return;
         } else {
           toast.error(response?.data?.message);
@@ -197,7 +199,7 @@ export default function RegisterPage() {
                     onClick={handleClick}
                     disabled={disable}
                   >
-                    Creat Account <i className="fal fa-arrow-right-long" />
+                    Create Account <i className="fal fa-arrow-right-long" />
                   </button>
                 </div>
                 {/* <div className="hr_content mb20">

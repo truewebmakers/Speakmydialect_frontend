@@ -8,7 +8,7 @@ const metadata = {
   title: "Freeio - Freelance Marketplace ReactJs Template | Dashboard",
 };
 
-export default function DasbPageDashboard() {
+export function DasbPageDashboard() {
   return (
     <>
       <MetaComponent meta={metadata} />

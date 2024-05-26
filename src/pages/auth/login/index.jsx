@@ -1,8 +1,9 @@
 import { apiMethods, routes } from "@/constants/constant";
+import { useAuth } from "@/context/authContext";
 import UseApi from "@/hook/useApi";
 import { handleValidations } from "@/utils/handleValidations";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function LoginPage() {
@@ -11,19 +12,12 @@ export default function LoginPage() {
     password: "",
   });
   const [disable, setDisable] = useState(false);
-  const [error, setError] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const { setToken } = useAuth();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
     setLoginData({ ...loginData, [name]: value });
-    if (disable) {
-      const newErr = handleValidations(name, value);
-      setError((prevError) => ({ ...prevError, ...newErr }));
-    }
-  };
-
-  const hasErrors = (error) => {
-    return Object.values(error).some((err) => err);
   };
 
   const areAllFieldsFilled = (data) => {
@@ -31,20 +25,15 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
-    if (error?.email?.length || error?.password?.length) {
+    if (!areAllFieldsFilled(loginData)) {
       setDisable(true);
       return;
     }
     setDisable(false);
-  }, [error]);
+  }, [loginData]);
 
   const handleClick = async () => {
-    let newErr = {};
-    for (let key in loginData) {
-      newErr = { ...newErr, ...handleValidations(key, loginData[key]) };
-    }
-    setError(newErr);
-    if (!hasErrors(error) && areAllFieldsFilled(loginData)) {
+    if (areAllFieldsFilled(loginData)) {
       try {
         // Prepare data for signup API
         const bodyData = {
@@ -53,8 +42,11 @@ export default function LoginPage() {
         };
         // Call signup API
         const response = await UseApi(routes.login, apiMethods.POST, bodyData);
-        if (response?.status == 201) {
-          toast.success(response?.message);
+        console.log(response);
+        if (response?.status == 200 || response?.status == 201) {
+          setToken(response?.data?.token);
+          navigate("/my-profile");
+          toast.success(response?.data?.message);
           return;
         } else {
           toast.error(response?.data?.message);
@@ -107,9 +99,6 @@ export default function LoginPage() {
                     value={loginData.email}
                     onChange={handleChange}
                   />
-                  {error?.email && (
-                    <p style={{ color: "red" }}>{error?.email}</p>
-                  )}
                 </div>
                 <div className="mb15">
                   <label className="form-label fw600 dark-color">
@@ -123,9 +112,6 @@ export default function LoginPage() {
                     value={loginData.password}
                     onChange={handleChange}
                   />
-                  {error?.password && (
-                    <p style={{ color: "red" }}>{error?.password}</p>
-                  )}
                 </div>
                 {/* <div className="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb20">
                   <label className="custom_checkbox fz14 ff-heading">
