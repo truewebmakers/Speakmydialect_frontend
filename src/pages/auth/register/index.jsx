@@ -62,11 +62,6 @@ export default function RegisterPage() {
     setError(newErr);
     if (!hasErrors(error) && areAllFieldsFilled(data)) {
       try {
-        // set headers
-        const headers = {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        };
         // Prepare data for signup API
         let route = pathname.split("-");
         const bodyData = {
@@ -81,7 +76,6 @@ export default function RegisterPage() {
         const response = await UseApi(
           apiUrls.signup,
           apiMethods.POST,
-          headers,
           bodyData
         );
         console.log(response, "response");

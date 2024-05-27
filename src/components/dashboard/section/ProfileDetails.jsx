@@ -5,26 +5,23 @@ import { apiMethods, apiUrls } from "@/constants/constant";
 import { toast } from "react-toastify";
 import UseApi from "@/hook/useApi";
 import { useAuth } from "@/context/authContext";
+import { CapitalizeFirstLetter } from "@/utils/helper";
 
-export default function ProfileDetails() {
+export default function ProfileDetails({ profileData }) {
   const [profileDetails, setProfileDetails] = useState({
+    fname: "",
+    lanme: "",
     phone: "",
     fix_rate: "",
     hourly_rate: "",
     intro: "",
   });
-  const [getGender, setGender] = useState({
-    option: "Select",
-    value: null,
-  });
-  const [getCountry, setCountry] = useState({
-    option: "Select",
-    value: null,
-  });
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadPic, setUploadedPic] = useState(null);
-  const { userId } = useAuth();
+  const [getGender, setGender] = useState({ option: "Select", value: null });
+  const [getCountry, setCountry] = useState({ option: "Select", value: null });
   const [countryList, setCountryList] = useState([]);
+  const { userId, token } = useAuth();
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -58,20 +55,46 @@ export default function ProfileDetails() {
     }
   }, []);
 
+  useEffect(() => {
+    if (profileData) {
+      // Enter Profile Details
+      setProfileDetails({
+        fname: profileData?.fname || "",
+        lanme: profileData?.lname || "",
+        phone: profileData?.user_meta?.phone || "",
+        fix_rate: profileData?.user_meta?.fix_rate || "",
+        hourly_rate: profileData?.user_meta?.hourly_rate || "",
+        intro: profileData?.user_meta?.intro || "",
+      });
+      // Enter Gender
+      setGender({
+        option: CapitalizeFirstLetter(profileData?.user_meta?.gender),
+        value: profileData?.user_meta?.gender,
+      });
+      // Enter Country
+      if (profileData?.user_meta?.location && countryList?.length > 0) {
+        const country = countryList?.find(
+          (coun) => coun?.id == profileData?.user_meta?.location
+        );
+        if (country) {
+          setCountry({
+            option: country?.name, // Set the country name as the option
+            value: country?.id, // Set the country ID as the value
+          });
+        }
+      }
+      setSelectedImage(profileData?.user_meta?.profile_pic);
+    }
+  }, [profileData]);
+
   const getCountries = async () => {
     try {
-      const headers = {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      };
-      const response = await UseApi(
-        apiUrls.getCountries,
-        apiMethods.GET,
-        headers
-      );
-      const countryData = response?.data?.data;
-      setCountryList(countryData);
-      sessionStorage.setItem("countries", JSON.stringify(countryData));
+      const response = await UseApi(apiUrls.getCountries, apiMethods.GET);
+      if (response?.status == 200 || response?.status == 201) {
+        const countryData = response?.data?.data;
+        setCountryList(countryData);
+        sessionStorage.setItem("countries", JSON.stringify(countryData));
+      }
     } catch (error) {
       toast.error("Error fetching countries");
     }
@@ -81,10 +104,8 @@ export default function ProfileDetails() {
     try {
       // set headers
       const headers = {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`,
       };
       // set body
       const bodyData = {
@@ -100,13 +121,11 @@ export default function ProfileDetails() {
       const response = await UseApi(
         apiUrls.updateProfile + userId,
         apiMethods.POST,
-        headers,
-        bodyData
+        bodyData,
+        headers
       );
-      console.log(response, "responsee");
       if (response?.status == 200 || response?.status == 201) {
         toast.success(response?.data?.message);
-        // navigate("/login");
         return;
       } else {
         toast.error(response?.data?.message);
@@ -164,6 +183,36 @@ export default function ProfileDetails() {
         <div className="col-lg-7">
           <form className="form-style1">
             <div className="row">
+              <div className="col-sm-6">
+                <div className="mb20">
+                  <label className="heading-color ff-heading fw500 mb10">
+                    First Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="i will"
+                    name="fname"
+                    value={profileDetails?.fname}
+                    onChange={handleOnChange}
+                  />
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="mb20">
+                  <label className="heading-color ff-heading fw500 mb10">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="i will"
+                    name="lname"
+                    value={profileDetails?.lanme}
+                    onChange={handleOnChange}
+                  />
+                </div>
+              </div>
               <div className="col-sm-6">
                 <div className="mb20">
                   <label className="heading-color ff-heading fw500 mb10">

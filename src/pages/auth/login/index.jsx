@@ -35,23 +35,13 @@ export default function LoginPage() {
   const handleClick = async () => {
     if (areAllFieldsFilled(loginData)) {
       try {
-        // set headers
-        const headers = {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        };
         // Prepare data for signup API
         const bodyData = {
           email: loginData.email,
           password: loginData.password,
         };
         // Call signup API
-        const response = await UseApi(
-          apiUrls.login,
-          apiMethods.POST,
-          headers,
-          bodyData
-        );
+        const response = await UseApi(apiUrls.login, apiMethods.POST, bodyData);
         console.log(response);
         if (response?.status == 200 || response?.status == 201) {
           setToken(response?.data?.token);

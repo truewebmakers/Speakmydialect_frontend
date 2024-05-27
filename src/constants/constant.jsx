@@ -13,4 +13,5 @@ export const apiUrls = {
   login: "/login",
   updateProfile: "/admin/update/",
   getCountries: "/get-countries",
+  getUserProfile: "/admin/getProfile/",
 };

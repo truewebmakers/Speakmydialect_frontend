@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import DashboardNavigation from "../header/DashboardNavigation";
 import Award from "./Award";
 import ChangePassword from "./ChangePassword";
@@ -6,8 +7,35 @@ import Education from "./Education";
 import ProfileDetails from "./ProfileDetails";
 import Skill from "./Skill";
 import WorkExperience from "./WorkExperience";
+import UseApi from "@/hook/useApi";
+import { apiMethods, apiUrls } from "@/constants/constant";
+import { useAuth } from "@/context/authContext";
 
 export default function MyProfileInfo() {
+  const { userId, token } = useAuth();
+  const [profileData, setProfileData] = useState({});
+
+  const getProfileData = async () => {
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      const response = await UseApi(
+        apiUrls.getUserProfile + userId,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.status === 200 || response?.status === 201) {
+        setProfileData(response?.data?.user);
+      }
+    } catch (error) {
+      return toast.error("Error fetching profile data");
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
+
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
@@ -24,7 +52,7 @@ export default function MyProfileInfo() {
         </div>
         <div className="row">
           <div className="col-xl-12">
-            <ProfileDetails />
+            <ProfileDetails profileData={profileData} />
             <Skill />
             <Education />
             <WorkExperience />
