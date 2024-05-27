@@ -33,7 +33,7 @@ const herobg = [
   },
   {
     id: 2,
-    bg: "/images/home/home-1.jpg",
+    bg: "/images/home/home-1.webp",
     headline: (
       <>
         With talented freelancers <br className="d-none d-lg-block" />

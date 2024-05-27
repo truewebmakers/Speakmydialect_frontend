@@ -1,12 +1,13 @@
 import { apiMethods, env } from "@/constants/constant";
 import axios from "axios";
 
-const UseApi = async (url, method, body) => {
+const UseApi = async (url, method, header, body) => {
   try {
     const result = await axios({
       method: method || apiMethods.GET,
       url: env.API_URL + url,
       data: body || undefined,
+      headers: header || null,
     });
     return result;
   } catch (error) {

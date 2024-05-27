@@ -15,7 +15,7 @@ const popular = ["Designer", "Developer", "Web", "IOS", "PHP", "Senior"];
 const herobg = [
   "/images/home/home-3.jpg",
   "/images/home/home-2.jpg",
-  "/images/home/home-1.jpg",
+  "/images/home/home-1.webp",
 ];
 
 export default function Hero9() {

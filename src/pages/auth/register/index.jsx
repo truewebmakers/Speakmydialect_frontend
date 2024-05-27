@@ -3,7 +3,7 @@ import MetaComponent from "@/components/common/MetaComponent";
 import { useEffect, useState } from "react";
 import { handleValidations } from "@/utils/handleValidations";
 import UseApi from "@/hook/useApi";
-import { apiMethods, env, routes } from "@/constants/constant";
+import { apiMethods, apiUrls } from "@/constants/constant";
 import { toast } from "react-toastify";
 
 const metadata = {
@@ -60,9 +60,13 @@ export default function RegisterPage() {
       newErr = { ...newErr, ...handleValidations(key, data[key]) };
     }
     setError(newErr);
-    console.log(areAllFieldsFilled(data), data);
     if (!hasErrors(error) && areAllFieldsFilled(data)) {
       try {
+        // set headers
+        const headers = {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        };
         // Prepare data for signup API
         let route = pathname.split("-");
         const bodyData = {
@@ -74,7 +78,12 @@ export default function RegisterPage() {
           user_type: route[1], // it is coming from the routes
         };
         // Call signup API
-        const response = await UseApi(routes.signup, apiMethods.POST, bodyData);
+        const response = await UseApi(
+          apiUrls.signup,
+          apiMethods.POST,
+          headers,
+          bodyData
+        );
         console.log(response, "response");
         if (response?.status == 201) {
           toast.success(response?.data?.message);

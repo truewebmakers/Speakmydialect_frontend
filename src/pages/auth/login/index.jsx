@@ -1,4 +1,4 @@
-import { apiMethods, routes } from "@/constants/constant";
+import { apiMethods, apiUrls } from "@/constants/constant";
 import { useAuth } from "@/context/authContext";
 import UseApi from "@/hook/useApi";
 import { handleValidations } from "@/utils/handleValidations";
@@ -13,7 +13,7 @@ export default function LoginPage() {
   });
   const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
-  const { setToken } = useAuth();
+  const { setToken, setUserId } = useAuth();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -35,16 +35,27 @@ export default function LoginPage() {
   const handleClick = async () => {
     if (areAllFieldsFilled(loginData)) {
       try {
+        // set headers
+        const headers = {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        };
         // Prepare data for signup API
         const bodyData = {
           email: loginData.email,
           password: loginData.password,
         };
         // Call signup API
-        const response = await UseApi(routes.login, apiMethods.POST, bodyData);
+        const response = await UseApi(
+          apiUrls.login,
+          apiMethods.POST,
+          headers,
+          bodyData
+        );
         console.log(response);
         if (response?.status == 200 || response?.status == 201) {
           setToken(response?.data?.token);
+          setUserId(response?.data?.userInfo?.id);
           navigate("/my-profile");
           toast.success(response?.data?.message);
           return;

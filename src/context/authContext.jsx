@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [token, setToken_] = useState(localStorage.getItem("token") || "");
+  const [userId, setUserId_] = useState(localStorage.getItem("userId") || "");
 
   const setToken = (newToken) => {
     setToken_(newToken);
@@ -14,6 +15,15 @@ const AuthProvider = ({ children }) => {
     } else {
       localStorage.removeItem("token");
       delete axios.defaults.headers.common["Authorization"];
+    }
+  };
+
+  const setUserId = (id) => {
+    setUserId_(id);
+    if (id) {
+      localStorage.setItem("userId", id);
+    } else {
+      localStorage.removeItem("userId");
     }
   };
 
@@ -27,6 +37,8 @@ const AuthProvider = ({ children }) => {
     () => ({
       token,
       setToken,
+      userId,
+      setUserId,
     }),
     [token]
   );
