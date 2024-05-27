@@ -12684,3 +12684,17 @@ hr {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.small-plus-btn {
+  font-size: 14px;
+  font-weight:bold;
+  padding: 7px 19px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin:18px;
+}
+
+.button-label {
+  display: none !important;
+}

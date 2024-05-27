@@ -32,7 +32,7 @@ export default function Invoice() {
                   <div className="row mb20 align-items-center">
                     <div className="col-lg-7">
                       <Link to="/" className="main_logo mb30-md">
-                        <img src="/images/header-logo-dark.svg" alt="logo" />
+                        <img src="/images/logo.jpeg" alt="logo" />
                       </Link>
                     </div>
                     <div className="col-lg-5">

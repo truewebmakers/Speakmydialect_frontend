@@ -14,4 +14,17 @@ export const apiUrls = {
   updateProfile: "/admin/update/",
   getCountries: "/get-countries",
   getUserProfile: "/admin/getProfile/",
+  getLanguages: "/get-languages",
+  updateUserSkill: "/admin/update/skills/",
 };
+
+export const skillStatus = [
+  { id: 1, name: "Active" },
+  { id: 2, name: "Inactive" },
+];
+export const skillLevel = [
+  { id: 1, name: "basic" },
+  { id: 2, name: "bilingual" },
+  { id: 3, name: "fluent" },
+  { id: 4, name: "native" },
+];

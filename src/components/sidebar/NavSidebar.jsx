@@ -21,7 +21,7 @@ export default function NavSidebar() {
       >
         <div className="offcanvas-header border-bottom">
           <Link to="/">
-            <img alt="Header Logo" src="/images/header-logo2.svg" />
+            <img alt="Header Logo" src="/images/logo.jpeg" />
           </Link>
           <button
             ref={crossRef}
