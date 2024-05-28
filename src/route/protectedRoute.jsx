@@ -1,12 +1,11 @@
 import { useAuth } from "@/context/authContext";
-import { Navigate, Outlet } from "react-router-dom";
+import { memo } from "react";
+import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = () => {
+const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
-  if (!token) {
-    return <Navigate to="/" />;
-  }
-  return <Outlet />;
+
+  return token?.length > 0 ? children : <Navigate to="/login" replace />;
 };
 
-export default ProtectedRoute;
+export default memo(ProtectedRoute);
