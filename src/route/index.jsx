@@ -12,69 +12,37 @@ import HelpPage from "@/pages/help";
 import AboutPage2 from "@/pages/about/about-2";
 import BlogPage1 from "@/pages/blog/blog-1";
 import FaqPage from "@/pages/faq";
-import RedirectRoute from "./redirectionRoutes";
 
 const AppRoutes = () => {
   const { token } = useAuth();
-  const routesForPublic = [
-    { path: "/", element: <HomePage1 /> },
-    { path: "/terms", element: <TermsPage /> },
-    { path: "/contact", element: <ContactPage /> },
-    { path: "/help", element: <HelpPage /> },
-    { path: "/about-2", element: <AboutPage2 /> },
-    { path: "/blog-1", element: <BlogPage1 /> },
-    { path: "/faq", element: <FaqPage /> },
-  ];
-
-  const routesForAuthenticatedOnly = [
-    { path: "dashboard", element: <DasbPageDashboard /> },
-    { path: "my-profile", element: <DasbPageMyProfile /> },
-  ];
-
-  const routesForNotAuthenticatedOnly = [
-    { path: "/login", element: <LoginPage /> },
-    { path: "/register-translator", element: <RegisterPage /> },
-    { path: "/register-client", element: <RegisterPage /> },
-  ];
-
+  console.log(token, "tokennn");
   return (
     <Routes>
-      {routesForPublic.map((route, index) => (
-        <Route key={index} path={route.path} element={route.element} />
-      ))}
+      <Route path="/" element={<HomePage1 />} />
+      <Route path="/terms" element={<TermsPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/help" element={<HelpPage />} />
+      <Route path="/about-2" element={<AboutPage2 />} />
+      <Route path="/blog-1" element={<BlogPage1 />} />
+      <Route path="/faq" element={<FaqPage />} />
 
       {token ? (
-        <Route path="/" element={<ProtectedRoute />}>
-          {routesForAuthenticatedOnly.map((route, index) => (
-            <Route key={index} path={route.path} element={route.element} />
-          ))}
-        </Route>
-      ) : (
-        routesForNotAuthenticatedOnly.map((route, index) => (
-          <Route
-            key={index}
-            path={route.path}
-            element={
-              <RedirectRoute
-                to="/dashboard"
-                condition={token}
-                redirectTo="/login"
-              >
-                {route.element}
-              </RedirectRoute>
-            }
-          />
+        (console.log("hiii"),
+        (
+          <>
+            <Route path="/" element={<ProtectedRoute />}>
+              <Route path="my-profile" element={<DasbPageMyProfile />} />
+              <Route path="dashboard" element={<DasbPageDashboard />} />
+            </Route>
+          </>
         ))
+      ) : (
+        <>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register-translator" element={<RegisterPage />} />
+          <Route path="/register-client" element={<RegisterPage />} />
+        </>
       )}
-
-      <Route
-        path="/login"
-        element={
-          <RedirectRoute to="/dashboard" condition={token} redirectTo="/login">
-            <LoginPage />
-          </RedirectRoute>
-        }
-      />
 
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

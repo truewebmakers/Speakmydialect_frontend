@@ -23,8 +23,8 @@ export const skillStatus = [
   { id: 2, name: "Inactive" },
 ];
 export const skillLevel = [
-  { id: 1, name: "basic" },
-  { id: 2, name: "bilingual" },
-  { id: 3, name: "fluent" },
-  { id: 4, name: "native" },
+  { id: 1, name: "Basic" },
+  { id: 2, name: "Bilingual" },
+  { id: 3, name: "Fluent" },
+  { id: 4, name: "Native" },
 ];
