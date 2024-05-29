@@ -3,9 +3,11 @@ import FooterHeader from "./FooterHeader";
 import { useLocation } from "react-router-dom";
 
 import { overview, about, support } from "@/data/footer";
+import { useAuth } from "@/context/authContext";
 
 export default function Footer() {
   const { pathname } = useLocation();
+  const { token } = useAuth();
 
   return (
     <>
@@ -35,11 +37,27 @@ export default function Footer() {
                   Overview
                 </h5>
                 <div className="link-list">
-                  {overview.map((item, i) => (
-                    <Link key={i} to={item.path}>
-                      {item.name}
-                    </Link>
-                  ))}
+                  {token?.length > 0
+                    ? overview.map((item, i) => (
+                        <Link key={i} to={item.path}>
+                          {item.name}
+                        </Link>
+                      ))
+                    : overview.map((item, i) =>
+                        item.name == "My Account" ? (
+                          <Link key={i} to={"/login"}>
+                            {item.name}
+                          </Link>
+                        ) : item.name == "Join" ? (
+                          <Link key={i} to={"/register-translator"}>
+                            {item.name}
+                          </Link>
+                        ) : (
+                          <Link key={i} to={item.path}>
+                            {item.name}
+                          </Link>
+                        )
+                      )}
                 </div>
               </div>
             </div>
