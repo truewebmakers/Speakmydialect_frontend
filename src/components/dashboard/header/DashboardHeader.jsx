@@ -1,4 +1,6 @@
-import { dasboardNavigation } from "@/data/dashboard";
+import { handleLogoutClick } from "@/components/common/logoutHandler";
+import { useAuth } from "@/context/authContext";
+import { clientNavigation, translatorNavigation } from "@/data/dashboard";
 import toggleStore from "@/store/toggleStore";
 
 import { Link } from "react-router-dom";
@@ -7,6 +9,7 @@ import { useLocation } from "react-router-dom";
 export default function DashboardHeader() {
   const toggle = toggleStore((state) => state.dashboardSlidebarToggleHandler);
   const { pathname } = useLocation();
+  const { userInfo } = useAuth();
 
   return (
     <>
@@ -245,48 +248,60 @@ export default function DashboardHeader() {
                             <p className="fz15 fw400 ff-heading mb10 pl30">
                               Start
                             </p>
-                            {dasboardNavigation.slice(0, 8).map((item, i) => (
-                              <Link
-                                key={i}
-                                className={`dropdown-item ${
-                                  pathname === item.path ? "active" : ""
-                                }`}
-                                to={item.path}
-                              >
-                                <i className={`${item.icon} mr10`} />
-                                {item.name}
-                              </Link>
-                            ))}
-                            <p className="fz15 fw400 ff-heading mt30 pl30">
-                              Organize and Manage
-                            </p>
-                            {dasboardNavigation.slice(8, 13).map((item, i) => (
-                              <Link
-                                key={i}
-                                className={`dropdown-item ${
-                                  pathname === item.path ? "active" : ""
-                                }`}
-                                to={item.path}
-                              >
-                                <i className={`${item.icon} mr10`} />
-                                {item.name}
-                              </Link>
-                            ))}
-                            <p className="fz15 fw400 ff-heading mt30 pl30">
-                              Account
-                            </p>
-                            {dasboardNavigation.slice(13, 15).map((item, i) => (
-                              <Link
-                                key={i}
-                                className={`dropdown-item ${
-                                  pathname === item.path ? "active" : ""
-                                }`}
-                                to={item.path}
-                              >
-                                <i className={`${item.icon} mr10`} />
-                                {item.name}
-                              </Link>
-                            ))}
+                            {userInfo &&
+                            JSON.parse(userInfo)?.user_type == "admin"
+                              ? ""
+                              : JSON.parse(userInfo)?.user_type == "translator"
+                              ? translatorNavigation.map((item, i) =>
+                                  item.name !== "Logout" ? (
+                                    <Link
+                                      key={i}
+                                      className={`dropdown-item ${
+                                        pathname === item.path ? "active" : ""
+                                      }`}
+                                      to={item.path}
+                                    >
+                                      <i className={`${item.icon} mr10`} />
+                                      {item.name}
+                                    </Link>
+                                  ) : (
+                                    <Link
+                                      key={i}
+                                      className={`dropdown-item ${
+                                        pathname === item.path ? "active" : ""
+                                      }`}
+                                      onClick={handleLogoutClick}
+                                    >
+                                      <i className={`${item.icon} mr10`} />
+                                      {item.name}
+                                    </Link>
+                                  )
+                                )
+                              : clientNavigation.map((item, i) =>
+                                  item.name !== "Logout" ? (
+                                    <Link
+                                      key={i}
+                                      className={`dropdown-item ${
+                                        pathname === item.path ? "active" : ""
+                                      }`}
+                                      to={item.path}
+                                    >
+                                      <i className={`${item.icon} mr10`} />
+                                      {item.name}
+                                    </Link>
+                                  ) : (
+                                    <Link
+                                      key={i}
+                                      className={`dropdown-item ${
+                                        pathname === item.path ? "active" : ""
+                                      }`}
+                                      onClick={handleLogoutClick}
+                                    >
+                                      <i className={`${item.icon} mr10`} />
+                                      {item.name}
+                                    </Link>
+                                  )
+                                )}
                           </div>
                         </div>
                       </div>

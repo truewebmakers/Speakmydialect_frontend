@@ -4,7 +4,7 @@ export const product1 = [
     img: "/images/listings/g-1.jpg",
     img2: "/images/listings/g-17.jpg",
     category: "Web & App Design",
-    title: "I will design modern websites in figma or adobe xd",
+    title: "I am proficient in English, French, Hindi",
     rating: 4.82,
     review: 94,
     author: {
@@ -28,7 +28,7 @@ export const product1 = [
     img: "/images/listings/g-2.jpg",
     img2: "/images/listings/g-18.jpg",
     category: "Art & Illustration",
-    title: "I will create modern flat design illustration",
+    title: "I am an expert of turkish",
     rating: 4.82,
     review: 94,
     gallery: [
@@ -57,8 +57,7 @@ export const product1 = [
     img: "/images/listings/g-3.jpg",
     img2: "/images/listings/g-19.jpg",
     category: "Design & Creative",
-    title:
-      "I will build a fully responsive design in HTML,CSS, bootstrap, and javascript",
+    title: "I am capable of translating in Hindi, English, French & Bengali",
     rating: 4.82,
     review: 94,
     author: {
@@ -82,7 +81,7 @@ export const product1 = [
     img: "/images/listings/g-4.jpg",
     img2: "/images/listings/g-20.jpg",
     category: "Web & App Design",
-    title: "I will do mobile app development for ios and android",
+    title: "I will do my best with the tasks",
     rating: 4.82,
     review: 94,
     author: {

@@ -21,9 +21,7 @@ export default function CtaBanner1() {
                 <div className="mb30">
                   <div className="main-title">
                     <h2 className="title">
-                      A whole world of freelance{" "}
-                      <br className="d-none d-xl-block" /> talent at your
-                      fingertips
+                      Why Speak My Dialect? <br className="d-none d-xl-block" />{" "}
                     </h2>
                   </div>
                 </div>
@@ -31,32 +29,32 @@ export default function CtaBanner1() {
                   <div className="list-one d-flex align-items-start mb30">
                     <span className="list-icon flex-shrink-0 flaticon-badge" />
                     <div className="list-content flex-grow-1 ml20">
-                      <h4 className="mb-1">Proof of quality</h4>
+                      <h4 className="mb-1">Multicultural Connection</h4>
                       <p className="text mb-0 fz15">
-                        Check any pro’s work samples, client reviews, and
-                        identity <br className="d-none d-lg-block" />{" "}
-                        verification.
+                        Connecting people from diverse background to create a
+                        better
+                        <br className="d-none d-lg-block" /> understanding and
+                        build relationships.
                       </p>
                     </div>
                   </div>
                   <div className="list-one d-flex align-items-start mb30">
                     <span className="list-icon flex-shrink-0 flaticon-money" />
                     <div className="list-content flex-grow-1 ml20">
-                      <h4 className="mb-1">No cost until you hire</h4>
+                      <h4 className="mb-1">Affordable</h4>
                       <p className="text mb-0 fz15">
-                        Interview potential fits for your job, negotiate rates,
-                        and only pay <br className="d-none d-lg-block" /> for
-                        work you approve.
+                        Our services is affordable, easy to access and
+                        reasonable priced.
                       </p>
                     </div>
                   </div>
                   <div className="list-one d-flex align-items-start mb30">
                     <span className="list-icon flex-shrink-0 flaticon-security" />
                     <div className="list-content flex-grow-1 ml20">
-                      <h4 className="mb-1">Safe and secure</h4>
+                      <h4 className="mb-1">Service & Community</h4>
                       <p className="text mb-0 fz15">
-                        Focus on your work knowing we help protect your data and
-                        privacy. We’re here with 24/7 support if you need it.
+                        We link services and community members to work together
+                        in closing the language barrier
                       </p>
                     </div>
                   </div>

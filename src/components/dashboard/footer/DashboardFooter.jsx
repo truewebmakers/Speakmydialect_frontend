@@ -1,5 +1,3 @@
-import FooterSelect1 from "@/components/footer/FooterSelect1";
-
 export default function DashboardFooter() {
   return (
     <>
@@ -9,15 +7,13 @@ export default function DashboardFooter() {
             <div className="col-auto">
               <div className="copyright-widget">
                 <p className="mb-md-0">
-                  © Freeio. {new Date().getFullYear()} CreativeLayers. All
-                  rights reserved.
+                  Copyright © 2024 {new Date().getFullYear()} Powered By
+                  SpeakMyDialect.com.au. All rights reserved.
                 </p>
               </div>
             </div>
             <div className="col-auto">
-              <div className="footer_bottom_right_btns at-home8 text-center text-lg-end">
-                <FooterSelect1 />
-              </div>
+              <div className="footer_bottom_right_btns at-home8 text-center text-lg-end"></div>
             </div>
           </div>
         </div>

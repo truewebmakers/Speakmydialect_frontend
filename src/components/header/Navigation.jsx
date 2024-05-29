@@ -1,4 +1,4 @@
-import navigation from "@/data/navigation";
+import menus from "@/data/navigation";
 import { isActiveNavigation } from "@/utils/isActiveNavigation";
 
 import { Link } from "react-router-dom";
@@ -18,7 +18,7 @@ export default function Navigation() {
             : ""
         } `}
       >
-        {navigation.map((item, i) => (
+        {menus.map((item, i) => (
           <li
             key={i}
             className={`visible_list menu-active ${

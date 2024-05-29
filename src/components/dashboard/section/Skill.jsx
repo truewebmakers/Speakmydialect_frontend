@@ -19,7 +19,8 @@ export default function Skill() {
     },
   ]);
   const [languageListing, setLanguageListing] = useState([]);
-  const { token, userId } = useAuth();
+  const { token, userInfo } = useAuth();
+  const userId = userInfo && JSON.parse(userInfo)?.id;
 
   const handleFieldChange = (index, field, option, value) => {
     const newLanguages = [...languages];

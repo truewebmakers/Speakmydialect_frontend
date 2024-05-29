@@ -12,8 +12,9 @@ import { apiMethods, apiUrls } from "@/constants/constant";
 import { useAuth } from "@/context/authContext";
 
 export default function MyProfileInfo() {
-  const { userId, token } = useAuth();
+  const { userInfo, token } = useAuth();
   const [profileData, setProfileData] = useState({});
+  const userId = userInfo && JSON.parse(userInfo)?.id;
 
   const getProfileData = async () => {
     try {

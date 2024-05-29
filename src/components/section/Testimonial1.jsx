@@ -23,9 +23,7 @@ export default function Testimonial1() {
             >
               <div className="main-title text-center">
                 <h2>Testimonials</h2>
-                <p className="paragraph">
-                  Interdum et malesuada fames ac ante ipsum
-                </p>
+                <p className="paragraph">Look At Honest User Reviews</p>
               </div>
             </div>
           </div>

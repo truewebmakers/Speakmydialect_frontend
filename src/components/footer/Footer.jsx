@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import FooterHeader from "./FooterHeader";
 import { useLocation } from "react-router-dom";
 
-import FooterSelect2 from "./FooterSelect2";
-import { about, category, support } from "@/data/footer";
+import { overview, about, support } from "@/data/footer";
 
 export default function Footer() {
   const { pathname } = useLocation();
@@ -33,10 +32,10 @@ export default function Footer() {
                     pathname !== "/home-4" ? "text-white" : ""
                   }`}
                 >
-                  About
+                  Overview
                 </h5>
                 <div className="link-list">
-                  {about.map((item, i) => (
+                  {overview.map((item, i) => (
                     <Link key={i} to={item.path}>
                       {item.name}
                     </Link>
@@ -59,10 +58,10 @@ export default function Footer() {
                     pathname !== "/home-4" ? "text-white" : ""
                   }`}
                 >
-                  Categories
+                  About
                 </h5>
                 <ul className="ps-0">
-                  {category.map((item, i) => (
+                  {about.map((item, i) => (
                     <li key={i}>
                       <Link to={item.path}>{item.name}</Link>
                     </li>
@@ -96,7 +95,7 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
-            <div className="col-sm-6 col-lg-3">
+            {/* <div className="col-sm-6 col-lg-3">
               <div className="footer-widget">
                 <div className="footer-widget mb-4 mb-sm-5">
                   <div className="mailchimp-widget">
@@ -143,7 +142,7 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="container white-bdrt1 py-4">
@@ -155,21 +154,17 @@ export default function Footer() {
                     pathname === "/home-11" ? "text-white" : "text-white-light"
                   } ff-heading`}
                 >
-                  © Freeio. {new Date().getFullYear()}{" "}
+                  Copyright © 2024
+                  {new Date().getFullYear()}{" "}
                   <a
                     href="https://themeforest.net/user/ib-themes/portfolio"
                     target="_blank"
                     style={{ color: "inherit" }}
                   >
-                    ib-themes
+                    Powered By SpeakMyDialect.com.au ,{" "}
                   </a>
-                  . All rights reserved.
+                  All rights reserved.
                 </p>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="footer_bottom_right_btns text-center text-lg-end">
-                <FooterSelect2 />
               </div>
             </div>
           </div>

@@ -1,11 +1,14 @@
-import { dasboardNavigation } from "@/data/dashboard";
+import { clientNavigation, translatorNavigation } from "@/data/dashboard";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "@/context/authContext";
+import { handleLogoutClick } from "@/components/common/logoutHandler";
 
 export default function DashboardNavigation() {
   const [isActive, setActive] = useState(false);
   const { pathname } = useLocation();
+  const { userInfo } = useAuth();
 
   return (
     <>
@@ -18,56 +21,75 @@ export default function DashboardNavigation() {
             <li>
               <p className="fz15 fw400 ff-heading mt30 pl30">Start</p>
             </li>
-            {dasboardNavigation.slice(0, 8).map((item, i) => (
-              <li
-                className={
-                  pathname == item.path ? "mobile-dasboard-menu-active" : ""
-                }
-                onClick={() => setActive(false)}
-                key={i}
-              >
-                <Link to={item.path}>
-                  <i className={`${item.icon} mr10`} />
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <p className="fz15 fw400 ff-heading mt30 pl30">
-                Organize and Manage
-              </p>
-            </li>
-            {dasboardNavigation.slice(8, 13).map((item, i) => (
-              <li
-                className={
-                  pathname == item.path ? "mobile-dasboard-menu-active" : ""
-                }
-                onClick={() => setActive(false)}
-                key={i}
-              >
-                <Link to={item.path}>
-                  <i className={`${item.icon} mr10`} />
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <p className="fz15 fw400 ff-heading mt30 pl30">Account</p>
-            </li>
-            {dasboardNavigation.slice(13, 15).map((item, i) => (
-              <li
-                className={
-                  pathname == item.path ? "mobile-dasboard-menu-active" : ""
-                }
-                onClick={() => setActive(false)}
-                key={i}
-              >
-                <Link to={item.path}>
-                  <i className={`${item.icon} mr10`} />
-                  {item.name}
-                </Link>
-              </li>
-            ))}
+            {userInfo && JSON.parse(userInfo)?.user_type == "admin"
+              ? ""
+              : JSON.parse(userInfo)?.user_type == "translator"
+              ? translatorNavigation.map((item, i) =>
+                  item.name !== "Logout" ? (
+                    <li
+                      className={
+                        pathname == item.path
+                          ? "mobile-dasboard-menu-active"
+                          : ""
+                      }
+                      onClick={() => setActive(false)}
+                      key={i}
+                    >
+                      <Link to={item.path}>
+                        <i className={`${item.icon} mr10`} />
+                        {item.name}
+                      </Link>
+                    </li>
+                  ) : (
+                    <li
+                      className={
+                        pathname == item.path
+                          ? "mobile-dasboard-menu-active"
+                          : ""
+                      }
+                      onClick={() => setActive(false)}
+                      key={i}
+                    >
+                      <Link onClick={handleLogoutClick}>
+                        <i className={`${item.icon} mr10`} />
+                        {item.name}
+                      </Link>
+                    </li>
+                  )
+                )
+              : clientNavigation.map((item, i) =>
+                  item.name !== "Logout" ? (
+                    <li
+                      className={
+                        pathname == item.path
+                          ? "mobile-dasboard-menu-active"
+                          : ""
+                      }
+                      onClick={() => setActive(false)}
+                      key={i}
+                    >
+                      <Link to={item.path}>
+                        <i className={`${item.icon} mr10`} />
+                        {item.name}
+                      </Link>
+                    </li>
+                  ) : (
+                    <li
+                      className={
+                        pathname == item.path
+                          ? "mobile-dasboard-menu-active"
+                          : ""
+                      }
+                      onClick={() => setActive(false)}
+                      key={i}
+                    >
+                      <Link onClick={handleLogoutClick}>
+                        <i className={`${item.icon} mr10`} />
+                        {item.name}
+                      </Link>
+                    </li>
+                  )
+                )}
           </ul>
         </div>
       </div>

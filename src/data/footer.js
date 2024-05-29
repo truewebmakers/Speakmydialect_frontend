@@ -1,29 +1,24 @@
-export const about = [
-  { id: 1, name: "Careers", path: "/" },
-  { id: 2, name: "Press & News", path: "/" },
-  { id: 3, name: "Partnerships", path: "/" },
-  { id: 4, name: "Privacy Policy", path: "/" },
+export const overview = [
+  { id: 1, name: "My Account", path: "/" },
+  { id: 2, name: "Join", path: "/" },
+  { id: 3, name: "Explore", path: "/" },
+  { id: 4, name: "How it works", path: "/" },
   { id: 5, name: "Terms of Service", path: "/" },
   { id: 6, name: "Investor Relations", path: "/" },
 ];
 
-export const category = [
-  { id: 1, name: "Graphics & Design", path: "/" },
-  { id: 2, name: "Digital Marketing", path: "/" },
-  { id: 3, name: "Writing & Translation", path: "/" },
-  { id: 4, name: "Video & Animation", path: "/" },
-  { id: 5, name: "Music & Audio", path: "/" },
-  { id: 6, name: "Programming & Tech", path: "/" },
-  { id: 7, name: "Data", path: "/" },
-  { id: 8, name: "Business", path: "/" },
-  { id: 9, name: "Lifestyle", path: "/" },
+export const about = [
+  { id: 1, name: "Company", path: "/" },
+  { id: 2, name: "Business Subscriptions", path: "/" },
+  { id: 3, name: "Business Center", path: "/" },
+  { id: 4, name: "FAQs", path: "/" },
 ];
 
 export const support = [
-  { id: 1, name: "Help & Support", path: "/" },
-  { id: 2, name: "Trust & Safety", path: "/" },
-  { id: 3, name: "Selling on Freeio", path: "/" },
-  { id: 4, name: "Buying on Freeio", path: "/" },
+  { id: 1, name: "Email: Info@speakmydialect.com.au", path: "/" },
+  { id: 2, name: "Contact Us", path: "/" },
+  { id: 3, name: "Terms & Conditions", path: "/" },
+  { id: 4, name: "Privacy Policy", path: "/" },
 ];
 
 export const momney = ["US$ USD", "Euro", "Pound"];

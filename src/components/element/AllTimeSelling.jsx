@@ -8,11 +8,8 @@ export default function AllTimeSelling() {
               <span className="flaticon-cv" />
             </div>
             <div className="details">
-              <h4 className="title mt10 mb-3">Post a job</h4>
-              <p className="text">
-                It’s free and easy to post a job. Simply fill{" "}
-                <br className="d-none d-xxl-block" /> in a title, description.
-              </p>
+              <h4 className="title mt10 mb-3">Search</h4>
+              <p className="text">Search the interpreter that you need. </p>
             </div>
           </div>
         </div>
@@ -22,10 +19,10 @@ export default function AllTimeSelling() {
               <span className="flaticon-web-design" />
             </div>
             <div className="details">
-              <h4 className="title mt10 mb-3">Choose freelancers</h4>
+              <h4 className="title mt10 mb-3">Select</h4>
               <p className="text">
-                It’s free and easy to post a job. Simply fill{" "}
-                <br className="d-none d-xxl-block" /> in a title, description.
+                Select the best matched interpreter for{" "}
+                <br className="d-none d-xxl-block" /> the specific language.
               </p>
             </div>
           </div>
@@ -36,10 +33,10 @@ export default function AllTimeSelling() {
               <span className="flaticon-secure" />
             </div>
             <div className="details">
-              <h4 className="title mt10 mb-3">Pay safely</h4>
+              <h4 className="title mt10 mb-3">Collaborate</h4>
               <p className="text">
-                It’s free and easy to post a job. Simply fill{" "}
-                <br className="d-none d-xxl-block" /> in a title, description.
+                Collaborate with the interpreters which{" "}
+                <br className="d-none d-xxl-block" /> you prefer.
               </p>
             </div>
           </div>
@@ -52,8 +49,8 @@ export default function AllTimeSelling() {
             <div className="details">
               <h4 className="title mt10 mb-3">We’re here to help</h4>
               <p className="text">
-                It’s free and easy to post a job. Simply fill{" "}
-                <br className="d-none d-xxl-block" /> in a title, description.
+                It’s easy to post your profile. Simply login, & fill
+                <br className="d-none d-xxl-block" /> in your details.
               </p>
             </div>
           </div>

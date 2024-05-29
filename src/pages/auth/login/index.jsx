@@ -45,7 +45,8 @@ export default function LoginPage() {
         console.log(response);
         if (response?.status == 200 || response?.status == 201) {
           setToken(response?.data?.token);
-          setUserId(response?.data?.userInfo?.id);
+          let info = JSON.stringify(response?.data?.userInfo);
+          setUserId(info);
           navigate("/my-profile");
           toast.success(response?.data?.message);
           return;

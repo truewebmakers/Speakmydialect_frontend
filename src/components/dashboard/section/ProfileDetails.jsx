@@ -21,7 +21,8 @@ export default function ProfileDetails({ profileData }) {
   const [getGender, setGender] = useState({ option: "Select", value: null });
   const [getCountry, setCountry] = useState({ option: "Select", value: null });
   const [countryList, setCountryList] = useState([]);
-  const { userId, token } = useAuth();
+  const { userInfo, token } = useAuth();
+  const userId = userInfo && JSON.parse(userInfo)?.id;
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];

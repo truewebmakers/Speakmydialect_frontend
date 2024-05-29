@@ -237,7 +237,7 @@ export const testimonial = [
   {
     id: 1,
     title:
-      "Our family embarked on a remarkable bullet train journey in Japan - this hotel's convenient location made it a breeze. Agoda's pricing was fantastic.",
+      "Through my own studies and the help of SpeackMyDialect's tutors, I was able to receive a score of 7.5 on my first IELTS test. ",
     name: "Emma Johnson",
     company: "Product Manager, Apple Inc",
     image: "/images/testimonials/testi-1.png",
@@ -245,7 +245,7 @@ export const testimonial = [
   {
     id: 2,
     title:
-      "A Memorable Bullet Train Adventure: Our family's Japan travel experience made easy by this hotel. Agoda's pricing exceeded our expectations.",
+      "I was a little bit skeptical in the beginning. I was used to studying with books and I was missing this. However, I quickly realized that it was the best tool I have ever found. ",
     name: "Olivia Smith",
     company: "Travel Blogger",
     image: "/images/testimonials/testi-2.png",
@@ -253,7 +253,7 @@ export const testimonial = [
   {
     id: 3,
     title:
-      "Unforgettable Japan Journey: Our family traveled by bullet train, and the hotel's strategic location enhanced our experience. Agoda's pricing was a pleasant surprise.",
+      " have noticed a significant improvement in the way I learn English. I have even already had some interviews in English, something that was not possible a few months ago.",
     name: "Sophia Ramirez",
     company: "Software Engineer",
     image: "/images/testimonials/testi-3.png",
@@ -261,7 +261,7 @@ export const testimonial = [
   {
     id: 4,
     title:
-      "A Wonderful Bullet Train Voyage: Our family explored Japan with ease from this hotel's ideal spot. Agoda's pricing made our trip even better.",
+      "Through my own studies and the help of SpeackMyDialect's tutors, I was able to receive a score of 7.5 on my first IELTS test. ",
     name: "Isabella Johnson",
     company: "Graphic Designer",
     image: "/images/testimonials/testi-4.png",
@@ -269,7 +269,7 @@ export const testimonial = [
   {
     id: 5,
     title:
-      "An Amazing Japan Journey: Bullet train travel with family was made effortless by the hotel's location. Agoda's pricing added tremendous value.",
+      "I was a little bit skeptical in the beginning. I was used to studying with books and I was missing this. However, I quickly realized that it was the best tool I have ever found. ",
     name: "Ava Lee",
     company: "Marketing Manager",
     image: "/images/testimonials/testi-5.png",

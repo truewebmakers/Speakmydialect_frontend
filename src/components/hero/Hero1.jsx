@@ -98,14 +98,9 @@ export default function Hero1() {
               <div className="col-xl-10 col-xxl-7">
                 <div className="position-relative">
                   <h3 className="banner-title animate-up-2">
-                    Hire the best freelancers for{" "}
+                    Find Trusted Local Interpreters{" "}
                     <br className="d-none d-lg-block" />
-                    any job, online.
                   </h3>
-                  <p className="banner-text text-white ff-heading mb25 animate-up-3">
-                    Millions of people use freeio.com to turn their ideas into
-                    reality.
-                  </p>
                   <div className="advance-search-tab bgc-white bgct-sm p10 p0-md bdrs4 banner-btn position-relative zi9 animate-up-4">
                     <div className="row">
                       <div className="col-md-5 col-lg-6 col-xl-6">
@@ -169,20 +164,6 @@ export default function Hero1() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="d-none d-md-flex mt30 banner-text animate-up-5">
-                    <p className="hero-text fz15 me-2 text-white mb-0">
-                      Popular Searches
-                    </p>
-                    {popular.map((elm, i) => (
-                      <a
-                        key={i}
-                        className="text-white"
-                        style={{ marginRight: "5px" }}
-                      >
-                        {`${elm}${i != popular.length - 1 ? "," : " "}`}
-                      </a>
-                    ))}
                   </div>
                 </div>
               </div>

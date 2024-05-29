@@ -3,62 +3,39 @@ import { Link } from "react-router-dom";
 export default function About1() {
   return (
     <>
-      <section className="our-about bgc-thm2">
+      <section className="our-about pb0 pt60-lg">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-xl-6">
-              <div className="position-relative mb30-lg">
-                <div className="iconbox-small1 at-home1 d-none d-md-block wow fadeInRight">
-                  <span className="icon flaticon-review" />
-                  <div className="details">
-                    <h6>4.9/5</h6>
-                    <p className="text fz13 mb-0">Clients rate professionals</p>
-                  </div>
-                </div>
-                <div className="iconbox-small2 d-none d-md-block wow fadeInLeft">
-                  <span className="icon flaticon-review" />
-                  <div className="details">
-                    <h6>+12M</h6>
-                    <p className="text fz13 mb-0">Project Completed</p>
-                  </div>
-                </div>
-                <div
-                  className="about-img wow fadeInRight"
-                  data-wow-delay="300ms"
-                >
-                  <img
-                    className="w100 object-fit-contain"
-                    src="/images/about/about-1.png"
-                    alt="object"
-                  />
-                </div>
-                <div className="imgbox-1 default-box-shadow1 text-center wow fadeInUp">
-                  <img
-                    className="img-1 bounce-y w-f"
-                    src="/images/about/happy-client.png"
-                    alt="object"
-                  />
-                </div>
+            <div className="col-md-6 col-xl-6">
+              <div
+                className="about-img mb30-sm wow fadeInRight"
+                data-wow-delay="300ms"
+              >
+                <img
+                  className="w100 h-100"
+                  src="/images/about/about-1.png"
+                  alt="about"
+                />
               </div>
             </div>
-            <div className="col-xl-5 offset-xl-1">
+            <div className="col-md-6 col-xl-5 offset-xl-1">
               <div
                 className="position-relative wow fadeInLeft"
                 data-wow-delay="300ms"
               >
-                <h2 className="text-white mb35">
+                <h2 className="mb25">
                   Join World's Best Marketplace{" "}
-                  <br className="d-none d-lg-block" /> for Workers
+                  <br className="d-none d-xl-block" /> for Workers
                 </h2>
-                <p className="text text-white mb35">
+                <p className="text mb25">
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                   The point of using Lorem Ipsum is that it has a more-or-less
                   normal distribution of letters, as opposed to using 'Content
                   here, content here', making it look like readable English.
                 </p>
-                <div className="list-style2 light-style">
-                  <ul className="mb30">
+                <div className="list-style2">
+                  <ul className="mb20">
                     <li>
                       <i className="far fa-check" />
                       Connect to freelancers with proven business experience
@@ -74,7 +51,7 @@ export default function About1() {
                     </li>
                   </ul>
                 </div>
-                <Link to="/freelancer-1" className="ud-btn btn-thm">
+                <Link to="/freelancer-single" className="ud-btn btn-thm-border">
                   Find Talent
                   <i className="fal fa-arrow-right-long" />
                 </Link>

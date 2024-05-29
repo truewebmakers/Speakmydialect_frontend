@@ -23,20 +23,20 @@ export default function TrendingService1() {
           <div className="row align-items-center wow fadeInUp">
             <div className="col-lg-9">
               <div className="main-title">
-                <h2 className="title">Trending Services</h2>
+                <h2 className="title">Popular Translators</h2>
                 <p className="paragraph">
-                  Most viewed and all-time top-selling services
+                  Most viewed and all-time top-selling translators
                 </p>
               </div>
             </div>
-            <div className="col-lg-3">
+            {/* <div className="col-lg-3">
               <div className="text-start text-lg-end mb-4 mb-lg-2">
                 <Link className="ud-btn2" to="/service-1">
                   All Categories
                   <i className="fal fa-arrow-right-long" />
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="row">
             <div className="col-lg-12">

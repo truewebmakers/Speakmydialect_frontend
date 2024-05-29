@@ -28,22 +28,12 @@ export default function Header1() {
                       <img src="/images/logo.jpeg" alt="Header Logo" />
                     </Link>
                   </div>
-                  <div className="home1_style">
-                    <Mega />
-                  </div>
                 </div>
               </div>
               <div className="col-auto px-0">
                 <div className="d-flex align-items-center">
                   <Navigation />
-                  <a
-                    className="login-info bdrl1 pl15-lg pl30"
-                    data-bs-toggle="modal"
-                    href="#exampleModalToggle"
-                  >
-                    <span className="flaticon-loupe" />
-                  </a>
-                  <Link
+                  {/* <Link
                     className={`login-info mx15-lg mx30`}
                     to="/register-translator"
                   >
@@ -61,7 +51,7 @@ export default function Header1() {
                   </Link>
                   <Link className={`login-info mr15-lg mr30`} to="/login">
                     Sign in
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
