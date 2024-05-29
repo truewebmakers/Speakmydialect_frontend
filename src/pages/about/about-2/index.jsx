@@ -9,14 +9,12 @@ import OurPartner1 from "@/components/section/OurPartner1";
 import Testimonial1 from "@/components/section/Testimonial1";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | About 2",
-};
+import { metaData } from "@/constants/constant";
 
 export default function AboutPage2() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <Breadcumb2
         title="About"
         brief="Give your visitor a smooth online experience with a solid UX design"

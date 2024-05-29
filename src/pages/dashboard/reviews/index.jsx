@@ -4,14 +4,12 @@ import ReviewsInfo from "@/components/dashboard/section/ReviewsInfo";
 import MobileNavigation2 from "@/components/header/MobileNavigation2";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Review",
-};
+import { metaData } from "@/constants/constant";
 
 export default function DasbPageReviews() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <MobileNavigation2 />
       <DashboardLayout>
         <ReviewsInfo />

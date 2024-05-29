@@ -4,14 +4,12 @@ import MessageInfo from "@/components/dashboard/section/MessageInfo";
 import MobileNavigation2 from "@/components/header/MobileNavigation2";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Message",
-};
+import { metaData } from "@/constants/constant";
 
 export default function DasbPageMessage() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <MobileNavigation2 />
       <DashboardLayout>
         <MessageInfo />

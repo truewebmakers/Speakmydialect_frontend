@@ -6,14 +6,12 @@ import JobInvision1 from "@/components/section/JobInvision1";
 import TabSection1 from "@/components/section/TabSection1";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Emplyee Single",
-};
+import { metaData } from "@/constants/constant";
 
 export default function EmploeePageSingle1() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <TabSection1 />
       <Breadcumb10 path={["Home", "Services", "Design & Creative"]} />
       <Breadcumb15 />

@@ -4,14 +4,12 @@ import MyProfileInfo from "@/components/dashboard/section/MyProfileInfo";
 import MobileNavigation2 from "@/components/header/MobileNavigation2";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | My Profile",
-};
+import { metaData } from "@/constants/constant";
 
 export default function DasbPageMyProfile() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <MobileNavigation2 />
       <DashboardLayout>
         <MyProfileInfo />

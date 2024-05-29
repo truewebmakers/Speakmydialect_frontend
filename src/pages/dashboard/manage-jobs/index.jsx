@@ -4,14 +4,12 @@ import ManageJobInfo from "@/components/dashboard/section/ManageJobInfo";
 import MobileNavigation2 from "@/components/header/MobileNavigation2";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Manage Job",
-};
+import { metaData } from "@/constants/constant";
 
 export default function DasbPageManageJobs() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <MobileNavigation2 />
       <DashboardLayout>
         <ManageJobInfo />

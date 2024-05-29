@@ -18,6 +18,9 @@ export const apiUrls = {
   updateUserSkill: "/admin/update/skills/",
 };
 
+export const metaData = {
+  title: "SpeakMyDialect - Local / Global interpreters",
+};
 export const skillStatus = [
   { id: 1, name: "Active" },
   { id: 2, name: "Inactive" },

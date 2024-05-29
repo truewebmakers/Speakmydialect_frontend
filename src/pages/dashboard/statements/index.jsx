@@ -4,14 +4,12 @@ import StatementInfo from "@/components/dashboard/section/StatementInfo";
 import MobileNavigation2 from "@/components/header/MobileNavigation2";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Statement",
-};
+import { metaData } from "@/constants/constant";
 
 export default function DasbPageStatements() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <MobileNavigation2 />
       <DashboardLayout>
         <StatementInfo />

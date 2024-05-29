@@ -3,14 +3,12 @@ import PayoutInfo from "@/components/dashboard/section/PayoutInfo";
 
 import MobileNavigation2 from "@/components/header/MobileNavigation2";
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Payout",
-};
+import { metaData } from "@/constants/constant";
 
 export default function DasbPagePayouts() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <MobileNavigation2 />
       <DashboardLayout>
         <PayoutInfo />

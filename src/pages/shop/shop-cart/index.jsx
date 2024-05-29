@@ -4,14 +4,12 @@ import HeaderInfo1 from "@/components/section/HeaderInfo1";
 import ShopCartArea1 from "@/components/section/ShopCartArea1";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Shop Cart",
-};
+import { metaData } from "@/constants/constant";
 
 export default function ShopPageCart() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <Breadcumb3 path={["Home", "Services", "Design & Creative"]} />
       <HeaderInfo1
         title="Shop Cart"

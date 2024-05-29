@@ -3,14 +3,11 @@ import MetaComponent from "@/components/common/MetaComponent";
 import { useEffect, useState } from "react";
 import { handleValidations } from "@/utils/handleValidations";
 import UseApi from "@/hook/useApi";
-import { apiMethods, apiUrls } from "@/constants/constant";
+import { apiMethods, apiUrls, metaData } from "@/constants/constant";
 import { toast } from "react-toastify";
 
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Register",
-};
 export default function RegisterPage() {
-  <MetaComponent meta={metadata} />;
+  <MetaComponent meta={metaData} />;
   const [data, setData] = useState({
     firstName: "",
     lastName: "",

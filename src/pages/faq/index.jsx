@@ -2,14 +2,12 @@ import FaqPayment from "@/components/section/FaqPayment";
 import FaqSuggestion from "@/components/section/FaqSuggestion";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | FAQ",
-};
+import { metaData } from "@/constants/constant";
 
 export default function FaqPage() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <section className="our-faq pb50">
         <div className="container">
           <div className="row">

@@ -4,14 +4,12 @@ import CreateProjectInfo from "@/components/dashboard/section/CreateProjectInfo"
 import MobileNavigation2 from "@/components/header/MobileNavigation2";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Create Project",
-};
+import { metaData } from "@/constants/constant";
 
 export default function DasbPageCreateProject() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <MobileNavigation2 />
       <DashboardLayout>
         <CreateProjectInfo />

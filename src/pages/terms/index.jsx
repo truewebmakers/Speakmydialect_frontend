@@ -1,14 +1,12 @@
 import TermsCondition1 from "@/components/section/TermsCondition1";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Terms & Conditions",
-};
+import { metaData } from "@/constants/constant";
 
 export default function TermsPage() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <TermsCondition1 />
     </>
   );

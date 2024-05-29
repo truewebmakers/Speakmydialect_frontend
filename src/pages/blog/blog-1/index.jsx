@@ -3,14 +3,12 @@ import Breadcumb3 from "@/components/breadcumb/Breadcumb3";
 import BlogArea1 from "@/components/section/BlogArea1";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Blog 1",
-};
+import { metaData } from "@/constants/constant";
 
 export default function BlogPage1() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <Breadcumb3 />
       <BlogArea1 />
     </>

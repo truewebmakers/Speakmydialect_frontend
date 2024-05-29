@@ -8,14 +8,12 @@ import Testimonial1 from "@/components/section/Testimonial1";
 import TrendingService1 from "@/components/section/TrendingService1";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Home 1",
-};
+import { metaData } from "@/constants/constant";
 
 export default function HomePage1() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <Hero1 />
       <TrendingService1 />
       <NeedSomething1 />

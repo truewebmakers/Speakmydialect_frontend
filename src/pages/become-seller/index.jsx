@@ -7,14 +7,12 @@ import OurFeature1 from "@/components/section/OurFeature1";
 import OurTeam1 from "@/components/section/OurTeam1";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Become seller",
-};
+import { metaData } from "@/constants/constant";
 
 export default function BecameSellerPage() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <Breadcumb1
         title={"Work Your Way"}
         brief={` Give your visitor a smooth online

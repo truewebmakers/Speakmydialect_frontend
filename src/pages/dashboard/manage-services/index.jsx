@@ -4,14 +4,12 @@ import ManageServiceInfo from "@/components/dashboard/section/ManageServiceInfo"
 import MobileNavigation2 from "@/components/header/MobileNavigation2";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Manage Services",
-};
+import { metaData } from "@/constants/constant";
 
 export default function DasbPageManageService() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <MobileNavigation2 />
       <DashboardLayout>
         <ManageServiceInfo />

@@ -5,14 +5,12 @@ import GoogleMap1 from "@/components/section/GoogleMap1";
 import OurFaq1 from "@/components/section/OurFaq1";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Contact",
-};
+import { metaData } from "@/constants/constant";
 
 export default function ContactPage() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <Breadcumb1
         title={"Contact us"}
         brief={`We'd love to talk about how we can help you.`}

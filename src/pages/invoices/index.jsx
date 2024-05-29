@@ -1,14 +1,12 @@
 import Invoice from "@/components/section/Invoice";
 
 import MetaComponent from "@/components/common/MetaComponent";
-const metadata = {
-  title: "Freeio - Freelance Marketplace ReactJs Template | Invoices",
-};
+import { metaData } from "@/constants/constant";
 
 export default function InvoicePage() {
   return (
     <>
-      <MetaComponent meta={metadata} />
+      <MetaComponent meta={metaData} />
       <Invoice />
     </>
   );
