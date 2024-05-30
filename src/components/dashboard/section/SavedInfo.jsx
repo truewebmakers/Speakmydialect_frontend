@@ -25,7 +25,7 @@ const ordersTab = [
 export default function SavedInfo() {
   const [getCurrentTab, setCurrentTab] = useState(0);
   const { pathname } = useLocation();
-  console.log(pathname);
+
   return (
     <>
       <div className="dashboard__content hover-bgc-color">

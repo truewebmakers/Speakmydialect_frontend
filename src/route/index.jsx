@@ -20,7 +20,6 @@ import ProjectPage1 from "@/pages/searchHandler/onSearchClick";
 
 const AppRoutes = () => {
   const { token } = useAuth();
-  console.log(token, "tokennn");
   return (
     <Suspense fallback>
       <Routes>
@@ -105,14 +104,7 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/search"
-          element={
-            <ProtectedRoute>
-              <ProjectPage1 />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/search" element={<ProjectPage1 />} />
         <Route
           path="/payouts"
           element={

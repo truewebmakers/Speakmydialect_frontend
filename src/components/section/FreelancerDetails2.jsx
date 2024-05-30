@@ -8,6 +8,7 @@ import { Sticky, StickyContainer } from "react-sticky";
 import useScreen from "@/hook/useScreen";
 
 import { useParams } from "react-router-dom";
+
 export default function FreelancerDetail1() {
   const isMatchedScreen = useScreen(1216);
   const { id } = useParams();

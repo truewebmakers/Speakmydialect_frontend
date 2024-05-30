@@ -4132,15 +4132,7 @@ section {
 }
 
 /* Manual serach bar changes*/
-.serach-bar{
-  max-width: 59% !important;
-}
-.search-text{
-  width:68%;
-}
-.search-button {
-  width: 31.666667%;
-}
+
 
 .advance-search-tab.at-home6 {
   border: 1px solid #1f4b3f;

@@ -97,7 +97,6 @@ export default function Skill() {
         bodyData,
         headers
       );
-      console.log(response, "resss");
       if (response?.status == 200 || response?.status == 201) {
         toast.success(response?.data?.message);
         return;

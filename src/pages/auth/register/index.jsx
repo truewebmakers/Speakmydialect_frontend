@@ -69,14 +69,12 @@ export default function RegisterPage() {
           password: data.password,
           user_type: route[1], // it is coming from the routes
         };
-        console.log("nnnnnnnnnn", bodyData);
         // Call signup API
         const response = await UseApi(
           apiUrls.signup,
           apiMethods.POST,
           bodyData
         );
-        console.log(response, "response");
         if (response?.status == 201) {
           toast.success(response?.data?.message);
           navigate("/login");

@@ -1,17 +1,11 @@
-import { handleLogoutClick } from "@/components/common/logoutHandler";
 import { useAuth } from "@/context/authContext";
-import { clientNavigation, translatorNavigation } from "@/data/dashboard";
 import toggleStore from "@/store/toggleStore";
-
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 export default function DashboardHeader() {
-  const toggle = toggleStore((state) => state.dashboardSlidebarToggleHandler);
-  const { pathname } = useLocation();
-  const { userInfo } = useAuth();
   let image = localStorage.getItem("picture");
-  console.log(image);
+
   return (
     <>
       <header className="header-nav nav-innerpage-style menu-home4 dashboard_header main-menu">
@@ -25,33 +19,6 @@ export default function DashboardHeader() {
                       <img src="/images/logo.jpeg" alt="logo" />
                     </Link>
                   </div>
-                  {/* <div className="fz20 ml90">
-                    <a
-                      onClick={toggle}
-                      className="dashboard_sidebar_toggle_icon vam"
-                    >
-                      <img src="/images/dashboard-navicon.svg" alt="navicon" />
-                    </a>
-                  </div>
-                  <a
-                    className="login-info d-block d-xl-none ml40 vam"
-                    data-bs-toggle="modal"
-                    href="#exampleModalToggle"
-                  >
-                    <span className="flaticon-loupe" />
-                  </a> */}
-                  {/* <div className="ml40 d-none d-xl-block">
-                    <div className="search_area dashboard-style">
-                      <input
-                        type="text"
-                        className="form-control border-0"
-                        placeholder="What service are you looking for today?"
-                      />
-                      <label>
-                        <span className="flaticon-loupe" />
-                      </label>
-                    </div>
-                  </div> */}
                 </div>
               </div>
               <div className="col-6 col-lg-auto">

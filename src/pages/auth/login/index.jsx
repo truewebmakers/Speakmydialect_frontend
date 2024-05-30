@@ -1,7 +1,6 @@
 import { apiMethods, apiUrls } from "@/constants/constant";
 import { useAuth } from "@/context/authContext";
 import UseApi from "@/hook/useApi";
-import { handleValidations } from "@/utils/handleValidations";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -42,12 +41,11 @@ export default function LoginPage() {
         };
         // Call signup API
         const response = await UseApi(apiUrls.login, apiMethods.POST, bodyData);
-        console.log(response);
         if (response?.status == 200 || response?.status == 201) {
           setToken(response?.data?.token);
           let info = JSON.stringify(response?.data?.userInfo);
           setUserId(info);
-          navigate("/dashboard");
+          navigate("/my-profile");
           toast.success(response?.data?.message);
           return;
         } else {
@@ -122,14 +120,6 @@ export default function LoginPage() {
                     onChange={handleChange}
                   />
                 </div>
-                {/* <div className="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb20">
-                  <label className="custom_checkbox fz14 ff-heading">
-                    Remember me
-                    <input type="checkbox" defaultChecked="checked" />
-                    <span className="checkmark" />
-                  </label>
-                  <a className="fz14 ff-heading">Lost your password?</a>
-                </div> */}
                 <div className="d-grid mb20">
                   <button
                     className="ud-btn btn-thm"
@@ -140,27 +130,6 @@ export default function LoginPage() {
                     Log In <i className="fal fa-arrow-right-long" />
                   </button>
                 </div>
-                {/* <div className="hr_content mb20">
-                  <hr />
-                  <span className="hr_top_text">OR</span>
-                </div>
-                <div className="d-md-flex justify-content-between">
-                  <button
-                    className="ud-btn btn-fb fz14 fw400 mb-2 mb-md-0"
-                    type="button"
-                  >
-                    <i className="fab fa-facebook-f pr10" /> Continue Facebook
-                  </button>
-                  <button
-                    className="ud-btn btn-google fz14 fw400 mb-2 mb-md-0"
-                    type="button"
-                  >
-                    <i className="fab fa-google" /> Continue Google
-                  </button>
-                  <button className="ud-btn btn-apple fz14 fw400" type="button">
-                    <i className="fab fa-apple" /> Continue Apple
-                  </button>
-                </div> */}
               </div>
             </div>
           </div>
