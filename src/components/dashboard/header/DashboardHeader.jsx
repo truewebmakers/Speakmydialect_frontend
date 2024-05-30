@@ -24,7 +24,7 @@ export default function DashboardHeader() {
                       <img src="/images/logo.jpeg" alt="logo" />
                     </Link>
                   </div>
-                  <div className="fz20 ml90">
+                  {/* <div className="fz20 ml90">
                     <a
                       onClick={toggle}
                       className="dashboard_sidebar_toggle_icon vam"
@@ -38,8 +38,8 @@ export default function DashboardHeader() {
                     href="#exampleModalToggle"
                   >
                     <span className="flaticon-loupe" />
-                  </a>
-                  <div className="ml40 d-none d-xl-block">
+                  </a> */}
+                  {/* <div className="ml40 d-none d-xl-block">
                     <div className="search_area dashboard-style">
                       <input
                         type="text"
@@ -50,7 +50,7 @@ export default function DashboardHeader() {
                         <span className="flaticon-loupe" />
                       </label>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="col-6 col-lg-auto">
@@ -240,10 +240,14 @@ export default function DashboardHeader() {
                     </li>
                     <li className="user_setting">
                       <div className="dropdown">
-                        <a className="btn" data-bs-toggle="dropdown">
+                        <Link
+                          className="btn"
+                          // data-bs-toggle="dropdown"
+                          to="/my-profile"
+                        >
                           <img src="/images/resource/user.png" alt="user.png" />
-                        </a>
-                        <div className="dropdown-menu">
+                        </Link>
+                        {/* <div className="dropdown-menu">
                           <div className="user_setting_content">
                             <p className="fz15 fw400 ff-heading mb10 pl30">
                               Start
@@ -303,7 +307,7 @@ export default function DashboardHeader() {
                                   )
                                 )}
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </li>
                   </ul>

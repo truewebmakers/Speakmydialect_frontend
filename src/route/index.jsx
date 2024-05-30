@@ -14,6 +14,8 @@ import BlogPage1 from "@/pages/blog/blog-1";
 import FaqPage from "@/pages/faq";
 import NotFound from "@/pages/not_found";
 import { Suspense } from "react";
+import DasbPageSaved from "@/pages/dashboard/saved";
+import DasbPagePayouts from "@/pages/dashboard/payouts";
 
 const AppRoutes = () => {
   const { token } = useAuth();
@@ -75,6 +77,39 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <DasbPageDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/jobs"
+          element={
+            <ProtectedRoute>
+              <DasbPageSaved />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cards"
+          element={
+            <ProtectedRoute>
+              <DasbPagePayouts />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <DasbPageSaved />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/payouts"
+          element={
+            <ProtectedRoute>
+              <DasbPagePayouts />
             </ProtectedRoute>
           }
         />

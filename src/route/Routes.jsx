@@ -135,7 +135,7 @@ export default function RoutesComponent() {
 
           <Route path="dashboard" element={<DasbPageDashboard />} />
           <Route path="proposal" element={<DasbPageProposal />} />
-          <Route path="saved" element={<DasbPageSaved />} />
+          <Route path="jobs" element={<DasbPageSaved />} />
           <Route path="message" element={<DasbPageMessage />} />
           <Route path="reviews" element={<DasbPageReviews />} />
           <Route path="invoice" element={<DasbPageInvoice />} />

@@ -47,7 +47,7 @@ export default function LoginPage() {
           setToken(response?.data?.token);
           let info = JSON.stringify(response?.data?.userInfo);
           setUserId(info);
-          navigate("/my-profile");
+          navigate("/dashboard");
           toast.success(response?.data?.message);
           return;
         } else {

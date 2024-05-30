@@ -21,7 +21,7 @@ export default function PayoutInfo() {
               <p className="text">Lorem ipsum dolor sit amet, consectetur.</p>
             </div>
           </div>
-          <div className="col-lg-6">
+          {/* <div className="col-lg-6">
             <div className="text-lg-end">
               <Link
                 to="/freelancer-1"
@@ -31,7 +31,7 @@ export default function PayoutInfo() {
                 <i className="fal fa-arrow-right-long" />
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="row">
           <div className="col-xl-12">
@@ -40,10 +40,10 @@ export default function PayoutInfo() {
                 <table className="table-style3 table at-savesearch">
                   <thead className="t-head">
                     <tr>
-                      <th scope="col">Amount</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Payout Method</th>
-                      <th scope="col">Payment Status</th>
+                      <th scope="col">Job Type</th>
+                      <th scope="col">Due Date</th>
+                      <th scope="col">Total Payment</th>{" "}
+                      <th scope="col">Job Status</th>
                     </tr>
                   </thead>
                   <tbody className="t-body">

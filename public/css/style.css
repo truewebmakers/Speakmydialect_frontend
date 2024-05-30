@@ -223,6 +223,11 @@ li {
     font-size: 20px;
   }
 }
+@media screen and (min-width: 1400px) {
+  #shadow-host-companion {
+    padding: 0px !important;
+  }
+}
 /*	Header Styles  */
 .login-info {
   font-size: 15px;
