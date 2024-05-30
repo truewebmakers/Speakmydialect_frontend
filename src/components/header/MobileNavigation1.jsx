@@ -12,9 +12,6 @@ export default function MobileNavigation1() {
                   <img src="/images/logo.jpeg" alt="Header Logo" />
                 </Link>
                 <div className="right-side text-end">
-                  <Link className="text-white" to="/login">
-                    join
-                  </Link>
                   <a
                     className="menubar ml30"
                     data-bs-toggle="offcanvas"

@@ -1,6 +1,8 @@
+import { useAuth } from "@/context/authContext";
 import { Link } from "react-router-dom";
 
 export default function MobileNavigation2() {
+  const { token } = useAuth();
   return (
     <>
       <div className="mobilie_header_nav stylehome1">
@@ -11,17 +13,19 @@ export default function MobileNavigation2() {
                 <Link className="mobile_logo" to="/">
                   <img src="/images/logo.jpeg" alt="Header Logo" />
                 </Link>
-                <div className="right-side text-end">
-                  <Link to="/login">join</Link>
-                  <a
-                    className="menubar ml30"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasExample"
-                    aria-controls="offcanvasExample"
-                  >
-                    <img src="/images/mobile-dark-nav-icon.svg" alt="icon" />
-                  </a>
-                </div>
+                {!token && (
+                  <div className="right-side text-end">
+                    {/* <Link to="/login">join</Link> */}
+                    <a
+                      className="menubar ml30"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasExample"
+                      aria-controls="offcanvasExample"
+                    >
+                      <img src="/images/mobile-dark-nav-icon.svg" alt="icon" />
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
             <div className="posr">

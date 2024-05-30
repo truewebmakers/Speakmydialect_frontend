@@ -14,6 +14,13 @@ export default function Header3() {
             <div className="row align-items-center justify-content-between">
               <div className="col-auto pe-0">
                 <div className="d-flex align-items-center">
+                  {/* <Link className="header-logo bdrr1 pr30 pr5-xl" to="/">
+                    <img
+                      className="w-100 h-100 object-fit-contain"
+                      src="/images/header-logo-dark.svg"
+                      alt="Header Logo"
+                    />
+                  </Link> */}
                   <Link className="w-100 h-100 object-fit-contain" to="/">
                     <img src="/images/logo.jpeg" alt="Header Logo" />
                   </Link>
