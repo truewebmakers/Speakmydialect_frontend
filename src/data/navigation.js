@@ -21,7 +21,7 @@ const menus = [
   },
   {
     id: 5,
-    name: "Hire a Translator",
+    name: "Join as a Client",
     path: "/register-client",
   },
   {

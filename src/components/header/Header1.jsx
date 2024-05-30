@@ -33,25 +33,6 @@ export default function Header1() {
               <div className="col-auto px-0">
                 <div className="d-flex align-items-center">
                   <Navigation />
-                  {/* <Link
-                    className={`login-info mx15-lg mx30`}
-                    to="/register-translator"
-                  >
-                    <span className="d-none d-xl-inline-block">
-                      Become a Translator
-                    </span>
-                  </Link>
-                  <Link
-                    className={`login-info mx15-lg mx30`}
-                    to="/register-client"
-                  >
-                    <span className="d-none d-xl-inline-block">
-                      Hire a Translator
-                    </span>
-                  </Link>
-                  <Link className={`login-info mr15-lg mr30`} to="/login">
-                    Sign in
-                  </Link> */}
                 </div>
               </div>
             </div>

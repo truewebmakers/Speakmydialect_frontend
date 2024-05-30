@@ -27,16 +27,7 @@ import WOW from "wow.js";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehaviour";
 import Header1 from "./components/header/Header1";
 import AppRoutes from "./route";
-import Header2 from "./components/header/Header2";
 import Header3 from "./components/header/Header3";
-import Header4 from "./components/header/Header4";
-import Header5 from "./components/header/Header5";
-import Header6 from "./components/header/Header6";
-import Header7 from "./components/header/Header7";
-import Header8 from "./components/header/Header8";
-import Header9 from "./components/header/Header9";
-import Header10 from "./components/header/Header10";
-import Header11 from "./components/header/Header11";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -74,34 +65,34 @@ export function App() {
           ) && <Header1 />}
           {header2.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
-          ) && <Header2 />}
+          ) && <Header3 />}
           {header3.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
           ) && <Header3 />}
           {header4.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
-          ) && <Header4 />}
+          ) && <Header3 />}
           {header5.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
-          ) && <Header5 />}
+          ) && <Header3 />}
           {header6.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
-          ) && <Header6 />}
+          ) && <Header3 />}
           {header7.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
-          ) && <Header7 />}
+          ) && <Header3 />}
           {header8.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
-          ) && <Header8 />}
+          ) && <Header3 />}
           {header9.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
-          ) && <Header9 />}
+          ) && <Header3 />}
           {header10.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
-          ) && <Header10 />}
+          ) && <Header3 />}
           {header11.find(
             (elm) => elm?.split("/")[1] == pathname?.split("/")[1]
-          ) && <Header11 />}
+          ) && <Header3 />}
 
           <SearchModal1 />
           <div className="body_content">
