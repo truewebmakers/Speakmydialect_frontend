@@ -10,7 +10,8 @@ export default function DashboardHeader() {
   const toggle = toggleStore((state) => state.dashboardSlidebarToggleHandler);
   const { pathname } = useLocation();
   const { userInfo } = useAuth();
-
+  let image = localStorage.getItem("picture");
+  console.log(image);
   return (
     <>
       <header className="header-nav nav-innerpage-style menu-home4 dashboard_header main-menu">
@@ -245,7 +246,13 @@ export default function DashboardHeader() {
                           // data-bs-toggle="dropdown"
                           to="/my-profile"
                         >
-                          <img src="/images/resource/user.png" alt="user.png" />
+                          <img
+                            src={image}
+                            alt="user.png"
+                            height={50}
+                            width={50}
+                            style={{ borderRadius: "21px" }}
+                          />
                         </Link>
                         {/* <div className="dropdown-menu">
                           <div className="user_setting_content">

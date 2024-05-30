@@ -10,7 +10,7 @@ import { CapitalizeFirstLetter } from "@/utils/helper";
 export default function ProfileDetails({ profileData }) {
   const [profileDetails, setProfileDetails] = useState({
     fname: "",
-    lanme: "",
+    lname: "",
     phone: "",
     fix_rate: "",
     hourly_rate: "",
@@ -61,7 +61,7 @@ export default function ProfileDetails({ profileData }) {
       // Enter Profile Details
       setProfileDetails({
         fname: profileData?.fname || "",
-        lanme: profileData?.lname || "",
+        lname: profileData?.lname || "",
         phone: profileData?.user_meta?.phone || "",
         fix_rate: profileData?.user_meta?.fix_rate || "",
         hourly_rate: profileData?.user_meta?.hourly_rate || "",
@@ -110,6 +110,8 @@ export default function ProfileDetails({ profileData }) {
       };
       // set body
       const bodyData = {
+        fname: profileDetails?.fname,
+        lname: profileDetails?.lname,
         phone: profileDetails?.phone,
         fix_rate: profileDetails.fix_rate,
         hourly_rate: profileDetails.hourly_rate,
@@ -209,7 +211,7 @@ export default function ProfileDetails({ profileData }) {
                     className="form-control"
                     placeholder="i will"
                     name="lname"
-                    value={profileDetails?.lanme}
+                    value={profileDetails?.lname}
                     onChange={handleOnChange}
                   />
                 </div>

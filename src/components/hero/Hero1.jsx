@@ -39,8 +39,9 @@ export default function Hero1() {
   const navigate = useNavigate();
   // search handler
   const searchHandler = () => {
-    navigate("/freelancer-1");
+    navigate("/search");
   };
+
   const [showSwiper, setShowSwiper] = useState(false);
   useEffect(() => {
     setShowSwiper(true);
@@ -101,58 +102,14 @@ export default function Hero1() {
                     Find Trusted Local Interpreters{" "}
                     <br className="d-none d-lg-block" />
                   </h3>
-                  <div className="advance-search-tab bgc-white bgct-sm p10 p0-md bdrs4 banner-btn position-relative zi9 animate-up-4">
+                  <div className="advance-search-tab serach-bar bgc-white bgct-sm p10 p0-md bdrs4 banner-btn position-relative zi9 animate-up-4">
                     <div className="row">
-                      <div className="col-md-5 col-lg-6 col-xl-6">
+                      <div className="search-text col-md-5 col-lg-6 col-xl-6">
                         <div className="advance-search-field mb10-sm bdrr1 bdrn-sm">
                           <HeroSearch1 />
                         </div>
                       </div>
-                      <div className="col-md-4 col-lg-4 col-xl-4 d-none d-md-block">
-                        <div className="bselect-style1">
-                          <div className="dropdown bootstrap-select">
-                            <button
-                              type="button"
-                              className="btn dropdown-toggle btn-light"
-                              data-bs-toggle="dropdown"
-                            >
-                              <div className="filter-option">
-                                <div className="filter-option-inner">
-                                  <div className="filter-option-inner-inner">
-                                    {getSelectedRole !== null
-                                      ? getSelectedRole
-                                      : "Select Role"}
-                                  </div>
-                                </div>
-                              </div>
-                            </button>
-                            <div className="dropdown-menu">
-                              <div className="inner show">
-                                <ul className="dropdown-menu inner show">
-                                  {role.map((item, index) => (
-                                    <li
-                                      onClick={() => roleHandler(item)}
-                                      key={index}
-                                      className="selected active"
-                                    >
-                                      <a
-                                        className={`dropdown-item selected ${
-                                          getSelectedRole === item
-                                            ? "active"
-                                            : ""
-                                        }`}
-                                      >
-                                        <span className="text">{item}</span>
-                                      </a>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-md-3 col-lg-2 col-xl-2 ps-md-0">
+                      <div className="search-button col-md-3 col-lg-2 col-xl-2 ps-md-0">
                         <div className="text-center text-xl-end">
                           <button
                             onClick={searchHandler}

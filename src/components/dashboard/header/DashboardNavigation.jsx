@@ -21,75 +21,76 @@ export default function DashboardNavigation() {
             <li>
               <p className="fz15 fw400 ff-heading mt30 pl30">Start</p>
             </li>
-            {userInfo && JSON.parse(userInfo)?.user_type == "admin"
-              ? ""
-              : JSON.parse(userInfo)?.user_type == "translator"
-              ? translatorNavigation.map((item, i) =>
-                  item.name !== "Logout" ? (
-                    <li
-                      className={
-                        pathname == item.path
-                          ? "mobile-dasboard-menu-active"
-                          : ""
-                      }
-                      onClick={() => setActive(false)}
-                      key={i}
-                    >
-                      <Link to={item.path}>
-                        <i className={`${item.icon} mr10`} />
-                        {item.name}
-                      </Link>
-                    </li>
-                  ) : (
-                    <li
-                      className={
-                        pathname == item.path
-                          ? "mobile-dasboard-menu-active"
-                          : ""
-                      }
-                      onClick={() => setActive(false)}
-                      key={i}
-                    >
-                      <Link onClick={handleLogoutClick}>
-                        <i className={`${item.icon} mr10`} />
-                        {item.name}
-                      </Link>
-                    </li>
+            {userInfo?.length > 0 &&
+              (JSON.parse(userInfo)?.user_type == "admin"
+                ? ""
+                : JSON.parse(userInfo)?.user_type == "translator"
+                ? translatorNavigation.map((item, i) =>
+                    item.name !== "Logout" ? (
+                      <li
+                        className={
+                          pathname == item.path
+                            ? "mobile-dasboard-menu-active"
+                            : ""
+                        }
+                        onClick={() => setActive(false)}
+                        key={i}
+                      >
+                        <Link to={item.path}>
+                          <i className={`${item.icon} mr10`} />
+                          {item.name}
+                        </Link>
+                      </li>
+                    ) : (
+                      <li
+                        className={
+                          pathname == item.path
+                            ? "mobile-dasboard-menu-active"
+                            : ""
+                        }
+                        onClick={() => setActive(false)}
+                        key={i}
+                      >
+                        <Link onClick={handleLogoutClick}>
+                          <i className={`${item.icon} mr10`} />
+                          {item.name}
+                        </Link>
+                      </li>
+                    )
                   )
-                )
-              : clientNavigation.map((item, i) =>
-                  item.name !== "Logout" ? (
-                    <li
-                      className={
-                        pathname == item.path
-                          ? "mobile-dasboard-menu-active"
-                          : ""
-                      }
-                      onClick={() => setActive(false)}
-                      key={i}
-                    >
-                      <Link to={item.path}>
-                        <i className={`${item.icon} mr10`} />
-                        {item.name}
-                      </Link>
-                    </li>
-                  ) : (
-                    <li
-                      className={
-                        pathname == item.path
-                          ? "mobile-dasboard-menu-active"
-                          : ""
-                      }
-                      onClick={() => setActive(false)}
-                      key={i}
-                    >
-                      <Link onClick={handleLogoutClick}>
-                        <i className={`${item.icon} mr10`} />
-                        {item.name}
-                      </Link>
-                    </li>
-                  )
-                )}
+                : clientNavigation.map((item, i) =>
+                    item.name !== "Logout" ? (
+                      <li
+                        className={
+                          pathname == item.path
+                            ? "mobile-dasboard-menu-active"
+                            : ""
+                        }
+                        onClick={() => setActive(false)}
+                        key={i}
+                      >
+                        <Link to={item.path}>
+                          <i className={`${item.icon} mr10`} />
+                          {item.name}
+                        </Link>
+                      </li>
+                    ) : (
+                      <li
+                        className={
+                          pathname == item.path
+                            ? "mobile-dasboard-menu-active"
+                            : ""
+                        }
+                        onClick={() => setActive(false)}
+                        key={i}
+                      >
+                        <Link onClick={handleLogoutClick}>
+                          <i className={`${item.icon} mr10`} />
+                          {item.name}
+                        </Link>
+                      </li>
+                    )
+                  ))}
           </ul>
         </div>
       </div>

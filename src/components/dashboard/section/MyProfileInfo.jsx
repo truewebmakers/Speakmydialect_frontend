@@ -14,7 +14,7 @@ import { useAuth } from "@/context/authContext";
 export default function MyProfileInfo() {
   const { userInfo, token } = useAuth();
   const [profileData, setProfileData] = useState({});
-  const userId = userInfo && JSON.parse(userInfo)?.id;
+  const userId = userInfo?.length > 0 ? JSON.parse(userInfo)?.id : "";
 
   const getProfileData = async () => {
     try {

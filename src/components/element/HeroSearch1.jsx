@@ -40,7 +40,7 @@ export default function HeroSearch1() {
             value={getSelectedResult}
             onChange={(e) => setSelectedResult(e.target.value)}
           />
-          <div
+          {/* <div
             className="search-suggestions"
             style={
               isSearchDropdownOpen
@@ -76,7 +76,7 @@ export default function HeroSearch1() {
                 ))}
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
       </form>
     </>

@@ -16,6 +16,7 @@ import NotFound from "@/pages/not_found";
 import { Suspense } from "react";
 import DasbPageSaved from "@/pages/dashboard/saved";
 import DasbPagePayouts from "@/pages/dashboard/payouts";
+import FreelancerPage1 from "@/pages/searchHandler/onSearchClick";
 
 const AppRoutes = () => {
   const { token } = useAuth();
@@ -96,12 +97,19 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/orders"
           element={
             <ProtectedRoute>
               <DasbPageSaved />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <ProtectedRoute>
+              <FreelancerPage1 />
             </ProtectedRoute>
           }
         />

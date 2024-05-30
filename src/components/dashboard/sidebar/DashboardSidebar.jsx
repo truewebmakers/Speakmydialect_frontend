@@ -11,65 +11,66 @@ export default function DashboardSidebar() {
     <>
       <div className="dashboard__sidebar d-none d-lg-block">
         <div className="dashboard_sidebar_list">
-          {userInfo && JSON.parse(userInfo)?.user_type == "admin"
-            ? ""
-            : JSON.parse(userInfo)?.user_type == "translator"
-            ? translatorNavigation.map((item, i) =>
-                item.name !== "Logout" ? (
-                  <div key={i} className="sidebar_list_item mb-1">
-                    <Link
-                      to={item.path}
-                      className={`items-center ${
-                        pathname === item.path ? "-is-active" : ""
-                      }`}
-                    >
-                      <i className={`${item.icon} mr15`} />
-                      {item.name}
-                    </Link>
-                  </div>
-                ) : (
-                  <div key={i} className="sidebar_list_item mb-1">
-                    <Link
-                      // to={item.path}
-                      className={`items-center ${
-                        pathname === item.path ? "-is-active" : ""
-                      }`}
-                      onClick={handleLogoutClick}
-                    >
-                      <i className={`${item.icon} mr15`} />
-                      {item.name}
-                    </Link>
-                  </div>
+          {userInfo?.length > 0 &&
+            (JSON.parse(userInfo)?.user_type == "admin"
+              ? ""
+              : JSON.parse(userInfo)?.user_type == "translator"
+              ? translatorNavigation.map((item, i) =>
+                  item.name !== "Logout" ? (
+                    <div key={i} className="sidebar_list_item mb-1">
+                      <Link
+                        to={item.path}
+                        className={`items-center ${
+                          pathname === item.path ? "-is-active" : ""
+                        }`}
+                      >
+                        <i className={`${item.icon} mr15`} />
+                        {item.name}
+                      </Link>
+                    </div>
+                  ) : (
+                    <div key={i} className="sidebar_list_item mb-1">
+                      <Link
+                        // to={item.path}
+                        className={`items-center ${
+                          pathname === item.path ? "-is-active" : ""
+                        }`}
+                        onClick={handleLogoutClick}
+                      >
+                        <i className={`${item.icon} mr15`} />
+                        {item.name}
+                      </Link>
+                    </div>
+                  )
                 )
-              )
-            : clientNavigation.map((item, i) =>
-                item.name !== "Logout" ? (
-                  <div key={i} className="sidebar_list_item mb-1">
-                    <Link
-                      to={item.path}
-                      className={`items-center ${
-                        pathname === item.path ? "-is-active" : ""
-                      }`}
-                    >
-                      <i className={`${item.icon} mr15`} />
-                      {item.name}
-                    </Link>
-                  </div>
-                ) : (
-                  <div key={i} className="sidebar_list_item mb-1">
-                    <Link
-                      // to={item.path}
-                      className={`items-center ${
-                        pathname === item.path ? "-is-active" : ""
-                      }`}
-                      onClick={handleLogoutClick}
-                    >
-                      <i className={`${item.icon} mr15`} />
-                      {item.name}
-                    </Link>
-                  </div>
-                )
-              )}
+              : clientNavigation.map((item, i) =>
+                  item.name !== "Logout" ? (
+                    <div key={i} className="sidebar_list_item mb-1">
+                      <Link
+                        to={item.path}
+                        className={`items-center ${
+                          pathname === item.path ? "-is-active" : ""
+                        }`}
+                      >
+                        <i className={`${item.icon} mr15`} />
+                        {item.name}
+                      </Link>
+                    </div>
+                  ) : (
+                    <div key={i} className="sidebar_list_item mb-1">
+                      <Link
+                        // to={item.path}
+                        className={`items-center ${
+                          pathname === item.path ? "-is-active" : ""
+                        }`}
+                        onClick={handleLogoutClick}
+                      >
+                        <i className={`${item.icon} mr15`} />
+                        {item.name}
+                      </Link>
+                    </div>
+                  )
+                ))}
         </div>
       </div>
     </>
