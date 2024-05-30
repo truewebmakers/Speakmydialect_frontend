@@ -16,7 +16,7 @@ import NotFound from "@/pages/not_found";
 import { Suspense } from "react";
 import DasbPageSaved from "@/pages/dashboard/saved";
 import DasbPagePayouts from "@/pages/dashboard/payouts";
-import FreelancerPage1 from "@/pages/searchHandler/onSearchClick";
+import ProjectPage1 from "@/pages/searchHandler/onSearchClick";
 
 const AppRoutes = () => {
   const { token } = useAuth();
@@ -109,7 +109,7 @@ const AppRoutes = () => {
           path="/search"
           element={
             <ProtectedRoute>
-              <FreelancerPage1 />
+              <ProjectPage1 />
             </ProtectedRoute>
           }
         />
