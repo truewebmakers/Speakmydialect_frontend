@@ -1,7 +1,8 @@
 import { apiMethods, apiUrls } from "@/constants/constant";
-import { useAuth } from "@/context/authContext";
 import UseApi from "@/hook/useApi";
+import { logInSuccess } from "@/redux/auth";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -12,7 +13,7 @@ export default function LoginPage() {
   });
   const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
-  const { setToken, setUserId } = useAuth();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -42,9 +43,11 @@ export default function LoginPage() {
         // Call signup API
         const response = await UseApi(apiUrls.login, apiMethods.POST, bodyData);
         if (response?.status == 200 || response?.status == 201) {
-          setToken(response?.data?.token);
-          let info = JSON.stringify(response?.data?.userInfo);
-          setUserId(info);
+          const userData = {
+            token: response?.data?.token,
+            userInfo: response?.data?.userInfo,
+          };
+          dispatch(logInSuccess(userData));
           navigate("/my-profile");
           toast.success(response?.data?.message);
           return;

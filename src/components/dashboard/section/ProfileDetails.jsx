@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SelectInput from "../option/SelectInput";
-import { Link } from "react-router-dom";
 import { apiMethods, apiUrls } from "@/constants/constant";
 import { toast } from "react-toastify";
 import UseApi from "@/hook/useApi";
-import { useAuth } from "@/context/authContext";
 import { CapitalizeFirstLetter } from "@/utils/helper";
+import { useSelector } from "react-redux";
 
-export default function ProfileDetails({ profileData }) {
+export default function ProfileDetails() {
   const [profileDetails, setProfileDetails] = useState({
     fname: "",
     lname: "",
@@ -16,13 +15,12 @@ export default function ProfileDetails({ profileData }) {
     hourly_rate: "",
     intro: "",
   });
+  const { user, profileData } = useSelector((state) => state.auth);
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadPic, setUploadedPic] = useState(null);
   const [getGender, setGender] = useState({ option: "Select", value: null });
   const [getCountry, setCountry] = useState({ option: "Select", value: null });
   const [countryList, setCountryList] = useState([]);
-  const { userInfo, token } = useAuth();
-  const userId = userInfo && JSON.parse(userInfo)?.id;
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -106,7 +104,7 @@ export default function ProfileDetails({ profileData }) {
       // set headers
       const headers = {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${user?.token}`,
       };
       // set body
       const bodyData = {
@@ -122,7 +120,7 @@ export default function ProfileDetails({ profileData }) {
       };
       // Call signup API
       const response = await UseApi(
-        apiUrls.updateProfile + userId,
+        apiUrls.updateProfile + user?.userInfo?.id,
         apiMethods.POST,
         bodyData,
         headers

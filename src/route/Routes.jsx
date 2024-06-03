@@ -79,11 +79,8 @@ import RegisterPage from "../pages/auth/register";
 import TermsPage from "../pages/terms";
 import UIElementsPage from "../pages/ui-elements";
 import HomePage1 from "../pages/home";
-import { useAuth } from "@/context/authContext";
 
 export default function RoutesComponent() {
-  const { token } = useAuth();
-
   return (
     <>
       <Routes>

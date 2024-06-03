@@ -1,8 +1,9 @@
-import { useAuth } from "@/context/authContext";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function MobileNavigation2() {
-  const { token } = useAuth();
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <>
       <div className="mobilie_header_nav stylehome1">
@@ -13,9 +14,8 @@ export default function MobileNavigation2() {
                 <Link className="mobile_logo" to="/">
                   <img src="/images/logo.jpeg" alt="Header Logo" />
                 </Link>
-                {!token && (
+                {!user?.token && (
                   <div className="right-side text-end">
-                    {/* <Link to="/login">join</Link> */}
                     <a
                       className="menubar ml30"
                       data-bs-toggle="offcanvas"

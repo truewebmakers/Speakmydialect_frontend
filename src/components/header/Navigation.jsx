@@ -1,45 +1,11 @@
-import { apiMethods, apiUrls } from "@/constants/constant";
-import { useAuth } from "@/context/authContext";
 import menus from "@/data/navigation";
-import UseApi from "@/hook/useApi";
-import { isActiveNavigation } from "@/utils/isActiveNavigation";
-import { useEffect, useState } from "react";
-
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 export default function Navigation() {
   const { pathname } = useLocation();
-  const { userInfo, token } = useAuth();
-  const [profileImg, setProfileImg] = useState("/images/resource/user.png");
-  const userId = userInfo?.length > 0 ? JSON.parse(userInfo)?.id : "";
-
-  const getProfileData = async () => {
-    try {
-      const headers = { Authorization: `Bearer ${token}` };
-      const response = await UseApi(
-        apiUrls.getUserProfile + userId,
-        apiMethods.GET,
-        null,
-        headers
-      );
-      if (response?.status === 200 || response?.status === 201) {
-        setProfileImg(response?.data?.user?.user_meta?.profile_pic);
-        localStorage.setItem(
-          "picture",
-          response?.data?.user?.user_meta?.profile_pic
-        );
-      }
-    } catch (error) {
-      return toast.error("Error fetching profile data");
-    }
-  };
-
-  useEffect(() => {
-    if (token?.length > 0) {
-      getProfileData();
-    }
-  }, []);
+  const { user, profileData } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -52,8 +18,9 @@ export default function Navigation() {
             : ""
         } `}
       >
-        {menus.map((item, i) =>
-          token?.length > 0 ? (
+        {menus?.map((item, i) =>
+          // if logged In show profile image, and hide other tabs
+          user?.token?.length > 0 ? (
             item?.id == 1 || item?.id == 2 || item?.id == 3 ? (
               <li
                 key={i}
@@ -75,7 +42,7 @@ export default function Navigation() {
                   <div className="dropdown">
                     <Link className="btn" to="/my-profile">
                       <img
-                        src={profileImg}
+                        src={profileData?.user_meta?.profile_pic}
                         alt="user.png"
                         height={50}
                         width={50}
@@ -87,6 +54,7 @@ export default function Navigation() {
               )
             )
           ) : (
+            // if not logged in show all tabs
             <li
               key={i}
               className={`visible_list menu-active ${

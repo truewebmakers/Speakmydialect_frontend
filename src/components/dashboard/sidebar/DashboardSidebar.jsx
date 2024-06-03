@@ -1,20 +1,21 @@
 import { handleLogoutClick } from "@/components/common/logoutHandler";
-import { useAuth } from "@/context/authContext";
 import { clientNavigation, translatorNavigation } from "@/data/dashboard";
-import { Link, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 export default function DashboardSidebar() {
   const { pathname } = useLocation();
-  const { userInfo } = useAuth();
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <>
       <div className="dashboard__sidebar d-none d-lg-block">
         <div className="dashboard_sidebar_list">
-          {userInfo?.length > 0 &&
-            (JSON.parse(userInfo)?.user_type == "admin"
+          {user?.token?.length > 0 &&
+            (user?.userInfo?.user_type == "admin"
               ? ""
-              : JSON.parse(userInfo)?.user_type == "translator"
+              : user?.userInfo?.user_type == "translator"
               ? translatorNavigation.map((item, i) =>
                   item.name !== "Logout" ? (
                     <div key={i} className="sidebar_list_item mb-1">

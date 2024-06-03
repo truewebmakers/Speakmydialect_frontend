@@ -1,11 +1,11 @@
-import { useAuth } from "@/context/authContext";
 import { memo } from "react";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const { token } = useAuth();
+  const { user } = useSelector((state) => state.auth);
 
-  return token?.length > 0 ? children : <Navigate to="/login" replace />;
+  return user?.token?.length > 0 ? children : <Navigate to="/login" replace />;
 };
 
 export default memo(ProtectedRoute);

@@ -2,13 +2,13 @@ import { clientNavigation, translatorNavigation } from "@/data/dashboard";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "@/context/authContext";
 import { handleLogoutClick } from "@/components/common/logoutHandler";
+import { useSelector } from "react-redux";
 
 export default function DashboardNavigation() {
   const [isActive, setActive] = useState(false);
   const { pathname } = useLocation();
-  const { userInfo } = useAuth();
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -21,10 +21,10 @@ export default function DashboardNavigation() {
             <li>
               <p className="fz15 fw400 ff-heading mt30 pl30">Start</p>
             </li>
-            {userInfo?.length > 0 &&
-              (JSON.parse(userInfo)?.user_type == "admin"
+            {user?.token?.length > 0 &&
+              (user?.userInfo?.user_type == "admin"
                 ? ""
-                : JSON.parse(userInfo)?.user_type == "translator"
+                : user?.userInfo?.user_type == "translator"
                 ? translatorNavigation.map((item, i) =>
                     item.name !== "Logout" ? (
                       <li

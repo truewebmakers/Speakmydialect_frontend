@@ -1,4 +1,3 @@
-import { useAuth } from "@/context/authContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./protectedRoute";
 import DasbPageMyProfile from "@/pages/dashboard/my-profile";
@@ -17,9 +16,11 @@ import { Suspense } from "react";
 import DasbPageSaved from "@/pages/dashboard/saved";
 import DasbPagePayouts from "@/pages/dashboard/payouts";
 import ProjectPage1 from "@/pages/searchHandler/onSearchClick";
+import { useSelector } from "react-redux";
 
 const AppRoutes = () => {
-  const { token } = useAuth();
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <Suspense fallback>
       <Routes>
@@ -27,30 +28,30 @@ const AppRoutes = () => {
         <Route
           path="/login"
           element={
-            !token?.length > 0 ? (
+            !user?.token?.length > 0 ? (
               <LoginPage />
             ) : (
-              <Navigate to="/dashboard" replace />
+              <Navigate to="/my-profile" replace />
             )
           }
         />
         <Route
           path="/register-translator"
           element={
-            !token?.length > 0 ? (
+            !user?.token?.length > 0 ? (
               <RegisterPage />
             ) : (
-              <Navigate to="/dashboard" replace />
+              <Navigate to="/my-profile" replace />
             )
           }
         />
         <Route
           path="/register-client"
           element={
-            !token?.length > 0 ? (
+            !user?.token?.length > 0 ? (
               <RegisterPage />
             ) : (
-              <Navigate to="/dashboard" replace />
+              <Navigate to="/my-profile" replace />
             )
           }
         />

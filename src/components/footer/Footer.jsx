@@ -3,11 +3,11 @@ import FooterHeader from "./FooterHeader";
 import { useLocation } from "react-router-dom";
 
 import { overview, about, support } from "@/data/footer";
-import { useAuth } from "@/context/authContext";
+import { useSelector } from "react-redux";
 
 export default function Footer() {
   const { pathname } = useLocation();
-  const { token } = useAuth();
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function Footer() {
                   Overview
                 </h5>
                 <div className="link-list">
-                  {token?.length > 0
+                  {user?.token?.length > 0
                     ? overview.map((item, i) => (
                         <Link key={i} to={item.path}>
                           {item.name}

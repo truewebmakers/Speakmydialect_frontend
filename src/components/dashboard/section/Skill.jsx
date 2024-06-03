@@ -8,7 +8,7 @@ import {
 } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import { toast } from "react-toastify";
-import { useAuth } from "@/context/authContext";
+import { useSelector } from "react-redux";
 
 export default function Skill() {
   const [languages, setLanguages] = useState([
@@ -19,8 +19,7 @@ export default function Skill() {
     },
   ]);
   const [languageListing, setLanguageListing] = useState([]);
-  const { token, userInfo } = useAuth();
-  const userId = userInfo && JSON.parse(userInfo)?.id;
+  const { user } = useSelector((state) => state.auth);
 
   const handleFieldChange = (index, field, option, value) => {
     const newLanguages = [...languages];
@@ -80,7 +79,7 @@ export default function Skill() {
     try {
       // set headers
       const headers = {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${user?.token}`,
       };
       // set body
       const bodyData = {
@@ -92,7 +91,7 @@ export default function Skill() {
       };
       // Call signup API
       const response = await UseApi(
-        apiUrls.updateUserSkill + userId,
+        apiUrls.updateUserSkill + user?.userInfo?.id,
         apiMethods.POST,
         bodyData,
         headers

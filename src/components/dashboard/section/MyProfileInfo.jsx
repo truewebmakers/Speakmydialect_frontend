@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import DashboardNavigation from "../header/DashboardNavigation";
 import Award from "./Award";
 import ChangePassword from "./ChangePassword";
@@ -9,24 +9,26 @@ import Skill from "./Skill";
 import WorkExperience from "./WorkExperience";
 import UseApi from "@/hook/useApi";
 import { apiMethods, apiUrls } from "@/constants/constant";
-import { useAuth } from "@/context/authContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileDetails } from "@/redux/auth";
+import { toast } from "react-toastify";
 
 export default function MyProfileInfo() {
-  const { userInfo, token } = useAuth();
-  const [profileData, setProfileData] = useState({});
-  const userId = userInfo?.length > 0 ? JSON.parse(userInfo)?.id : "";
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
 
   const getProfileData = async () => {
     try {
-      const headers = { Authorization: `Bearer ${token}` };
+      const headers = { Authorization: `Bearer ${user?.token}` };
       const response = await UseApi(
-        apiUrls.getUserProfile + userId,
+        apiUrls.getUserProfile + user?.userInfo?.id,
         apiMethods.GET,
         null,
         headers
       );
       if (response?.status === 200 || response?.status === 201) {
-        setProfileData(response?.data?.user);
+        // setProfileData(response?.data?.user);
+        dispatch(getProfileDetails(response?.data?.user));
       }
     } catch (error) {
       return toast.error("Error fetching profile data");
@@ -53,7 +55,7 @@ export default function MyProfileInfo() {
         </div>
         <div className="row">
           <div className="col-xl-12">
-            <ProfileDetails profileData={profileData} />
+            <ProfileDetails />
             <Skill />
             <Education />
             <WorkExperience />
