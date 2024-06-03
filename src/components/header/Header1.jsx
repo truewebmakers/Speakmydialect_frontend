@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Mega from "./Mega";
 
 import Navigation from "./Navigation";
 import useStickyMenu from "@/hook/useStickyMenu";

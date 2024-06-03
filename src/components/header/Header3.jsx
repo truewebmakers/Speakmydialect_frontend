@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Mega from "./Mega";
 import MobileNavigation2 from "./MobileNavigation2";
 import Navigation from "./Navigation";
 
