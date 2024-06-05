@@ -17,6 +17,7 @@ import DasbPageSaved from "@/pages/dashboard/saved";
 import DasbPagePayouts from "@/pages/dashboard/payouts";
 import ProjectPage1 from "@/pages/searchHandler/onSearchClick";
 import { useSelector } from "react-redux";
+import { routes } from "@/constants/constant";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -26,47 +27,46 @@ const AppRoutes = () => {
       <Routes>
         {/* Conditional Routes */}
         <Route
-          path="/login"
+          path={routes.Login}
           element={
             !user?.token?.length > 0 ? (
               <LoginPage />
             ) : (
-              <Navigate to="/my-profile" replace />
+              <Navigate to={routes.MyProfile} replace />
             )
           }
         />
         <Route
-          path="/register-translator"
+          path={routes.TranslatorRegister}
           element={
             !user?.token?.length > 0 ? (
               <RegisterPage />
             ) : (
-              <Navigate to="/my-profile" replace />
+              <Navigate to={routes.MyProfile} replace />
             )
           }
         />
         <Route
-          path="/register-client"
+          path={routes.ClientRegister}
           element={
             !user?.token?.length > 0 ? (
               <RegisterPage />
             ) : (
-              <Navigate to="/my-profile" replace />
+              <Navigate to={routes.MyProfile} replace />
             )
           }
         />
         {/* Publc Routesss */}
-        <Route path="/" element={<HomePage1 />} />
-        <Route path="/" element={<HomePage1 />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/help" element={<HelpPage />} />
-        <Route path="/about-2" element={<AboutPage2 />} />
-        <Route path="/blog-1" element={<BlogPage1 />} />
-        <Route path="/faq" element={<FaqPage />} />
+        <Route path={routes.Home} element={<HomePage1 />} />
+        <Route path={routes.Terms} element={<TermsPage />} />
+        <Route path={routes.Contact} element={<ContactPage />} />
+        <Route path={routes.Help} element={<HelpPage />} />
+        <Route path={routes.About} element={<AboutPage2 />} />
+        <Route path={routes.Blog} element={<BlogPage1 />} />
+        <Route path={routes.Faq} element={<FaqPage />} />
         {/* Private Routes */}
         <Route
-          path="/my-profile"
+          path={routes.MyProfile}
           element={
             <ProtectedRoute>
               <DasbPageMyProfile />
@@ -74,7 +74,7 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/dashboard"
+          path={routes.Dashboard}
           element={
             <ProtectedRoute>
               <DasbPageDashboard />
@@ -82,7 +82,7 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/jobs"
+          path={routes.Jobs}
           element={
             <ProtectedRoute>
               <DasbPageSaved />
@@ -90,7 +90,7 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/cards"
+          path={routes.Cards}
           element={
             <ProtectedRoute>
               <DasbPagePayouts />
@@ -98,24 +98,27 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/orders"
+          path={routes.Orders}
           element={
             <ProtectedRoute>
               <DasbPageSaved />
             </ProtectedRoute>
           }
         />
-        <Route path="/search" element={<ProjectPage1 />} />
+        <Route path={routes.Search} element={<ProjectPage1 />} />
         <Route
-          path="/payouts"
+          path={routes.Payouts}
           element={
             <ProtectedRoute>
               <DasbPagePayouts />
             </ProtectedRoute>
           }
         />
-        <Route path="/not-found" element={<NotFound />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path={routes.NotFound} element={<NotFound />} />
+        <Route
+          path={routes.Nothing}
+          element={<Navigate to={routes.Home} replace />}
+        />
       </Routes>
     </Suspense>
   );

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import DashboardNavigation from "../header/DashboardNavigation";
-import Award from "./Award";
 import ChangePassword from "./ChangePassword";
 import ConfirmPassword from "./ConfirmPassword";
 import Education from "./Education";
@@ -59,9 +58,8 @@ export default function MyProfileInfo() {
             <Skill />
             <Education />
             <WorkExperience />
-            <Award />
             <ChangePassword />
-            <ConfirmPassword />
+            {/* <ConfirmPassword /> */}
           </div>
         </div>
       </div>

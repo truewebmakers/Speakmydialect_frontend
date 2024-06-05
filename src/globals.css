@@ -361,3 +361,9 @@ a {
 .ui-social-media a:hover i {
   color: #5bbb7b !important;
 }
+
+.custom-modal-width {
+  max-width: 80%;
+  /* Adjust the width as needed */
+  width: 80%;
+}

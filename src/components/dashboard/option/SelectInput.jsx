@@ -18,7 +18,7 @@ export default function SelectInput({
               <div className="filter-option">
                 <div className="filter-option-inner">
                   <div className="filter-option-inner-inner">
-                    {defaultSelect.option}
+                    {defaultSelect?.option}
                   </div>
                 </div>
               </div>
