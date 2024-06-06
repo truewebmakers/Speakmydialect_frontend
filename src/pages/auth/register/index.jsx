@@ -5,6 +5,7 @@ import { handleValidations } from "@/utils/handleValidations";
 import UseApi from "@/hook/useApi";
 import { apiMethods, apiUrls, metaData } from "@/constants/constant";
 import { toast } from "react-toastify";
+import Loader from "@/components/common/loader";
 
 export default function RegisterPage() {
   <MetaComponent meta={metaData} />;
@@ -25,6 +26,7 @@ export default function RegisterPage() {
   });
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -58,6 +60,7 @@ export default function RegisterPage() {
     }
     setError(newErr);
     if (!hasErrors(error) && areAllFieldsFilled(data)) {
+      setIsLoading(true);
       try {
         // Prepare data for signup API
         let route = pathname.split("-");
@@ -78,12 +81,15 @@ export default function RegisterPage() {
         if (response?.status == 201 || response?.status == 200) {
           toast.success(response?.data?.message);
           navigate("/login");
+          setIsLoading(false);
           return;
         } else {
           toast.error(response?.data?.message);
+          setIsLoading(false);
         }
       } catch (err) {
         toast.error(err);
+        setIsLoading(false);
       }
     }
   };
@@ -203,30 +209,14 @@ export default function RegisterPage() {
                     onClick={handleClick}
                     disabled={disable}
                   >
-                    Create Account <i className="fal fa-arrow-right-long" />
+                    Create Account{" "}
+                    {isLoading ? (
+                      <Loader />
+                    ) : (
+                      <i className="fal fa-arrow-right-long" />
+                    )}
                   </button>
                 </div>
-                {/* <div className="hr_content mb20">
-                  <hr />
-                  <span className="hr_top_text">OR</span>
-                </div>
-                <div className="d-md-flex justify-content-between">
-                  <button
-                    className="ud-btn btn-fb fz14 fw400 mb-2 mb-md-0"
-                    type="button"
-                  >
-                    <i className="fab fa-facebook-f pr10" /> Continue Facebook
-                  </button>
-                  <button
-                    className="ud-btn btn-google fz14 fw400 mb-2 mb-md-0"
-                    type="button"
-                  >
-                    <i className="fab fa-google" /> Continue Google
-                  </button>
-                  <button className="ud-btn btn-apple fz14 fw400" type="button">
-                    <i className="fab fa-apple" /> Continue Apple
-                  </button>
-                </div> */}
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import Loader from "@/components/common/loader";
 import { apiMethods, apiUrls } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import { logInSuccess } from "@/redux/auth";
@@ -137,12 +138,7 @@ export default function LoginPage() {
                   >
                     Log In &nbsp;&nbsp;
                     {isLoading ? (
-                      <div
-                        className="spinner-border spinner-border-sm "
-                        role="status"
-                      >
-                        <span className="sr-only">Loading...</span>
-                      </div>
+                      <Loader />
                     ) : (
                       <i className="fal fa-arrow-right-long" />
                     )}
