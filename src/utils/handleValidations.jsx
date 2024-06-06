@@ -65,3 +65,49 @@ export const handleValidations = (name, value) => {
   }
   return newErr;
 };
+
+export const passwordValidations = (name, value) => {
+  let newErr = {};
+  switch (name) {
+    case "oldPassword":
+      if (value === "") {
+        newErr[name] = "Enter password";
+        break;
+      } else if (!passwordRegex.test(value)) {
+        newErr[name] =
+          "Your password must be at least 8 characters long including a lowercase letter, an uppercase letter,a number and a special symbol";
+        break;
+      } else {
+        newErr[name] = "";
+        break;
+      }
+    case "newPassword":
+      if (value === "") {
+        newErr[name] = "Enter password";
+        break;
+      } else if (!passwordRegex.test(value)) {
+        newErr[name] =
+          "Your password must be at least 8 characters long including a lowercase letter, an uppercase letter,a number and a special symbol";
+        break;
+      } else {
+        newErr[name] = "";
+        break;
+      }
+    case "confirmPassword":
+      if (value === "") {
+        newErr[name] = "Enter password";
+        break;
+      } else if (!passwordRegex.test(value)) {
+        newErr[name] =
+          "Your password must be at least 8 characters long including a lowercase letter, an uppercase letter,a number and a special symbol";
+        break;
+      } else {
+        newErr[name] = "";
+        break;
+      }
+    default:
+      break;
+  }
+
+  return newErr;
+};

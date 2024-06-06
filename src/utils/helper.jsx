@@ -5,3 +5,15 @@ export const CapitalizeFirstLetter = (str) => {
   }
   return newStr;
 };
+
+export function formatDate(value) {
+  const dateInput = value;
+  if (dateInput) {
+    const date = new Date(dateInput);
+    const options = { day: "2-digit", month: "short", year: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-GB", options);
+    return formattedDate;
+  } else {
+    console.log("No date selected");
+  }
+}

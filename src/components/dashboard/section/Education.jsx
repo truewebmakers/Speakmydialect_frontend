@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import AddEducationModal from "../modal/AddEducationModal";
 import { Tooltip } from "react-tooltip";
+import { formatDate } from "@/utils/helper";
 
 export default function Education() {
   const [educationList, setEducationList] = useState([]);
@@ -236,11 +237,11 @@ export default function Education() {
                   </div>
 
                   <span className="tag">
-                    {edu.year_start} - {edu.year_end}
+                    {formatDate(edu?.year_start)} - {formatDate(edu?.year_end)}
                   </span>
-                  <h5 className="mt15">{edu.degree_name}</h5>
-                  <h6 className="text-thm">{edu.university_name}</h6>
-                  <p>{edu.any_info}</p>
+                  <h5 className="mt15">{edu?.degree_name}</h5>
+                  <h6 className="text-thm">{edu?.university_name}</h6>
+                  <p>{edu?.any_info}</p>
                 </div>
               </div>
             ))}
@@ -253,6 +254,7 @@ export default function Education() {
         education={currentEducation}
         handleOnChange={handleOnChange}
         handleSave={handleSaveEducation}
+        editId={editId}
       />
     </>
   );

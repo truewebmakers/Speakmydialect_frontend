@@ -4,6 +4,7 @@ export default function AddEducationModal({
   education,
   handleOnChange,
   handleSave,
+  editId,
 }) {
   return (
     <>
@@ -96,7 +97,7 @@ export default function AddEducationModal({
                   className="ud-btn btn-thm"
                   onClick={handleSave}
                 >
-                  Update
+                  {editId == true ? "Update" : "Save"}
                   <i className="fal fa-arrow-right-long" />
                 </button>
               </form>

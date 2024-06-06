@@ -16,6 +16,8 @@ export const apiUrls = {
   getCountries: "/get-countries",
   getUserProfile: "/admin/getProfile/",
   getLanguages: "/get-languages",
+  getSkills: "/admin/get/skills/",
+  deleteSkills: "/admin/delete/skills/",
   updateUserSkill: "/admin/update/skills/",
   addEducation: "/admin/education/add/",
   getEducation: "/admin/education/get/",
@@ -25,6 +27,7 @@ export const apiUrls = {
   getExperience: "/admin/experience/get/",
   deleteExpirence: "/admin/experience/delete/",
   editExperience: "/admin/experience/update/",
+  changePassword: "/admin/update/password/",
 };
 
 export const metaData = {

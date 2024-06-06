@@ -14,6 +14,7 @@ export default function LoginPage() {
   const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -34,6 +35,7 @@ export default function LoginPage() {
 
   const handleClick = async () => {
     if (areAllFieldsFilled(loginData)) {
+      setIsLoading(true);
       try {
         // Prepare data for signup API
         const bodyData = {
@@ -49,17 +51,20 @@ export default function LoginPage() {
           };
           dispatch(logInSuccess(userData));
           navigate("/my-profile");
+          setIsLoading(false);
           toast.success(response?.data?.message);
           return;
         } else {
           toast.error(response?.data?.message);
+          setIsLoading(false);
         }
       } catch (err) {
         toast.error(err);
+        setIsLoading(false);
       }
     }
   };
-
+  console.log(isLoading);
   return (
     <>
       <section className="our-login">
@@ -130,7 +135,17 @@ export default function LoginPage() {
                     onClick={handleClick}
                     disabled={disable}
                   >
-                    Log In <i className="fal fa-arrow-right-long" />
+                    Log In &nbsp;&nbsp;
+                    {isLoading ? (
+                      <div
+                        className="spinner-border spinner-border-sm "
+                        role="status"
+                      >
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                    ) : (
+                      <i className="fal fa-arrow-right-long" />
+                    )}
                   </button>
                 </div>
               </div>
