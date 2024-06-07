@@ -1,3 +1,5 @@
+import Loader from "@/components/common/loader";
+
 export default function AddEducationModal({
   show,
   handleClose,
@@ -5,6 +7,7 @@ export default function AddEducationModal({
   handleOnChange,
   handleSave,
   editId,
+  isLoading,
 }) {
   return (
     <>
@@ -98,7 +101,13 @@ export default function AddEducationModal({
                   onClick={handleSave}
                 >
                   {editId == true ? "Update" : "Save"}
-                  <i className="fal fa-arrow-right-long" />
+                  {isLoading ? (
+                    <>
+                      &nbsp;&nbsp; <Loader />
+                    </>
+                  ) : (
+                    <i className="fal fa-arrow-right-long" />
+                  )}
                 </button>
               </form>
             </div>

@@ -87,7 +87,7 @@ export default function AddExperienceModal({
                       }
                     />
                   </div>
-                  <div className="col-sm-6 mb20">
+                  <div className="col-sm-12 mb20">
                     <SelectInput
                       label="Employment Type"
                       defaultSelect={employment_type}
@@ -100,54 +100,55 @@ export default function AddExperienceModal({
                       }
                     />
                   </div>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="mb-3">
+                        <label className="form-label">Starting Month</label>
+                        <input
+                          type="date"
+                          className="form-control"
+                          name="start_month"
+                          value={experience?.start_month}
+                          onChange={handleOnChange}
+                        />
+                      </div>
+                    </div>
 
-                  <div className="col-md-6">
-                    <div className="mb-3">
-                      <label className="form-label">Starting Month</label>
-                      <input
-                        type="date"
-                        className="form-control"
-                        name="start_month"
-                        value={experience?.start_month}
-                        onChange={handleOnChange}
-                      />
+                    <div className="col-md-6">
+                      <div className="mb-3">
+                        <label className="form-label">Starting Year</label>
+                        <input
+                          type="date"
+                          className="form-control"
+                          name="start_year"
+                          value={experience?.start_year}
+                          onChange={handleOnChange}
+                        />
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="mb-3">
-                      <label className="form-label">Starting Year</label>
-                      <input
-                        type="date"
-                        className="form-control"
-                        name="start_year"
-                        value={experience?.start_year}
-                        onChange={handleOnChange}
-                      />
+                    <div className="col-md-6">
+                      <div className="mb-3">
+                        <label className="form-label">Ending Month</label>
+                        <input
+                          type="date"
+                          className="form-control"
+                          name="end_month"
+                          value={experience?.end_month}
+                          onChange={handleOnChange}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="mb-3">
-                      <label className="form-label">Ending Month</label>
-                      <input
-                        type="date"
-                        className="form-control"
-                        name="end_month"
-                        value={experience?.end_month}
-                        onChange={handleOnChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="mb-3">
-                      <label className="form-label">Ending Year</label>
-                      <input
-                        type="date"
-                        className="form-control"
-                        name="end_year"
-                        value={experience?.end_year}
-                        onChange={handleOnChange}
-                      />
+                    <div className="col-md-6">
+                      <div className="mb-3">
+                        <label className="form-label">Ending Year</label>
+                        <input
+                          type="date"
+                          className="form-control"
+                          name="end_year"
+                          value={experience?.end_year}
+                          onChange={handleOnChange}
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="col-md-8">

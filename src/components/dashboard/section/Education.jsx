@@ -19,6 +19,7 @@ export default function Education() {
   const [showModal, setShowModal] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const [editId, setEditId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // show modal to add new education field
   const handleAddEducationField = () => {
@@ -129,6 +130,7 @@ export default function Education() {
 
   // Add new Education Api call
   const handleSaveAll = async () => {
+    setIsLoading(true);
     try {
       const headers = {
         Authorization: `Bearer ${user?.token}`,
@@ -142,12 +144,15 @@ export default function Education() {
       );
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
+        setIsLoading(false);
         getEduaction();
       } else {
         toast.error(response?.data?.message);
+        setIsLoading(false);
       }
     } catch (err) {
       toast.error(err);
+      setIsLoading(false);
     }
   };
 
@@ -167,6 +172,7 @@ export default function Education() {
 
   // Edit Education Api Call
   const handleEditEduField = async () => {
+    setIsLoading(true);
     try {
       const headers = {
         Authorization: `Bearer ${user?.token}`,
@@ -180,12 +186,15 @@ export default function Education() {
       );
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
+        setIsLoading(false);
         getEduaction();
       } else {
         toast.error(response?.data?.message);
+        setIsLoading(false);
       }
     } catch (err) {
       toast.error(err);
+      setIsLoading(false);
     }
   };
 
@@ -255,6 +264,7 @@ export default function Education() {
         handleOnChange={handleOnChange}
         handleSave={handleSaveEducation}
         editId={editId}
+        isLoading={isLoading}
       />
     </>
   );

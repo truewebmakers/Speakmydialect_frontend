@@ -1,3 +1,4 @@
+import Loader from "@/components/common/loader";
 import { apiMethods, apiUrls } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import { passwordValidations } from "@/utils/handleValidations";
@@ -18,6 +19,7 @@ export default function ChangePassword() {
     confirmPassword: "",
   });
   const { user } = useSelector((state) => state.auth);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -56,6 +58,7 @@ export default function ChangePassword() {
   };
 
   const apiCall = async () => {
+    setIsLoading(true);
     try {
       // headers
       const headers = {
@@ -81,12 +84,15 @@ export default function ChangePassword() {
           newPassword: "",
           confirmPassword: "",
         });
+        setIsLoading(false);
         return;
       } else {
         toast.error(response?.data?.message);
+        setIsLoading(false);
       }
     } catch (err) {
       toast.error(err);
+      setIsLoading(false);
     }
   };
 
@@ -162,7 +168,13 @@ export default function ChangePassword() {
                       disabled={disable}
                     >
                       Change Password
-                      <i className="fal fa-arrow-right-long" />
+                      {isLoading ? (
+                        <>
+                          &nbsp;&nbsp; <Loader />
+                        </>
+                      ) : (
+                        <i className="fal fa-arrow-right-long" />
+                      )}
                     </button>
                   </div>
                 </div>

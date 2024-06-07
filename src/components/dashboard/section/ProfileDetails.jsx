@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import UseApi from "@/hook/useApi";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import { useSelector } from "react-redux";
+import Loader from "@/components/common/loader";
 
 export default function ProfileDetails() {
   const [profileDetails, setProfileDetails] = useState({
@@ -21,6 +22,7 @@ export default function ProfileDetails() {
   const [getGender, setGender] = useState({ option: "Select", value: null });
   const [getCountry, setCountry] = useState({ option: "Select", value: null });
   const [countryList, setCountryList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -100,6 +102,7 @@ export default function ProfileDetails() {
   };
 
   const handleSave = async () => {
+    setIsLoading(true);
     try {
       // set headers
       const headers = {
@@ -127,12 +130,15 @@ export default function ProfileDetails() {
       );
       if (response?.status == 200 || response?.status == 201) {
         toast.success(response?.data?.message);
+        setIsLoading(false);
         return;
       } else {
         toast.error(response?.data?.message);
+        setIsLoading(false);
       }
     } catch (err) {
       toast.error(err);
+      setIsLoading(false);
     }
   };
 
@@ -312,7 +318,13 @@ export default function ProfileDetails() {
                     onClick={handleSave}
                   >
                     Save
-                    <i className="fal fa-arrow-right-long" />
+                    {isLoading ? (
+                      <>
+                        &nbsp;&nbsp; <Loader />
+                      </>
+                    ) : (
+                      <i className="fal fa-arrow-right-long" />
+                    )}
                   </button>
                 </div>
               </div>

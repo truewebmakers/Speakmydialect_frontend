@@ -22,6 +22,7 @@ export const authSlice = createSlice({
         token: "",
         userInfo: "",
       };
+      state.profileData = {};
       state.isLoggedIn = false;
     },
     getProfileDetails: (state, action) => {

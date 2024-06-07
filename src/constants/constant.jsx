@@ -12,6 +12,7 @@ export const env = {
 export const apiUrls = {
   signup: "/signup",
   login: "/login",
+  logout: "/admin/logout",
   updateProfile: "/admin/update/",
   getCountries: "/get-countries",
   getUserProfile: "/admin/getProfile/",

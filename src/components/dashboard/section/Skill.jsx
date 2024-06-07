@@ -5,11 +5,13 @@ import UseApi from "@/hook/useApi";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Tooltip } from "react-tooltip";
+import Loader from "@/components/common/loader";
 
 export default function Skill() {
   const [skills, setSkills] = useState([]);
   const [languageListing, setLanguageListing] = useState([]);
   const { user } = useSelector((state) => state.auth);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Skills on Change method
   const handleFieldChange = (index, field, option, value) => {
@@ -43,8 +45,42 @@ export default function Skill() {
   // Skill Delete method by Id
   const handleDeleteLanguage = (index) => {
     const newSkills = [...skills];
-    newSkills.splice(index, 1);
-    setSkills(newSkills);
+    const id = newSkills[index]?.id;
+    if (id !== undefined) {
+      // If the item has an id, execute the deletion logic
+      deleteExperienceId(id)
+        .then(() => {
+          newSkills.splice(index, 1);
+          setSkills(newSkills);
+        })
+        .catch((error) => {
+          toast.error("Failed to delete experience with id:", id, error);
+        });
+    } else {
+      // If the item doesn't have an id, remove it from the list
+      newSkills.splice(index, 1);
+      setSkills(newSkills);
+    }
+  };
+
+  // Delete Skill Api
+  const deleteExperienceId = async (id) => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${user?.token}`,
+      };
+      const response = await UseApi(
+        apiUrls.deleteSkills + id,
+        apiMethods.POST,
+        null,
+        headers
+      );
+      if (response?.status == 200 || response?.status == 201) {
+        toast.success("Deleted Successfully");
+      }
+    } catch (error) {
+      toast.error("Error fetching experience");
+    }
   };
 
   // Get languages method
@@ -77,6 +113,7 @@ export default function Skill() {
         const skillsData = response?.data?.data;
         const storedLanguages = sessionStorage.getItem("languages");
         const formattedSkills = skillsData?.map((skill) => ({
+          id: skill.id,
           language: {
             option:
               (storedLanguages &&
@@ -111,6 +148,7 @@ export default function Skill() {
 
   // Add skills Method with Api call
   const handleSave = async () => {
+    setIsLoading(true);
     try {
       const headers = {
         Authorization: `Bearer ${user?.token}`,
@@ -130,11 +168,14 @@ export default function Skill() {
       );
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
+        setIsLoading(false);
       } else {
         toast.error(response?.data?.message);
+        setIsLoading(false);
       }
     } catch (err) {
       toast.error(err);
+      setIsLoading(false);
     }
   };
 
@@ -201,7 +242,7 @@ export default function Skill() {
                     </div>
                   </div>
                 </div>
-                {index > 0 && (
+                {index >= 0 && (
                   <div className="col-sm-3 mb20">
                     <div className="del-edit">
                       <div className="d-flex">
@@ -235,7 +276,13 @@ export default function Skill() {
               onClick={handleSave}
             >
               Save
-              <i className="fal fa-arrow-right-long" />
+              {isLoading ? (
+                <>
+                  &nbsp;&nbsp; <Loader />
+                </>
+              ) : (
+                <i className="fal fa-arrow-right-long" />
+              )}
             </button>
           </div>
         </div>

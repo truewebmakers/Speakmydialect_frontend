@@ -29,7 +29,7 @@ const AppRoutes = () => {
         <Route
           path={routes.Login}
           element={
-            !user?.token?.length > 0 ? (
+            !user?.token ? (
               <LoginPage />
             ) : (
               <Navigate to={routes.MyProfile} replace />

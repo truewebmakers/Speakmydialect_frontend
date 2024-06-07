@@ -4,8 +4,8 @@ import UseApi from "@/hook/useApi";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Tooltip } from "react-tooltip";
-import AddExperienceModal from "../modal/AddExperienceModal";
 import { formatDate } from "@/utils/helper";
+import AddExperienceModal from "../modal/AddExperienceModal";
 
 export default function WorkExperience() {
   const [experienceList, setExperienceList] = useState([]);

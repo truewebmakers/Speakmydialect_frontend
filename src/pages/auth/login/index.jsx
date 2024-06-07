@@ -65,7 +65,7 @@ export default function LoginPage() {
       }
     }
   };
-  console.log(isLoading);
+
   return (
     <>
       <section className="our-login">
@@ -136,9 +136,11 @@ export default function LoginPage() {
                     onClick={handleClick}
                     disabled={disable}
                   >
-                    Log In &nbsp;&nbsp;
+                    Log In
                     {isLoading ? (
-                      <Loader />
+                      <>
+                        &nbsp;&nbsp; <Loader />
+                      </>
                     ) : (
                       <i className="fal fa-arrow-right-long" />
                     )}
