@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function MobileNavigation2() {
-  const { user } = useSelector((state) => state.auth);
+  const { user, profileData } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -11,10 +11,12 @@ export default function MobileNavigation2() {
           <div className="header bdrb1">
             <div className="menu_and_widgets">
               <div className="mobile_menu_bar d-flex justify-content-between align-items-center">
+                {/* Logo */}
                 <Link className="mobile_logo" to="/">
                   <img src="/images/logo.jpeg" alt="Header Logo" />
                 </Link>
-                {!user?.token && (
+                {/* Profile Image */}
+                {user?.token && (
                   <div className="right-side text-end">
                     <a
                       className="menubar ml30"
@@ -22,7 +24,13 @@ export default function MobileNavigation2() {
                       data-bs-target="#offcanvasExample"
                       aria-controls="offcanvasExample"
                     >
-                      <img src="/images/mobile-dark-nav-icon.svg" alt="icon" />
+                      <img
+                        src={profileData?.user_meta?.profile_pic}
+                        alt="user.png"
+                        height={45}
+                        width={45}
+                        style={{ borderRadius: "21px" }}
+                      />
                     </a>
                   </div>
                 )}

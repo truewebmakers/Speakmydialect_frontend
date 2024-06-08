@@ -79,9 +79,6 @@ export default function DashboardNavigation() {
             <i className="fa fa-bars pr10" /> Dashboard Navigation
           </button>
           <ul className={`dropdown-content ${isActive ? "show" : ""}`}>
-            <li>
-              <p className="fz15 fw400 ff-heading mt30 pl30">Start</p>
-            </li>
             {user?.token?.length > 0 &&
               (user?.userInfo?.user_type == "admin"
                 ? ""

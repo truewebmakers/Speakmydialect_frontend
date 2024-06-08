@@ -10,6 +10,7 @@ export default function DasbPageSaved() {
   return (
     <>
       <MetaComponent meta={metaData} />
+      <MobileNavigation2 />
       <DashboardLayout>
         <SavedInfo />
       </DashboardLayout>

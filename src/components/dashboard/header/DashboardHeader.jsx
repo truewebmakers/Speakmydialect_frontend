@@ -28,8 +28,8 @@ export default function DashboardHeader() {
                           <img
                             src={profileData?.user_meta?.profile_pic}
                             alt="user.png"
-                            height={50}
-                            width={50}
+                            height={45}
+                            width={45}
                             style={{ borderRadius: "21px" }}
                           />
                         </Link>

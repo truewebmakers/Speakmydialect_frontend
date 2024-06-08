@@ -154,11 +154,8 @@ export default function ProfileDetails() {
               <img
                 className="rounded-circle wa-xs"
                 src={selectedImage ? selectedImage : "/images/team/fl-1.png"}
-                style={{
-                  height: "71px",
-                  width: "71px",
-                  objectFit: "cover",
-                }}
+                height={60}
+                width={60}
                 alt="profile"
               />
             </div>

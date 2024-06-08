@@ -98,31 +98,6 @@ export function App() {
           <div className="body_content">
             {/* {children} */}
             <AppRoutes />
-            {/* footer */}
-            {/* {pathname === "/home-4" ||
-            pathname === "/home-7" ||
-            pathname === "/home-13" ? (
-              <Footer2 />
-            ) : pathname === "/home-5" ? (
-              <Footer3 />
-            ) : pathname === "/home-8" ? (
-              <Footer4 />
-            ) : pathname === "/home-9" ? (
-              <Footer5 />
-            ) : pathname === "/home-12" ? (
-              <Footer12 />
-            ) : pathname === "/home-14" ? (
-              <Footer14 />
-            ) : pathname === "/home-15" ? (
-              <Footer15 />
-            ) : pathname === "/home-18" ? (
-              <Footer18 />
-            ) : pathname === "/home-20" ? (
-              <Footer20 />
-            ) : (
-              pathname !== "/service-7" &&
-              pathname !== "/invoices" && <Footer />
-            )} */}
             {!pathname.includes("/invoices") && <Footer />}
 
             {/* bottom to top */}

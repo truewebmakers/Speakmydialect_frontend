@@ -25,7 +25,7 @@ export default function AddExperienceModal({
         aria-labelledby="proposalModalLabel"
         aria-hidden={!show}
       >
-        <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content position-relative">
             <button
               type="button"

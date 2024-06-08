@@ -6,35 +6,10 @@ import { EffectFade, Navigation } from "swiper";
 import HeroSearch1 from "../element/HeroSearch1";
 import { useNavigate } from "react-router-dom";
 
-const role = [
-  "Select Role",
-  "Graphics & Design",
-  "Digital Marketing",
-  "Writing & Translation",
-  "Video & Animation",
-  "Music & Audio",
-  "Programming & Tech",
-];
-
-const popular = [
-  "Designer",
-  "Developer",
-  "Web",
-  "IOS",
-  "PHP",
-  "Senior",
-  "Engineer",
-];
-
 const hero = ["/images/home/home-1.webp", "/images/home/home-2.jpg"];
 
 export default function Hero1() {
   const [getSelectedRole, setSelectedRole] = useState(null);
-
-  // role handler
-  const roleHandler = (select) => {
-    setSelectedRole(select);
-  };
 
   const navigate = useNavigate();
   // search handler
