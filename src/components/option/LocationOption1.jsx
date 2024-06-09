@@ -24,8 +24,8 @@ export default function LocationOption1({ data }) {
               {item?.name}
               <input
                 type="checkbox"
-                checked={getLocation?.includes(item?.name)}
-                onChange={() => locationHandler(item?.name)}
+                checked={getLocation?.includes(item?.id)}
+                onChange={() => locationHandler(item?.id)}
               />
               <span className="checkmark" />
             </label>

@@ -1,5 +1,6 @@
 import { apiMethods, apiUrls, routes } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
+import listingStore from "@/store/listingStore";
 import { useCallback, useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,6 +9,8 @@ export default function HeroSearch1({ isSearchingPage }) {
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [searchingList, setSearchingList] = useState([]);
+  const getLanguages = listingStore((state) => state.getSpeak);
+
   const navigate = useNavigate();
 
   // search dropdown
@@ -63,9 +66,11 @@ export default function HeroSearch1({ isSearchingPage }) {
     }, 1000),
     []
   );
-
   const handleSearchClick = async () => {
-    const params = { name: "loaction", value: searchValue };
+    const params = {
+      value: searchValue,
+      language: getLanguages,
+    };
     navigate({
       pathname: routes.Search,
       search: `?${createSearchParams(params)}`,

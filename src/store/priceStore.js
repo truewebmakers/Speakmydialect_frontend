@@ -10,7 +10,6 @@ const priceStore = create((set) => ({
   priceRangeHandler: (min, max) =>
     set(() => ({
       priceRange: {
-        min,
         max,
       },
     })),

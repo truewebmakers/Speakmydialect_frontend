@@ -1,16 +1,24 @@
-import { getCountries } from "@/utils/commonFunctions";
+import { getCountries, getLanguages } from "@/utils/commonFunctions";
 import { useEffect, useState } from "react";
 
 export default function ProjectCard1({ data }) {
   const [countryList, setCountryList] = useState([]);
+  const [languageList, setLanguageList] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const storedCountries = sessionStorage.getItem("countries");
+      const storedLanguages = sessionStorage.getItem("languages");
+
       if (storedCountries?.length > 0) {
         setCountryList(JSON.parse(storedCountries));
       } else {
         await getCountries(setCountryList);
+      }
+      if (storedLanguages?.length > 0) {
+        setLanguageList(JSON.parse(storedLanguages));
+      } else {
+        await getLanguages(setLanguageList);
       }
     };
     fetchData();
@@ -19,6 +27,11 @@ export default function ProjectCard1({ data }) {
   const getCountryName = (countryId) => {
     const country = countryList.find((coun) => coun.id == countryId);
     return country ? country.name : "Unknown Country";
+  };
+
+  const getLanguageName = (languageId) => {
+    const language = languageList.find((coun) => coun.id == languageId);
+    return language ? language.name : "Unknown Language";
   };
 
   return (
@@ -57,7 +70,7 @@ export default function ProjectCard1({ data }) {
             <div className="skill-tags d-flex align-items-center justify-content-start">
               {data?.user_skills?.map((item, i) => (
                 <span key={i} className={`tag ${i === 1 ? "mx10" : ""}`}>
-                  {item?.language}
+                  {getLanguageName(item?.language)}
                 </span>
               ))}
             </div>

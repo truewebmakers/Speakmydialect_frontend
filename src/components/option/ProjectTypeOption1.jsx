@@ -12,20 +12,20 @@ export default function ProjectTypeOption1() {
 
   return (
     <>
-      {projectType.map((item, i) => (
+      {projectType?.map((item, i) => (
         <div key={i} className="switch-style1">
           <div className="form-check form-switch mb20">
             <input
               className="form-check-input mt-0"
               type="checkbox"
               id="flexSwitchCheckDefault"
-              onChange={() => projectTypeHandler(item.title)}
+              onChange={() => projectTypeHandler(item.value)}
             />
             <label
               className="form-check-label mt-0"
               htmlFor="flexSwitchCheckDefault"
             >
-              {item.title}
+              {item?.title}
             </label>
             <span className="right-tags">({item.total})</span>
           </div>

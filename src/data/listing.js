@@ -106,11 +106,13 @@ export const projectType = [
   {
     id: 1,
     title: "Fixed",
+    value: "fix_rate",
     total: "1,945",
   },
   {
     id: 2,
     title: "Hourly",
+    value: "hourly_rate",
     total: "8,136",
   },
 ];

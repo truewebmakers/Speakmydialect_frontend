@@ -1,4 +1,3 @@
-import { project1 } from "@/data/product";
 import ProjectCard1 from "../card/ProjectCard1";
 import ListingOption2 from "../element/ListingOption2";
 import ListingSidebar2 from "../sidebar/ListingSidebar2";
@@ -6,77 +5,44 @@ import Pagination1 from "./Pagination1";
 import listingStore from "@/store/listingStore";
 import priceStore from "@/store/priceStore";
 import ListingSidebarModal2 from "../modal/ListingSidebarModal2";
+import { useEffect, useState } from "react";
+import { searchingApi } from "@/hook/searchingApi";
 
-export default function Listing8({ searchingResult }) {
+export default function Listing8() {
   const getCategory = listingStore((state) => state.getCategory);
   const getProjectType = listingStore((state) => state.getProjectType);
   const getPrice = priceStore((state) => state.priceRange);
-  const getDesginTool = listingStore((state) => state.getDesginTool);
   const getLocation = listingStore((state) => state.getLocation);
-  const getSearch = listingStore((state) => state.getSearch);
   const getSpeak = listingStore((state) => state.getSpeak);
-  const getBestSeller = listingStore((state) => state.getBestSeller);
-  const getEnglishLevel = listingStore((state) => state.getEnglishLevel);
+  const [searchParams, setSearchParams] = useState({});
+  const [searchingResult, setSearchingResult] = useState([]);
 
-  const categoryFilter = (item) =>
-    getCategory?.length !== 0 ? getCategory.includes(item.category) : true;
+  useEffect(() => {
+    searchingApi(searchParams).then((data) => setSearchingResult(data));
+  }, [searchParams]);
 
-  const projectTypeFilter = (item) =>
-    getProjectType?.length !== 0
-      ? getProjectType.includes(item.projectType)
-      : true;
-
-  const priceFilter = (item) =>
-    getPrice.min <= item.price.min && getPrice.max >= item.price.max;
-
-  const skillFilter = (item) =>
-    getDesginTool?.length !== 0
-      ? getDesginTool.includes(item.skills.split(" ").join("-").toLowerCase())
-      : true;
-
-  const locationFilter = (item) =>
-    getLocation?.length !== 0
-      ? getLocation.includes(item.location.split(" ").join("-").toLowerCase())
-      : true;
-
-  const searchFilter = (item) =>
-    getSearch !== ""
-      ? item.location
-          .split("-")
-          .join(" ")
-          .toLowerCase()
-          .includes(getSearch.toLowerCase())
-      : true;
-
-  const speakFilter = (item) =>
-    getSpeak?.length !== 0
-      ? getSpeak.includes(item.language.split(" ").join("-").toLowerCase())
-      : true;
-
-  const englishLevelFilter = (item) =>
-    getEnglishLevel?.length !== 0
-      ? getEnglishLevel.includes(item.englishLevel)
-      : true;
-
-  const sortByFilter = (item) =>
-    getBestSeller === "best-seller" ? item : item.sort === getBestSeller;
-
-  const filteredProjects = project1
-    .filter(categoryFilter)
-    .filter(projectTypeFilter)
-    .filter(priceFilter)
-    .filter(skillFilter)
-    .filter(locationFilter)
-    .filter(searchFilter)
-    .filter(speakFilter)
-    .filter(englishLevelFilter)
-    .filter(sortByFilter);
-
-  const content = filteredProjects.map((item, i) => (
+  const content = searchingResult?.map((item, i) => (
     <div key={i} className="col-md-6 col-lg-12">
       <ProjectCard1 data={item} />
     </div>
   ));
+
+  useEffect(() => {
+    if (getProjectType?.length > 0) {
+      setSearchParams({
+        location: getLocation,
+        language: getSpeak,
+        level: getCategory,
+        [getProjectType]: getPrice?.max,
+      });
+    } else {
+      setSearchParams({
+        location: getLocation,
+        language: getSpeak,
+        level: getCategory,
+      });
+    }
+  }, [getLocation, getSpeak, getCategory, getPrice]);
 
   return (
     <>
@@ -88,13 +54,7 @@ export default function Listing8({ searchingResult }) {
             </div>
             <div className="col-lg-9">
               <ListingOption2 itemLength={searchingResult?.length} />
-              <div className="row">
-                {searchingResult?.map((item, i) => (
-                  <div className="col-md-6 col-lg-12" key={i}>
-                    <ProjectCard1 data={item} />
-                  </div>
-                ))}
-              </div>
+              <div className="row">{content}</div>
               {searchingResult?.length > 10 && (
                 <div className="mt30">
                   <Pagination1 />
