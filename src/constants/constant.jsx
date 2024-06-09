@@ -29,6 +29,8 @@ export const apiUrls = {
   deleteExpirence: "/admin/experience/delete/",
   editExperience: "/admin/experience/update/",
   changePassword: "/admin/update/password/",
+  getSearchingSuggestions: "/language/search/suggestion?language=",
+  serachingApi: "/translators/search?language=",
 };
 
 export const metaData = {

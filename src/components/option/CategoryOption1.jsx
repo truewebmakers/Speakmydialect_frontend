@@ -1,3 +1,4 @@
+import { skillLevel } from "@/constants/constant";
 import { category } from "@/data/listing";
 import listingStore from "@/store/listingStore";
 
@@ -13,16 +14,15 @@ export default function CategoryOption1() {
   return (
     <>
       <div className="checkbox-style1 mb15">
-        {category.map((item, i) => (
+        {skillLevel?.map((item, i) => (
           <label key={i} className="custom_checkbox">
-            {item.title}
+            {item?.name}
             <input
               type="checkbox"
-              onChange={() => categoryHandler(item.title)}
-              checked={getCategory.includes(item.title)}
+              onChange={() => categoryHandler(item?.name)}
+              checked={getCategory.includes(item?.name)}
             />
             <span className="checkmark" />
-            <span className="right-tags">({item.total})</span>
           </label>
         ))}
       </div>

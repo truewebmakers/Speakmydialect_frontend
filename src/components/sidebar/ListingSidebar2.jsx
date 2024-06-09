@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import ClearButton from "../button/ClearButton";
 import BudgetOption2 from "../option/BudgetOption2";
 import CategoryOption1 from "../option/CategoryOption1";
@@ -6,8 +7,30 @@ import EnglishLevelOption1 from "../option/EnglishLevelOption1";
 import LocationOption1 from "../option/LocationOption1";
 import ProjectTypeOption1 from "../option/ProjectTypeOption1";
 import SpeakOption1 from "../option/SpeakOption1";
+import { getCountries, getLanguages } from "@/utils/commonFunctions";
 
 export default function ListingSidebar2() {
+  const [countryList, setCountryList] = useState([]);
+  const [languageListing, setLanguageListing] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const storedCountries = sessionStorage.getItem("countries");
+      const storedLanguages = sessionStorage.getItem("languages");
+      if (storedCountries?.length > 0) {
+        setCountryList(JSON.parse(storedCountries));
+      } else {
+        await getCountries(setCountryList);
+      }
+      if (storedLanguages?.length > 0) {
+        setLanguageListing(JSON.parse(storedLanguages));
+      } else {
+        await getLanguages(setLanguageListing);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="list-sidebar-style1 d-none d-lg-block">
@@ -23,7 +46,7 @@ export default function ListingSidebar2() {
                   aria-expanded="false"
                   aria-controls="collapse0"
                 >
-                  Category
+                  Level
                 </button>
               </h4>
             </div>
@@ -35,7 +58,6 @@ export default function ListingSidebar2() {
             >
               <div className="card-body card-body px-0 pt-0">
                 <CategoryOption1 />
-                <a className="text-thm">+20 more</a>
               </div>
             </div>
           </div>
@@ -91,32 +113,6 @@ export default function ListingSidebar2() {
               </div>
             </div>
           </div>
-          <div className="card mb20 pb10">
-            <div className="card-header" id="heading0">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse02"
-                  aria-expanded="false"
-                  aria-controls="collapse02"
-                >
-                  Skills
-                </button>
-              </h4>
-            </div>
-            <div
-              id="collapse02"
-              className="collapse show"
-              aria-labelledby="heading0"
-              data-parent="#accordionExample"
-            >
-              <div className="card-body card-body px-0 pt-0">
-                <DesignToolOption1 />
-              </div>
-            </div>
-          </div>
           <div className="card mb20 pb5">
             <div className="card-header" id="heading2">
               <h4>
@@ -139,7 +135,7 @@ export default function ListingSidebar2() {
               data-parent="#accordionExample"
             >
               <div className="card-body card-body px-0 pt-0">
-                <LocationOption1 />
+                <LocationOption1 data={countryList} />
               </div>
             </div>
           </div>
@@ -165,33 +161,7 @@ export default function ListingSidebar2() {
               data-parent="#accordionExample"
             >
               <div className="card-body card-body px-0 pt-0">
-                <SpeakOption1 />
-              </div>
-            </div>
-          </div>
-          <div className="card mb20 pb5">
-            <div className="card-header" id="heading4">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse4"
-                  aria-expanded="false"
-                  aria-controls="collapse4"
-                >
-                  English Level
-                </button>
-              </h4>
-            </div>
-            <div
-              id="collapse4"
-              className="collapse show"
-              aria-labelledby="heading4"
-              data-parent="#accordionExample"
-            >
-              <div className="card-body card-body px-0 pt-0">
-                <EnglishLevelOption1 />
+                <SpeakOption1 data={languageListing} />
               </div>
             </div>
           </div>

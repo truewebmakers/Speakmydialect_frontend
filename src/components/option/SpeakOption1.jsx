@@ -1,33 +1,42 @@
-import { speaks } from "@/data/listing";
 import listingStore from "@/store/listingStore";
+import { useState } from "react";
 
-export default function SpeakOption1() {
+export default function SpeakOption1({ data }) {
   const getSpeak = listingStore((state) => state.getSpeak);
   const setSpeak = listingStore((state) => state.setSpeak);
+  const [showAll, setShowAll] = useState(false);
 
   // handler
   const speakHandler = (data) => {
     setSpeak(data);
   };
 
+  const displayedData = showAll ? data : data?.slice(0, 10);
   return (
     <>
       <div className="card-body card-body px-0 pt-0">
         <div className="checkbox-style1 mb15">
-          {speaks.map((item, i) => (
+          {displayedData?.map((item, i) => (
             <label key={i} className="custom_checkbox">
-              {item.title}
+              {item?.name}
               <input
                 type="checkbox"
-                onChange={() => speakHandler(item.value)}
-                checked={getSpeak.includes(item.value)}
+                onChange={() => speakHandler(item?.name)}
+                checked={getSpeak?.includes(item?.name)}
               />
               <span className="checkmark" />
-              <span className="right-tags">({item.total})</span>
             </label>
           ))}
         </div>
-        <a className="text-thm">+20 more</a>
+        {showAll ? (
+          <a className="text-thm" onClick={() => setShowAll(false)}>
+            Show less
+          </a>
+        ) : (
+          <a className="text-thm" onClick={() => setShowAll(true)}>
+            Show more
+          </a>
+        )}{" "}
       </div>
     </>
   );

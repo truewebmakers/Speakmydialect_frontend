@@ -1,35 +1,45 @@
-import { location } from "@/data/listing";
+import React, { useState } from "react";
 import Search1 from "../element/Search1";
 import listingStore from "@/store/listingStore";
 
-export default function LocationOption1() {
+export default function LocationOption1({ data }) {
   const getLocation = listingStore((state) => state.getLocation);
   const setLocation = listingStore((state) => state.setLocation);
+  const [showAll, setShowAll] = useState(false);
 
   // handler
-  const locationHandler = (data) => {
-    setLocation(data);
+  const locationHandler = (id) => {
+    setLocation(id);
   };
+
+  const displayedData = showAll ? data : data?.slice(0, 10);
 
   return (
     <>
       <div className="card-body card-body px-0 pt-0">
         <Search1 />
         <div className="checkbox-style1 mb15">
-          {location.map((item, i) => (
+          {displayedData?.map((item, i) => (
             <label key={i} className="custom_checkbox">
-              {item.title}
+              {item?.name}
               <input
                 type="checkbox"
-                checked={getLocation.includes(item.value)}
-                onChange={() => locationHandler(item.value)}
+                checked={getLocation?.includes(item?.name)}
+                onChange={() => locationHandler(item?.name)}
               />
               <span className="checkmark" />
-              <span className="right-tags">({item.total})</span>
             </label>
           ))}
         </div>
-        <a className="text-thm">+20 more</a>
+        {showAll ? (
+          <a className="text-thm" onClick={() => setShowAll(false)}>
+            Show less
+          </a>
+        ) : (
+          <a className="text-thm" onClick={() => setShowAll(true)}>
+            Show more
+          </a>
+        )}
       </div>
     </>
   );

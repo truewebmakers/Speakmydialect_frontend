@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Tooltip } from "react-tooltip";
 import Loader from "@/components/common/loader";
+import { getLanguages } from "@/utils/commonFunctions";
 
 export default function Skill() {
   const [skills, setSkills] = useState([]);
@@ -83,20 +84,6 @@ export default function Skill() {
     }
   };
 
-  // Get languages method
-  const getLanguages = async () => {
-    try {
-      const response = await UseApi(apiUrls.getLanguages, apiMethods.GET);
-      if (response?.status === 200 || response?.status === 201) {
-        const languageData = response?.data?.data;
-        setLanguageListing(languageData);
-        sessionStorage.setItem("languages", JSON.stringify(languageData));
-      }
-    } catch (error) {
-      toast.error("Error fetching languages");
-    }
-  };
-
   // Get Previously Added Skills method
   const getSkills = async () => {
     try {
@@ -137,13 +124,17 @@ export default function Skill() {
   };
   // Calling get languages
   useEffect(() => {
-    const storedLanguages = sessionStorage.getItem("languages");
-    if (storedLanguages?.length > 0) {
-      setLanguageListing(JSON.parse(storedLanguages));
-      getSkills();
-    } else {
-      getLanguages().then(() => getSkills());
-    }
+    const fetchData = async () => {
+      const storedLanguages = sessionStorage.getItem("languages");
+      if (storedLanguages?.length > 0) {
+        setLanguageListing(JSON.parse(storedLanguages));
+        getSkills();
+      } else {
+        await getLanguages(setLanguageListing);
+        getSkills();
+      }
+    };
+    fetchData();
   }, []);
 
   // Add skills Method with Api call

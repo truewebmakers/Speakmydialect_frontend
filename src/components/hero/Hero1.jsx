@@ -79,22 +79,7 @@ export default function Hero1() {
                   </h3>
                   <div className="advance-search-tab bgc-white bgct-sm p10 p0-md bdrs4 banner-btn position-relative zi9 animate-up-4">
                     <div className="row">
-                      <div className="col-md-9 col-lg-9 col-xl-9">
-                        <div className="advance-search-field mb10-sm bdrr1 bdrn-sm">
-                          <HeroSearch1 />
-                        </div>
-                      </div>
-                      <div className="col-md-5 col-lg-3 col-xl-3 ps-md-0">
-                        <div className="text-center text-xl-end">
-                          <button
-                            onClick={searchHandler}
-                            className="ud-btn btn-thm w-100 px-4"
-                            type="button"
-                          >
-                            Search
-                          </button>
-                        </div>
-                      </div>
+                      <HeroSearch1 />
                     </div>
                   </div>
                 </div>

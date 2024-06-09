@@ -6,6 +6,7 @@ import UseApi from "@/hook/useApi";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import { useSelector } from "react-redux";
 import Loader from "@/components/common/loader";
+import { getCountries } from "@/utils/commonFunctions";
 
 export default function ProfileDetails() {
   const [profileDetails, setProfileDetails] = useState({
@@ -48,12 +49,15 @@ export default function ProfileDetails() {
   };
 
   useEffect(() => {
-    const storedCountries = sessionStorage.getItem("countries");
-    if (storedCountries) {
-      setCountryList(JSON.parse(storedCountries));
-    } else {
-      getCountries();
-    }
+    const fetchData = async () => {
+      const storedCountries = sessionStorage.getItem("countries");
+      if (storedCountries?.length > 0) {
+        setCountryList(JSON.parse(storedCountries));
+      } else {
+        await getCountries(setCountryList);
+      }
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -87,19 +91,6 @@ export default function ProfileDetails() {
       setSelectedImage(profileData?.user_meta?.profile_pic);
     }
   }, [profileData]);
-
-  const getCountries = async () => {
-    try {
-      const response = await UseApi(apiUrls.getCountries, apiMethods.GET);
-      if (response?.status == 200 || response?.status == 201) {
-        const countryData = response?.data?.data;
-        setCountryList(countryData);
-        sessionStorage.setItem("countries", JSON.stringify(countryData));
-      }
-    } catch (error) {
-      toast.error("Error fetching countries");
-    }
-  };
 
   const handleSave = async () => {
     setIsLoading(true);
