@@ -9,11 +9,12 @@ import { apiMethods, apiUrls, metaData } from "@/constants/constant";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UseApi from "@/hook/useApi";
+import { toast } from "react-toastify";
 
 export default function ProjectPage1() {
   const [searchParams] = useSearchParams();
   const searchValue = searchParams.get("value");
-  const [searchingResult, setSearchingResult] = useState([]);
+  const [searchingResult1, setSearchingResult1] = useState([]);
 
   const getSearchingResult = async () => {
     try {
@@ -23,7 +24,7 @@ export default function ProjectPage1() {
       );
       if (data?.status === true || data?.status == 200) {
         const searhingData = data?.data;
-        setSearchingResult(searhingData);
+        setSearchingResult1(searhingData);
       }
     } catch (error) {
       toast.error("Error fetching suggestions");
@@ -40,7 +41,10 @@ export default function ProjectPage1() {
       <TabSection1 />
       <Breadcumb3 path={["Home", "Services", "Design & Creative"]} />
       <Breadcumb9 />
-      <Listing8 searchingResult={searchingResult} />
+      <Listing8
+        searchingResult1={searchingResult1}
+        setSearchingResult1={setSearchingResult1}
+      />
     </>
   );
 }

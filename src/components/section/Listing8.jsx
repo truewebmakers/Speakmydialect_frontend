@@ -8,7 +8,7 @@ import ListingSidebarModal2 from "../modal/ListingSidebarModal2";
 import { useEffect, useState } from "react";
 import { searchingApi } from "@/hook/searchingApi";
 
-export default function Listing8() {
+export default function Listing8({ searchingResult1, setSearchingResult1 }) {
   const getCategory = listingStore((state) => state.getCategory);
   const getProjectType = listingStore((state) => state.getProjectType);
   const getPrice = priceStore((state) => state.priceRange);
@@ -19,13 +19,21 @@ export default function Listing8() {
 
   useEffect(() => {
     searchingApi(searchParams).then((data) => setSearchingResult(data));
+    setSearchingResult1([]);
   }, [searchParams]);
 
-  const content = searchingResult?.map((item, i) => (
-    <div key={i} className="col-md-6 col-lg-12">
-      <ProjectCard1 data={item} />
-    </div>
-  ));
+  const content =
+    searchingResult1?.length > 0
+      ? searchingResult1?.map((item, i) => (
+          <div key={i} className="col-md-6 col-lg-12">
+            <ProjectCard1 data={item} />
+          </div>
+        ))
+      : searchingResult?.map((item, i) => (
+          <div key={i} className="col-md-6 col-lg-12">
+            <ProjectCard1 data={item} />
+          </div>
+        ));
 
   useEffect(() => {
     if (getProjectType?.length > 0) {
