@@ -1,5 +1,4 @@
 import { skillLevel } from "@/constants/constant";
-import { category } from "@/data/listing";
 import listingStore from "@/store/listingStore";
 
 export default function CategoryOption1() {

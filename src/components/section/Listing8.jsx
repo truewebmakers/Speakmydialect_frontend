@@ -7,6 +7,7 @@ import priceStore from "@/store/priceStore";
 import ListingSidebarModal2 from "../modal/ListingSidebarModal2";
 import { useEffect, useState } from "react";
 import { searchingApi } from "@/hook/searchingApi";
+import { useSearchParams } from "react-router-dom";
 
 export default function Listing8({ searchingResult1, setSearchingResult1 }) {
   const getCategory = listingStore((state) => state.getCategory);
@@ -14,11 +15,12 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
   const getPrice = priceStore((state) => state.priceRange);
   const getLocation = listingStore((state) => state.getLocation);
   const getSpeak = listingStore((state) => state.getSpeak);
-  const [searchParams, setSearchParams] = useState({});
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchingResult, setSearchingResult] = useState([]);
 
   useEffect(() => {
-    searchingApi(searchParams).then((data) => setSearchingResult(data));
+    const query = Object.fromEntries(searchParams.entries());
+    searchingApi(query).then((data) => setSearchingResult(data));
     setSearchingResult1([]);
   }, [searchParams]);
 
@@ -36,21 +38,16 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
         ));
 
   useEffect(() => {
+    const params = {
+      location: getLocation,
+      language: getSpeak,
+      level: getCategory,
+    };
     if (getProjectType?.length > 0) {
-      setSearchParams({
-        location: getLocation,
-        language: getSpeak,
-        level: getCategory,
-        [getProjectType]: getPrice?.max,
-      });
-    } else {
-      setSearchParams({
-        location: getLocation,
-        language: getSpeak,
-        level: getCategory,
-      });
+      params[getProjectType] = getPrice?.max;
     }
-  }, [getLocation, getSpeak, getCategory, getPrice]);
+    setSearchParams(params);
+  }, [getLocation, getSpeak, getCategory, getPrice, getProjectType]);
 
   return (
     <>

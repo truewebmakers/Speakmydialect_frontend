@@ -79,6 +79,7 @@ export const routes = {
   Cards: "/cards",
   Orders: "/orders",
   Search: "/search",
+  TranslatorProfile: "/profile/:id",
   Payouts: "/payouts",
   NotFound: "/not-found",
   Nothing: "*",

@@ -9,7 +9,7 @@ export default function HeroSearch1({ isSearchingPage }) {
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [searchingList, setSearchingList] = useState([]);
-  const getLanguages = listingStore((state) => state.getSpeak);
+  const setSpeak = listingStore((state) => state.setSpeak);
 
   const navigate = useNavigate();
 
@@ -63,13 +63,14 @@ export default function HeroSearch1({ isSearchingPage }) {
       } catch (error) {
         toast.error("Error fetching suggestions");
       }
-    }, 1000),
+    }, 300),
     []
   );
+
   const handleSearchClick = async () => {
+    setSpeak(searchValue);
     const params = {
-      value: searchValue,
-      language: getLanguages,
+      language: searchValue,
     };
     navigate({
       pathname: routes.Search,
@@ -91,7 +92,7 @@ export default function HeroSearch1({ isSearchingPage }) {
                 placeholder="What are you looking for?"
                 onFocus={focusDropdown}
                 onBlur={blurDropdown}
-                autoComplete="off" // Add this line
+                autoComplete="off"
                 value={searchValue}
                 onChange={onSearchChange}
               />
@@ -167,51 +168,10 @@ export default function HeroSearch1({ isSearchingPage }) {
                   placeholder="What are you looking for?"
                   onFocus={focusDropdown}
                   onBlur={blurDropdown}
-                  autoComplete="off" // Add this line
+                  autoComplete="off"
                   value={searchValue}
                   onChange={onSearchChange}
                 />
-                {/* {searchingList?.length > 0 && (
-                  <div
-                    className="search-suggestions"
-                    style={
-                      isSearchDropdownOpen
-                        ? {
-                            visibility: "visible",
-                            opacity: "1",
-                            top: "70px",
-                          }
-                        : {
-                            visibility: "hidden",
-                            opacity: "0",
-                            top: "100px",
-                          }
-                    }
-                  >
-                    <h6 className="fz14 ml30 mt25 mb-3">Popular Search</h6>
-                    <div className="box-suggestions">
-                      <ul className="px-0 m-0 pb-4">
-                        {searchingList?.map((item, index) => (
-                          <li
-                            key={index}
-                            className={
-                              searchValue === item?.name ? "ui-list-active" : ""
-                            }
-                          >
-                            <div className="info-product cursor-pointer">
-                              <div
-                                className="item_title"
-                                onClick={() => selectSearch(item?.name)}
-                              >
-                                {item?.name}
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )} */}
               </div>
             </form>
           </div>

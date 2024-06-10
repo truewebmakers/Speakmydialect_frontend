@@ -25,10 +25,6 @@ export default function Breadcumb9() {
               <div className="col-xl-7">
                 <div className="position-relative">
                   <h2>Search Results</h2>
-                  {/* <p className="text mb30">
-                    All the Lorem Ipsum generators on the Internet tend to
-                    repeat.
-                  </p> */}
                 </div>
                 <HeroSearch1 isSearchingPage={true} />
               </div>

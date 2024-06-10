@@ -1,7 +1,8 @@
 import listingStore from "@/store/listingStore";
 import { useState } from "react";
 
-export default function SpeakOption1({ data }) {
+export default function SpeakOption1(datas) {
+  const { data } = datas;
   const getSpeak = listingStore((state) => state.getSpeak);
   const setSpeak = listingStore((state) => state.setSpeak);
   const [showAll, setShowAll] = useState(false);
@@ -10,7 +11,6 @@ export default function SpeakOption1({ data }) {
   const speakHandler = (data) => {
     setSpeak(data);
   };
-
   const displayedData = showAll ? data : data?.slice(0, 10);
   return (
     <>
@@ -19,6 +19,7 @@ export default function SpeakOption1({ data }) {
           {displayedData?.map((item, i) => (
             <label key={i} className="custom_checkbox">
               {item?.name}
+
               <input
                 type="checkbox"
                 onChange={() => speakHandler(item?.name)}

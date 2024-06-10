@@ -15,9 +15,10 @@ import NotFound from "@/pages/not_found";
 import { Suspense } from "react";
 import DasbPageSaved from "@/pages/dashboard/saved";
 import DasbPagePayouts from "@/pages/dashboard/payouts";
-import ProjectPage1 from "@/pages/searchHandler/onSearchClick";
+import SearchPage from "@/pages/searchHandler/searchPage";
 import { useSelector } from "react-redux";
 import { routes } from "@/constants/constant";
+import TranslatorsProfile from "@/pages/profiles/translatorProfile";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -105,7 +106,11 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        <Route path={routes.Search} element={<ProjectPage1 />} />
+        <Route path={routes.Search} element={<SearchPage />} />
+        <Route
+          path={routes.TranslatorProfile}
+          element={<TranslatorsProfile />}
+        />
         <Route
           path={routes.Payouts}
           element={

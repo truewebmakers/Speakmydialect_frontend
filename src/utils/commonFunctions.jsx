@@ -1,5 +1,6 @@
 import { apiMethods, apiUrls } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
+import { getProfileDetails } from "@/redux/auth";
 import { toast } from "react-toastify";
 
 export const getCountries = async (setCountryList) => {
@@ -27,3 +28,5 @@ export const getLanguages = async (setLanguageListing) => {
     toast.error("Error fetching languages");
   }
 };
+
+export const getTranslatorProfile = () => {};

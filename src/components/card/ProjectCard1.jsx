@@ -1,5 +1,7 @@
+import { routes } from "@/constants/constant";
 import { getCountries, getLanguages } from "@/utils/commonFunctions";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function ProjectCard1({ data }) {
   const [countryList, setCountryList] = useState([]);
@@ -94,15 +96,12 @@ export default function ProjectCard1({ data }) {
               <p className="text">Fixed Rate</p>
             </div>
           )}
-          {/* <div className="d-grid mt15">
-            <Link
-              to={`/project-single/${data?.id}`}
-              className="ud-btn btn-light-thm"
-            >
-              Send Proposal
+          <div className="d-grid mt15">
+            <Link to={`/profile/${data?.id}`} className="ud-btn btn-light-thm">
+              View Profile
               <i className="fal fa-arrow-right-long" />
             </Link>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
