@@ -10,7 +10,6 @@ export const searchingApi = async (params) => {
       }
     );
     // Return the data received from the API response
-    console.log(response);
     return response.data.data;
   } catch (error) {
     // Handle any errors that occur during the API request

@@ -1,11 +1,10 @@
 import { freelancer1 } from "@/data/product";
+import { getCountryName } from "@/utils/commonFunctions";
+import { CapitalizeFirstLetter } from "@/utils/helper";
+import moment from "moment";
 
-import { useParams } from "react-router-dom";
-
-export default function Breadcumb17() {
-  const { id } = useParams();
-
-  const data = freelancer1.find((item) => item.id == id);
+export default function Breadcumb17({ translatorProfile }) {
+  const storedCountries = sessionStorage.getItem("countries");
 
   return (
     <>
@@ -25,20 +24,16 @@ export default function Breadcumb17() {
             <div className="row wow fadeInUp">
               <div className="col-xl-7">
                 <div className="position-relative">
-                  {data ? (
-                    <h2>{data.title}</h2>
-                  ) : (
-                    <h2>I will design website UI UX in adobe xd or figma</h2>
-                  )}
-
                   <div className="list-meta d-sm-flex align-items-center mt30">
                     <a className="position-relative freelancer-single-style">
                       <span className="online" />
-                      {data ? (
+                      {translatorProfile?.user_meta?.profile_pic ? (
                         <img
                           className="rounded-circle w-100 wa-sm mb15-sm"
-                          src={data.img}
+                          src={translatorProfile?.user_meta?.profile_pic}
                           alt="Freelancer Photo"
+                          height={80}
+                          width={90}
                         />
                       ) : (
                         <img
@@ -49,23 +44,38 @@ export default function Breadcumb17() {
                       )}
                     </a>
                     <div className="ml20 ml0-xs">
-                      {data ? (
-                        <h5 className="title mb-1">{data.name}</h5>
-                      ) : (
-                        <h5 className="title mb-1">Leslie Alexander</h5>
-                      )}
-                      <p className="mb-0">UI/UX Designer</p>
+                      <h5 className="title mb-1">
+                        {translatorProfile?.fname} {translatorProfile?.lname}
+                      </h5>
+
+                      <p className="mb-0">
+                        {translatorProfile?.user_meta?.intro
+                          ? CapitalizeFirstLetter(
+                              translatorProfile?.user_meta?.intro
+                            )
+                          : "-"}
+                      </p>
                       <p className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm">
                         <i className="fas fa-star vam fz10 review-color me-2" />{" "}
-                        4.82 94 reviews
+                        {CapitalizeFirstLetter(
+                          translatorProfile?.user_meta?.gender
+                        )}
                       </p>
                       <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
-                        <i className="flaticon-place vam fz20 me-2" /> London,
-                        UK
+                        <i className="flaticon-place vam fz20 me-2" />{" "}
+                        {storedCountries?.length > 0
+                          ? getCountryName(
+                              translatorProfile?.user_meta?.location,
+                              JSON.parse(storedCountries)
+                            )
+                          : "Not Specified Yet"}
                       </p>
                       <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
                         <i className="flaticon-30-days vam fz20 me-2" /> Member
-                        since April 1, 2022
+                        since{" "}
+                        {moment(
+                          translatorProfile?.user_meta?.created_at
+                        ).format("YYYY, DD MMM")}
                       </p>
                     </div>
                   </div>

@@ -29,4 +29,13 @@ export const getLanguages = async (setLanguageListing) => {
   }
 };
 
-export const getTranslatorProfile = () => {};
+// get country and languages from session storage based on ids
+export const getCountryName = (countryId, countryList) => {
+  const country = countryList.find((coun) => coun.id == countryId);
+  return country ? country.name : "Unknown Country";
+};
+
+export const getLanguageName = (languageId, languageList) => {
+  const language = languageList.find((coun) => coun.id == languageId);
+  return language ? language.name : "Unknown Language";
+};

@@ -1,5 +1,10 @@
 import { routes } from "@/constants/constant";
-import { getCountries, getLanguages } from "@/utils/commonFunctions";
+import {
+  getCountries,
+  getCountryName,
+  getLanguageName,
+  getLanguages,
+} from "@/utils/commonFunctions";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -26,16 +31,6 @@ export default function ProjectCard1({ data }) {
     fetchData();
   }, []);
 
-  const getCountryName = (countryId) => {
-    const country = countryList.find((coun) => coun.id == countryId);
-    return country ? country.name : "Unknown Country";
-  };
-
-  const getLanguageName = (languageId) => {
-    const language = languageList.find((coun) => coun.id == languageId);
-    return language ? language.name : "Unknown Language";
-  };
-
   return (
     <div className="freelancer-style1 bdr1 hover-box-shadow row ms-0 align-items-lg-center">
       <div className="col-lg-8 ps-0">
@@ -57,7 +52,7 @@ export default function ProjectCard1({ data }) {
             <p className="mb-0 fz14 list-inline-item mb5-sm pe-1">
               <i className="flaticon-place fz16 vam text-thm2 me-1" />{" "}
               {data?.user_meta?.location && countryList?.length > 0
-                ? getCountryName(data?.user_meta?.location)
+                ? getCountryName(data?.user_meta?.location, countryList)
                 : "Location not specified"}
             </p>
             <p className="mb-0 fz14 list-inline-item mb5-sm pe-1">
@@ -72,7 +67,7 @@ export default function ProjectCard1({ data }) {
             <div className="skill-tags d-flex align-items-center justify-content-start">
               {data?.user_skills?.map((item, i) => (
                 <span key={i} className={`tag ${i === 1 ? "mx10" : ""}`}>
-                  {getLanguageName(item?.language)}
+                  {getLanguageName(item?.language, languageList)}
                 </span>
               ))}
             </div>
@@ -97,7 +92,10 @@ export default function ProjectCard1({ data }) {
             </div>
           )}
           <div className="d-grid mt15">
-            <Link to={`/profile/${data?.id}`} className="ud-btn btn-light-thm">
+            <Link
+              to={`/profile/${data?.uuid}`}
+              className="ud-btn btn-light-thm"
+            >
               View Profile
               <i className="fal fa-arrow-right-long" />
             </Link>

@@ -31,6 +31,7 @@ export const apiUrls = {
   changePassword: "/admin/update/password/",
   getSearchingSuggestions: "/language/search/suggestion?language=",
   serachingApi: "/translators/search?language=",
+  getTranslatorProfile: "/get-profile/",
 };
 
 export const metaData = {
