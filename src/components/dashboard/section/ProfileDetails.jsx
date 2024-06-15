@@ -105,8 +105,8 @@ export default function ProfileDetails() {
         fname: profileDetails?.fname,
         lname: profileDetails?.lname,
         phone: profileDetails?.phone,
-        fix_rate: profileDetails.fix_rate,
-        hourly_rate: profileDetails.hourly_rate,
+        fix_rate: profileDetails.fix_rate || 0,
+        hourly_rate: profileDetails.hourly_rate || 0,
         intro: profileDetails.intro,
         profile_pic: uploadPic,
         gender: getGender?.value,
@@ -186,9 +186,10 @@ export default function ProfileDetails() {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="i will"
+                    placeholder="Enter your first name"
                     name="fname"
                     value={profileDetails?.fname}
+                    autoComplete="off"
                     onChange={handleOnChange}
                   />
                 </div>
@@ -201,9 +202,10 @@ export default function ProfileDetails() {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="i will"
+                    placeholder="Enter your last name"
                     name="lname"
                     value={profileDetails?.lname}
+                    autoComplete="off"
                     onChange={handleOnChange}
                   />
                 </div>
@@ -216,43 +218,51 @@ export default function ProfileDetails() {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="i will"
+                    placeholder="Enter your phone number"
                     name="phone"
                     value={profileDetails?.phone}
+                    autoComplete="off"
                     onChange={handleOnChange}
                   />
                 </div>
               </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <label className="heading-color ff-heading fw500 mb10">
-                    Fix Rate
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="i will"
-                    name="fix_rate"
-                    value={profileDetails?.fix_rate}
-                    onChange={handleOnChange}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="mb20">
-                  <label className="heading-color ff-heading fw500 mb10">
-                    Hourly Rate
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="i will"
-                    name="hourly_rate"
-                    value={profileDetails?.hourly_rate}
-                    onChange={handleOnChange}
-                  />
-                </div>
-              </div>
+              {user?.userInfo?.user_type == "translator" && (
+                <>
+                  <div className="col-sm-6">
+                    <div className="mb20">
+                      <label className="heading-color ff-heading fw500 mb10">
+                        Fix Rate
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter your fix rate"
+                        name="fix_rate"
+                        value={profileDetails?.fix_rate}
+                        autoComplete="off"
+                        onChange={handleOnChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-sm-6">
+                    <div className="mb20">
+                      <label className="heading-color ff-heading fw500 mb10">
+                        Hourly Rate
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter your hourly rate"
+                        name="hourly_rate"
+                        autoComplete="off"
+                        value={profileDetails?.hourly_rate}
+                        onChange={handleOnChange}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
               <div className="col-sm-6">
                 <div className="mb20">
                   <SelectInput
@@ -292,8 +302,9 @@ export default function ProfileDetails() {
                     cols={30}
                     rows={6}
                     name="intro"
-                    placeholder="Description"
+                    placeholder="Write about yourself"
                     value={profileDetails?.intro}
+                    autoComplete="off"
                     onChange={handleOnChange}
                   />
                 </div>
