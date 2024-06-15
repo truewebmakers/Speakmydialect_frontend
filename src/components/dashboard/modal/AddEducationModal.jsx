@@ -1,4 +1,7 @@
 import Loader from "@/components/common/loader";
+import SelectInput from "../option/SelectInput";
+import { useEffect, useState } from "react";
+import { startYearDropdown } from "@/constants/constant";
 
 export default function AddEducationModal({
   show,
@@ -9,6 +12,19 @@ export default function AddEducationModal({
   editId,
   isLoading,
 }) {
+  const [years, setYears] = useState([]);
+  let startYear = startYearDropdown;
+  let date = new Date();
+  let endYear = date.getFullYear();
+
+  useEffect(() => {
+    let temp = [];
+    for (let val = startYear; val <= endYear; val++) {
+      temp.push(val);
+    }
+    setYears(temp);
+  }, []);
+
   return (
     <>
       <div
@@ -20,6 +36,9 @@ export default function AddEducationModal({
       >
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content position-relative">
+            <div className="bdrb1 pb10 mb30 d-sm-flex justify-content-center pt10">
+              <h5 className="list-title pt10">Add Education</h5>
+            </div>
             <button
               type="button"
               className="btn-close position-absolute"
@@ -41,6 +60,7 @@ export default function AddEducationModal({
                         placeholder="Ex: Bachelor's"
                         value={education.degree_name}
                         onChange={handleOnChange}
+                        autoComplete="off"
                       />
                     </div>
                   </div>
@@ -54,6 +74,7 @@ export default function AddEducationModal({
                         placeholder="Ex: Boston University"
                         value={education.university_name}
                         onChange={handleOnChange}
+                        autoComplete="off"
                       />
                     </div>
                   </div>
@@ -61,25 +82,35 @@ export default function AddEducationModal({
                 <div className="row">
                   <div className="col-md-6">
                     <div className="mb-3">
-                      <label className="form-label">Starting Year</label>
-                      <input
-                        type="date"
-                        className="form-control"
-                        name="year_start"
-                        value={education.year_start}
-                        onChange={handleOnChange}
+                      <SelectInput
+                        label="Starting Year"
+                        defaultSelect={education?.year_start}
+                        data={years?.map((year) => ({
+                          option: year,
+                          value: year,
+                        }))}
+                        handler={(option, value) =>
+                          handleOnChange({
+                            target: { name: "year_start", value: value },
+                          })
+                        }
                       />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
-                      <label className="form-label">Ending Year</label>
-                      <input
-                        type="date"
-                        className="form-control"
-                        name="year_end"
-                        value={education.year_end}
-                        onChange={handleOnChange}
+                      <SelectInput
+                        label="Ending Year"
+                        defaultSelect={education?.year_end}
+                        data={years?.map((year) => ({
+                          option: year,
+                          value: year,
+                        }))}
+                        handler={(option, value) =>
+                          handleOnChange({
+                            target: { name: "year_end", value: value },
+                          })
+                        }
                       />
                     </div>
                   </div>
@@ -93,6 +124,7 @@ export default function AddEducationModal({
                     className="form-control"
                     value={education.any_info}
                     onChange={handleOnChange}
+                    autoComplete="off"
                   />
                 </div>
                 <button

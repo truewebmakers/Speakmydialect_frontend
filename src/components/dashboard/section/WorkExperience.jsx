@@ -13,11 +13,11 @@ export default function WorkExperience() {
     title: "",
     company_name: "",
     location: "",
-    start_month: "",
-    start_year: "",
+    start_month: { option: "Select", value: null },
+    start_year: { option: "Select", value: null },
     present_working: 0,
-    end_month: "",
-    end_year: "",
+    end_month: { option: "Select", value: null },
+    end_year: { option: "Select", value: null },
     job_description: "",
   });
   const [employment_type, setEmploymentType] = useState({
@@ -40,11 +40,11 @@ export default function WorkExperience() {
       title: "",
       company_name: "",
       location: "",
-      start_month: "",
-      start_year: "",
+      start_month: { option: "Select", value: null },
+      start_year: { option: "Select", value: null },
       present_working: 0,
-      end_month: "",
-      end_year: "",
+      end_month: { option: "Select", value: null },
+      end_year: { option: "Select", value: null },
       job_description: "",
     });
     setEmploymentType({ option: "Select", value: null });
@@ -60,10 +60,25 @@ export default function WorkExperience() {
   // On change for adding experience fileds
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    setCurrentExperience((prevExperience) => ({
-      ...prevExperience,
-      [name]: value,
-    }));
+    if (
+      name === "start_year" ||
+      name === "end_year" ||
+      name === "start_month" ||
+      name === "end_month"
+    ) {
+      setCurrentExperience({
+        ...currentExperience,
+        [name]: {
+          option: value,
+          value: value,
+        },
+      });
+    } else {
+      setCurrentExperience((prevExperience) => ({
+        ...prevExperience,
+        [name]: value,
+      }));
+    }
   };
 
   const handleFieldChange = (field, option, value) => {
@@ -146,7 +161,6 @@ export default function WorkExperience() {
 
   // Add new Experience in modal
   const handleSaveExperience = () => {
-    setExperienceList([...experienceList, currentExperience]);
     handleCloseModal();
     if (editId !== null) {
       handleEditExpField();
@@ -163,15 +177,15 @@ export default function WorkExperience() {
       };
       const bodyData = {
         title: currentExperience?.title,
-        employment_type: currentExperience?.employment_type?.value,
+        employment_type: employment_type?.value,
         company_name: currentExperience?.company_name,
         location: currentExperience?.location,
-        location_type: currentExperience?.location_type?.value,
-        start_month: currentExperience?.start_month,
-        start_year: currentExperience?.start_year,
+        location_type: location_type?.value,
+        start_month: currentExperience?.start_month?.value,
+        start_year: currentExperience?.start_year?.value?.toString() || "",
         present_working: currentExperience?.present_working,
-        end_month: currentExperience?.end_month,
-        end_year: currentExperience?.end_year,
+        end_month: currentExperience?.end_month?.value,
+        end_year: currentExperience?.end_year?.value?.toString() || "",
         job_description: currentExperience?.job_description,
       };
       const response = await UseApi(
@@ -199,11 +213,11 @@ export default function WorkExperience() {
       title: data?.title,
       company_name: data?.company_name,
       location: data?.location,
-      start_month: data?.start_month,
-      start_year: data?.start_year,
+      start_month: { option: data?.start_month, value: data?.start_month },
+      start_year: { option: data?.start_year, value: data?.start_year },
       present_working: data?.present_working,
-      end_month: data?.end_month,
-      end_year: data?.end_year,
+      end_month: { option: data?.end_month, value: data?.end_month },
+      end_year: { option: data?.end_year, value: data?.end_year },
       job_description: data?.job_description,
     });
     setEmploymentType({
@@ -225,15 +239,15 @@ export default function WorkExperience() {
       };
       const bodyData = {
         title: currentExperience?.title,
-        employment_type: currentExperience?.employment_type?.value,
+        employment_type: employment_type?.value,
         company_name: currentExperience?.company_name,
         location: currentExperience?.location,
-        location_type: currentExperience?.location_type?.value,
-        start_month: currentExperience?.start_month,
-        start_year: currentExperience?.start_year,
+        location_type: location_type?.value,
+        start_month: currentExperience?.start_month?.value,
+        start_year: currentExperience?.start_year?.value?.toString() || "",
         present_working: currentExperience?.present_working,
-        end_month: currentExperience?.end_month,
-        end_year: currentExperience?.end_year,
+        end_month: currentExperience?.end_month?.value,
+        end_year: currentExperience?.end_year?.value?.toString() || "",
         job_description: currentExperience?.job_description,
       };
       const response = await UseApi(
@@ -308,8 +322,10 @@ export default function WorkExperience() {
                   </div>
 
                   <span className="tag">
-                    {formatDate(edu?.start_year)} -{" "}
-                    {edu?.end_year ? formatDate(edu?.end_year) : "Present"}
+                    {edu?.start_month + ", " + edu?.start_year} -{" "}
+                    {edu?.end_year
+                      ? edu?.end_month + ", " + edu?.end_year
+                      : "Present"}
                   </span>
                   <h5 className="mt15">{edu?.title}</h5>
                   <h6 className="text-thm">{edu?.location}</h6>

@@ -133,8 +133,9 @@ export default function RegisterPage() {
                     className="form-control"
                     placeholder="Enter your first name"
                     name="firstName"
-                    value={data.firstName}
+                    value={data?.firstName}
                     onChange={handleChange}
+                    autoComplete="off"
                   />
                   {error?.firstName && (
                     <p style={{ color: "red" }}>{error?.firstName}</p>
@@ -149,8 +150,9 @@ export default function RegisterPage() {
                     className="form-control"
                     placeholder="Enter your last name"
                     name="lastName"
-                    value={data.lastName}
+                    value={data?.lastName}
                     onChange={handleChange}
+                    autoComplete="off"
                   />
                   {error?.lastName && (
                     <p style={{ color: "red" }}>{error?.lastName}</p>
@@ -165,8 +167,9 @@ export default function RegisterPage() {
                     className="form-control"
                     placeholder="Enter your username"
                     name="userName"
-                    value={data.userName}
+                    value={data?.userName}
                     onChange={handleChange}
+                    autoComplete="off"
                   />
                   {error?.userName && (
                     <p style={{ color: "red" }}>{error?.userName}</p>
@@ -179,8 +182,9 @@ export default function RegisterPage() {
                     className="form-control"
                     placeholder="abc@xyz.com"
                     name="email"
-                    value={data.email}
+                    value={data?.email}
                     onChange={handleChange}
+                    autoComplete="off"
                   />
                   {error?.email && (
                     <p style={{ color: "red" }}>{error?.email}</p>
@@ -191,12 +195,13 @@ export default function RegisterPage() {
                     Password
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     placeholder="*******"
                     name="password"
                     value={data.password}
                     onChange={handleChange}
+                    autoComplete="off"
                   />
                   {error?.password && (
                     <p style={{ color: "red" }}>{error?.password}</p>

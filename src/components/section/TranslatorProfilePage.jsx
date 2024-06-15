@@ -17,52 +17,6 @@ export default function TranslatorProfilePage({ translatorProfile }) {
         <div className="container">
           <div className="row wow fadeInUp">
             <div className="col-lg-8">
-              <div className="row">
-                <div className="col-sm-6 col-xl-3">
-                  <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
-                    <div className="icon flex-shrink-0">
-                      <span className="flaticon-target" />
-                    </div>
-                    <div className="details">
-                      <h5 className="title">Job Success</h5>
-                      <p className="mb-0 text">98%</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-xl-3">
-                  <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
-                    <div className="icon flex-shrink-0">
-                      <span className="flaticon-goal" />
-                    </div>
-                    <div className="details">
-                      <h5 className="title">Total Jobs</h5>
-                      <p className="mb-0 text">921</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-xl-3">
-                  <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
-                    <div className="icon flex-shrink-0">
-                      <span className="flaticon-fifteen" />
-                    </div>
-                    <div className="details">
-                      <h5 className="title">Total Hours</h5>
-                      <p className="mb-0 text">1,499</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-xl-3">
-                  <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
-                    <div className="icon flex-shrink-0">
-                      <span className="flaticon-file-1" />
-                    </div>
-                    <div className="details">
-                      <h5 className="title">In Queue Service</h5>
-                      <p className="mb-0 text">20</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div className="service-about">
                 <h4>Description</h4>
                 <p className="text mb30">
@@ -75,10 +29,8 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                 <h4 className="mb30">Education</h4>
                 <div className="educational-quality">
                   {translatorProfile?.user_education?.map((item, index) => (
-                    <>
-                      <div className="m-circle text-thm" key={index}>
-                        M
-                      </div>
+                    <div key={index}>
+                      <div className="m-circle text-thm">M</div>
                       <div className="wrapper mb40">
                         <span className="tag">
                           {moment(item?.year_start).format("yyyy")}
@@ -89,7 +41,7 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                         <h6 className="text-thm">{item?.university_name}</h6>
                         <p>{item?.any_info}</p>
                       </div>
-                    </>
+                    </div>
                   ))}
                 </div>
 
@@ -98,10 +50,8 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                 <h4 className="mb30">Languages & Skills</h4>
                 <div className="educational-quality">
                   {translatorProfile?.user_skills?.map((item, index) => (
-                    <>
-                      <div className="m-circle text-thm" key={index}>
-                        M
-                      </div>
+                    <div key={index}>
+                      <div className="m-circle text-thm">M</div>
                       <div className="wrapper mb40">
                         <h5 className="mt15">
                           {storedLanguages?.length > 0
@@ -118,7 +68,7 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                           {"Status: " + CapitalizeFirstLetter(item?.status)}
                         </p>
                       </div>
-                    </>
+                    </div>
                   ))}
                 </div>
                 {/* Work & Experience */}
@@ -127,10 +77,8 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                 <div className="educational-quality">
                   {translatorProfile?.user_work_experince?.map(
                     (item, index) => (
-                      <>
-                        <div className="m-circle text-thm" key={index}>
-                          M
-                        </div>
+                      <div key={index}>
+                        <div className="m-circle text-thm">M</div>
                         <div className="wrapper mb40">
                           <span className="tag">
                             {item?.start_year
@@ -151,12 +99,12 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                           </h6>
                           <p>{item?.job_description}</p>
                         </div>
-                      </>
+                      </div>
                     )
                   )}
                 </div>
 
-                <hr className="opacity-100 mb60" />
+                {/* <hr className="opacity-100 mb60" />
                 <h4 className="mb30">Featured Services</h4>
                 <div className="row mb35">
                   {product1.slice(0, 3).map((item, i) => (
@@ -164,16 +112,16 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                       <FreelancerFutureCard1 data={item} />
                     </div>
                   ))}
-                </div>
-                <hr className="opacity-100" />
+                </div> */}
+                {/* <hr className="opacity-100" />
                 <ServiceDetailReviewInfo1 />
-                <ServiceDetailComment1 />
+                <ServiceDetailComment1 /> */}
               </div>
             </div>
             <div className="col-lg-4">
               <div className="blog-sidebar ms-lg-auto">
                 <FreelancerAbout1 data={translatorProfile} />
-                <FreelancerSkill1 />
+                <FreelancerSkill1 data={translatorProfile} />
               </div>
             </div>
           </div>

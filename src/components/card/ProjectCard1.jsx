@@ -5,6 +5,7 @@ import {
   getLanguageName,
   getLanguages,
 } from "@/utils/commonFunctions";
+import { CapitalizeFirstLetter } from "@/utils/helper";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -47,7 +48,8 @@ export default function ProjectCard1({ data }) {
           </div>
           <div className="details ml15 ml0-md mb15-md">
             <h5 className="title mb-3">
-              {data?.fname} {data?.lname}
+              {CapitalizeFirstLetter(data?.fname)}{" "}
+              {CapitalizeFirstLetter(data?.lname)}
             </h5>
             <p className="mb-0 fz14 list-inline-item mb5-sm pe-1">
               <i className="flaticon-place fz16 vam text-thm2 me-1" />{" "}
@@ -57,11 +59,12 @@ export default function ProjectCard1({ data }) {
             </p>
             <p className="mb-0 fz14 list-inline-item mb5-sm pe-1">
               <i className="flaticon-gender fz16 vam text-thm2 me-1 bdrl1 pl15 pl0-xs bdrn-xs" />{" "}
-              {data?.user_meta?.gender || "Gender not specified"}
+              {CapitalizeFirstLetter(data?.user_meta?.gender) ||
+                "Gender not specified"}
             </p>
             <p className="mb-0 fz14 list-inline-item mb5-sm">
               <i className="flaticon-contract fz16 vam text-thm2 me-1 bdrl1 pl15 pl0-xs bdrn-xs" />{" "}
-              {data?.status}
+              {CapitalizeFirstLetter(data?.status) || "-"}
             </p>
             <p className="text mt10">{data?.user_meta?.intro}</p>
             <div className="skill-tags d-flex align-items-center justify-content-start">

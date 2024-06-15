@@ -14,6 +14,10 @@ export default function LocationOption1({ data }) {
 
   const displayedData = showAll ? data : data?.slice(0, 10);
 
+  let search =
+    data?.length > 0 ? data.find((item) => item.name == "India") : "";
+  console.log(search, "searcgh");
+
   return (
     <>
       <div className="card-body card-body px-0 pt-0">
@@ -31,6 +35,7 @@ export default function LocationOption1({ data }) {
             </label>
           ))}
         </div>
+
         {showAll ? (
           <a className="text-thm" onClick={() => setShowAll(false)}>
             Show less

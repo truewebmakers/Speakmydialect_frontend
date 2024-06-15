@@ -114,6 +114,7 @@ export default function LoginPage() {
                     name="email"
                     value={loginData.email}
                     onChange={handleChange}
+                    autoComplete="off"
                   />
                 </div>
                 <div className="mb15">
@@ -127,6 +128,7 @@ export default function LoginPage() {
                     name="password"
                     value={loginData.password}
                     onChange={handleChange}
+                    autoComplete="off"
                   />
                 </div>
                 <div className="d-grid mb20">

@@ -11676,7 +11676,7 @@ input:focus-visible {
   border-left: 1px dashed #5bbb7b;
   bottom: 0;
   content: "";
-  height: 140px;
+  height: 85px;
   position: absolute;
   left: 15px;
   top: 40px;

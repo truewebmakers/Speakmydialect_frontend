@@ -29,11 +29,11 @@ export default function Breadcumb17({ translatorProfile }) {
                       <span className="online" />
                       {translatorProfile?.user_meta?.profile_pic ? (
                         <img
-                          className="rounded-circle w-100 wa-sm mb15-sm"
+                          className="rounded-circle  wa-sm mb15-sm"
                           src={translatorProfile?.user_meta?.profile_pic}
                           alt="Freelancer Photo"
                           height={80}
-                          width={90}
+                          width={80}
                         />
                       ) : (
                         <img

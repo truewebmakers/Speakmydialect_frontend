@@ -1,8 +1,11 @@
 import {
   experienceEmploymentType,
   experienceLocationType,
+  monthsList,
+  startYearDropdown,
 } from "@/constants/constant";
 import SelectInput from "../option/SelectInput";
+import { useEffect, useState } from "react";
 
 export default function AddExperienceModal({
   show,
@@ -16,6 +19,19 @@ export default function AddExperienceModal({
   location_type,
   editId,
 }) {
+  const [years, setYears] = useState([]);
+  let startYear = startYearDropdown;
+  let date = new Date();
+  let endYear = date.getFullYear();
+
+  useEffect(() => {
+    let temp = [];
+    for (let val = startYear; val <= endYear; val++) {
+      temp.push(val);
+    }
+    setYears(temp);
+  }, []);
+
   return (
     <>
       <div
@@ -47,6 +63,7 @@ export default function AddExperienceModal({
                         name="title"
                         value={experience?.title}
                         onChange={handleOnChange}
+                        autoComplete="off"
                       />
                     </div>
                   </div>
@@ -59,6 +76,7 @@ export default function AddExperienceModal({
                         name="company_name"
                         value={experience?.company_name}
                         onChange={handleOnChange}
+                        autoComplete="off"
                       />
                     </div>
                   </div>
@@ -71,6 +89,7 @@ export default function AddExperienceModal({
                         name="location"
                         value={experience?.location}
                         onChange={handleOnChange}
+                        autoComplete="off"
                       />
                     </div>
                   </div>
@@ -103,50 +122,70 @@ export default function AddExperienceModal({
                   <div className="row">
                     <div className="col-md-6">
                       <div className="mb-3">
-                        <label className="form-label">Starting Month</label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          name="start_month"
-                          value={experience?.start_month}
-                          onChange={handleOnChange}
+                        <SelectInput
+                          label="Starting Month"
+                          defaultSelect={experience?.start_month}
+                          data={monthsList?.map((month) => ({
+                            option: month?.name,
+                            value: month?.name,
+                          }))}
+                          handler={(option, value) =>
+                            handleOnChange({
+                              target: { name: "start_month", value: value },
+                            })
+                          }
                         />
                       </div>
                     </div>
 
                     <div className="col-md-6">
                       <div className="mb-3">
-                        <label className="form-label">Starting Year</label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          name="start_year"
-                          value={experience?.start_year}
-                          onChange={handleOnChange}
+                        <SelectInput
+                          label="Starting Year"
+                          defaultSelect={experience?.start_year}
+                          data={years?.map((year) => ({
+                            option: year,
+                            value: year,
+                          }))}
+                          handler={(option, value) =>
+                            handleOnChange({
+                              target: { name: "start_year", value: value },
+                            })
+                          }
                         />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="mb-3">
-                        <label className="form-label">Ending Month</label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          name="end_month"
-                          value={experience?.end_month}
-                          onChange={handleOnChange}
+                        <SelectInput
+                          label="Ending Month"
+                          defaultSelect={experience?.end_month}
+                          data={monthsList?.map((month) => ({
+                            option: month?.name,
+                            value: month?.name,
+                          }))}
+                          handler={(option, value) =>
+                            handleOnChange({
+                              target: { name: "end_month", value: value },
+                            })
+                          }
                         />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="mb-3">
-                        <label className="form-label">Ending Year</label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          name="end_year"
-                          value={experience?.end_year}
-                          onChange={handleOnChange}
+                        <SelectInput
+                          label="Ending Year"
+                          defaultSelect={experience?.end_year}
+                          data={years?.map((year) => ({
+                            option: year,
+                            value: year,
+                          }))}
+                          handler={(option, value) =>
+                            handleOnChange({
+                              target: { name: "end_year", value: value },
+                            })
+                          }
                         />
                       </div>
                     </div>
@@ -157,8 +196,8 @@ export default function AddExperienceModal({
                         I am currently working in this role
                         <input
                           type="checkbox"
-                          value={Number(experience?.present_working)}
                           onChange={(e) => handleChecked(e)}
+                          checked={experience?.present_working}
                         />
                         <span className="checkmark" />
                       </label>
@@ -173,6 +212,7 @@ export default function AddExperienceModal({
                       className="form-control"
                       value={experience?.job_description}
                       onChange={handleOnChange}
+                      autoComplete="off"
                     />
                   </div>
                 </div>

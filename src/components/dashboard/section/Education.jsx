@@ -12,8 +12,8 @@ export default function Education() {
   const [currentEducation, setCurrentEducation] = useState({
     degree_name: "",
     university_name: "",
-    year_start: "",
-    year_end: "",
+    year_start: { option: "Select", value: null },
+    year_end: { option: "Select", value: null },
     any_info: "",
   });
   const [showModal, setShowModal] = useState(false);
@@ -27,8 +27,8 @@ export default function Education() {
     setCurrentEducation({
       degree_name: "",
       university_name: "",
-      year_start: "",
-      year_end: "",
+      year_start: { option: "Select", value: null },
+      year_end: { option: "Select", value: null },
       any_info: "",
     });
     setShowModal(true);
@@ -42,10 +42,28 @@ export default function Education() {
   // On change for adding education fileds
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    setCurrentEducation({
-      ...currentEducation,
-      [name]: value,
-    });
+    if (name == "year_start") {
+      setCurrentEducation({
+        ...currentEducation,
+        ["year_start"]: {
+          option: value,
+          value: value,
+        },
+      });
+    } else if (name == "year_end") {
+      setCurrentEducation({
+        ...currentEducation,
+        ["year_end"]: {
+          option: value,
+          value: value,
+        },
+      });
+    } else {
+      setCurrentEducation({
+        ...currentEducation,
+        [name]: value,
+      });
+    }
   };
 
   // getEducation of particulr user
@@ -76,7 +94,6 @@ export default function Education() {
 
   // delete Education of particular user
   const handleDeleteEducation = (index) => {
-    getEduaction();
     const newEducationList = [...educationList];
     const id = newEducationList[index]?.id;
 
@@ -86,7 +103,9 @@ export default function Education() {
         .then(() => {
           newEducationList.splice(index, 1);
           setEducationList(newEducationList);
+          getEduaction();
         })
+
         .catch((error) => {
           toast.error("Failed to delete education with id:", id, error);
         });
@@ -119,7 +138,6 @@ export default function Education() {
 
   // Add new Education in modal
   const handleSaveEducation = () => {
-    setEducationList([...educationList, currentEducation]);
     handleCloseModal();
     if (editId !== null) {
       handleEditEduField();
@@ -135,7 +153,13 @@ export default function Education() {
       const headers = {
         Authorization: `Bearer ${user?.token}`,
       };
-      const bodyData = currentEducation;
+      const bodyData = {
+        degree_name: currentEducation?.degree_name,
+        university_name: currentEducation?.university_name,
+        year_start: currentEducation?.year_start?.value.toString(),
+        year_end: currentEducation?.year_end?.value?.toString(),
+        any_info: currentEducation?.any_info,
+      };
       const response = await UseApi(
         apiUrls.addEducation + user?.userInfo?.id,
         apiMethods.POST,
@@ -163,8 +187,8 @@ export default function Education() {
     setCurrentEducation({
       degree_name: data?.degree_name,
       university_name: data?.university_name,
-      year_start: data?.year_start,
-      year_end: data?.year_end,
+      year_start: { option: data?.year_start, value: data?.year_start },
+      year_end: { option: data?.year_end, value: data?.year_end },
       any_info: data?.any_info,
     });
     setShowModal(true);
@@ -177,7 +201,13 @@ export default function Education() {
       const headers = {
         Authorization: `Bearer ${user?.token}`,
       };
-      const bodyData = currentEducation;
+      const bodyData = {
+        degree_name: currentEducation?.degree_name,
+        university_name: currentEducation?.university_name,
+        year_start: currentEducation?.year_start?.value.toString(),
+        year_end: currentEducation?.year_end?.value?.toString(),
+        any_info: currentEducation?.any_info,
+      };
       const response = await UseApi(
         apiUrls.editEducation + editId,
         apiMethods.POST,
@@ -246,7 +276,8 @@ export default function Education() {
                   </div>
 
                   <span className="tag">
-                    {formatDate(edu?.year_start)} - {formatDate(edu?.year_end)}
+                    {edu?.year_start} -{" "}
+                    {edu?.year_end ? edu?.year_end : "Present"}
                   </span>
                   <h5 className="mt15">{edu?.degree_name}</h5>
                   <h6 className="text-thm">{edu?.university_name}</h6>
