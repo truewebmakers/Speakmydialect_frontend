@@ -3,17 +3,25 @@ export default function SelectInput({
   defaultSelect,
   data = [],
   handler,
+  disable,
 }) {
   return (
     <>
       <div className="form-style1">
-        <label className="heading-color ff-heading fw500 mb10">{label}</label>
+        <label
+          className={
+            disable ? "form-label" : "heading-color ff-heading fw500 mb10"
+          }
+        >
+          {label}
+        </label>
         <div className="bootselect-multiselect">
           <div className="dropdown bootstrap-select">
             <button
               type="button"
               className="btn dropdown-toggle btn-light"
               data-bs-toggle="dropdown"
+              disabled={disable}
             >
               <div className="filter-option">
                 <div className="filter-option-inner">
@@ -35,10 +43,10 @@ export default function SelectInput({
                   {data?.map((item, i) => (
                     <li key={i} className="selected active">
                       <a
-                        onClick={() => handler(item.option, item.value)}
+                        onClick={() => handler(item?.option, item?.value)}
                         className={`dropdown-item ${
                           defaultSelect.value !== null &&
-                          item.value === defaultSelect.value
+                          item?.value === defaultSelect?.value
                             ? "active selected"
                             : ""
                         }`}

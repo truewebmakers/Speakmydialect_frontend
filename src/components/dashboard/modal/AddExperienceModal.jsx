@@ -6,6 +6,7 @@ import {
 } from "@/constants/constant";
 import SelectInput from "../option/SelectInput";
 import { useEffect, useState } from "react";
+import { getCountries } from "@/utils/commonFunctions";
 
 export default function AddExperienceModal({
   show,
@@ -17,7 +18,9 @@ export default function AddExperienceModal({
   handleFieldChange,
   employment_type,
   location_type,
+  location,
   editId,
+  countryList,
 }) {
   const [years, setYears] = useState([]);
   let startYear = startYearDropdown;
@@ -43,6 +46,11 @@ export default function AddExperienceModal({
       >
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content position-relative">
+            <div className="bdrb1 pb10 mb30 d-sm-flex justify-content-center pt10">
+              <h5 className="list-title pt10">
+                {editId ? "Update Experience" : "Add Experience"}
+              </h5>
+            </div>
             <button
               type="button"
               className="btn-close position-absolute"
@@ -56,11 +64,14 @@ export default function AddExperienceModal({
                 <div className="row">
                   <div className="col-md-6">
                     <div className="mb-3">
-                      <label className="form-label">Job Title</label>
+                      <label className="heading-color ff-heading fw500 mb10">
+                        Job Title
+                      </label>
                       <input
                         type="text"
                         className="form-control"
                         name="title"
+                        placeholder="Enter Job Title"
                         value={experience?.title}
                         onChange={handleOnChange}
                         autoComplete="off"
@@ -69,11 +80,14 @@ export default function AddExperienceModal({
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
-                      <label className="form-label">Company</label>
+                      <label className="heading-color ff-heading fw500 mb10">
+                        Company
+                      </label>
                       <input
                         type="text"
                         className="form-control"
                         name="company_name"
+                        placeholder="Enter Company Name"
                         value={experience?.company_name}
                         onChange={handleOnChange}
                         autoComplete="off"
@@ -82,14 +96,16 @@ export default function AddExperienceModal({
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
-                      <label className="form-label">Location</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="location"
-                        value={experience?.location}
-                        onChange={handleOnChange}
-                        autoComplete="off"
+                      <SelectInput
+                        label="Location"
+                        defaultSelect={location}
+                        data={countryList?.map((item) => ({
+                          option: item?.name,
+                          value: item?.id,
+                        }))}
+                        handler={(option, value) =>
+                          handleFieldChange("location", option, value)
+                        }
                       />
                     </div>
                   </div>
@@ -169,6 +185,9 @@ export default function AddExperienceModal({
                               target: { name: "end_month", value: value },
                             })
                           }
+                          disable={
+                            experience?.present_working == 1 ? true : false
+                          }
                         />
                       </div>
                     </div>
@@ -185,6 +204,9 @@ export default function AddExperienceModal({
                             handleOnChange({
                               target: { name: "end_year", value: value },
                             })
+                          }
+                          disable={
+                            experience?.present_working == 1 ? true : false
                           }
                         />
                       </div>
@@ -204,7 +226,9 @@ export default function AddExperienceModal({
                     </div>
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">Job Description</label>
+                    <label className="heading-color ff-heading fw500 mb10">
+                      Job Description
+                    </label>
                     <textarea
                       name="job_description"
                       cols={30}
@@ -221,7 +245,7 @@ export default function AddExperienceModal({
                   className="ud-btn btn-thm"
                   onClick={handleSave}
                 >
-                  {editId == true ? "Update" : "Save"}
+                  {editId ? "Update" : "Save"}
                   <i className="fal fa-arrow-right-long" />
                 </button>
               </form>

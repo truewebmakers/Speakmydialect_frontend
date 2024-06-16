@@ -27,7 +27,6 @@ export default function ProjectTypeOption1() {
             >
               {item?.title}
             </label>
-            <span className="right-tags">({item.total})</span>
           </div>
         </div>
       ))}

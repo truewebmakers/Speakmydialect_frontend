@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import AddEducationModal from "../modal/AddEducationModal";
 import { Tooltip } from "react-tooltip";
-import { formatDate } from "@/utils/helper";
 
 export default function Education() {
   const [educationList, setEducationList] = useState([]);

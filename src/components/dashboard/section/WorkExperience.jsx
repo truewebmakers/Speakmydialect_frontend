@@ -6,13 +6,13 @@ import { toast } from "react-toastify";
 import { Tooltip } from "react-tooltip";
 import { formatDate } from "@/utils/helper";
 import AddExperienceModal from "../modal/AddExperienceModal";
+import { getCountries, getCountryName } from "@/utils/commonFunctions";
 
 export default function WorkExperience() {
   const [experienceList, setExperienceList] = useState([]);
   const [currentExperience, setCurrentExperience] = useState({
     title: "",
     company_name: "",
-    location: "",
     start_month: { option: "Select", value: null },
     start_year: { option: "Select", value: null },
     present_working: 0,
@@ -28,10 +28,28 @@ export default function WorkExperience() {
     option: "Select",
     value: null,
   });
+  const [location, setLocation] = useState({
+    option: "Select",
+    value: null,
+  });
 
   const [showModal, setShowModal] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const [editId, setEditId] = useState(null);
+  const [countryList, setCountryList] = useState([]);
+
+  // get Countries
+  useEffect(() => {
+    const fetchData = async () => {
+      const storedCountries = sessionStorage.getItem("countries");
+      if (storedCountries?.length > 0) {
+        setCountryList(JSON.parse(storedCountries));
+      } else {
+        await getCountries(setCountryList);
+      }
+    };
+    fetchData();
+  }, []);
 
   // show modal to add new experience field
   const handleAddExperienceField = () => {
@@ -39,7 +57,6 @@ export default function WorkExperience() {
     setCurrentExperience({
       title: "",
       company_name: "",
-      location: "",
       start_month: { option: "Select", value: null },
       start_year: { option: "Select", value: null },
       present_working: 0,
@@ -49,6 +66,7 @@ export default function WorkExperience() {
     });
     setEmploymentType({ option: "Select", value: null });
     setLocationType({ option: "Select", value: null });
+    setLocation({ option: "Select", value: null });
     setShowModal(true);
   };
 
@@ -82,9 +100,10 @@ export default function WorkExperience() {
   };
 
   const handleFieldChange = (field, option, value) => {
-    const newLanguages = { ...currentExperience };
     if (field == "location_type") {
       setLocationType({ option: option, value: value });
+    } else if (field == "location") {
+      setLocation({ option: option, value: value });
     } else if (field == "employment_type") {
       setEmploymentType({ option: option, value: value });
     }
@@ -179,7 +198,7 @@ export default function WorkExperience() {
         title: currentExperience?.title,
         employment_type: employment_type?.value,
         company_name: currentExperience?.company_name,
-        location: currentExperience?.location,
+        location: location?.value?.toString(),
         location_type: location_type?.value,
         start_month: currentExperience?.start_month?.value,
         start_year: currentExperience?.start_year?.value?.toString() || "",
@@ -212,7 +231,6 @@ export default function WorkExperience() {
     setCurrentExperience({
       title: data?.title,
       company_name: data?.company_name,
-      location: data?.location,
       start_month: { option: data?.start_month, value: data?.start_month },
       start_year: { option: data?.start_year, value: data?.start_year },
       present_working: data?.present_working,
@@ -228,6 +246,16 @@ export default function WorkExperience() {
       option: data?.location_type,
       value: data?.location_type,
     });
+    // Enter edited country
+    if (countryList?.length > 0) {
+      const country = countryList?.find((coun) => coun?.id == data?.location);
+      if (country) {
+        setLocation({
+          option: country?.name, // Set the country name as the option
+          value: country?.id, // Set the country ID as the value
+        });
+      }
+    }
     setShowModal(true);
   };
 
@@ -241,7 +269,7 @@ export default function WorkExperience() {
         title: currentExperience?.title,
         employment_type: employment_type?.value,
         company_name: currentExperience?.company_name,
-        location: currentExperience?.location,
+        location: location?.value?.toString(),
         location_type: location_type?.value,
         start_month: currentExperience?.start_month?.value,
         start_year: currentExperience?.start_year?.value?.toString() || "",
@@ -328,7 +356,13 @@ export default function WorkExperience() {
                       : "Present"}
                   </span>
                   <h5 className="mt15">{edu?.title}</h5>
-                  <h6 className="text-thm">{edu?.location}</h6>
+                  <h6 className="text-thm">
+                    {countryList?.length > 0
+                      ? isNaN(Number(edu?.location))
+                        ? edu?.location
+                        : getCountryName(edu?.location, countryList)
+                      : "Not Specified Yet"}
+                  </h6>
                   <p>{edu?.job_description}</p>
                 </div>
               </div>
@@ -346,7 +380,9 @@ export default function WorkExperience() {
         handleFieldChange={handleFieldChange}
         employment_type={employment_type}
         location_type={location_type}
+        location={location}
         editId={editId}
+        countryList={countryList}
       />
     </>
   );

@@ -5,13 +5,12 @@ import { Link } from "react-router-dom";
 
 export default function FreelancerAbout1({ data }) {
   const storedCountries = sessionStorage.getItem("countries");
-  const storedLanguages = sessionStorage.getItem("languages");
 
   return (
     <>
       <div className="price-widget pt25 bdrs8">
         <h3 className="widget-title">
-          {data?.user_meta?.hourly_rate}
+          {data?.user_meta?.hourly_rate}||0
           <small className="fz15 fw500">/per hour</small>
         </h3>
         <div className="category-list mt20">
@@ -70,8 +69,12 @@ export default function FreelancerAbout1({ data }) {
           </a>
         </div>
         <div className="d-grid">
-          <Link to="/contact" className="ud-btn btn-thm">
-            Contact Me
+          <Link
+            to={`/hire/${data?.uuid}`}
+            className="ud-btn btn-thm"
+            state={data}
+          >
+            Hire Now
             <i className="fal fa-arrow-right-long" />
           </Link>
         </div>

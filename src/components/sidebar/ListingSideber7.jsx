@@ -53,7 +53,7 @@ export default function ListingSideber7() {
                   type="button"
                   data-bs-toggle="dropdown"
                 >
-                  Project Type <i className="fa fa-angle-down ms-2"></i>
+                  Price Type <i className="fa fa-angle-down ms-2"></i>
                 </button>
                 <div className="dropdown-menu dd4 pb20">
                   <div className="widget-wrapper pr20">

@@ -37,7 +37,9 @@ export default function AddEducationModal({
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content position-relative">
             <div className="bdrb1 pb10 mb30 d-sm-flex justify-content-center pt10">
-              <h5 className="list-title pt10">Add Education</h5>
+              <h5 className="list-title pt10">
+                {editId ? "Update Education" : "Add Education"}
+              </h5>
             </div>
             <button
               type="button"
@@ -52,7 +54,9 @@ export default function AddEducationModal({
                 <div className="row">
                   <div className="col-md-6">
                     <div className="mb-3">
-                      <label className="form-label">Degree Name</label>
+                      <label className="heading-color ff-heading fw500 mb10">
+                        Degree Name
+                      </label>
                       <input
                         type="text"
                         className="form-control"
@@ -66,7 +70,9 @@ export default function AddEducationModal({
                   </div>
                   <div className="col-md-6">
                     <div className="mb-3">
-                      <label className="form-label">University Name</label>
+                      <label className="heading-color ff-heading fw500 mb10">
+                        University Name
+                      </label>
                       <input
                         type="text"
                         className="form-control"
@@ -116,7 +122,9 @@ export default function AddEducationModal({
                   </div>
                 </div>
                 <div className="mb-3">
-                  <label className="form-label">Degree Info</label>
+                  <label className="heading-color ff-heading fw500 mb10">
+                    Degree Info
+                  </label>
                   <textarea
                     name="any_info"
                     cols={30}
@@ -132,7 +140,7 @@ export default function AddEducationModal({
                   className="ud-btn btn-thm"
                   onClick={handleSave}
                 >
-                  {editId == true ? "Update" : "Save"}
+                  {editId ? "Update" : "Save"}
                   {isLoading ? (
                     <>
                       &nbsp;&nbsp; <Loader />

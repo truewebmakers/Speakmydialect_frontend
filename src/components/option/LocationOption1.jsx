@@ -6,30 +6,32 @@ export default function LocationOption1({ data }) {
   const getLocation = listingStore((state) => state.getLocation);
   const setLocation = listingStore((state) => state.setLocation);
   const [showAll, setShowAll] = useState(false);
+  const [search, setSearch] = useState("");
 
-  // handler
+  // Location Handler
   const locationHandler = (id) => {
     setLocation(id);
   };
 
-  const displayedData = showAll ? data : data?.slice(0, 10);
+  // Filtering data based on search input
+  const filteredData = data?.filter((item) =>
+    item?.name?.toLowerCase()?.includes(search?.toLowerCase())
+  );
 
-  let search =
-    data?.length > 0 ? data.find((item) => item.name == "India") : "";
-  console.log(search, "searcgh");
+  const displayedData = showAll ? filteredData : filteredData?.slice(0, 10);
 
   return (
     <>
       <div className="card-body card-body px-0 pt-0">
-        <Search1 />
+        <Search1 setSearch={setSearch} search={search} />
         <div className="checkbox-style1 mb15">
           {displayedData?.map((item, i) => (
             <label key={i} className="custom_checkbox">
-              {item?.name}
+              {item.name}
               <input
                 type="checkbox"
-                checked={getLocation?.includes(item?.id)}
-                onChange={() => locationHandler(item?.id)}
+                checked={getLocation.includes(item.id)}
+                onChange={() => locationHandler(item.id)}
               />
               <span className="checkmark" />
             </label>

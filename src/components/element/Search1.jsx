@@ -1,11 +1,13 @@
+import React from "react";
 import listingStore from "@/store/listingStore";
 import { useLocation } from "react-router-dom";
 
-export default function Search1() {
-  const getSearch = listingStore((state) => state.getSearch);
-  const setSearch = listingStore((state) => state.setSearch);
+export default function Search1({ setSearch, search }) {
+  // const getSearch = listingStore((state) => state.getSearch);
+  // const setSearch = listingStore((state) => state.setSearch);
 
   const { pathname } = useLocation();
+
   return (
     <>
       <div
@@ -18,7 +20,7 @@ export default function Search1() {
             type="text"
             className="form-control"
             onChange={(e) => setSearch(e.target.value)}
-            value={getSearch}
+            value={search}
             placeholder={
               pathname === "/service-1" ? "What are you looking for?" : "Search"
             }

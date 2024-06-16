@@ -99,6 +99,7 @@ export const routes = {
   Payouts: "/payouts",
   NotFound: "/not-found",
   Nothing: "*",
+  HireNow: "/hire/:id",
 };
 
 export const startYearDropdown = 1965;

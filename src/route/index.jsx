@@ -19,6 +19,7 @@ import SearchPage from "@/pages/searchHandler/searchPage";
 import { useSelector } from "react-redux";
 import { routes } from "@/constants/constant";
 import TranslatorsProfile from "@/pages/profiles/translatorProfile";
+import HireNowPage from "@/pages/hire";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -107,6 +108,8 @@ const AppRoutes = () => {
           }
         />
         <Route path={routes.Search} element={<SearchPage />} />
+        <Route path={routes.HireNow} element={<HireNowPage />} />
+
         <Route
           path={routes.TranslatorProfile}
           element={<TranslatorsProfile />}

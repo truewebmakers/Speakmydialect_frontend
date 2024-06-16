@@ -1,9 +1,5 @@
-import { product1 } from "@/data/product";
 import FreelancerAbout1 from "../element/FreelancerAbout1";
 import FreelancerSkill1 from "../element/FreelancerSkill1";
-import ServiceDetailComment1 from "../element/ServiceDetailComment1";
-import ServiceDetailReviewInfo1 from "../element/ServiceDetailReviewInfo1";
-import FreelancerFutureCard1 from "../card/FreelancerFutureCard1";
 import moment from "moment";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import { getLanguageName } from "@/utils/commonFunctions";
@@ -103,19 +99,6 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                     )
                   )}
                 </div>
-
-                {/* <hr className="opacity-100 mb60" />
-                <h4 className="mb30">Featured Services</h4>
-                <div className="row mb35">
-                  {product1.slice(0, 3).map((item, i) => (
-                    <div className="col-sm-6 col-xl-4" key={i}>
-                      <FreelancerFutureCard1 data={item} />
-                    </div>
-                  ))}
-                </div> */}
-                {/* <hr className="opacity-100" />
-                <ServiceDetailReviewInfo1 />
-                <ServiceDetailComment1 /> */}
               </div>
             </div>
             <div className="col-lg-4">
