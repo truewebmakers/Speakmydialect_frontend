@@ -27,6 +27,7 @@ export default function DashboardSidebar() {
       if (response?.status === 200 || response?.status === 201) {
         toast.success("Logged out");
         localStorage.clear();
+        sessionStorage.clear();
         dispatch(logOutSuccess());
         navigate("/login");
       }

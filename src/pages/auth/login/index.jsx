@@ -51,7 +51,9 @@ export default function LoginPage() {
             userInfo: response?.data?.userInfo,
           };
           dispatch(logInSuccess(userData));
-          navigate("/my-profile");
+          const redirectPath =
+            sessionStorage.getItem("redirectAfterLogin") || "/my-profile";
+          navigate(redirectPath);
           setIsLoading(false);
           toast.success(response?.data?.message);
           return;

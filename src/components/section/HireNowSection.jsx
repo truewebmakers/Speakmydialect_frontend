@@ -72,7 +72,7 @@ export default function HireNowSection({ translatorProfile }) {
             </div>
             <div className="col-lg-6 ml100">
               <div className="contact-page-form default-box-shadow1 bdrs8 bdr1 p50 mb30-md bgc-white">
-                <h4 className="form-title mb25">Tell us about yourself</h4>
+                <h4 className="form-title mb25">Book your Translator Now</h4>
                 <p className="text mb30">
                   Whether you have questions or you would just like to hire,
                   contact us.
@@ -109,7 +109,7 @@ export default function HireNowSection({ translatorProfile }) {
                         />
                       </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                       <div className="mb20">
                         <SelectInput
                           label="Mode of Work"

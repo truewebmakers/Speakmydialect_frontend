@@ -1,16 +1,29 @@
 import { getCountryName, getLanguageName } from "@/utils/commonFunctions";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function FreelancerAbout1({ data }) {
   const storedCountries = sessionStorage.getItem("countries");
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+  const navigate = useNavigate();
+
+  const handleLoginRedirection = () => {
+    sessionStorage.setItem("redirectAfterLogin", window.location.pathname);
+    navigate("/login");
+  };
+  const handleSignupRedirection = () => {
+    sessionStorage.setItem("redirectAfterLogin", window.location.pathname);
+    navigate("/register-client");
+  };
 
   return (
     <>
       <div className="price-widget pt25 bdrs8">
         <h3 className="widget-title">
-          {data?.user_meta?.hourly_rate}||0
+          {data?.user_meta?.hourly_rate || 0}
           <small className="fz15 fw500">/per hour</small>
         </h3>
         <div className="category-list mt20">
@@ -37,13 +50,7 @@ export default function FreelancerAbout1({ data }) {
               {moment(data?.user_meta?.created_at).format("YYYY, DD MMM")}
             </span>
           </a>
-          {/* <a className="d-flex align-items-center justify-content-between bdrb1 pb-2">
-            <span className="text">
-              <i className="flaticon-calendar text-thm2 pe-2 vam" />
-              Last Delivery
-            </span>
-            <span>5 days</span>
-          </a> */}
+
           <a className="d-flex align-items-center justify-content-between bdrb1 pb-2">
             <span className="text">
               <i className="flaticon-mars text-thm2 pe-2 vam" />
@@ -68,16 +75,40 @@ export default function FreelancerAbout1({ data }) {
             <span>{data?.user_meta?.fix_rate}</span>
           </a>
         </div>
-        <div className="d-grid">
-          <Link
-            to={`/hire/${data?.uuid}`}
-            className="ud-btn btn-thm"
-            state={data}
-          >
-            Hire Now
-            <i className="fal fa-arrow-right-long" />
-          </Link>
-        </div>
+        {user?.token?.length > 0 ? (
+          <div className="d-grid">
+            <Link
+              to={`/hire/${data?.uuid}`}
+              className="ud-btn btn-thm"
+              state={data}
+            >
+              Hire Now
+              <i className="fal fa-arrow-right-long" />
+            </Link>
+          </div>
+        ) : (
+          <div className="d-grid">
+            <span
+              className="ud-btn btn-thm"
+              state={data}
+              onClick={handleSignupRedirection}
+              style={{ cursor: "pointer" }}
+            >
+              Sign Up
+              <i className="fal fa-arrow-right-long" />
+            </span>
+            <p className="text mt20">
+              Already have an account?{" "}
+              <span
+                className="text-thm"
+                onClick={handleLoginRedirection}
+                style={{ cursor: "pointer" }}
+              >
+                Log In!
+              </span>
+            </p>
+          </div>
+        )}
       </div>
     </>
   );

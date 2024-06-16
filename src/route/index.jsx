@@ -23,7 +23,7 @@ import HireNowPage from "@/pages/hire";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
-
+  let routeProfile = sessionStorage.getItem("redirectAfterLogin");
   return (
     <Suspense fallback>
       <Routes>
@@ -33,6 +33,8 @@ const AppRoutes = () => {
           element={
             !user?.token ? (
               <LoginPage />
+            ) : routeProfile ? (
+              <Navigate to={routeProfile} replace />
             ) : (
               <Navigate to={routes.MyProfile} replace />
             )
