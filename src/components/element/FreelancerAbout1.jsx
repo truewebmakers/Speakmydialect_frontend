@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 export default function FreelancerAbout1({ data }) {
   const storedCountries = sessionStorage.getItem("countries");
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
   const navigate = useNavigate();
 
   const handleLoginRedirection = () => {
@@ -75,6 +74,11 @@ export default function FreelancerAbout1({ data }) {
             <span>{data?.user_meta?.fix_rate}</span>
           </a>
         </div>
+        {data?.fname && (
+          <p>
+            Do you want to work with {data?.fname} {data?.lname}?
+          </p>
+        )}
         {user?.token?.length > 0 ? (
           <div className="d-grid">
             <Link

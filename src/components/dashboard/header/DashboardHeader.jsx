@@ -26,8 +26,11 @@ export default function DashboardHeader() {
                       <div className="dropdown">
                         <Link className="btn" to="/my-profile">
                           <img
-                            src={profileData?.user_meta?.profile_pic}
-                            alt="user.png"
+                            src={
+                              profileData?.user_meta?.profile_pic ||
+                              "profile-picss"
+                            }
+                            alt="User Image"
                             height={45}
                             width={45}
                             style={{ borderRadius: "21px" }}

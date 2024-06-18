@@ -32,6 +32,7 @@ export const apiUrls = {
   getSearchingSuggestions: "/language/search/suggestion?language=",
   serachingApi: "/translators/search?language=",
   getTranslatorProfile: "/get-profile/",
+  addBooking: "/admin/booking/add",
 };
 
 export const metaData = {
@@ -49,9 +50,36 @@ export const skillLevel = [
 ];
 
 export const experienceLocationType = [
-  { id: 1, name: "On-site" },
-  { id: 2, name: "Hybrid" },
-  { id: 3, name: "Remote" },
+  { id: 1, name: "On-site", value: "on-site" },
+  { id: 2, name: "Hybrid", value: "hybrid" },
+  { id: 3, name: "Remote", value: "remote" },
+];
+
+export const paymentMode = [
+  { id: 1, name: "Fix Rate", value: "fix" },
+  { id: 2, name: "Hourly", value: "hourly" },
+];
+
+export const translatorBookingPaymentStatus = [
+  { id: 1, name: "Paid", value: "paid" },
+  { id: 2, name: "Escrow", value: "escrow" },
+  { id: 3, name: "Hold", value: "hold" },
+  { id: 4, name: "Dispute", value: "dispute" },
+  { id: 5, name: "None", value: "none" },
+];
+
+export const translatorBookingWorkStatus = [
+  { id: 1, name: "approved", value: "Approved" },
+  { id: 2, name: "reject", value: "Reject" },
+  { id: 3, name: "disputed", value: "Disputed" },
+  { id: 4, name: "pending", value: "Pending" },
+];
+
+export const translatorBookingStatus = [
+  { id: 1, name: "accept", value: "Accept" },
+  { id: 2, name: "reject", value: "Reject" },
+  { id: 3, name: "cancel", value: "Cancel" },
+  { id: 4, name: "in-process", value: "In-Process" },
 ];
 
 export const experienceEmploymentType = [

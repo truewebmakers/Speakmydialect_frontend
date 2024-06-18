@@ -39,23 +39,23 @@ export default function NavSidebar() {
                   ? loggedInMenu.map((item, i) => (
                       <MenuItem
                         key={i}
-                        component={<Link to={item.path} />}
+                        component={<Link to={item?.path} />}
                         className={
                           item.path === pathname ? "ui-mobile-active" : ""
                         }
                       >
-                        <span data-bs-dismiss="offcanvas">{item.name}</span>
+                        <span data-bs-dismiss="offcanvas">{item?.name}</span>
                       </MenuItem>
                     ))
                   : menus.map((item, i) => (
                       <MenuItem
                         key={i}
-                        component={<Link to={item.path} />}
+                        component={<Link to={item?.path} />}
                         className={
                           item.path === pathname ? "ui-mobile-active" : ""
                         }
                       >
-                        <span data-bs-dismiss="offcanvas">{item.name}</span>
+                        <span data-bs-dismiss="offcanvas">{item?.name}</span>
                       </MenuItem>
                     ))}
               </Menu>

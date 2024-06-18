@@ -1,24 +1,37 @@
-import { experienceLocationType } from "@/constants/constant";
+import {
+  apiMethods,
+  apiUrls,
+  experienceLocationType,
+  paymentMode,
+} from "@/constants/constant";
 import { useState } from "react";
 import SelectInput from "../dashboard/option/SelectInput";
+import { useSelector } from "react-redux";
+import UseApi from "@/hook/useApi";
+import { toast } from "react-toastify";
+import Loader from "../common/loader";
 
 export default function HireNowSection({ translatorProfile }) {
   const [hireNowForm, setHireNowForm] = useState({
-    name: "",
-    email: "",
-    workMode: { option: "Select", value: null },
-    startDate: "",
-    endDate: "",
-    questions: "",
+    client_id: "", //client_id from api
+    translator_id: "", //translator_id from api
+    payment_type: { option: "Select", value: null }, // Type of payment client will buy translator on: fix or hourly
+    present_rate: "", // It will contain the price at which client hired the translator,
+    availability: { option: "Select", value: null }, // Mode of Work:remote,hybrid,onsite
+    status: { option: "Select", value: null }, // Translator job Status: accept,reject,cancel,in-process
+    work_status: { option: "Select", value: null }, // Client request Status:approved,reject,disputed,pending
+    payment_status: { option: "Select", value: null }, //Payment Status: paid,escrow,hold,dispute,none
+    start_at: "", //2024-02-19 11:00:00
+    end_at: "", //2024-02-20 11:00:00
   });
+  const { user, profileData } = useSelector((state) => state.auth);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFieldChange = (field, option, value) => {
-    if (field == "workMode") {
-      setHireNowForm({
-        ...hireNowForm,
-        ["workMode"]: { option: option, value: value },
-      });
-    }
+    setHireNowForm({
+      ...hireNowForm,
+      [field]: { option: option, value: value },
+    });
   };
 
   const handleInputChanges = (e) => {
@@ -26,7 +39,63 @@ export default function HireNowSection({ translatorProfile }) {
     setHireNowForm({ ...hireNowForm, [name]: value });
   };
 
-  console.log(hireNowForm);
+  const addBooking = async () => {
+    setIsLoading(true);
+    try {
+      // headers
+      const headers = {
+        Authorization: `Bearer ${user?.token}`,
+      };
+      // Prepare data for API
+      const bodyData = {
+        client_id: profileData?.user_meta?.user_id,
+        translator_id: translatorProfile?.user_meta?.user_id,
+        payment_type: hireNowForm?.payment_type?.value,
+        present_rate:
+          hireNowForm?.payment_type?.value == "fix"
+            ? +translatorProfile?.user_meta?.fix_rate
+            : +translatorProfile?.user_meta?.hourly_rate,
+        availability: hireNowForm?.availability?.value,
+        status: "in-process ",
+        work_status: "pending",
+        payment_status: "none",
+        start_at: hireNowForm?.start_at,
+        end_at: hireNowForm?.end_at,
+      };
+      // Call API
+      const response = await UseApi(
+        apiUrls.addBooking,
+        apiMethods.POST,
+        bodyData,
+        headers
+      );
+      if (response?.status == 201 || response?.status == 200) {
+        toast.success(response?.data?.message);
+        setIsLoading(false);
+        setHireNowForm({
+          client_id: "",
+          translator_id: "",
+          payment_type: { option: "Select", value: null },
+          present_rate: "",
+          availability: { option: "Select", value: null },
+          status: { option: "Select", value: null },
+          work_status: { option: "Select", value: null },
+          payment_status: { option: "Select", value: null },
+          start_at: "",
+          end_at: "",
+        });
+        return;
+      } else {
+        setIsLoading(false);
+        toast.error(response?.data?.message);
+        return;
+      }
+    } catch (err) {
+      setIsLoading(false);
+      toast.error(err);
+      return;
+    }
+  };
   return (
     <>
       <section className="pt-0">
@@ -63,9 +132,15 @@ export default function HireNowSection({ translatorProfile }) {
                   <a className="d-flex align-items-center justify-content-between mb-3">
                     <span className="text">
                       <i className="flaticon-sliders text-thm2 pe-2 vam" />
-                      Fix Rate
+                      {hireNowForm?.payment_type?.value == "fix"
+                        ? " Fix Rate"
+                        : "Hourly Rate"}
                     </span>
-                    <span>{translatorProfile?.user_meta?.fix_rate}</span>
+                    <span>
+                      {hireNowForm?.payment_type?.value == "fix"
+                        ? translatorProfile?.user_meta?.fix_rate
+                        : translatorProfile?.user_meta?.hourly_rate}
+                    </span>
                   </a>
                 </div>
               </div>
@@ -74,8 +149,7 @@ export default function HireNowSection({ translatorProfile }) {
               <div className="contact-page-form default-box-shadow1 bdrs8 bdr1 p50 mb30-md bgc-white">
                 <h4 className="form-title mb25">Book your Translator Now</h4>
                 <p className="text mb30">
-                  Whether you have questions or you would just like to hire,
-                  contact us.
+                  If you would like to hire, contact us.
                 </p>
                 <form className="form-style1">
                   <div className="row">
@@ -89,8 +163,8 @@ export default function HireNowSection({ translatorProfile }) {
                           className="form-control"
                           placeholder="Name"
                           name="name"
-                          value={hireNowForm?.name}
-                          onChange={handleInputChanges}
+                          value={user?.userInfo?.fname}
+                          disabled={true}
                         />
                       </div>
                     </div>
@@ -104,22 +178,38 @@ export default function HireNowSection({ translatorProfile }) {
                           className="form-control"
                           placeholder="Enter Email"
                           name="email"
-                          value={hireNowForm?.email}
-                          onChange={handleInputChanges}
+                          value={user?.userInfo?.email}
+                          disabled={true}
                         />
                       </div>
                     </div>
-                    <div className="col-md-12">
+
+                    <div className="col-md-6">
                       <div className="mb20">
                         <SelectInput
                           label="Mode of Work"
-                          defaultSelect={hireNowForm.workMode}
+                          defaultSelect={hireNowForm.availability}
                           data={experienceLocationType?.map((item) => ({
                             option: item?.name,
-                            value: item?.name,
+                            value: item?.value,
                           }))}
                           handler={(option, value) =>
-                            handleFieldChange("workMode", option, value)
+                            handleFieldChange("availability", option, value)
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="mb20">
+                        <SelectInput
+                          label="Payment Type"
+                          defaultSelect={hireNowForm.payment_type}
+                          data={paymentMode?.map((item) => ({
+                            option: item?.name,
+                            value: item?.value,
+                          }))}
+                          handler={(option, value) =>
+                            handleFieldChange("payment_type", option, value)
                           }
                         />
                       </div>
@@ -130,11 +220,11 @@ export default function HireNowSection({ translatorProfile }) {
                           Start Date & Time
                         </label>
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           placeholder="Choose Start Date"
-                          name="startDate"
-                          value={hireNowForm?.startDate}
+                          name="start_at"
+                          value={hireNowForm?.start_at}
                           onChange={handleInputChanges}
                         />
                       </div>
@@ -145,34 +235,31 @@ export default function HireNowSection({ translatorProfile }) {
                           End Date & Time
                         </label>
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control"
                           placeholder="Choose End Date"
-                          name="endDate"
-                          value={hireNowForm?.endDate}
+                          name="end_at"
+                          value={hireNowForm?.end_at}
                           onChange={handleInputChanges}
                         />
                       </div>
                     </div>
-                    <div className="col-md-12">
-                      <div className="mb20">
-                        <label className="heading-color ff-heading fw500 mb10">
-                          Any Questions?
-                        </label>
-                        <textarea
-                          cols={30}
-                          rows={6}
-                          placeholder="Ask here"
-                          value={hireNowForm?.questions}
-                          onChange={handleInputChanges}
-                          name="questions"
-                        />
-                      </div>
-                    </div>
+
                     <div className="col-md-12">
                       <div>
-                        <button type="button" className="ud-btn btn-thm">
-                          Pay Now <i className="fal fa-arrow-right-long" />
+                        <button
+                          type="button"
+                          className="ud-btn btn-thm"
+                          onClick={addBooking}
+                        >
+                          Book Now{" "}
+                          {isLoading ? (
+                            <>
+                              &nbsp;&nbsp; <Loader />
+                            </>
+                          ) : (
+                            <i className="fal fa-arrow-right-long" />
+                          )}
                         </button>
                       </div>
                     </div>
