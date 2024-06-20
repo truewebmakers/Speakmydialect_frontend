@@ -1,3 +1,4 @@
+import { CapitalizeFirstLetter } from "@/utils/helper";
 import { Tooltip } from "react-tooltip";
 
 export default function ProjectCard1({ data }) {
@@ -40,11 +41,16 @@ export default function ProjectCard1({ data }) {
                 1 Received
               </p>
               <div className="skill-tags d-flex align-items-center justify-content-start mt-3">
-                {data.tags.map((item, i) => (
-                  <span key={i} className={`tag ${i === 1 ? "mx10" : ""}`}>
-                    {item}
-                  </span>
-                ))}
+                <span className={`tag ${data?.id === 1 ? "mx10" : ""}`}>
+                  {CapitalizeFirstLetter(data?.availability) || "-"}{" "}
+                </span>
+                <span className={`tag ${data?.id === 1 ? "mx10" : ""}`}>
+                  Paid: {CapitalizeFirstLetter(data?.payment_status) || "-"}{" "}
+                </span>
+
+                <span className={`tag ${data?.id === 1 ? "mx10" : ""}`}>
+                  Work: {CapitalizeFirstLetter(data?.work_status) || "-"}{" "}
+                </span>
               </div>
             </div>
           </div>
@@ -52,10 +58,8 @@ export default function ProjectCard1({ data }) {
         <div className="col-lg-3 px-0">
           <div className="details">
             <div className="text-lg-end">
-              <h4 className="mb-0">
-                ${data.price.min} - ${data.price.max}
-              </h4>
-              <p className="text mb-0">Hourly Rate</p>
+              <h4 className="mb-0">$ {data?.present_rate}</h4>
+              <p className="text mb-0">{data?.payment_type} Rate</p>
             </div>
           </div>
         </div>

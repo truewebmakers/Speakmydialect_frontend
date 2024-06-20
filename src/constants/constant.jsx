@@ -33,6 +33,8 @@ export const apiUrls = {
   serachingApi: "/translators/search?language=",
   getTranslatorProfile: "/get-profile/",
   addBooking: "/admin/booking/add",
+  getTranslatorAllJobs: "/admin/booking/get/translator/",
+  getClientOrders: "/admin/booking/get/client/",
 };
 
 export const metaData = {
@@ -131,3 +133,17 @@ export const routes = {
 };
 
 export const startYearDropdown = 1965;
+
+export const jobManagementTab = [
+  { id: 0, name: "Jobs In-Process", status: "in-process" },
+  { id: 1, name: "Accepted Jobs", status: "accept" },
+  { id: 2, name: "Rejected Jobs", status: "reject" },
+  { id: 3, name: "Canceled Jobs", status: "cancel" },
+];
+
+export const ordersManagementTab = [
+  { id: 0, name: "Current Orders", status: "approved" },
+  { id: 1, name: "Orders In-Transit", status: "reject" },
+  { id: 2, name: "Completed Orders", status: "disputed" },
+  { id: 3, name: "Canceled Orders", status: "pending" },
+];

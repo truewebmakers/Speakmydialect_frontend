@@ -1,30 +1,71 @@
 import Pagination1 from "@/components/section/Pagination1";
 import DashboardNavigation from "../header/DashboardNavigation";
-import { useState } from "react";
-import ServiceCard1 from "../card/ServiceCard1";
-import ProjectCard1 from "../card/ProjectCard1";
+import { useEffect, useState } from "react";
 import JobCard1 from "../card/JobCard1";
-import { product1, project1 } from "@/data/product";
-import { job1 } from "@/data/job";
 import { useLocation } from "react-router-dom";
+import {
+  apiMethods,
+  apiUrls,
+  jobManagementTab,
+  ordersManagementTab,
+} from "@/constants/constant";
+import { useSelector } from "react-redux";
+import UseApi from "@/hook/useApi";
+import { toast } from "react-toastify";
 
-const tab = [
-  "Current Jobs",
-  "Upcoming Jobs",
-  "Completed Jobs",
-  "Canceled Jobs",
-];
-
-const ordersTab = [
-  "Current Orders",
-  "Orders In-Transit",
-  "Completed Orders",
-  "Canceled Orders",
-];
-
-export default function SavedInfo() {
-  const [getCurrentTab, setCurrentTab] = useState(0);
+export default function JobAndOrdersManagement() {
+  const [getCurrentTab, setCurrentTab] = useState({
+    id: 0,
+    name: "",
+    status: "",
+  });
   const { pathname } = useLocation();
+  const { user } = useSelector((state) => state.auth);
+  const [userJobListing, setUserJobListing] = useState([]);
+
+  const handleJobManagement = async () => {
+    try {
+      const status = getCurrentTab?.status || "in-process";
+      const headers = { Authorization: `Bearer ${user?.token}` };
+      const response = await UseApi(
+        `${apiUrls.getTranslatorAllJobs}${user?.userInfo?.id}/${status}`,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.status === 200 || response?.status === 201) {
+        setUserJobListing(response?.data?.data);
+      }
+    } catch (error) {
+      toast.error("Error fetching profile data");
+    }
+  };
+
+  const handleOrdersManagement = async () => {
+    try {
+      const status = getCurrentTab?.status || "pending";
+      const headers = { Authorization: `Bearer ${user?.token}` };
+      const response = await UseApi(
+        `${apiUrls.getClientOrders}${user?.userInfo?.id}/${status}`,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.status === 200 || response?.status === 201) {
+        setUserJobListing(response?.data?.data);
+      }
+    } catch (error) {
+      toast.error("Error fetching profile data");
+    }
+  };
+
+  useEffect(() => {
+    if (pathname?.includes("/jobs")) {
+      handleJobManagement();
+    } else {
+      handleOrdersManagement();
+    }
+  }, [pathname, getCurrentTab]);
 
   return (
     <>
@@ -52,111 +93,72 @@ export default function SavedInfo() {
                 <nav>
                   <div className="nav nav-tabs mb30">
                     {pathname?.includes("/jobs")
-                      ? tab.map((item, i) => (
+                      ? jobManagementTab?.map((item, i) => (
                           <button
-                            onClick={() => setCurrentTab(i)}
+                            onClick={() =>
+                              setCurrentTab({
+                                id: item?.id,
+                                name: item?.name,
+                                status: item?.status,
+                              })
+                            }
                             key={i}
                             className={`nav-link fw500 ps-0 ${
-                              getCurrentTab === i ? "active" : ""
+                              getCurrentTab?.id === item?.id ? "active" : ""
                             }`}
                           >
-                            {item}
+                            {item?.name}
                           </button>
                         ))
-                      : ordersTab.map((item, i) => (
+                      : ordersManagementTab?.map((item, i) => (
                           <button
-                            onClick={() => setCurrentTab(i)}
+                            onClick={() =>
+                              setCurrentTab({
+                                id: item?.id,
+                                name: item?.name,
+                                status: item?.status,
+                              })
+                            }
                             key={i}
                             className={`nav-link fw500 ps-0 ${
-                              getCurrentTab === i ? "active" : ""
+                              getCurrentTab?.id === item?.id ? "active" : ""
                             }`}
                           >
-                            {item}
+                            {item?.name}
                           </button>
                         ))}
                   </div>
                 </nav>
-                {/* Current Jobs */}
-                {pathname?.includes("jobs")
-                  ? getCurrentTab === 0 && (
-                      <div className="row">
-                        {product1.slice(0, 8).map((item, i) => (
-                          <div key={i} className="col-sm-6 col-xl-3">
-                            <ServiceCard1 data={item} />
-                          </div>
-                        ))}
-                      </div>
-                    )
-                  : getCurrentTab === 0 && (
-                      <div className="packages_table table-responsive">
-                        <table className="table-style3 table at-savesearch">
-                          <tbody className="t-body">
-                            {job1.slice(0, 4).map((item, i) => (
-                              <JobCard1 key={i} data={item} i={i} />
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
 
-                {/* Upcoming Jobs */}
-                {pathname?.includes("jobs")
-                  ? getCurrentTab === 1 && (
-                      <div className="row">
-                        {project1.slice(0, 6).map((item, i) => (
-                          <div key={i} className="col-md-6 col-lg-12 col-xl-6">
-                            <ProjectCard1 data={item} />
-                          </div>
-                        ))}
-                      </div>
-                    )
-                  : getCurrentTab === 1 && (
-                      <div className="packages_table table-responsive">
-                        <table className="table-style3 table at-savesearch">
-                          <tbody className="t-body">
-                            {job1.slice(0, 4).map((item, i) => (
-                              <JobCard1 key={i} data={item} i={i} />
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-
-                {/*Completed Jobs*/}
-                {getCurrentTab === 2 && (
+                {/* Table Section */}
+                {pathname?.includes("jobs") ? (
                   <div className="packages_table table-responsive">
                     <table className="table-style3 table at-savesearch">
                       <tbody className="t-body">
-                        {job1.slice(0, 4).map((item, i) => (
-                          <JobCard1 key={i} data={item} i={i} />
-                        ))}
+                        {userJobListing?.length ? (
+                          userJobListing?.map((item, i) => (
+                            <JobCard1 key={i} data={item} i={i} />
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan="4">No jobs found</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="packages_table table-responsive">
+                    <table className="table-style3 table at-savesearch">
+                      <tbody className="t-body">
+                        {/* Replace with actual data fetching and display for orders */}
+                        <tr>
+                          <td colSpan="4">Orders data here</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
                 )}
-
-                {/* Canceled Jobs */}
-                {pathname?.includes("jobs")
-                  ? getCurrentTab === 3 && (
-                      <div className="row">
-                        {project1.slice(0, 6).map((item, i) => (
-                          <div key={i} className="col-md-6 col-lg-12 col-xl-6">
-                            <ProjectCard1 data={item} />
-                          </div>
-                        ))}
-                      </div>
-                    )
-                  : getCurrentTab === 3 && (
-                      <div className="packages_table table-responsive">
-                        <table className="table-style3 table at-savesearch">
-                          <tbody className="t-body">
-                            {job1.slice(0, 4).map((item, i) => (
-                              <JobCard1 key={i} data={item} i={i} />
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
               </div>
 
               <Pagination1 />
