@@ -1,15 +1,17 @@
 import {
   apiMethods,
   apiUrls,
-  experienceLocationType,
+  jobAvailaibiltyType,
   paymentMode,
 } from "@/constants/constant";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SelectInput from "../dashboard/option/SelectInput";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UseApi from "@/hook/useApi";
 import { toast } from "react-toastify";
 import Loader from "../common/loader";
+import { getProfileData } from "@/utils/commonFunctions";
+import { getProfileDetails } from "@/redux/auth";
 
 export default function HireNowSection({ translatorProfile }) {
   const [hireNowForm, setHireNowForm] = useState({
@@ -26,6 +28,7 @@ export default function HireNowSection({ translatorProfile }) {
   });
   const { user, profileData } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleFieldChange = (field, option, value) => {
     setHireNowForm({
@@ -33,6 +36,14 @@ export default function HireNowSection({ translatorProfile }) {
       [field]: { option: option, value: value },
     });
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let res = await getProfileData(user?.userInfo?.id, user?.token);
+      dispatch(getProfileDetails(res));
+    };
+    fetchData();
+  }, [user]);
 
   const handleInputChanges = (e) => {
     const { name, value } = e.target;
@@ -189,7 +200,7 @@ export default function HireNowSection({ translatorProfile }) {
                         <SelectInput
                           label="Mode of Work"
                           defaultSelect={hireNowForm.availability}
-                          data={experienceLocationType?.map((item) => ({
+                          data={jobAvailaibiltyType?.map((item) => ({
                             option: item?.name,
                             value: item?.value,
                           }))}

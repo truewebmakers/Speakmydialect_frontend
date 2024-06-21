@@ -57,9 +57,11 @@ export default function Breadcumb17({ translatorProfile }) {
                       </p>
                       <p className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm">
                         <i className="fas fa-star vam fz10 review-color me-2" />{" "}
-                        {CapitalizeFirstLetter(
-                          translatorProfile?.user_meta?.gender
-                        )}
+                        {translatorProfile?.user_meta?.gender
+                          ? CapitalizeFirstLetter(
+                              translatorProfile?.user_meta?.gender
+                            )
+                          : null}
                       </p>
                       <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
                         <i className="flaticon-place vam fz20 me-2" />{" "}
@@ -73,9 +75,11 @@ export default function Breadcumb17({ translatorProfile }) {
                       <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
                         <i className="flaticon-30-days vam fz20 me-2" /> Member
                         since{" "}
-                        {moment(
-                          translatorProfile?.user_meta?.created_at
-                        ).format("YYYY, DD MMM")}
+                        {translatorProfile?.user_meta?.created_at
+                          ? moment(
+                              translatorProfile?.user_meta?.created_at
+                            ).format("YYYY, DD MMM")
+                          : null}
                       </p>
                     </div>
                   </div>

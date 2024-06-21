@@ -57,6 +57,12 @@ export const experienceLocationType = [
   { id: 3, name: "Remote", value: "remote" },
 ];
 
+export const jobAvailaibiltyType = [
+  { id: 1, name: "On-site", value: "onsite" },
+  { id: 2, name: "Hybrid", value: "hybrid" },
+  { id: 3, name: "Remote", value: "remote" },
+];
+
 export const paymentMode = [
   { id: 1, name: "Fix Rate", value: "fix" },
   { id: 2, name: "Hourly", value: "hourly" },
@@ -123,7 +129,7 @@ export const routes = {
   Dashboard: "/dashboard",
   Jobs: "/jobs",
   Cards: "/cards",
-  Orders: "/orders",
+  Bookings: "/bookings",
   Search: "/search",
   TranslatorProfile: "/profile/:id",
   Payouts: "/payouts",
@@ -142,8 +148,8 @@ export const jobManagementTab = [
 ];
 
 export const ordersManagementTab = [
-  { id: 0, name: "Current Orders", status: "approved" },
-  { id: 1, name: "Orders In-Transit", status: "reject" },
-  { id: 2, name: "Completed Orders", status: "disputed" },
-  { id: 3, name: "Canceled Orders", status: "pending" },
+  { id: 3, name: "Upcoming Bookings", status: "pending" },
+  { id: 0, name: "Current Bookings", status: "pending" },
+  { id: 1, name: "Canceled Bookings", status: "reject" },
+  { id: 2, name: "Completed Bookings", status: "approved" },
 ];

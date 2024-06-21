@@ -52,9 +52,9 @@ export const clientNavigation = [
   },
   {
     id: 4,
-    name: "Orders",
+    name: "Bookings",
     icon: "flaticon-like",
-    path: "/orders",
+    path: "/bookings",
   },
   {
     id: 5,

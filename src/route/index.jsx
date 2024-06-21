@@ -102,7 +102,7 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path={routes.Orders}
+          path={routes.Bookings}
           element={
             <ProtectedRoute>
               <DasbPageSaved />

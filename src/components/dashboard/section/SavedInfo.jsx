@@ -79,7 +79,7 @@ export default function JobAndOrdersManagement() {
               {pathname?.includes("/jobs") ? (
                 <h2>Job Management</h2>
               ) : (
-                <h2>Orders</h2>
+                <h2>Bookings</h2>
               )}
 
               <p className="text">Lorem ipsum dolor sit amet, consectetur.</p>
@@ -153,7 +153,7 @@ export default function JobAndOrdersManagement() {
                       <tbody className="t-body">
                         {/* Replace with actual data fetching and display for orders */}
                         <tr>
-                          <td colSpan="4">Orders data here</td>
+                          <td colSpan="4">Bookings data here</td>
                         </tr>
                       </tbody>
                     </table>

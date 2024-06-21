@@ -39,3 +39,20 @@ export const getLanguageName = (languageId, languageList) => {
   const language = languageList.find((coun) => coun.id == languageId);
   return language ? language.name : "Unknown Language";
 };
+
+export const getProfileData = async (id, token) => {
+  try {
+    const headers = { Authorization: `Bearer ${token}` };
+    const response = await UseApi(
+      apiUrls.getUserProfile + id,
+      apiMethods.GET,
+      null,
+      headers
+    );
+    if (response?.status === 200 || response?.status === 201) {
+      return response?.data?.user;
+    }
+  } catch (error) {
+    return toast.error("Error fetching profile data");
+  }
+};

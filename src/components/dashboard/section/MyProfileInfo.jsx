@@ -11,32 +11,19 @@ import { apiMethods, apiUrls } from "@/constants/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileDetails } from "@/redux/auth";
 import { toast } from "react-toastify";
+import { getProfileData } from "@/utils/commonFunctions";
 
 export default function MyProfileInfo() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  const getProfileData = async () => {
-    try {
-      const headers = { Authorization: `Bearer ${user?.token}` };
-      const response = await UseApi(
-        apiUrls.getUserProfile + user?.userInfo?.id,
-        apiMethods.GET,
-        null,
-        headers
-      );
-      if (response?.status === 200 || response?.status === 201) {
-        // setProfileData(response?.data?.user);
-        dispatch(getProfileDetails(response?.data?.user));
-      }
-    } catch (error) {
-      return toast.error("Error fetching profile data");
-    }
-  };
-
   useEffect(() => {
-    getProfileData();
-  }, []);
+    const fetchData = async () => {
+      let res = await getProfileData(user?.userInfo?.id, user?.token);
+      dispatch(getProfileDetails(res));
+    };
+    fetchData();
+  }, [user]);
 
   return (
     <>
