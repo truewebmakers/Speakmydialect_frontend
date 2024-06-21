@@ -28,7 +28,7 @@ export default function DashboardHeader() {
                           <img
                             src={
                               profileData?.user_meta?.profile_pic ||
-                              "profile-picss"
+                              "/images/default/defaultProfile.png"
                             }
                             alt="User Image"
                             height={45}

@@ -144,7 +144,11 @@ export default function ProfileDetails() {
             <div className="profile-img mb20-sm">
               <img
                 className="rounded-circle wa-xs"
-                src={selectedImage ? selectedImage : "/images/team/fl-1.png"}
+                src={
+                  selectedImage
+                    ? selectedImage
+                    : "/images/default/defaultProfile.png"
+                }
                 height={60}
                 width={60}
                 alt="profile"

@@ -26,7 +26,8 @@ export default function MobileNavigation2() {
                     >
                       <img
                         src={
-                          profileData?.user_meta?.profile_pic || "profile-picss"
+                          profileData?.user_meta?.profile_pic ||
+                          "/images/default/defaultProfile.png"
                         }
                         alt="User Image"
                         height={45}

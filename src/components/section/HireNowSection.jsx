@@ -49,7 +49,6 @@ export default function HireNowSection({ translatorProfile }) {
     const { name, value } = e.target;
     setHireNowForm({ ...hireNowForm, [name]: value });
   };
-
   const addBooking = async () => {
     setIsLoading(true);
     try {
@@ -59,16 +58,16 @@ export default function HireNowSection({ translatorProfile }) {
       };
       // Prepare data for API
       const bodyData = {
-        client_id: profileData?.user_meta?.user_id,
-        translator_id: translatorProfile?.user_meta?.user_id,
+        client_id: profileData?.id,
+        translator_id: translatorProfile?.id,
         payment_type: hireNowForm?.payment_type?.value,
         present_rate:
           hireNowForm?.payment_type?.value == "fix"
             ? +translatorProfile?.user_meta?.fix_rate
             : +translatorProfile?.user_meta?.hourly_rate,
         availability: hireNowForm?.availability?.value,
-        status: "in-process ",
-        work_status: "pending",
+        status: "in-process ", // this is for transaltor's job
+        work_status: "pending", // this status belongs to client's request
         payment_status: "none",
         start_at: hireNowForm?.start_at,
         end_at: hireNowForm?.end_at,

@@ -39,7 +39,10 @@ export default function ProjectCard1({ data }) {
           <div className="thumb w60 position-relative rounded-circle mb15-md">
             <img
               className="rounded-circle mx-auto"
-              src={data?.user_meta?.profile_pic}
+              src={
+                data?.user_meta?.profile_pic ||
+                "/images/default/defaultProfile.png"
+              }
               height={45}
               width={45}
               alt="profile"

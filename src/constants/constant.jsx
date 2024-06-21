@@ -35,6 +35,7 @@ export const apiUrls = {
   addBooking: "/admin/booking/add",
   getTranslatorAllJobs: "/admin/booking/get/translator/",
   getClientOrders: "/admin/booking/get/client/",
+  changeTranslatorBookingStatus: "/admin/booking/update/translator/",
 };
 
 export const metaData = {
@@ -140,16 +141,70 @@ export const routes = {
 
 export const startYearDropdown = 1965;
 
-export const jobManagementTab = [
-  { id: 0, name: "Jobs In-Process", status: "in-process" },
-  { id: 1, name: "Accepted Jobs", status: "accept" },
-  { id: 2, name: "Rejected Jobs", status: "reject" },
-  { id: 3, name: "Canceled Jobs", status: "cancel" },
+export const translatorBookingTab = [
+  { id: 0, name: "New Bookings", status: "in-process", type: "new_booking" }, //pending jobs
+  {
+    id: 1,
+    name: "Today's Bookings",
+    status: "accept", //today's date
+    type: "today_booking",
+  },
+  {
+    id: 2,
+    name: "Upcoming Bookings",
+    status: "accept", //>date jobs which are aligned for future
+    type: "upcoming_booking",
+  },
+  {
+    id: 3,
+    name: "Approved Bookings",
+    status: "mark-completed", // job completed by translator & approved by client
+    type: "approved_booking",
+  },
+  {
+    id: 4,
+    name: "Completed Bookings",
+    status: "mark-completed", // job completed by translator not yet approved by client
+    type: "completed_booking",
+  },
+  {
+    id: 5,
+    name: "Canceled Bookings",
+    status: "cancel", // job canceled by client
+    type: null, //not required
+  },
+  {
+    id: 6,
+    name: "Rejected Bookings",
+    status: "reject", // translator reject the job
+    type: null, //not required
+  },
 ];
 
 export const ordersManagementTab = [
-  { id: 3, name: "Upcoming Bookings", status: "pending" },
-  { id: 0, name: "Current Bookings", status: "pending" },
-  { id: 1, name: "Canceled Bookings", status: "reject" },
-  { id: 2, name: "Completed Bookings", status: "approved" },
+  {
+    id: 0,
+    name: "Upcoming Bookings",
+    status: "pending",
+    type: "upcoming_booking",
+  }, // pending from client & translator both,
+  {
+    id: 1,
+    name: "Current Bookings",
+    status: "pending",
+    type: "current_booking",
+  }, //pending from client & accepted from translator
+  {
+    id: 2,
+    name: "Completed Bookings",
+    status: "pending",
+    type: "completed_booking",
+  }, //  client can approve & user as well
+  {
+    id: 3,
+    name: "Approved Bookings",
+    status: "approved",
+    type: null,
+  }, //  approved by client  & user as well
+  { id: 4, name: "Canceled Bookings", status: "cancel", type: null }, // rejected by client
 ];

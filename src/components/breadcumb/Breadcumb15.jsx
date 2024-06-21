@@ -1,4 +1,3 @@
-import { freelancer1 } from "@/data/product";
 import { getCountryName } from "@/utils/commonFunctions";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
@@ -31,15 +30,15 @@ export default function Breadcumb17({ translatorProfile }) {
                         <img
                           className="rounded-circle  wa-sm mb15-sm"
                           src={translatorProfile?.user_meta?.profile_pic}
-                          alt="Freelancer Photo"
+                          alt="Profile Pic"
                           height={80}
                           width={80}
                         />
                       ) : (
                         <img
                           className="rounded-circle w-100 wa-sm mb15-sm"
-                          src="/images/team/fl-1.png"
-                          alt="Freelancer Photo"
+                          src="/images/default/defaultProfile.png"
+                          alt="Profile Pic"
                         />
                       )}
                     </a>
@@ -47,7 +46,6 @@ export default function Breadcumb17({ translatorProfile }) {
                       <h5 className="title mb-1">
                         {translatorProfile?.fname} {translatorProfile?.lname}
                       </h5>
-
                       <p className="mb-0">
                         {translatorProfile?.user_meta?.intro
                           ? CapitalizeFirstLetter(

@@ -7324,6 +7324,17 @@ textarea {
   border: 2px solid #5bbb7b;
 }
 
+.btn-red-border {
+  background-color: #ffffff;
+  border: 2px solid #e7370a;
+  color: #e7370a;
+}
+
+.btn-red-border:hover {
+  background-color: #e7370a;
+  border: 2px solid #e7370a;
+}
+
 .btn-dark-border {
   background-color: #ffffff;
   border: 2px solid #222222;

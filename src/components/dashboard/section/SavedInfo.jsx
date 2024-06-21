@@ -1,4 +1,3 @@
-import Pagination1 from "@/components/section/Pagination1";
 import DashboardNavigation from "../header/DashboardNavigation";
 import { useEffect, useState } from "react";
 import JobCard1 from "../card/JobCard1";
@@ -6,8 +5,8 @@ import { useLocation } from "react-router-dom";
 import {
   apiMethods,
   apiUrls,
-  jobManagementTab,
   ordersManagementTab,
+  translatorBookingTab,
 } from "@/constants/constant";
 import { useSelector } from "react-redux";
 import UseApi from "@/hook/useApi";
@@ -18,25 +17,32 @@ export default function JobAndOrdersManagement() {
     id: 0,
     name: "",
     status: "",
+    type: "",
   });
   const { pathname } = useLocation();
   const { user } = useSelector((state) => state.auth);
   const [userJobListing, setUserJobListing] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleJobManagement = async () => {
+    setIsLoading(true);
     try {
       const status = getCurrentTab?.status || "in-process";
+      const typeOfBooking = getCurrentTab?.type || "new_booking";
       const headers = { Authorization: `Bearer ${user?.token}` };
       const response = await UseApi(
-        `${apiUrls.getTranslatorAllJobs}${user?.userInfo?.id}/${status}`,
+        `${apiUrls.getTranslatorAllJobs}${user?.userInfo?.id}/${status}?type=${typeOfBooking}`,
         apiMethods.GET,
         null,
         headers
       );
       if (response?.status === 200 || response?.status === 201) {
         setUserJobListing(response?.data?.data);
+        setIsLoading(false);
       }
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       toast.error("Error fetching profile data");
     }
   };
@@ -93,13 +99,14 @@ export default function JobAndOrdersManagement() {
                 <nav>
                   <div className="nav nav-tabs mb30">
                     {pathname?.includes("/jobs")
-                      ? jobManagementTab?.map((item, i) => (
+                      ? translatorBookingTab?.map((item, i) => (
                           <button
                             onClick={() =>
                               setCurrentTab({
                                 id: item?.id,
                                 name: item?.name,
                                 status: item?.status,
+                                type: item?.type,
                               })
                             }
                             key={i}
@@ -117,6 +124,7 @@ export default function JobAndOrdersManagement() {
                                 id: item?.id,
                                 name: item?.name,
                                 status: item?.status,
+                                type: item?.type,
                               })
                             }
                             key={i}
@@ -131,37 +139,31 @@ export default function JobAndOrdersManagement() {
                 </nav>
 
                 {/* Table Section */}
-                {pathname?.includes("jobs") ? (
-                  <div className="packages_table table-responsive">
-                    <table className="table-style3 table at-savesearch">
-                      <tbody className="t-body">
-                        {userJobListing?.length ? (
-                          userJobListing?.map((item, i) => (
-                            <JobCard1 key={i} data={item} i={i} />
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan="4">No jobs found</td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                ) : (
-                  <div className="packages_table table-responsive">
-                    <table className="table-style3 table at-savesearch">
-                      <tbody className="t-body">
-                        {/* Replace with actual data fetching and display for orders */}
+                {/* {pathname?.includes("jobs") ? ( */}
+                <div className="packages_table table-responsive">
+                  <table className="table-style3 table at-savesearch">
+                    <tbody className="t-body">
+                      {userJobListing?.length ? (
+                        userJobListing?.map((item, i) => (
+                          <JobCard1
+                            key={i}
+                            data={item}
+                            i={i}
+                            isLoading={isLoading}
+                            currentTab={getCurrentTab}
+                          />
+                        ))
+                      ) : (
                         <tr>
-                          <td colSpan="4">Bookings data here</td>
+                          <td colSpan="4">No Bookings Found</td>
                         </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
-              <Pagination1 />
+              {/* <Pagination1 /> */}
             </div>
           </div>
         </div>
