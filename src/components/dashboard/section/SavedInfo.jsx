@@ -172,6 +172,7 @@ export default function JobAndOrdersManagement() {
                                   isLoading={isLoading}
                                   currentTab={getCurrentTab}
                                   getData={handleJobManagement}
+                                  type="translator"
                                 />
                               ))
                             ) : (
@@ -195,6 +196,7 @@ export default function JobAndOrdersManagement() {
                                   isLoading={isLoading}
                                   currentTab={getClientCurrentTab}
                                   getData={handleOrdersManagement}
+                                  type="client"
                                 />
                               ))
                             ) : (

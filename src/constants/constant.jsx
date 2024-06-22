@@ -36,6 +36,7 @@ export const apiUrls = {
   getTranslatorAllJobs: "/admin/booking/get/translator/",
   getClientOrders: "/admin/booking/get/client/",
   changeTranslatorBookingStatus: "/admin/booking/update/translator/",
+  changeClientBookingStatus: "/admin/booking/update/client/",
 };
 
 export const metaData = {

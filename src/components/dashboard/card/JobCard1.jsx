@@ -5,18 +5,26 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-export default function JobCard1({ data, i, currentTab, getData }) {
+export default function JobCard1({ data, i, currentTab, getData, type }) {
   const { user } = useSelector((state) => state.auth);
 
   const changeBookingStatus = async (status, id) => {
     try {
       const headers = { Authorization: `Bearer ${user?.token}` };
-      const response = await UseApi(
-        `${apiUrls.changeTranslatorBookingStatus}${id}/${status}`,
-        apiMethods.POST,
-        null,
-        headers
-      );
+      let response = {};
+      type == "translator"
+        ? (response = await UseApi(
+            `${apiUrls.changeTranslatorBookingStatus}${id}/${status}`,
+            apiMethods.POST,
+            null,
+            headers
+          ))
+        : (response = await UseApi(
+            `${apiUrls.changeClientBookingStatus}${id}/${status}`,
+            apiMethods.POST,
+            null,
+            headers
+          ));
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
         getData();
