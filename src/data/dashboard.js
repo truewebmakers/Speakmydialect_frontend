@@ -13,7 +13,7 @@ export const translatorNavigation = [
   },
   {
     id: 3,
-    name: "Job Management",
+    name: "Booking Management",
     icon: "flaticon-like",
     path: "/jobs",
   },
@@ -46,18 +46,12 @@ export const clientNavigation = [
   },
   {
     id: 3,
-    name: "My Credit Cards",
-    icon: "flaticon-web",
-    path: "/cards",
-  },
-  {
-    id: 4,
     name: "Bookings",
     icon: "flaticon-like",
     path: "/bookings",
   },
   {
-    id: 5,
+    id: 4,
     name: "Logout",
     icon: "flaticon-logout",
     path: "/login",

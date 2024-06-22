@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfileDetails } from "@/redux/auth";
 import { toast } from "react-toastify";
 import { getProfileData } from "@/utils/commonFunctions";
+import PaymentMethod from "./PaymentMethod";
 
 export default function MyProfileInfo() {
   const dispatch = useDispatch();
@@ -49,8 +50,8 @@ export default function MyProfileInfo() {
                 <WorkExperience />
               </>
             )}
+            {user?.userInfo?.user_type == "client" && <PaymentMethod />}
             <ChangePassword />
-            {/* <ConfirmPassword /> */}
           </div>
         </div>
       </div>

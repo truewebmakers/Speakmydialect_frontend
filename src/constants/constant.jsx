@@ -171,13 +171,13 @@ export const translatorBookingTab = [
     id: 5,
     name: "Canceled Bookings",
     status: "cancel", // job canceled by client
-    type: null, //not required
+    type: "null", //not required
   },
   {
     id: 6,
     name: "Rejected Bookings",
     status: "reject", // translator reject the job
-    type: null, //not required
+    type: "null", //not required
   },
 ];
 
@@ -204,7 +204,7 @@ export const ordersManagementTab = [
     id: 3,
     name: "Approved Bookings",
     status: "approved",
-    type: null,
+    type: "null",
   }, //  approved by client  & user as well
-  { id: 4, name: "Canceled Bookings", status: "cancel", type: null }, // rejected by client
+  { id: 4, name: "Canceled Bookings", status: "cancel", type: "null" }, // rejected by client
 ];

@@ -18,7 +18,7 @@ export default function PayoutInfo() {
           <div className="col-lg-6">
             <div className="dashboard_title_area">
               <h2>Payouts</h2>
-              <p className="text">Lorem ipsum dolor sit amet, consectetur.</p>
+              {/* <p className="text">Lorem ipsum dolor sit amet, consectetur.</p> */}
             </div>
           </div>
           {/* <div className="col-lg-6">
