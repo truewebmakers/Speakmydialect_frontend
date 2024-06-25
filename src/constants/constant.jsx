@@ -158,15 +158,15 @@ export const translatorBookingTab = [
   },
   {
     id: 3,
-    name: "Approved Bookings",
-    status: "mark-completed", // job completed by translator & approved by client
-    type: "approved_booking",
-  },
-  {
-    id: 4,
     name: "Completed Bookings",
     status: "mark-completed", // job completed by translator not yet approved by client
     type: "completed_booking",
+  },
+  {
+    id: 4,
+    name: "Approved Bookings",
+    status: "mark-completed", // job completed by translator & approved by client
+    type: "approved_booking",
   },
   {
     id: 5,

@@ -33,37 +33,71 @@ export default function JobCard1({ data, i, currentTab, getData, type }) {
       toast.error("Error fetching profile data");
     }
   };
+  console.log(data);
   return (
     <>
       <tr>
         <th className={`ps-0 ${i === 0 ? "pt-0" : ""}`} scope="row">
           <div className="job-list-style1 at-dashboard p-0 d-xl-flex align-items-start mb-0">
-            <div className="icon2 mb10-lg mb-0 me-3 bg-transparent">
-              <img
-                className="wa"
-                src={data?.profile_pic || "/images/default/defaultProfile.png"}
-                alt="icon2"
-              />
-            </div>
-            <div className="details">
-              <h5>New Work From {data?.fname || "Nobody"}</h5>
-              <h6 className="mb-3 text-thm">
-                {data?.location || "Not specified yet"}
-              </h6>
-            </div>
+            {type == "translator" ? (
+              <div className="icon2 mb10-lg mb-0 me-3 bg-transparent">
+                <img
+                  className="wa"
+                  src={
+                    data?.client_meta?.profile_pic ||
+                    "/images/default/defaultProfile.png"
+                  }
+                  height={40}
+                  width={40}
+                  alt="icon2"
+                />
+              </div>
+            ) : type == "client" ? (
+              <div className="icon2 mb10-lg mb-0 me-3 bg-transparent">
+                <img
+                  className="wa"
+                  src={
+                    data?.translator_meta?.profile_pic ||
+                    "/images/default/defaultProfile.png"
+                  }
+                  height={40}
+                  width={40}
+                  alt="icon2"
+                />
+              </div>
+            ) : null}
+            {type == "translator" ? (
+              <div className="details">
+                <h5>New Work From {data?.client?.fname || "Nobody"}</h5>
+                <h6 className="mb-3 text-thm">
+                  {data?.location || "Not specified yet"}
+                </h6>
+              </div>
+            ) : type == "client" ? (
+              <div className="details">
+                <h5>New Work for {data?.translator?.fname || "Nobody"}</h5>
+                <h6 className="mb-3 text-thm">
+                  {data?.location || "Not specified yet"}
+                </h6>
+              </div>
+            ) : null}
           </div>
         </th>
         <td className="vam">
           <p className="list-inline-item mb-0">
-            {CapitalizeFirstLetter(data?.payment_type) + " Rate: " ||
-              "Not Mentioned Yet"}{" "}
+            <b>
+              {" "}
+              {CapitalizeFirstLetter(data?.payment_type) + " Rate: " ||
+                "Not Mentioned Yet"}{" "}
+            </b>
             ${data?.present_rate || "Not specified yet"}{" "}
           </p>
           <p className="list-inline-item mb-0 bdrl1 pl15 bdrn-lg pl5-lg">
-            Start At : {moment(data?.start_at).format("lll") || "-"}
+            <b> Start At</b> : {moment(data?.start_at).format("lll") || "-"}
           </p>
           <p className="list-inline-item mb-0 bdrl1 pl15 bdrn-lg pl5-lg">
-            Sign Off: {moment(data?.end_at).format("lll") || "-"}
+            <b> Ends At: </b>
+            {moment(data?.end_at).format("lll") || "-"}
           </p>
           <p className="list-inline-item mb-0 bdrl1 pl15 bdrn-lg pl5-lg">
             {CapitalizeFirstLetter(data?.availability) || "Not specified yet"}
@@ -81,7 +115,8 @@ export default function JobCard1({ data, i, currentTab, getData, type }) {
           </p>
         </td>
         {currentTab?.type == "new_booking" ||
-        currentTab?.type == "upcoming_booking" ? (
+        currentTab?.type == "upcoming_booking" ||
+        currentTab?.type == "current_booking" ? (
           <td className="vam">
             <a
               className="ud-btn btn-thm-border"
@@ -110,7 +145,8 @@ export default function JobCard1({ data, i, currentTab, getData, type }) {
           </td>
         ) : null}
         {currentTab?.type == "new_booking" ||
-        currentTab?.type == "upcoming_booking" ? (
+        currentTab?.type == "upcoming_booking" ||
+        currentTab?.type == "current_booking" ? (
           <td className="vam">
             <a
               className="ud-btn btn-red-border"
