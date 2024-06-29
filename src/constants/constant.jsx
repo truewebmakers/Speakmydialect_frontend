@@ -132,6 +132,7 @@ export const routes = {
   Jobs: "/jobs",
   Cards: "/cards",
   Bookings: "/bookings",
+  Invoice: "/invoice",
   Search: "/search",
   TranslatorProfile: "/profile/:id",
   Payouts: "/payouts",
@@ -146,7 +147,7 @@ export const translatorBookingTab = [
   { id: 0, name: "New Bookings", status: "in-process", type: "new_booking" }, //pending jobs
   {
     id: 1,
-    name: "Today's Bookings",
+    name: "Current Bookings",
     status: "accept", //today's date
     type: "today_booking",
   },

@@ -18,20 +18,8 @@ export default function PayoutInfo() {
           <div className="col-lg-6">
             <div className="dashboard_title_area">
               <h2>Payouts</h2>
-              {/* <p className="text">Lorem ipsum dolor sit amet, consectetur.</p> */}
             </div>
           </div>
-          {/* <div className="col-lg-6">
-            <div className="text-lg-end">
-              <Link
-                to="/freelancer-1"
-                className="ud-btn btn-dark default-box-shadow2"
-              >
-                Create Payout
-                <i className="fal fa-arrow-right-long" />
-              </Link>
-            </div>
-          </div> */}
         </div>
         <div className="row">
           <div className="col-xl-12">

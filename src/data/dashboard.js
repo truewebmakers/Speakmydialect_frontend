@@ -52,6 +52,12 @@ export const clientNavigation = [
   },
   {
     id: 4,
+    name: "Invoices",
+    icon: "flaticon-like",
+    path: "/invoice",
+  },
+  {
+    id: 4,
     name: "Logout",
     icon: "flaticon-logout",
     path: "/login",

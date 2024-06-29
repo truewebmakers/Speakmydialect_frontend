@@ -5,26 +5,19 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-export default function JobCard1({ data, i, currentTab, getData, type }) {
+export default function TranslatorBooking({ data, i, currentTab, getData }) {
   const { user } = useSelector((state) => state.auth);
 
   const changeBookingStatus = async (status, id) => {
     try {
       const headers = { Authorization: `Bearer ${user?.token}` };
-      let response = {};
-      type == "translator"
-        ? (response = await UseApi(
-            `${apiUrls.changeTranslatorBookingStatus}${id}/${status}`,
-            apiMethods.POST,
-            null,
-            headers
-          ))
-        : (response = await UseApi(
-            `${apiUrls.changeClientBookingStatus}${id}/${status}`,
-            apiMethods.POST,
-            null,
-            headers
-          ));
+      let response = await UseApi(
+        `${apiUrls.changeTranslatorBookingStatus}${id}/${status}`,
+        apiMethods.POST,
+        null,
+        headers
+      );
+
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
         getData();
@@ -33,54 +26,31 @@ export default function JobCard1({ data, i, currentTab, getData, type }) {
       toast.error("Error fetching profile data");
     }
   };
-  console.log(data);
+
   return (
     <>
       <tr>
         <th className={`ps-0 ${i === 0 ? "pt-0" : ""}`} scope="row">
           <div className="job-list-style1 at-dashboard p-0 d-xl-flex align-items-start mb-0">
-            {type == "translator" ? (
-              <div className="icon2 mb10-lg mb-0 me-3 bg-transparent">
-                <img
-                  className="wa"
-                  src={
-                    data?.client_meta?.profile_pic ||
-                    "/images/default/defaultProfile.png"
-                  }
-                  height={40}
-                  width={40}
-                  alt="icon2"
-                />
-              </div>
-            ) : type == "client" ? (
-              <div className="icon2 mb10-lg mb-0 me-3 bg-transparent">
-                <img
-                  className="wa"
-                  src={
-                    data?.translator_meta?.profile_pic ||
-                    "/images/default/defaultProfile.png"
-                  }
-                  height={40}
-                  width={40}
-                  alt="icon2"
-                />
-              </div>
-            ) : null}
-            {type == "translator" ? (
-              <div className="details">
-                <h5>New Work From {data?.client?.fname || "Nobody"}</h5>
-                <h6 className="mb-3 text-thm">
-                  {data?.location || "Not specified yet"}
-                </h6>
-              </div>
-            ) : type == "client" ? (
-              <div className="details">
-                <h5>New Work for {data?.translator?.fname || "Nobody"}</h5>
-                <h6 className="mb-3 text-thm">
-                  {data?.location || "Not specified yet"}
-                </h6>
-              </div>
-            ) : null}
+            <div className="icon2 mb10-lg mb-0 me-3 bg-transparent">
+              <img
+                className="wa"
+                src={
+                  data?.client_meta?.profile_pic ||
+                  "/images/default/defaultProfile.png"
+                }
+                height={40}
+                width={40}
+                alt="icon2"
+              />
+            </div>
+
+            <div className="details">
+              <h5>New Work From {data?.client?.fname || "Nobody"}</h5>
+              <h6 className="mb-3 text-thm">
+                {data?.location || "Not specified yet"}
+              </h6>
+            </div>
           </div>
         </th>
         <td className="vam">
@@ -114,9 +84,7 @@ export default function JobCard1({ data, i, currentTab, getData, type }) {
               : data?.payment_status == "Paid"}
           </p>
         </td>
-        {currentTab?.type == "new_booking" ||
-        currentTab?.type == "upcoming_booking" ||
-        currentTab?.type == "current_booking" ? (
+        {currentTab?.type == "new_booking" ? (
           <td className="vam">
             <a
               className="ud-btn btn-thm-border"
@@ -134,19 +102,8 @@ export default function JobCard1({ data, i, currentTab, getData, type }) {
               Mark Complete
             </a>
           </td>
-        ) : currentTab?.type == "completed_booking" ? (
-          <td className="vam">
-            <a
-              className="ud-btn btn-thm-border"
-              onClick={() => changeBookingStatus("approved", data?.id)}
-            >
-              Approve
-            </a>
-          </td>
         ) : null}
-        {currentTab?.type == "new_booking" ||
-        currentTab?.type == "upcoming_booking" ||
-        currentTab?.type == "current_booking" ? (
+        {currentTab?.type == "new_booking" ? (
           <td className="vam">
             <a
               className="ud-btn btn-red-border"

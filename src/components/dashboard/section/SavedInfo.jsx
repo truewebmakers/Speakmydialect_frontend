@@ -1,6 +1,5 @@
 import DashboardNavigation from "../header/DashboardNavigation";
 import { useEffect, useState } from "react";
-import JobCard1 from "../card/JobCard1";
 import { useLocation } from "react-router-dom";
 import {
   apiMethods,
@@ -12,6 +11,8 @@ import { useSelector } from "react-redux";
 import UseApi from "@/hook/useApi";
 import { toast } from "react-toastify";
 import Loader from "@/components/common/loader";
+import ClientBookings from "../card/ClientBookings";
+import TranslatorBooking from "../card/TranslatorBooking";
 
 export default function JobAndOrdersManagement() {
   const [getCurrentTab, setCurrentTab] = useState({
@@ -165,14 +166,13 @@ export default function JobAndOrdersManagement() {
                           <tbody className="t-body">
                             {userJobListing?.length ? (
                               userJobListing?.map((item, i) => (
-                                <JobCard1
+                                <TranslatorBooking
                                   key={i}
                                   data={item}
                                   i={i}
                                   isLoading={isLoading}
                                   currentTab={getCurrentTab}
                                   getData={handleJobManagement}
-                                  type="translator"
                                 />
                               ))
                             ) : (
@@ -189,14 +189,13 @@ export default function JobAndOrdersManagement() {
                           <tbody className="t-body">
                             {userJobListing?.length ? (
                               userJobListing?.map((item, i) => (
-                                <JobCard1
+                                <ClientBookings
                                   key={i}
                                   data={item}
                                   i={i}
                                   isLoading={isLoading}
                                   currentTab={getClientCurrentTab}
                                   getData={handleOrdersManagement}
-                                  type="client"
                                 />
                               ))
                             ) : (

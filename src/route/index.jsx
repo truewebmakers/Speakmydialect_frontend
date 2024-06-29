@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import { routes } from "@/constants/constant";
 import TranslatorsProfile from "@/pages/profiles/translatorProfile";
 import HireNowPage from "@/pages/hire";
+import InvoiceComponent from "@/pages/dashboard/invoices";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -109,6 +110,8 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
+        <Route path={routes.Invoice} element={<InvoiceComponent />} />
+
         <Route path={routes.Search} element={<SearchPage />} />
         <Route path={routes.HireNow} element={<HireNowPage />} />
 

@@ -3,6 +3,7 @@ import {
   apiUrls,
   jobAvailaibiltyType,
   paymentMode,
+  routes,
 } from "@/constants/constant";
 import { useEffect, useState } from "react";
 import SelectInput from "../dashboard/option/SelectInput";
@@ -12,6 +13,7 @@ import { toast } from "react-toastify";
 import Loader from "../common/loader";
 import { getProfileData } from "@/utils/commonFunctions";
 import { getProfileDetails } from "@/redux/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function HireNowSection({ translatorProfile }) {
   const [hireNowForm, setHireNowForm] = useState({
@@ -29,6 +31,7 @@ export default function HireNowSection({ translatorProfile }) {
   const { user, profileData } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleFieldChange = (field, option, value) => {
     setHireNowForm({
@@ -81,6 +84,7 @@ export default function HireNowSection({ translatorProfile }) {
       );
       if (response?.status == 201 || response?.status == 200) {
         toast.success(response?.data?.message);
+        navigate(routes.Bookings);
         setIsLoading(false);
         setHireNowForm({
           client_id: "",

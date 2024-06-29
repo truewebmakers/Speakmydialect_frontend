@@ -7,6 +7,7 @@ import { CapitalizeFirstLetter } from "@/utils/helper";
 import { useSelector } from "react-redux";
 import Loader from "@/components/common/loader";
 import { getCountries } from "@/utils/commonFunctions";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileDetails() {
   const [profileDetails, setProfileDetails] = useState({
@@ -24,6 +25,7 @@ export default function ProfileDetails() {
   const [getCountry, setCountry] = useState({ option: "Select", value: null });
   const [countryList, setCountryList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -133,11 +135,19 @@ export default function ProfileDetails() {
     }
   };
 
+  const handleViewProfile = () => {
+    navigate(`/profile/${profileData?.uuid}`);
+  };
+
   return (
     <>
       <div className="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
-        <div className="bdrb1 pb15 mb25">
+        <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between">
           <h5 className="list-title">Profile Details</h5>
+          <a className="add-more-btn text-thm" onClick={handleViewProfile}>
+            <i className="fal fa-arrow-left-long" />
+            &nbsp; &nbsp; View Profile
+          </a>
         </div>
         <div className="col-xl-7">
           <div className="profile-box d-sm-flex align-items-center mb30">
