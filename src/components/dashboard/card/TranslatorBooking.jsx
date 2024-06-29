@@ -106,7 +106,7 @@ export default function TranslatorBooking({ data, i, currentTab, getData }) {
         {currentTab?.type == "new_booking" ? (
           <td className="vam">
             <a
-              className="ud-btn btn-red-border"
+              className="red-btn btn-red-border"
               onClick={() => changeBookingStatus("reject", data?.id)}
             >
               Reject

@@ -2,11 +2,13 @@ import { apiMethods, apiUrls } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 export default function ClientBookings({ data, i, currentTab, getData }) {
   const { user } = useSelector((state) => state.auth);
+  const [disable, setDisable] = useState(false);
 
   const changeBookingStatus = async (status, id) => {
     try {
@@ -25,6 +27,18 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
       toast.error("Error fetching profile data");
     }
   };
+
+  const isRejectDisabled = () => {
+    const now = moment();
+    const startAt = moment(data?.start_at);
+    const diffInMinutes = startAt.diff(now, "minutes");
+    return diffInMinutes < 120;
+  };
+
+  useEffect(() => {
+    let disableValue = isRejectDisabled();
+    setDisable(disableValue);
+  }, [data]);
 
   return (
     <>
@@ -96,12 +110,13 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
         currentTab?.type == "upcoming_booking" ||
         currentTab?.type == "completed_booking" ? (
           <td className="vam">
-            <a
-              className="ud-btn btn-red-border"
+            <button
+              className={`red-btn btn-red-border`}
               onClick={() => changeBookingStatus("reject", data?.id)}
+              disabled={disable}
             >
               Reject
-            </a>
+            </button>
           </td>
         ) : null}
       </tr>

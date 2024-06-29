@@ -7324,6 +7324,25 @@ textarea {
   border: 2px solid #5bbb7b;
 }
 
+.red-btn{
+  border-radius: 4px;
+    display: inline-block;
+    font-family: var(--title-font-family);
+    font-weight: 700;
+    font-size: 15px;
+    font-style: normal;
+    letter-spacing: 0em;
+    padding: 13px 35px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    z-index: 0;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
 .btn-red-border {
   background-color: #ffffff;
   border: 2px solid #e7370a;
@@ -7331,8 +7350,23 @@ textarea {
 }
 
 .btn-red-border:hover {
-  background-color: #e7370a;
+  background-color: #e7370a !important;
   border: 2px solid #e7370a;
+  color:#ffffff;
+}
+
+.btn-red-border:disabled {
+  background-color: #ffffff !important;
+    border: 2px solid #dd7054;
+    color: #dd7054;
+  cursor: not-allowed !important;
+}
+
+.btn-red-border:disabled:hover {
+  background-color:#dd7054 !important;
+  border: 2px solid #dd7054;
+  color: #fff;
+  cursor: not-allowed !important;
 }
 
 .btn-dark-border {
