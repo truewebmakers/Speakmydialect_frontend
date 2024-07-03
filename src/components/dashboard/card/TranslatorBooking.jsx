@@ -46,7 +46,10 @@ export default function TranslatorBooking({ data, i, currentTab, getData }) {
             </div>
 
             <div className="details">
-              <h5>New Work From {data?.client?.fname || "Nobody"}</h5>
+              <h5>
+                New Work From{" "}
+                {data?.client?.fname + " " + data?.client?.lname || "Unknown"}
+              </h5>
               <h6 className="mb-3 text-thm">
                 {data?.location || "Not specified yet"}
               </h6>

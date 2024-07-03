@@ -37,9 +37,11 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
 
   useEffect(() => {
     let disableValue = isRejectDisabled();
+    console.log(disableValue, "disablllleee");
     setDisable(disableValue);
   }, [data]);
 
+  console.log(data, "dattttt");
   return (
     <>
       <tr>
@@ -58,7 +60,10 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
               />
             </div>
             <div className="details">
-              <h5>New Work for {data?.translator?.fname || "Nobody"}</h5>
+              <h5>
+                {data?.translator?.fname + " " + data?.translator?.lname ||
+                  "Unknown"}
+              </h5>
               <h6 className="mb-3 text-thm">
                 {data?.location || "Not specified yet"}
               </h6>
@@ -98,22 +103,31 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
         </td>
         {currentTab?.type == "completed_booking" ? (
           <td className="vam">
-            <a
+            <button
               className="ud-btn btn-thm-border"
               onClick={() => changeBookingStatus("approved", data?.id)}
             >
               Approve
-            </a>
+            </button>
           </td>
         ) : null}
         {currentTab?.type == "current_booking" ||
-        currentTab?.type == "upcoming_booking" ||
-        currentTab?.type == "completed_booking" ? (
+        currentTab?.type == "upcoming_booking" ? (
+          <td className="vam">
+            <button
+              className="red-btn btn-red-border"
+              onClick={() => changeBookingStatus("cancel", data?.id)}
+              disabled={disable}
+            >
+              Cancel
+            </button>
+          </td>
+        ) : null}
+        {currentTab?.type == "completed_booking" ? (
           <td className="vam">
             <button
               className={`red-btn btn-red-border`}
               onClick={() => changeBookingStatus("reject", data?.id)}
-              disabled={disable}
             >
               Reject
             </button>

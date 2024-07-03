@@ -64,6 +64,39 @@ export const clientNavigation = [
   },
 ];
 
+export const adminNavigation = [
+  {
+    id: 1,
+    name: "Dashboard",
+    icon: "flaticon-home",
+    path: "/dashboard",
+  },
+  {
+    id: 2,
+    name: "My Profile",
+    icon: "flaticon-photo",
+    path: "/my-profile",
+  },
+  {
+    id: 3,
+    name: "Bookings",
+    icon: "flaticon-like",
+    path: "/bookings",
+  },
+  {
+    id: 4,
+    name: "Invoices",
+    icon: "flaticon-like",
+    path: "/invoice",
+  },
+  {
+    id: 4,
+    name: "Logout",
+    icon: "flaticon-logout",
+    path: "/login",
+  },
+];
+
 export const invoice = [
   {
     id: 1,

@@ -144,10 +144,15 @@ export default function ProfileDetails() {
       <div className="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
         <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between">
           <h5 className="list-title">Profile Details</h5>
-          <a className="add-more-btn text-thm" onClick={handleViewProfile}>
-            <i className="fal fa-arrow-left-long" />
-            &nbsp; &nbsp; View Profile
-          </a>
+          {user?.userInfo?.user_type == "translator" && (
+            <button
+              className="ud-btn btn-thm default-box-shadow2"
+              onClick={handleViewProfile}
+            >
+              View Profile
+              <i className="fal fa-arrow-right-long" />
+            </button>
+          )}
         </div>
         <div className="col-xl-7">
           <div className="profile-box d-sm-flex align-items-center mb30">
