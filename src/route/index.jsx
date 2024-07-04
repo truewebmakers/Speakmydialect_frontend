@@ -110,7 +110,30 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        <Route path={routes.Invoice} element={<InvoiceComponent />} />
+        <Route
+          path={routes.UserApprovals}
+          element={
+            <ProtectedRoute>
+              <InvoiceComponent />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={routes.PayoutManagement}
+          element={
+            <ProtectedRoute>
+              <DasbPagePayouts />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={routes.Invoice}
+          element={
+            <ProtectedRoute>
+              <InvoiceComponent />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path={routes.Search} element={<SearchPage />} />
         <Route path={routes.HireNow} element={<HireNowPage />} />

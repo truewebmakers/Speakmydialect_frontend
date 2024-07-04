@@ -367,3 +367,22 @@ a {
   /* Adjust the width as needed */
   width: 80%;
 }
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  /* Adjust as needed */
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.input-with-icon .toggle-password:focus {
+  outline: none;
+}

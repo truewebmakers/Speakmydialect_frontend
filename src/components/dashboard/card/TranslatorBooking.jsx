@@ -3,6 +3,7 @@ import UseApi from "@/hook/useApi";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function TranslatorBooking({ data, i, currentTab, getData }) {
@@ -44,14 +45,11 @@ export default function TranslatorBooking({ data, i, currentTab, getData }) {
                 alt="icon2"
               />
             </div>
-
             <div className="details">
-              <h5>
-                New Work From{" "}
+              <h5>{data?.job_title || "-"}</h5>
+              <h6 className="mb-3">
+                {" "}
                 {data?.client?.fname + " " + data?.client?.lname || "Unknown"}
-              </h5>
-              <h6 className="mb-3 text-thm">
-                {data?.location || "Not specified yet"}
               </h6>
             </div>
           </div>

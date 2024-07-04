@@ -4,7 +4,9 @@ import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export default function ClientBookings({ data, i, currentTab, getData }) {
   const { user } = useSelector((state) => state.auth);
@@ -37,11 +39,36 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
 
   useEffect(() => {
     let disableValue = isRejectDisabled();
-    console.log(disableValue, "disablllleee");
     setDisable(disableValue);
   }, [data]);
+  console.log(data);
 
-  console.log(data, "dattttt");
+  const handleApproveBooings = (id) => {
+    Swal.fire({
+      title: "Are you sure you want to Approve this Work?",
+      showCancelButton: true,
+      confirmButtonText: "Approve",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Approved!", "", "success");
+        changeBookingStatus("approved", id);
+      }
+    });
+  };
+
+  const handleRejectedBookings = (id) => {
+    Swal.fire({
+      title: "Are you sure you want to Reject this Work?",
+      showCancelButton: true,
+      confirmButtonText: "Reject",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Reject!", "", "success");
+        changeBookingStatus("reject", id);
+      }
+    });
+  };
+
   return (
     <>
       <tr>
@@ -60,12 +87,12 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
               />
             </div>
             <div className="details">
-              <h5>
-                {data?.translator?.fname + " " + data?.translator?.lname ||
-                  "Unknown"}
-              </h5>
-              <h6 className="mb-3 text-thm">
-                {data?.location || "Not specified yet"}
+              <h5>{data?.job_title || "-"}</h5>
+              <h6 className="mb-3">
+                <Link to={`/profile/${data?.translator?.uuid}`} target="_blank">
+                  {data?.translator?.fname + " " + data?.translator?.lname ||
+                    "Unknown"}
+                </Link>
               </h6>
             </div>
           </div>
@@ -101,11 +128,12 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
               : data?.payment_status == "Paid"}
           </p>
         </td>
-        {currentTab?.type == "completed_booking" ? (
+        {currentTab?.type == "completed_booking" ||
+        currentTab?.type == "completed_booking" ? (
           <td className="vam">
             <button
               className="ud-btn btn-thm-border"
-              onClick={() => changeBookingStatus("approved", data?.id)}
+              onClick={() => handleApproveBooings(data?.id)}
             >
               Approve
             </button>
@@ -127,9 +155,19 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
           <td className="vam">
             <button
               className={`red-btn btn-red-border`}
-              onClick={() => changeBookingStatus("reject", data?.id)}
+              onClick={() => handleRejectedBookings(data?.id)}
             >
               Reject
+            </button>
+          </td>
+        ) : null}
+        {currentTab?.type == "rejected_booking" ? (
+          <td className="vam">
+            <button
+              className={`ud-btn btn-thm-border`}
+              onClick={() => handleApproveBooings(data?.id)}
+            >
+              ReApprove
             </button>
           </td>
         ) : null}

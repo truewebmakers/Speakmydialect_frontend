@@ -27,6 +27,7 @@ export default function HireNowSection({ translatorProfile }) {
     payment_status: { option: "Select", value: null }, //Payment Status: paid,escrow,hold,dispute,none
     start_at: "", //2024-02-19 11:00:00
     end_at: "", //2024-02-20 11:00:00
+    job_title: "",
   });
   const { user, profileData } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +53,7 @@ export default function HireNowSection({ translatorProfile }) {
     const { name, value } = e.target;
     setHireNowForm({ ...hireNowForm, [name]: value });
   };
+
   const addBooking = async () => {
     setIsLoading(true);
     try {
@@ -74,6 +76,7 @@ export default function HireNowSection({ translatorProfile }) {
         payment_status: "none",
         start_at: hireNowForm?.start_at,
         end_at: hireNowForm?.end_at,
+        job_title: hireNowForm?.job_title,
       };
       // Call API
       const response = await UseApi(
@@ -97,6 +100,7 @@ export default function HireNowSection({ translatorProfile }) {
           payment_status: { option: "Select", value: null },
           start_at: "",
           end_at: "",
+          job_title: "",
         });
         return;
       } else {
@@ -167,6 +171,22 @@ export default function HireNowSection({ translatorProfile }) {
                 </p>
                 <form className="form-style1">
                   <div className="row">
+                    <div className="col-md-12">
+                      <div className="mb20">
+                        <label className="heading-color ff-heading fw500 mb10">
+                          Job Title
+                        </label>
+                        <textarea
+                          type="text"
+                          maxlength={155}
+                          className="form-control"
+                          placeholder="Enter Job Title"
+                          name="job_title"
+                          value={hireNowForm?.job_title}
+                          onChange={handleInputChanges}
+                        />
+                      </div>
+                    </div>
                     <div className="col-md-6">
                       <div className="mb20">
                         <label className="heading-color ff-heading fw500 mb10">

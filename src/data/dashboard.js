@@ -57,7 +57,7 @@ export const clientNavigation = [
     path: "/invoice",
   },
   {
-    id: 4,
+    id: 5,
     name: "Logout",
     icon: "flaticon-logout",
     path: "/login",
@@ -79,18 +79,18 @@ export const adminNavigation = [
   },
   {
     id: 3,
-    name: "Bookings",
+    name: "User Approvals",
     icon: "flaticon-like",
-    path: "/bookings",
+    path: "/admin/userApprovals",
   },
   {
     id: 4,
-    name: "Invoices",
+    name: "Payouts",
     icon: "flaticon-like",
-    path: "/invoice",
+    path: "/admin/payoutManagement",
   },
   {
-    id: 4,
+    id: 5,
     name: "Logout",
     icon: "flaticon-logout",
     path: "/login",

@@ -9,6 +9,8 @@ export const header3 = [
   "/about-1",
   "/about-2",
   "/search",
+  "/admin/userApprovals",
+  "/admin/payoutManagement",
   "/hire/:id",
   "/profile/:id",
   "/blog-1",

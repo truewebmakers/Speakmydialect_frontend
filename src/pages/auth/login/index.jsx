@@ -16,6 +16,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -68,6 +69,10 @@ export default function LoginPage() {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <>
       <section className="our-login">
@@ -79,10 +84,6 @@ export default function LoginPage() {
             >
               <div className="main-title text-center">
                 <h2 className="title">Log In</h2>
-                <p className="paragraph">
-                  Give your visitor a smooth online experience with a solid UX
-                  design
-                </p>
               </div>
             </div>
           </div>
@@ -120,18 +121,45 @@ export default function LoginPage() {
                   />
                 </div>
                 <div className="mb15">
-                  <label className="form-label fw600 dark-color">
+                  <label
+                    className="form-label fw600 dark-color"
+                    htmlFor="password"
+                  >
                     Password
                   </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Enter your password"
-                    name="password"
-                    value={loginData.password}
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
+                  <div className="input-with-icon">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Enter your password"
+                      name="password"
+                      id="password"
+                      value={loginData.password}
+                      onChange={handleChange}
+                      autoComplete="off"
+                    />
+                    <button
+                      type="button"
+                      className="toggle-password"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {showPassword ? (
+                        <img
+                          src="/images/Eye-icon/visibilityOn.svg"
+                          alt="VisibilityOn"
+                          width={20}
+                          height={20}
+                        />
+                      ) : (
+                        <img
+                          src="/images/Eye-icon/visibilityOff.svg"
+                          alt="VisibilityOff"
+                          width={20}
+                          height={20}
+                        />
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <div className="d-grid mb20">
                   <button

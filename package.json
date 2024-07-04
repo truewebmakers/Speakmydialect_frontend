@@ -33,6 +33,7 @@
     "react-tooltip": "^5.25.2",
     "redux-persist": "^6.0.0",
     "sass": "^1.70.0",
+    "sweetalert2": "^11.12.1",
     "swiper": "^8.0.0",
     "wow.js": "^1.2.2",
     "zustand": "^4.5.0"

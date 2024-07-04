@@ -139,6 +139,8 @@ export const routes = {
   NotFound: "/not-found",
   Nothing: "*",
   HireNow: "/hire/:id",
+  UserApprovals: "/admin/userApprovals",
+  PayoutManagement: "/admin/payoutManagement",
 };
 
 export const startYearDropdown = 1965;
@@ -166,20 +168,20 @@ export const translatorBookingTab = [
   {
     id: 4,
     name: "Approved Bookings",
-    status: "mark-completed", // job completed by translator & approved by client
+    status: "approved", // job completed by translator & approved by client
     type: "approved_booking",
   },
   {
     id: 5,
     name: "Canceled Bookings",
     status: "cancel", // job canceled by client
-    type: "null", //not required
+    type: "canceled_booking", //not required
   },
   {
     id: 6,
     name: "Rejected Bookings",
     status: "reject", // translator reject the job
-    type: "null", //not required
+    type: "rejected_booking", //not required
   },
 ];
 
@@ -187,26 +189,37 @@ export const ordersManagementTab = [
   {
     id: 0,
     name: "Upcoming Bookings",
-    status: "pending",
+    status: "in-process",
     type: "upcoming_booking",
-  }, // pending from client & translator both,
+  }, // pending or accepted from translator +future date,
   {
     id: 1,
     name: "Current Bookings",
-    status: "pending",
+    status: "accept",
     type: "current_booking",
-  }, //pending from client & accepted from translator
+  }, //accepted from from translator + today's date
   {
     id: 2,
     name: "Completed Bookings",
-    status: "pending",
+    status: "mark-completed",
     type: "completed_booking",
   }, //  client can approve & user as well
   {
     id: 3,
     name: "Approved Bookings",
     status: "approved",
-    type: "null",
+    type: "approved_booking",
   }, //  approved by client  & user as well
-  { id: 4, name: "Canceled Bookings", status: "cancel", type: "null" }, // rejected by client
+  {
+    id: 4,
+    name: "Canceled Bookings",
+    status: "cancel",
+    type: "canceled_booking",
+  }, // rejected by client
+  {
+    id: 5,
+    name: "Rejected Bookings",
+    status: "reject", // translator reject the job
+    type: "rejected_booking", //not required
+  },
 ];

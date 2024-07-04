@@ -1,16 +1,12 @@
 import { useEffect } from "react";
 import DashboardNavigation from "../header/DashboardNavigation";
 import ChangePassword from "./ChangePassword";
-import ConfirmPassword from "./ConfirmPassword";
 import Education from "./Education";
 import ProfileDetails from "./ProfileDetails";
 import Skill from "./Skill";
 import WorkExperience from "./WorkExperience";
-import UseApi from "@/hook/useApi";
-import { apiMethods, apiUrls } from "@/constants/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileDetails } from "@/redux/auth";
-import { toast } from "react-toastify";
 import { getProfileData } from "@/utils/commonFunctions";
 import PaymentMethod from "./PaymentMethod";
 
@@ -42,7 +38,9 @@ export default function MyProfileInfo() {
         </div>
         <div className="row">
           <div className="col-xl-12">
+            {/* Profile Details will be visible to everone */}
             <ProfileDetails />
+            {/* Only Transaltor can see skills, education & work Expierence modules */}
             {user?.userInfo?.user_type == "translator" && (
               <>
                 <Skill />
@@ -50,7 +48,9 @@ export default function MyProfileInfo() {
                 <WorkExperience />
               </>
             )}
+            {/* Payment Method will only be visible to client */}
             {user?.userInfo?.user_type == "client" && <PaymentMethod />}
+            {/* Change Password will be visible to all  */}
             <ChangePassword />
           </div>
         </div>

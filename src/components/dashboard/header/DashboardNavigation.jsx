@@ -1,4 +1,8 @@
-import { clientNavigation, translatorNavigation } from "@/data/dashboard";
+import {
+  adminNavigation,
+  clientNavigation,
+  translatorNavigation,
+} from "@/data/dashboard";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -82,7 +86,7 @@ export default function DashboardNavigation() {
           <ul className={`dropdown-content ${isActive ? "show" : ""}`}>
             {user?.token?.length > 0 &&
               (user?.userInfo?.user_type == "admin"
-                ? ""
+                ? renderNavigationItems(adminNavigation)
                 : user?.userInfo?.user_type == "translator"
                 ? renderNavigationItems(translatorNavigation)
                 : renderNavigationItems(clientNavigation))}

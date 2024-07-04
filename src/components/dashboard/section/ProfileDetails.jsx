@@ -135,23 +135,20 @@ export default function ProfileDetails() {
     }
   };
 
-  const handleViewProfile = () => {
-    navigate(`/profile/${profileData?.uuid}`);
-  };
-
   return (
     <>
       <div className="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
         <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between">
           <h5 className="list-title">Profile Details</h5>
           {user?.userInfo?.user_type == "translator" && (
-            <button
+            <a
+              href={`/profile/${profileData?.uuid}`}
               className="ud-btn btn-thm default-box-shadow2"
-              onClick={handleViewProfile}
+              target="_blank"
             >
               View Profile
               <i className="fal fa-arrow-right-long" />
-            </button>
+            </a>
           )}
         </div>
         <div className="col-xl-7">

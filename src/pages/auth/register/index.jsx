@@ -105,10 +105,6 @@ export default function RegisterPage() {
             >
               <div className="main-title text-center">
                 <h2 className="title">Register</h2>
-                <p className="paragraph">
-                  Give your visitor a smooth online experience with a solid UX
-                  design
-                </p>
               </div>
             </div>
           </div>

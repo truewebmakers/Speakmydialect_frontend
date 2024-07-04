@@ -1,4 +1,8 @@
-import { clientNavigation, translatorNavigation } from "@/data/dashboard";
+import {
+  adminNavigation,
+  clientNavigation,
+  translatorNavigation,
+} from "@/data/dashboard";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -64,7 +68,7 @@ export default function DashboardSidebar() {
       <div className="dashboard_sidebar_list">
         {user?.token?.length > 0 &&
           (user?.userInfo?.user_type === "admin"
-            ? null
+            ? renderNavigationItems(adminNavigation)
             : user?.userInfo?.user_type === "translator"
             ? renderNavigationItems(translatorNavigation)
             : renderNavigationItems(clientNavigation))}
