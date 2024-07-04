@@ -115,7 +115,7 @@ export default function LoginPage() {
                     className="form-control"
                     placeholder="Enter your email"
                     name="email"
-                    value={loginData.email}
+                    value={loginData?.email}
                     onChange={handleChange}
                     autoComplete="off"
                   />
@@ -134,7 +134,7 @@ export default function LoginPage() {
                       placeholder="Enter your password"
                       name="password"
                       id="password"
-                      value={loginData.password}
+                      value={loginData?.password}
                       onChange={handleChange}
                       autoComplete="off"
                     />

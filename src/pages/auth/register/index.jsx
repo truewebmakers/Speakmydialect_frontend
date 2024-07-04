@@ -27,6 +27,7 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -92,6 +93,10 @@ export default function RegisterPage() {
         setIsLoading(false);
       }
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -176,7 +181,7 @@ export default function RegisterPage() {
                   <input
                     type="email"
                     className="form-control"
-                    placeholder="abc@xyz.com"
+                    placeholder="Enter your email"
                     name="email"
                     value={data?.email}
                     onChange={handleChange}
@@ -190,15 +195,39 @@ export default function RegisterPage() {
                   <label className="form-label fw500 dark-color">
                     Password
                   </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="*******"
-                    name="password"
-                    value={data.password}
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
+                  <div className="input-with-icon">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Enter your password"
+                      name="password"
+                      value={data?.password}
+                      onChange={handleChange}
+                      autoComplete="off"
+                    />
+                    <button
+                      type="button"
+                      className="toggle-password"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {showPassword ? (
+                        <img
+                          src="/images/Eye-icon/visibilityOn.svg"
+                          alt="VisibilityOn"
+                          width={20}
+                          height={20}
+                        />
+                      ) : (
+                        <img
+                          src="/images/Eye-icon/visibilityOff.svg"
+                          alt="VisibilityOff"
+                          width={20}
+                          height={20}
+                        />
+                      )}
+                    </button>
+                  </div>
+
                   {error?.password && (
                     <p style={{ color: "red" }}>{error?.password}</p>
                   )}
