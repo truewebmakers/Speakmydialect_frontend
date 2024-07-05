@@ -144,19 +144,9 @@ export default function LoginPage() {
                       onClick={togglePasswordVisibility}
                     >
                       {showPassword ? (
-                        <img
-                          src="/images/Eye-icon/visibilityOn.svg"
-                          alt="VisibilityOn"
-                          width={20}
-                          height={20}
-                        />
+                        <i class="fa fa-eye" aria-hidden="true"></i>
                       ) : (
-                        <img
-                          src="/images/Eye-icon/visibilityOff.svg"
-                          alt="VisibilityOff"
-                          width={20}
-                          height={20}
-                        />
+                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
                       )}
                     </button>
                   </div>

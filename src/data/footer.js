@@ -38,6 +38,8 @@ export const footer = [
   "/message",
   "/reviews",
   "/invoice",
+  "/admin/userApprovals",
+  "/admin/payoutManagement",
   "/payouts",
   "/statements",
   "/cards",
