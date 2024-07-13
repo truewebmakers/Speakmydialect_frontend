@@ -24,6 +24,16 @@ export default function RegisterPage() {
     email: "",
     password: "",
   });
+
+  const [fileUpload, setFileUpload] = useState({
+    idCheck: null,
+    primaryId: null,
+    secondaryId: null,
+    policeCheck: null,
+    wwcCheck: null,
+  });
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +70,11 @@ export default function RegisterPage() {
       newErr = { ...newErr, ...handleValidations(key, data[key]) };
     }
     setError(newErr);
-    if (!hasErrors(error) && areAllFieldsFilled(data)) {
+    if (
+      !hasErrors(error) &&
+      areAllFieldsFilled(data) &&
+      uploadedFiles?.length == 5
+    ) {
       setIsLoading(true);
       try {
         // Prepare data for signup API
@@ -72,6 +86,7 @@ export default function RegisterPage() {
           email: data.email,
           password: data.password,
           user_type: route[1], // it is coming from the routes
+          files: uploadedFiles,
         };
         // Call signup API
         const response = await UseApi(
@@ -89,7 +104,7 @@ export default function RegisterPage() {
           setIsLoading(false);
         }
       } catch (err) {
-        toast.error(err);
+        toast.error(err?.message);
         setIsLoading(false);
       }
     }
@@ -97,6 +112,60 @@ export default function RegisterPage() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleFileUpload = async (e, fileType) => {
+    const { name, files } = e.target;
+    const file = files[0];
+
+    // Updating the state with the selected file
+    setFileUpload((prevState) => ({
+      ...prevState,
+      [name]: file,
+    }));
+
+    try {
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+      const bodyData = {
+        file: file,
+        type: fileType,
+        side: "front",
+      };
+      const response = await UseApi(
+        apiUrls.uploadDoc,
+        apiMethods.POST,
+        bodyData,
+        headers
+      );
+
+      if (response?.status == 201 || response?.status == 200) {
+        const newFileData = {
+          path: response.data.path,
+          type: fileType,
+          side: "front",
+        };
+
+        // Replace the file if it already exists, else add it
+        setUploadedFiles((prev) => {
+          const existingIndex = prev?.findIndex(
+            (file) => file?.type === fileType
+          );
+          if (existingIndex !== -1) {
+            const newFiles = [...prev];
+            newFiles[existingIndex] = newFileData;
+            return newFiles;
+          } else {
+            return [...prev, newFileData];
+          }
+        });
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
@@ -220,6 +289,88 @@ export default function RegisterPage() {
 
                   {error?.password && (
                     <p style={{ color: "red" }}>{error?.password}</p>
+                  )}
+                </div>
+                <div className="mb25">
+                  <label className="form-label fw500 dark-color">
+                    Id Check:
+                  </label>
+                  &nbsp;&nbsp;
+                  <input
+                    type="file"
+                    name="idCheck"
+                    accept=".png, .jpg, .jpeg, .pdf"
+                    onChange={(e) => handleFileUpload(e, "id_check")}
+                    required
+                  />
+                  {!fileUpload?.idCheck && (
+                    <p style={{ color: "red" }}>Upload your Id Check</p>
+                  )}
+                </div>
+                <div className="mb25">
+                  <label className="form-label fw500 dark-color">
+                    Primary Id:
+                  </label>
+                  &nbsp;&nbsp;
+                  <input
+                    type="file"
+                    name="primaryId"
+                    accept=".png, .jpg, .jpeg, .pdf"
+                    onChange={(e) => handleFileUpload(e, "primary_id")}
+                    required
+                  />
+                  {!fileUpload?.primaryId && (
+                    <p style={{ color: "red" }}>Upload your Primary Id</p>
+                  )}
+                </div>
+                <div className="mb25">
+                  <label className="form-label fw500 dark-color">
+                    Secondary Id:
+                  </label>{" "}
+                  &nbsp;&nbsp;
+                  <input
+                    type="file"
+                    name="secondaryId"
+                    accept=".png, .jpg, .jpeg, .pdf"
+                    onChange={(e) => handleFileUpload(e, "secondary_id")}
+                    required
+                  />
+                  {!fileUpload?.secondaryId && (
+                    <p style={{ color: "red" }}>Upload your Secondary Check</p>
+                  )}
+                </div>
+                <div className="mb25">
+                  <label className="form-label fw500 dark-color">
+                    Police Check:
+                  </label>
+                  &nbsp;&nbsp;
+                  <input
+                    type="file"
+                    name="policeCheck"
+                    accept=".png, .jpg, .jpeg, .pdf"
+                    onChange={(e) => handleFileUpload(e, "police_check")}
+                    required
+                  />
+                  {!fileUpload?.policeCheck && (
+                    <p style={{ color: "red" }}>
+                      Upload Id For Ploice Verification
+                    </p>
+                  )}
+                </div>
+                <div className="mb25">
+                  <label className="form-label fw500 dark-color">
+                    WWC Check:
+                  </label>
+                  &nbsp;&nbsp;
+                  <input
+                    type="file"
+                    accept=".png, .jpg, .jpeg, .pdf"
+                    name="wwcCheck"
+                    onChange={(e) => handleFileUpload(e, "wwc_check")}
+                    required
+                  />
+                  {!fileUpload?.wwcCheck && (
+                    <p style={{ color: "red" }}>Upload your Id for WWC Check</p>
                   )}
                 </div>
                 <div className="d-grid mb20">

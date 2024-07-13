@@ -14,6 +14,7 @@ import Loader from "../common/loader";
 import { getProfileData } from "@/utils/commonFunctions";
 import { getProfileDetails } from "@/redux/auth";
 import { useNavigate } from "react-router-dom";
+import { validateBookingForm } from "@/utils/handleValidations";
 
 export default function HireNowSection({ translatorProfile }) {
   const [hireNowForm, setHireNowForm] = useState({
@@ -33,6 +34,13 @@ export default function HireNowSection({ translatorProfile }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState({
+    job_title: "",
+    availability: "",
+    payment_type: "",
+    start_at: "",
+    end_at: "",
+  });
 
   const handleFieldChange = (field, option, value) => {
     setHireNowForm({
@@ -55,6 +63,11 @@ export default function HireNowSection({ translatorProfile }) {
   };
 
   const addBooking = async () => {
+    const formErrors = validateBookingForm(hireNowForm); // Validate the form
+    if (Object.keys(formErrors)?.length > 0) {
+      setError(formErrors);
+      return;
+    }
     setIsLoading(true);
     try {
       // headers
@@ -176,15 +189,19 @@ export default function HireNowSection({ translatorProfile }) {
                         <label className="heading-color ff-heading fw500 mb10">
                           Job Title
                         </label>
-                        <textarea
+                        <input
                           type="text"
                           maxlength={155}
                           className="form-control"
                           placeholder="Enter Job Title"
                           name="job_title"
                           value={hireNowForm?.job_title}
+                          autoComplete="off"
                           onChange={handleInputChanges}
                         />
+                        {error?.job_title && (
+                          <p style={{ color: "red" }}>{error?.job_title}</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -231,6 +248,9 @@ export default function HireNowSection({ translatorProfile }) {
                             handleFieldChange("availability", option, value)
                           }
                         />
+                        {error?.availability && (
+                          <p style={{ color: "red" }}>{error?.availability}</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -246,6 +266,9 @@ export default function HireNowSection({ translatorProfile }) {
                             handleFieldChange("payment_type", option, value)
                           }
                         />
+                        {error?.payment_type && (
+                          <p style={{ color: "red" }}>{error?.payment_type}</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -261,6 +284,9 @@ export default function HireNowSection({ translatorProfile }) {
                           value={hireNowForm?.start_at}
                           onChange={handleInputChanges}
                         />
+                        {error?.start_at && (
+                          <p style={{ color: "red" }}>{error?.start_at}</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -276,6 +302,9 @@ export default function HireNowSection({ translatorProfile }) {
                           value={hireNowForm?.end_at}
                           onChange={handleInputChanges}
                         />
+                        {error?.end_at && (
+                          <p style={{ color: "red" }}>{error?.end_at}</p>
+                        )}
                       </div>
                     </div>
 

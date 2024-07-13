@@ -111,3 +111,77 @@ export const passwordValidations = (name, value) => {
 
   return newErr;
 };
+
+export const validateBookingForm = (hireNowForm) => {
+  const errors = {};
+
+  // Validate payment type
+  switch (true) {
+    case !hireNowForm?.payment_type?.value:
+      errors.payment_type = "Payment type is required";
+      break;
+    case typeof hireNowForm?.payment_type?.value !== "string" ||
+      hireNowForm?.payment_type?.value.trim() === "":
+      errors.payment_type = "Invalid payment type";
+      break;
+    default:
+      break;
+  }
+
+  // Validate availability
+  switch (true) {
+    case !hireNowForm?.availability?.value:
+      errors.availability = "Availability is required";
+      break;
+    case typeof hireNowForm?.availability?.value !== "string" ||
+      hireNowForm?.availability?.value.trim() === "":
+      errors.availability = "Invalid availability";
+      break;
+    default:
+      break;
+  }
+
+  // Validate start date and time
+  const startDate = new Date(hireNowForm?.start_at);
+  switch (true) {
+    case !hireNowForm?.start_at:
+      errors.start_at = "Start date and time are required";
+      break;
+    case isNaN(startDate.getTime()) || startDate <= new Date():
+      errors.start_at = "Start date and time must be after today";
+      break;
+    default:
+      break;
+  }
+
+  // Validate end date and time
+  const endDate = new Date(hireNowForm?.end_at);
+  switch (true) {
+    case !hireNowForm?.end_at:
+      errors.end_at = "End date and time are required";
+      break;
+    case isNaN(endDate.getTime()) || endDate <= new Date():
+      errors.end_at = "End date and time must be after today";
+      break;
+    case endDate <= startDate:
+      errors.end_at = "End date and time must be after start date and time";
+      break;
+    default:
+      break;
+  }
+
+  // Validate job title
+  switch (true) {
+    case !hireNowForm?.job_title:
+      errors.job_title = "Job title is required";
+      break;
+    case typeof hireNowForm?.job_title !== "string" ||
+      hireNowForm?.job_title.trim() === "":
+      errors.job_title = "Invalid job title";
+      break;
+    default:
+      break;
+  }
+
+  return errors;
+};
