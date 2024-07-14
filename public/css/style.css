@@ -1097,17 +1097,18 @@ li {
   font-size: 13px;
   padding: 10px 20px;
   border-radius: 6px;
+  font-weight: bold;
 }
 .pending-style.style1 {
-  background-color: #fff4de;
+  background-color: #f0e4e8;
   color: #ffa800;
 }
 .pending-style.style2 {
-  background-color: #f1faff;
+  background-color: #f0e4e8;
   color: #00a3ff;
 }
 .pending-style.style3 {
-  background-color: #fff5f8;
+  background-color: #f0e4e8;
   color: #f1416c;
 }
 .pending-style.style4 {

@@ -21,6 +21,7 @@ import { routes } from "@/constants/constant";
 import TranslatorsProfile from "@/pages/profiles/translatorProfile";
 import HireNowPage from "@/pages/hire";
 import InvoiceComponent from "@/pages/dashboard/invoices";
+import UserApprovals from "@/pages/admin/userApproval";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -114,7 +115,7 @@ const AppRoutes = () => {
           path={routes.UserApprovals}
           element={
             <ProtectedRoute>
-              <InvoiceComponent />
+              <UserApprovals />
             </ProtectedRoute>
           }
         />

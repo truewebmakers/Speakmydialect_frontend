@@ -1,13 +1,41 @@
+import { useSelector } from "react-redux";
 import LineChart from "../chart/LineChart";
 import DashboardNavigation from "../header/DashboardNavigation";
+import { useEffect, useState } from "react";
+import UseApi from "@/hook/useApi";
+import { apiMethods, apiUrls } from "@/constants/constant";
+import { toast } from "react-toastify";
+import {
+  adminDashboardWidgets,
+  clientDashboardWidgets,
+} from "@/constants/structuralConstant";
 
 export default function DashboardInfo() {
-  const clientWidgets = [
-    "Upcoming Bookings",
-    "Current Bookings",
-    "Completed Bookings",
-    "Approved Bookings",
-  ];
+  const { user } = useSelector((state) => state.auth);
+  const [adminCards, setAdminCards] = useState({});
+
+  const fetchAdminCardDetails = async () => {
+    try {
+      const headers = { Authorization: `Bearer ${user?.token}` };
+
+      const response = await UseApi(
+        apiUrls.adminDashboardCards,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.status == 200 || response?.status == 201) {
+        const cards = response?.data?.data;
+        setAdminCards(cards);
+      }
+    } catch (error) {
+      toast.error("Error fetching countries");
+    }
+  };
+
+  useEffect(() => {
+    fetchAdminCardDetails();
+  }, []);
 
   return (
     <>
@@ -23,21 +51,55 @@ export default function DashboardInfo() {
             </div>
           </div>
         </div>
-        <div className="row">
-          {clientWidgets?.map((item, index) => (
-            <div className="col-sm-6 col-xxl-3" key={index}>
-              <div className="d-flex align-items-center justify-content-between statistics_funfact">
-                <div className="details">
-                  <div className="fz15">{item}</div>
-                  <div className="title">0</div>
-                </div>
-                <div className="icon text-center">
-                  <i className="flaticon-contract" />
+        {user?.userInfo?.user_type === "admin" ? (
+          <div className="row">
+            {adminDashboardWidgets?.map((item, index) => (
+              <div className="col-sm-6 col-xxl-3" key={index}>
+                <div className="d-flex align-items-center justify-content-between statistics_funfact">
+                  <div className="details">
+                    <div className="fz15">{item?.name}</div>
+                    <div className="title">{adminCards[item?.key] || 0}</div>
+                  </div>
+                  <div className="icon text-center">
+                    <i className="flaticon-contract" />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : user?.userInfo?.user_type === "client" ? (
+          <div className="row">
+            {clientDashboardWidgets?.map((item, index) => (
+              <div className="col-sm-6 col-xxl-3" key={index}>
+                <div className="d-flex align-items-center justify-content-between statistics_funfact">
+                  <div className="details">
+                    <div className="fz15">{item}</div>
+                    <div className="title">0</div>
+                  </div>
+                  <div className="icon text-center">
+                    <i className="flaticon-contract" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="row">
+            {clientWidgets?.map((item, index) => (
+              <div className="col-sm-6 col-xxl-3" key={index}>
+                <div className="d-flex align-items-center justify-content-between statistics_funfact">
+                  <div className="details">
+                    <div className="fz15">{item}</div>
+                    <div className="title">0</div>
+                  </div>
+                  <div className="icon text-center">
+                    <i className="flaticon-contract" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="row">
           <div className="col-xl-12">
             <LineChart />

@@ -62,7 +62,7 @@ export default function AddEducationModal({
                         className="form-control"
                         name="degree_name"
                         placeholder="Ex: Bachelor's"
-                        value={education.degree_name}
+                        value={education?.degree_name}
                         onChange={handleOnChange}
                         autoComplete="off"
                       />
@@ -78,7 +78,7 @@ export default function AddEducationModal({
                         className="form-control"
                         name="university_name"
                         placeholder="Ex: Boston University"
-                        value={education.university_name}
+                        value={education?.university_name}
                         onChange={handleOnChange}
                         autoComplete="off"
                       />
@@ -130,7 +130,7 @@ export default function AddEducationModal({
                     cols={30}
                     rows={2}
                     className="form-control"
-                    value={education.any_info}
+                    value={education?.any_info}
                     onChange={handleOnChange}
                     autoComplete="off"
                   />

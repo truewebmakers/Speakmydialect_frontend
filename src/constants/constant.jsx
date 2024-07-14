@@ -38,6 +38,9 @@ export const apiUrls = {
   getClientOrders: "/admin/booking/get/client/",
   changeTranslatorBookingStatus: "/admin/booking/update/translator/",
   changeClientBookingStatus: "/admin/booking/update/client/",
+  adminGetUserApprovals: "/admin/users/get/list",
+  adminDashboardCards: "/admin/user/get/dashboard/count?id=1&userType=admin",
+  adminApproveUsers: "/admin/user/update/status/",
 };
 
 export const metaData = {
