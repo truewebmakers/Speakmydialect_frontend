@@ -12,33 +12,6 @@ import UseApi from "@/hook/useApi";
 
 export default function DasbPagePayouts() {
   const { pathname } = useLocation();
-  const [payoutListing, setPayoutListing] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const { user } = useSelector((state) => state.auth);
-
-  const getPayoutDetails = async () => {
-    try {
-      const headers = { Authorization: `Bearer ${user?.token}` };
-      const response = await UseApi(
-        `${apiUrls.adminGetPayoutsListing}`,
-        apiMethods.GET,
-        null,
-        headers
-      );
-      if (response?.status === 200 || response?.status === 201) {
-        setPayoutListing(response?.data?.data);
-        setIsLoading(false);
-      }
-      setIsLoading(false);
-    } catch (error) {
-      toast.error("Error fetching profile data");
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getPayoutDetails();
-  }, []);
 
   return (
     <>
@@ -46,7 +19,7 @@ export default function DasbPagePayouts() {
       <MobileNavigation2 />
       <DashboardLayout>
         {pathname?.includes("/payout") ? (
-          <PayoutInfo payoutListing={payoutListing} />
+          <PayoutInfo />
         ) : (
           <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
             <div className="row">

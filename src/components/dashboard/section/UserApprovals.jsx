@@ -63,10 +63,10 @@ export default function UserApprovalInfo() {
       );
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
-        handleClose();
+        handleCloseModal();
       } else {
         toast.error(response?.data?.message);
-        handleClose();
+        handleCloseModal();
       }
     } catch (err) {
       toast.error(err);

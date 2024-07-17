@@ -22,9 +22,9 @@ export default function PayoutCard1({ data }) {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    fetchData();
+    // fetchData();
   };
-  console.log(data, "dataa");
+
   const handleSave = async () => {
     try {
       const headers = {
@@ -45,10 +45,10 @@ export default function PayoutCard1({ data }) {
       );
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
-        handleClose();
+        handleCloseModal();
       } else {
         toast.error(response?.data?.message);
-        handleClose();
+        handleCloseModal();
       }
     } catch (err) {
       toast.error(err);

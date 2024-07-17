@@ -2,8 +2,46 @@ import DashboardNavigation from "../header/DashboardNavigation";
 import Pagination1 from "@/components/section/Pagination1";
 import PaymentMethod from "./PaymentMethod";
 import PayoutCard1 from "../card/PayoutCard1";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import UseApi from "@/hook/useApi";
+import { apiMethods, apiUrls } from "@/constants/constant";
+import { toast } from "react-toastify";
 
-export default function PayoutInfo({ payoutListing }) {
+export default function PayoutInfo() {
+  const [payoutListing, setPayoutListing] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  const [showModal, setShowModal] = useState(false);
+
+  const getPayoutDetails = async () => {
+    try {
+      const headers = { Authorization: `Bearer ${user?.token}` };
+      const response = await UseApi(
+        `${apiUrls.adminGetPayoutsListing}`,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.status === 200 || response?.status === 201) {
+        setPayoutListing(response?.data?.data);
+        setIsLoading(false);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      toast.error("Error fetching profile data");
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getPayoutDetails();
+  }, []);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    fetchData();
+  };
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
