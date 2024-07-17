@@ -6,38 +6,17 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import UseApi from "@/hook/useApi";
 
-export default function UserApprovalModal({ show, handleClose, userId }) {
-  const [action, setAction] = useState({ option: "Select", value: null });
-  const [reason, setReason] = useState("");
-  const { user } = useSelector((state) => state.auth);
-
-  const handleSave = async () => {
-    try {
-      const headers = {
-        Authorization: `Bearer ${user?.token}`,
-      };
-      const bodyData = {
-        status: action?.value,
-        reason: reason,
-      };
-      const response = await UseApi(
-        apiUrls.adminApproveUsers + userId,
-        apiMethods.POST,
-        bodyData,
-        headers
-      );
-      if (response?.status === 200 || response?.status === 201) {
-        toast.success(response?.data?.message);
-        handleClose();
-      } else {
-        toast.error(response?.data?.message);
-        handleClose();
-      }
-    } catch (err) {
-      toast.error(err);
-    }
-  };
-
+export default function UserApprovalModal({
+  show,
+  handleClose,
+  option,
+  setAction,
+  setReason,
+  handleSave,
+  action,
+  reason,
+}) {
+  console.log(option, "option");
   return (
     <>
       <div
@@ -69,7 +48,7 @@ export default function UserApprovalModal({ show, handleClose, userId }) {
                       <SelectInput
                         label="Choose Action"
                         defaultSelect={action}
-                        data={userApprovalDropdown?.map((year) => ({
+                        data={option?.map((year) => ({
                           option: year?.name,
                           value: year?.key,
                         }))}

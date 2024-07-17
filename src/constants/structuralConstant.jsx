@@ -19,6 +19,10 @@ export const clientDashboardWidgets = [
 export const userApprovalDropdown = [
   { name: "Active", key: "active" },
   { name: "Inactive", key: "inactive" },
-  { name: "Hold", key: "hold" },
   { name: "Reject", key: "reject" },
+];
+export const PaymentStatusChangeDropdown = [
+  { name: "Paid", key: "paid" },
+  { name: "Hold", key: "hold" },
+  { name: "Dispute", key: "dispute" },
 ];

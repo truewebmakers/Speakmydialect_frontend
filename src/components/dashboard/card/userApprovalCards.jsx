@@ -1,12 +1,12 @@
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
-import { Tooltip } from "react-tooltip";
 
 export default function UserApprovalCard({ data, setUserId, setShowModal }) {
-  const handleView = () => {
+  const updateStatus = () => {
     setShowModal(true);
     setUserId(data?.id);
   };
+  const handleViewDocs = () => {};
   return (
     <>
       <tr>
@@ -23,7 +23,11 @@ export default function UserApprovalCard({ data, setUserId, setShowModal }) {
         <td className="vam">
           {data?.user_type ? CapitalizeFirstLetter(data?.user_type) : "-"}
         </td>
-        <td className="vam">
+        <td
+          className="vam"
+          title="Click to update status"
+          onClick={() => updateStatus()}
+        >
           {data?.status ? (
             <span
               className={`pending-style ${
@@ -45,7 +49,7 @@ export default function UserApprovalCard({ data, setUserId, setShowModal }) {
           <a
             className="table-action fz15 fw500 text-thm2"
             id="view"
-            onClick={() => handleView()}
+            onClick={() => handleViewDocs()}
           >
             <span className="flaticon-website me-2 vam"> View</span>
           </a>

@@ -32,6 +32,7 @@ export default function PayoutInfo({ payoutListing }) {
                       <th scope="col">Start At</th>
                       <th scope="col">End At</th>
                       <th scope="col">Payment Status</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody className="t-body">

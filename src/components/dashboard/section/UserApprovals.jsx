@@ -7,12 +7,15 @@ import { useEffect, useState } from "react";
 import UserApprovalCard from "../card/userApprovalCards";
 import { toast } from "react-toastify";
 import UserApprovalModal from "../modal/UserApprovalModal";
+import { userApprovalDropdown } from "@/constants/structuralConstant";
 
 export default function UserApprovalInfo() {
   const [userApproval, setUserApproval] = useState([]);
   const { user } = useSelector((state) => state.auth);
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState(0);
+  const [action, setAction] = useState({ option: "Select", value: null });
+  const [reason, setReason] = useState("");
 
   const fetchData = async () => {
     try {
@@ -41,6 +44,33 @@ export default function UserApprovalInfo() {
   const handleCloseModal = () => {
     setShowModal(false);
     fetchData();
+  };
+
+  const handleSave = async () => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${user?.token}`,
+      };
+      const bodyData = {
+        status: action?.value,
+        reason: reason,
+      };
+      const response = await UseApi(
+        apiUrls.adminApproveUsers + userId,
+        apiMethods.POST,
+        bodyData,
+        headers
+      );
+      if (response?.status === 200 || response?.status === 201) {
+        toast.success(response?.data?.message);
+        handleClose();
+      } else {
+        toast.error(response?.data?.message);
+        handleClose();
+      }
+    } catch (err) {
+      toast.error(err);
+    }
   };
 
   return (
@@ -107,7 +137,12 @@ export default function UserApprovalInfo() {
       <UserApprovalModal
         show={showModal}
         handleClose={handleCloseModal}
-        userId={userId}
+        option={userApprovalDropdown}
+        setAction={setAction}
+        action={action}
+        reason={reason}
+        setReason={setReason}
+        handleSave={handleSave}
       />
     </>
   );
