@@ -1100,8 +1100,15 @@ li {
   font-weight: bold;
 }
 .pending-style.style1 {
+  /* background-color: #f0e4e8;
+  color: #ffa800; */
   background-color: #f0e4e8;
-  color: #ffa800;
+    color: #ffa800;
+    max-width: 131px;
+    display: block ruby;
+    max-width: 96px;
+    max-height: 38px;
+    padding-top: 4px;
 }
 .pending-style.style2 {
   background-color: #f0e4e8;
@@ -1124,6 +1131,10 @@ li {
   color: #00a3ff;
 }
 
+.pending-style.style7 {
+  background-color: #f1faff;
+  color: #29ea49;
+}
 .table-action {
   background-color: #ffede8;
   border-radius: 5px;

@@ -41,7 +41,6 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
     let disableValue = isRejectDisabled();
     setDisable(disableValue);
   }, [data]);
-  console.log(data);
 
   const handleApproveBooings = (id) => {
     Swal.fire({

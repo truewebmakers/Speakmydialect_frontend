@@ -95,6 +95,9 @@ export default function HeroSearch1({ isSearchingPage }) {
                 autoComplete="off"
                 value={searchValue}
                 onChange={onSearchChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSearchClick();
+                }}
               />
               {searchingList?.length > 0 && (
                 <div

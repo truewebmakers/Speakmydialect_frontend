@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
 import DashboardNavigation from "../header/DashboardNavigation";
 import Pagination1 from "@/components/section/Pagination1";
 import PaymentMethod from "./PaymentMethod";
 import PayoutCard1 from "../card/PayoutCard1";
-import { payout } from "@/data/dashboard";
 
-export default function PayoutInfo() {
+export default function PayoutInfo({ payoutListing }) {
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
@@ -28,21 +26,21 @@ export default function PayoutInfo() {
                 <table className="table-style3 table at-savesearch">
                   <thead className="t-head">
                     <tr>
-                      <th scope="col">Job Type</th>
-                      <th scope="col">Due Date</th>
-                      <th scope="col">Total Payment</th>{" "}
-                      <th scope="col">Job Status</th>
+                      <th scope="col">Job Title</th>
+                      <th scope="col">Paid At</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Start At</th>
+                      <th scope="col">End At</th>
+                      <th scope="col">Payment Status</th>
                     </tr>
                   </thead>
                   <tbody className="t-body">
-                    {payout.map((item, i) => (
+                    {payoutListing?.map((item, i) => (
                       <PayoutCard1 key={i} data={item} />
                     ))}
                   </tbody>
                 </table>
-                <div className="mt30">
-                  <Pagination1 />
-                </div>
+                <div className="mt30">{/* <Pagination1 /> */}</div>
               </div>
             </div>
             <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
