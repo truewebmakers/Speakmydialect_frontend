@@ -1,7 +1,10 @@
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 export default function PayoutCard1({ data, openModal }) {
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <>
       <tr>

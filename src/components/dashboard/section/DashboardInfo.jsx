@@ -17,7 +17,7 @@ export default function DashboardInfo() {
       const response = await UseApi(
         apiUrls.adminDashboardCards +
           user?.userInfo?.id +
-          "userType=" +
+          "&userType=" +
           user?.userInfo?.user_type,
         apiMethods.GET,
         null,
