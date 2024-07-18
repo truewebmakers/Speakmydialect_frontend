@@ -7,13 +7,31 @@ import { useSelector } from "react-redux";
 import UseApi from "@/hook/useApi";
 import { apiMethods, apiUrls } from "@/constants/constant";
 import { toast } from "react-toastify";
+import StatusChangeModal from "../modal/StatusChangeModal";
+import { PaymentStatusChangeDropdown } from "@/constants/structuralConstant";
 
 export default function PayoutInfo() {
   const [payoutListing, setPayoutListing] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const [showModal, setShowModal] = useState(false);
+  const [userId, setUserId] = useState(0);
+  const [action, setAction] = useState({ option: "Select", value: null });
+  const [reason, setReason] = useState("");
 
+  // close modal
+  const handleCloseModal = () => {
+    setShowModal(false);
+    getPayoutDetails();
+  };
+
+  // open modal
+  const handleView = (id) => {
+    setShowModal(true);
+    setUserId(id);
+  };
+
+  // fetch payoutes listing
   const getPayoutDetails = async () => {
     try {
       const headers = { Authorization: `Bearer ${user?.token}` };
@@ -38,10 +56,37 @@ export default function PayoutInfo() {
     getPayoutDetails();
   }, []);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    fetchData();
+  // update status api handler
+  const handleSave = async () => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${user?.token}`,
+      };
+      const bodyData = {
+        status: action?.value,
+        reason: reason,
+      };
+      const response = await UseApi(
+        apiUrls.adminChangePaymentStatus +
+          userId +
+          "?payment_status=" +
+          action?.value,
+        apiMethods.POST,
+        bodyData,
+        headers
+      );
+      if (response?.status === 200 || response?.status === 201) {
+        toast.success(response?.data?.message);
+        handleCloseModal();
+      } else {
+        toast.error(response?.data?.message);
+        handleCloseModal();
+      }
+    } catch (err) {
+      toast.error(err);
+    }
   };
+  console.log(user?.userInfo?.user_type);
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
@@ -70,12 +115,14 @@ export default function PayoutInfo() {
                       <th scope="col">Start At</th>
                       <th scope="col">End At</th>
                       <th scope="col">Payment Status</th>
-                      <th scope="col">Action</th>
+                      {user?.userInfo?.user_type === "admin" && (
+                        <th scope="col">Action</th>
+                      )}
                     </tr>
                   </thead>
                   <tbody className="t-body">
                     {payoutListing?.map((item, i) => (
-                      <PayoutCard1 key={i} data={item} />
+                      <PayoutCard1 key={i} data={item} openModal={handleView} />
                     ))}
                   </tbody>
                 </table>
@@ -92,6 +139,17 @@ export default function PayoutInfo() {
           </div>
         </div>
       </div>
+      <StatusChangeModal
+        show={showModal}
+        handleClose={handleCloseModal}
+        option={PaymentStatusChangeDropdown}
+        setAction={setAction}
+        action={action}
+        reason={reason}
+        setReason={setReason}
+        handleSave={handleSave}
+        content="Payout Approval"
+      />
     </>
   );
 }

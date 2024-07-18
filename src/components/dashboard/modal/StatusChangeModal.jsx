@@ -1,12 +1,6 @@
 import SelectInput from "../option/SelectInput";
-import { useState } from "react";
-import { apiMethods, apiUrls, startYearDropdown } from "@/constants/constant";
-import { userApprovalDropdown } from "@/constants/structuralConstant";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import UseApi from "@/hook/useApi";
 
-export default function UserApprovalModal({
+export default function StatusChangeModal({
   show,
   handleClose,
   option,
@@ -15,8 +9,8 @@ export default function UserApprovalModal({
   handleSave,
   action,
   reason,
+  content,
 }) {
-  console.log(option, "option");
   return (
     <>
       <div
@@ -29,7 +23,7 @@ export default function UserApprovalModal({
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content position-relative">
             <div className="bdrb1 pb10 mb30 d-sm-flex justify-content-center pt10">
-              <h5 className="list-title pt10">{"User Approval"}</h5>
+              <h5 className="list-title pt10">{content}</h5>
             </div>
             <button
               type="button"

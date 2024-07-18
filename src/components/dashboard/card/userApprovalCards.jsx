@@ -1,12 +1,7 @@
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 
-export default function UserApprovalCard({ data, setUserId, setShowModal }) {
-  const updateStatus = () => {
-    setShowModal(true);
-    setUserId(data?.id);
-  };
-  const handleViewDocs = () => {};
+export default function UserApprovalCard({ data, openModal }) {
   return (
     <>
       <tr>
@@ -23,18 +18,14 @@ export default function UserApprovalCard({ data, setUserId, setShowModal }) {
         <td className="vam">
           {data?.user_type ? CapitalizeFirstLetter(data?.user_type) : "-"}
         </td>
-        <td
-          className="vam"
-          title="Click to update status"
-          onClick={() => updateStatus()}
-        >
+        <td className="vam" title={data?.reason}>
           {data?.status ? (
             <span
               className={`pending-style ${
-                data?.status === "hold" ? "style2" : ""
+                data?.status === "hold" ? "style1" : ""
               } ${data.status === "in-review" ? "style1" : ""} ${
                 data.status === "inactive" ? "style3" : ""
-              } `}
+              }${data?.status === "reject" ? "style2" : ""} `}
             >
               {CapitalizeFirstLetter(data?.status)}
             </span>
@@ -49,7 +40,7 @@ export default function UserApprovalCard({ data, setUserId, setShowModal }) {
           <a
             className="table-action fz15 fw500 text-thm2"
             id="view"
-            onClick={() => handleViewDocs()}
+            onClick={() => openModal(data?.id)}
           >
             <span className="flaticon-website me-2 vam"> View</span>
           </a>

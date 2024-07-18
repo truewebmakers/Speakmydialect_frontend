@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import UserApprovalCard from "../card/userApprovalCards";
 import { toast } from "react-toastify";
-import UserApprovalModal from "../modal/UserApprovalModal";
+import StatusChangeModal from "../modal/StatusChangeModal";
 import { userApprovalDropdown } from "@/constants/structuralConstant";
 
 export default function UserApprovalInfo() {
@@ -17,6 +17,7 @@ export default function UserApprovalInfo() {
   const [action, setAction] = useState({ option: "Select", value: null });
   const [reason, setReason] = useState("");
 
+  //fetch user bookings listing
   const fetchData = async () => {
     try {
       const headers = { Authorization: `Bearer ${user?.token}` };
@@ -40,12 +41,7 @@ export default function UserApprovalInfo() {
     fetchData();
   }, []);
 
-  // close modal while clicking on cross button
-  const handleCloseModal = () => {
-    setShowModal(false);
-    fetchData();
-  };
-
+  //updtae status api
   const handleSave = async () => {
     try {
       const headers = {
@@ -73,6 +69,18 @@ export default function UserApprovalInfo() {
     }
   };
 
+  //openModal
+  const openModal = (id) => {
+    setShowModal(true);
+    setUserId(id);
+  };
+
+  // close modal while clicking on cross button
+  const handleCloseModal = () => {
+    setShowModal(false);
+    fetchData();
+  };
+
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
@@ -87,20 +95,6 @@ export default function UserApprovalInfo() {
               <h2>User Approvals</h2>
             </div>
           </div>
-          {/* <div className="col-xl-4">
-            <div className="dashboard_search_meta">
-              <div className="search_area">
-                <input
-                  type="text"
-                  className="form-control bdrs4"
-                  placeholder="Search Invoice"
-                />
-                <label>
-                  <span className="far fa-magnifying-glass" />
-                </label>
-              </div>
-            </div>
-          </div> */}
         </div>
         <div className="row">
           <div className="col-xl-12">
@@ -122,8 +116,7 @@ export default function UserApprovalInfo() {
                       <UserApprovalCard
                         key={i}
                         data={item}
-                        setUserId={setUserId}
-                        setShowModal={setShowModal}
+                        openModal={openModal}
                       />
                     ))}
                   </tbody>
@@ -134,7 +127,7 @@ export default function UserApprovalInfo() {
           </div>
         </div>
       </div>
-      <UserApprovalModal
+      <StatusChangeModal
         show={showModal}
         handleClose={handleCloseModal}
         option={userApprovalDropdown}
@@ -143,6 +136,7 @@ export default function UserApprovalInfo() {
         reason={reason}
         setReason={setReason}
         handleSave={handleSave}
+        content="User Approval"
       />
     </>
   );
