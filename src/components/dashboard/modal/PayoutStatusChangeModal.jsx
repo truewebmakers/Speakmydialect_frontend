@@ -22,7 +22,7 @@ export default function PayoutStatusChangeModal({
       >
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content position-relative">
-            <div className="bdrb1 pb10 mb30 d-sm-flex justify-content-center pt10">
+            <div className="bdrb1 pb10 mb10 d-sm-flex justify-content-center pt10">
               <h5 className="list-title pt10">{content}</h5>
             </div>
             <button
@@ -34,39 +34,37 @@ export default function PayoutStatusChangeModal({
               onClick={handleClose}
             />
             <div className="modal-body p-4">
-              <div className="content">
-                <form>
-                  <div className="row"></div>
-                  <div className="row">
-                    <div className="col-md-12">
-                      <div className="mb-3">
-                        <SelectInput
-                          label="Choose Action"
-                          defaultSelect={action}
-                          data={option?.map((year) => ({
-                            option: year?.name,
-                            value: year?.key,
-                          }))}
-                          handler={(option, value) =>
-                            setAction({
-                              option: option,
-                              value: value,
-                            })
-                          }
-                        />
-                      </div>
+              <form>
+                <div className="row"></div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="mb-3">
+                      <SelectInput
+                        label="Choose Action"
+                        defaultSelect={action}
+                        data={option?.map((year) => ({
+                          option: year?.name,
+                          value: year?.key,
+                        }))}
+                        handler={(option, value) =>
+                          setAction({
+                            option: option,
+                            value: value,
+                          })
+                        }
+                      />
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="ud-btn btn-thm"
-                    onClick={() => handleSave()}
-                  >
-                    Save
-                    <i className="fal fa-arrow-right-long" />
-                  </button>
-                </form>
-              </div>
+                </div>
+                <button
+                  type="button"
+                  className="ud-btn btn-thm"
+                  onClick={() => handleSave()}
+                >
+                  Save
+                  <i className="fal fa-arrow-right-long" />
+                </button>
+              </form>
             </div>
           </div>
         </div>

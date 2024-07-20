@@ -14,7 +14,7 @@ export default function UserApprovalInfo() {
   const [userApproval, setUserApproval] = useState([]);
   const { user } = useSelector((state) => state.auth);
   const [showModal, setShowModal] = useState(false);
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState("");
   const [action, setAction] = useState({ option: "Select", value: null });
   const [reason, setReason] = useState("");
   const [showReason, setShowReason] = useState(false);
@@ -152,6 +152,7 @@ export default function UserApprovalInfo() {
         setReason={setReason}
         handleSave={handleSave}
         content="User Approval"
+        userId={userId}
       />
       <ShowInfoModal
         show={showReason}

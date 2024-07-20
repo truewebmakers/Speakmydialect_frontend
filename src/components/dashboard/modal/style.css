@@ -63,3 +63,20 @@
   color: white;
   cursor: pointer;
 }
+
+.image-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.icon-image {
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  object-fit: cover;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+}

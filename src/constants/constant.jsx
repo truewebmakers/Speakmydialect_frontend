@@ -43,6 +43,7 @@ export const apiUrls = {
   adminApproveUsers: "/admin/user/update/status/",
   adminGetPayoutsListing: "/admin/user/get/approved/bookings",
   adminChangePaymentStatus: "/admin/user/status/approved/bookings/",
+  getUserDocuments: "/admin/user/get/docuemnts/",
 };
 
 export const metaData = {
