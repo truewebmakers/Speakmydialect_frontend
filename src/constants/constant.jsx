@@ -44,6 +44,7 @@ export const apiUrls = {
   adminGetPayoutsListing: "/admin/user/get/approved/bookings",
   adminChangePaymentStatus: "/admin/user/status/approved/bookings/",
   getUserDocuments: "/admin/user/get/docuemnts/",
+  getInvoiceListing: "/admin/payout/get/client/",
 };
 
 export const metaData = {

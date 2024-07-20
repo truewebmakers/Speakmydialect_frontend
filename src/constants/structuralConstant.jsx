@@ -12,8 +12,20 @@ export const adminDashboardWidgets = [
 export const clientDashboardWidgets = [
   { name: "Upcoming Bookings", key: "" },
   { name: "Current Bookings", key: "" },
-  { name: "Completed Bookings", key: "" },
-  { name: "Approved Bookings", key: "" },
+  { name: "Completed Bookings", key: "mark-completed" },
+  { name: "Approved Bookings", key: "approved" },
+  { name: "Canceled", key: "cancel" },
+  { name: "Rejected", key: "reject" },
+];
+
+export const translatorDashboardWidgets = [
+  { name: "New Bookings", key: "" },
+  { name: "Current Bookings", key: "" },
+  { name: "Upcoming Bookings", key: "" },
+  { name: "Completed Bookings", key: "mark-completed" },
+  { name: "Approved Bookings", key: "approved" },
+  { name: "Canceled", key: "cancel" },
+  { name: "Rejected", key: "reject" },
 ];
 
 export const userApprovalDropdown = [

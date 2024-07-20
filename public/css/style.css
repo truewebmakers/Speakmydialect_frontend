@@ -1122,17 +1122,21 @@ span.mb25.me-4.badge-success {
   padding: 10px 20px;
   border-radius: 6px;
   font-weight: bold;
+  display: flex;
+  align-items: center; /* Ensures content is centered vertically */
+  justify-content: center; /* Ensures content is centered horizontally */
+  white-space: nowrap; /* Prevents text from wrapping */
 }
 .pending-style.style1 {
-  /* background-color: #f0e4e8;
-  color: #ffa800; */
   background-color: #f0e4e8;
+  padding-top: 24px;
+  padding-bottom: 24px;
   color: #ffa800;
-  max-width: 131px;
-  display: block ruby;
-  max-width: 96px;
-  max-height: 38px;
-  padding-top: 4px;
+  max-width: 128px !important;
+  display: flex;
+  height: 38px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .pending-style.style2 {
   background-color: #f0e4e8;

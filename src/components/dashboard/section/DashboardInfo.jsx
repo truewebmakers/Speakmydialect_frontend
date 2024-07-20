@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import UseApi from "@/hook/useApi";
 import { apiMethods, apiUrls } from "@/constants/constant";
 import { toast } from "react-toastify";
-import { adminDashboardWidgets } from "@/constants/structuralConstant";
+import {
+  adminDashboardWidgets,
+  clientDashboardWidgets,
+  translatorDashboardWidgets,
+} from "@/constants/structuralConstant";
 
 export default function DashboardInfo() {
   const { user } = useSelector((state) => state.auth);
@@ -51,19 +55,47 @@ export default function DashboardInfo() {
           </div>
         </div>
         <div className="row">
-          {adminDashboardWidgets?.map((item, index) => (
-            <div className="col-sm-6 col-xxl-3" key={index}>
-              <div className="d-flex align-items-center justify-content-between statistics_funfact">
-                <div className="details">
-                  <div className="fz15">{item?.name}</div>
-                  <div className="title">{adminCards[item?.key] || 0}</div>
+          {user?.userInfo?.user_type === "admin"
+            ? adminDashboardWidgets?.map((item, index) => (
+                <div className="col-sm-6 col-xxl-3" key={index}>
+                  <div className="d-flex align-items-center justify-content-between statistics_funfact">
+                    <div className="details">
+                      <div className="fz15">{item?.name}</div>
+                      <div className="title">{adminCards[item?.key] || 0}</div>
+                    </div>
+                    <div className="icon text-center">
+                      <i className="flaticon-contract" />
+                    </div>
+                  </div>
                 </div>
-                <div className="icon text-center">
-                  <i className="flaticon-contract" />
+              ))
+            : user?.userInfo?.user_type === "client"
+            ? clientDashboardWidgets?.map((item, index) => (
+                <div className="col-sm-6 col-xxl-3" key={index}>
+                  <div className="d-flex align-items-center justify-content-between statistics_funfact">
+                    <div className="details">
+                      <div className="fz15">{item?.name}</div>
+                      <div className="title">{adminCards[item?.key] || 0}</div>
+                    </div>
+                    <div className="icon text-center">
+                      <i className="flaticon-contract" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              ))
+            : translatorDashboardWidgets?.map((item, index) => (
+                <div className="col-sm-6 col-xxl-3" key={index}>
+                  <div className="d-flex align-items-center justify-content-between statistics_funfact">
+                    <div className="details">
+                      <div className="fz15">{item?.name}</div>
+                      <div className="title">{adminCards[item?.key] || 0}</div>
+                    </div>
+                    <div className="icon text-center">
+                      <i className="flaticon-contract" />
+                    </div>
+                  </div>
+                </div>
+              ))}
         </div>
 
         <div className="row">

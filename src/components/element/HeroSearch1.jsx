@@ -175,6 +175,42 @@ export default function HeroSearch1({ isSearchingPage }) {
                   value={searchValue}
                   onChange={onSearchChange}
                 />
+                {searchingList?.length > 0 && (
+                  <div
+                    className="search-suggestions"
+                    style={{
+                      visibility: isSearchDropdownOpen ? "visible" : "hidden",
+                      opacity: isSearchDropdownOpen ? "1" : "0",
+                      top: isSearchDropdownOpen ? "70px" : "100px",
+                      zIndex: 120001, // Higher than 99999
+                      position: "absolute", // Ensure it's positioned correctly
+                      border: "1px solid black",
+                    }}
+                  >
+                    <h6 className="fz14 ml30 mt25 mb-3">Popular Search</h6>
+                    <div className="box-suggestions">
+                      <ul className="px-0 m-0 pb-4">
+                        {searchingList?.map((item, index) => (
+                          <li
+                            key={index}
+                            className={
+                              searchValue === item?.name ? "ui-list-active" : ""
+                            }
+                          >
+                            <div className="info-product cursor-pointer">
+                              <div
+                                className="item_title"
+                                onClick={() => selectSearch(item?.name)}
+                              >
+                                {item?.name}
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
               </div>
             </form>
           </div>

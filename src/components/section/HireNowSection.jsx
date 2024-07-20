@@ -124,7 +124,6 @@ export default function HireNowSection({ translatorProfile }) {
     }
   };
 
-  console.log(error);
   return (
     <>
       <section className="pt-0">

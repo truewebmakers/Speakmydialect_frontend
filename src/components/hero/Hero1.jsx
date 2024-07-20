@@ -4,19 +4,10 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import { EffectFade, Navigation } from "swiper";
 import HeroSearch1 from "../element/HeroSearch1";
-import { useNavigate } from "react-router-dom";
 
 const hero = ["/images/home/home-1.webp", "/images/home/home-2.jpg"];
 
 export default function Hero1() {
-  const [getSelectedRole, setSelectedRole] = useState(null);
-
-  const navigate = useNavigate();
-  // search handler
-  const searchHandler = () => {
-    navigate("/search");
-  };
-
   const [showSwiper, setShowSwiper] = useState(false);
   useEffect(() => {
     setShowSwiper(true);

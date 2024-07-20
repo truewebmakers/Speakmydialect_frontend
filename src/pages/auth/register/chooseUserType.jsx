@@ -20,11 +20,10 @@ const ChooseUserType = () => {
                       class="mt-3 mb-4"
                     />
                     <p class="text-dark font-weight-bold fs-5 mb-3">
-                      Wants to hire a translator
+                      Join As A Client
                     </p>
                     <p class="text-secondary fs-6 mb-0">
-                      I want to find transltaors for myself or on someone's
-                      behalf.
+                      I want to hire translators.
                     </p>
                   </div>
                 </a>
@@ -42,11 +41,9 @@ const ChooseUserType = () => {
                       class="mt-3 mb-4"
                     />
                     <p class="text-dark font-weight-bold fs-5 mb-3">
-                      Get hired as a translator
+                      Join As A Translator
                     </p>
-                    <p class="text-secondary fs-6 mb-0">
-                      I want to get hired as a transltaor
-                    </p>
+                    <p class="text-secondary fs-6 mb-0">I want to get hired.</p>
                   </div>
                 </a>
               </div>
