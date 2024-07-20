@@ -295,17 +295,31 @@ export default function RegisterPage() {
                   <label className="form-label fw500 dark-color">
                     Id Check:
                   </label>
-                  &nbsp;&nbsp;
-                  <div className="card flex justify-content-center upload">
+                  <div
+                    className="upload-box"
+                    onClick={() =>
+                      document.getElementById("idCheckInput").click()
+                    }
+                  >
                     <input
+                      id="idCheckInput"
                       type="file"
                       name="idCheck"
                       accept=".png, .jpg, .jpeg, .pdf"
                       onChange={(e) => handleFileUpload(e, "id_check")}
                       required
+                      style={{ display: "none" }}
                     />
+                    <p>Drop files here or</p>
+                    <button type="button" className="upload-button">
+                      Select Files
+                    </button>
                   </div>
-                  {!fileUpload?.idCheck && (
+                  {fileUpload.idCheck ? (
+                    <p className="file-name">
+                      Selected file: {fileUpload?.idCheck?.name}
+                    </p>
+                  ) : (
                     <p className="error-msg">Upload your Id Check</p>
                   )}
                 </div>
@@ -313,76 +327,131 @@ export default function RegisterPage() {
                   <label className="form-label fw500 dark-color">
                     Primary Id:
                   </label>
-                  &nbsp;&nbsp;
-                  <div className="card flex justify-content-center upload">
+                  <div
+                    className="upload-box"
+                    onClick={() =>
+                      document.getElementById("primaryIdInput").click()
+                    }
+                  >
                     <input
+                      id="primaryIdInput"
                       type="file"
                       name="primaryId"
                       accept=".png, .jpg, .jpeg, .pdf"
                       onChange={(e) => handleFileUpload(e, "primary_id")}
                       required
+                      style={{ display: "none" }}
                     />
+                    <p>Drop files here or</p>
+                    <button type="button" className="upload-button">
+                      Select Files
+                    </button>
                   </div>
-                  {!fileUpload?.primaryId && (
+                  {fileUpload.primaryId ? (
+                    <p className="file-name">
+                      Selected file: {fileUpload?.primaryId?.name}
+                    </p>
+                  ) : (
                     <p className="error-msg">Upload your Primary Id</p>
                   )}
                 </div>
                 <div className="mb25">
                   <label className="form-label fw500 dark-color">
                     Secondary Id:
-                  </label>{" "}
-                  &nbsp;&nbsp;
-                  <div className="card flex justify-content-center upload">
+                  </label>
+                  <div
+                    className="upload-box"
+                    onClick={() =>
+                      document.getElementById("secondaryIdInput").click()
+                    }
+                  >
                     <input
+                      id="secondaryIdInput"
                       type="file"
                       name="secondaryId"
                       accept=".png, .jpg, .jpeg, .pdf"
                       onChange={(e) => handleFileUpload(e, "secondary_id")}
                       required
+                      style={{ display: "none" }}
                     />
+                    <p>Drop files here or</p>
+                    <button type="button" className="upload-button">
+                      Select Files
+                    </button>
                   </div>
-                  {!fileUpload?.secondaryId && (
-                    <p className="error-msg">Upload your Secondary Check</p>
+                  {fileUpload?.secondaryId ? (
+                    <p className="file-name">
+                      Selected file: {fileUpload?.secondaryId?.name}
+                    </p>
+                  ) : (
+                    <p className="error-msg">Upload your Secondary Id</p>
                   )}
                 </div>
                 <div className="mb25">
                   <label className="form-label fw500 dark-color">
                     Police Check:
                   </label>
-                  &nbsp;&nbsp;
-                  <div className="card flex justify-content-center upload">
+                  <div
+                    className="upload-box"
+                    onClick={() =>
+                      document.getElementById("policeCheckInput").click()
+                    }
+                  >
                     <input
+                      id="policeCheckInput"
                       type="file"
                       name="policeCheck"
                       accept=".png, .jpg, .jpeg, .pdf"
                       onChange={(e) => handleFileUpload(e, "police_check")}
                       required
+                      style={{ display: "none" }}
                     />
+                    <p>Drop files here or</p>
+                    <button type="button" className="upload-button">
+                      Select Files
+                    </button>
                   </div>
-                  {!fileUpload?.policeCheck && (
-                    <p className="error-msg">
-                      Upload Id For Ploice Verification
+                  {fileUpload?.policeCheck ? (
+                    <p className="file-name">
+                      Selected file: {fileUpload?.policeCheck?.name}
                     </p>
+                  ) : (
+                    <p className="error-msg">Upload your Id for Police Check</p>
                   )}
                 </div>
                 <div className="mb25">
                   <label className="form-label fw500 dark-color">
                     WWC Check:
                   </label>
-                  &nbsp;&nbsp;
-                  <div className="card flex justify-content-center upload">
+                  <div
+                    className="upload-box"
+                    onClick={() =>
+                      document.getElementById("wwcCheckInput").click()
+                    }
+                  >
                     <input
+                      id="wwcCheckInput"
                       type="file"
-                      accept=".png, .jpg, .jpeg, .pdf"
                       name="wwcCheck"
+                      accept=".png, .jpg, .jpeg, .pdf"
                       onChange={(e) => handleFileUpload(e, "wwc_check")}
                       required
+                      style={{ display: "none" }}
                     />
+                    <p>Drop files here or</p>
+                    <button type="button" className="upload-button">
+                      Select Files
+                    </button>
                   </div>
-                  {!fileUpload?.wwcCheck && (
-                    <p style={{ color: "red" }}>Upload your Id for WWC Check</p>
+                  {fileUpload?.wwcCheck ? (
+                    <p className="file-name">
+                      Selected file: {fileUpload?.wwcCheck?.name}
+                    </p>
+                  ) : (
+                    <p className="error-msg">Upload your Id for WWC Check</p>
                   )}
                 </div>
+
                 <div className="d-grid mb20">
                   <button
                     className="ud-btn btn-thm default-box-shadow2"

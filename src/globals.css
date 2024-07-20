@@ -410,3 +410,28 @@ a {
   position: absolute;
   width: 100%;
 }
+
+.upload-box {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.upload-button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.upload-button:hover {
+  background-color: #555;
+}
+
+.error-msg {
+  color: red;
+  margin-top: 10px;
+}
