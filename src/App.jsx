@@ -47,6 +47,7 @@ export function App() {
   return (
     <div
       className={` ${
+        pathname === "/register" ||
         pathname === "/register-translator" ||
         pathname === "/register-client" ||
         pathname === "/login"

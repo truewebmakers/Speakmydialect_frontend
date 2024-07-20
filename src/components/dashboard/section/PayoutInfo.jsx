@@ -17,7 +17,7 @@ export default function PayoutInfo() {
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState(0);
   const [action, setAction] = useState({ option: "Select", value: null });
-  const [reason, setReason] = useState("");
+  // const [reason, setReason] = useState("");
 
   // close modal
   const handleCloseModal = () => {
@@ -64,7 +64,6 @@ export default function PayoutInfo() {
       };
       const bodyData = {
         status: action?.value,
-        reason: reason,
       };
       const response = await UseApi(
         apiUrls.adminChangePaymentStatus +
@@ -86,7 +85,7 @@ export default function PayoutInfo() {
       toast.error(err);
     }
   };
-  console.log(user?.userInfo?.user_type);
+
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
@@ -145,8 +144,6 @@ export default function PayoutInfo() {
         option={PaymentStatusChangeDropdown}
         setAction={setAction}
         action={action}
-        reason={reason}
-        setReason={setReason}
         handleSave={handleSave}
         content="Payout Approval"
       />

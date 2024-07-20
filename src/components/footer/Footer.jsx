@@ -47,7 +47,7 @@ export default function Footer() {
                             {item.name}
                           </Link>
                         ) : item.name == "Join" ? (
-                          <Link key={i} to={"/register-translator"}>
+                          <Link key={i} to={"/register"}>
                             {item.name}
                           </Link>
                         ) : (

@@ -95,14 +95,9 @@ export default function LoginPage() {
                   <p className="text">
                     Don't have an account?{" "}
                     <span>
-                      Sign up as a{" "}
-                      <Link to="/register-translator" className="text-thm">
-                        Translator
+                      <Link to="/register" className="text-thm">
+                        Sign up
                       </Link>{" "}
-                      or{" "}
-                      <Link to="/register-client" className="text-thm">
-                        Hire one!
-                      </Link>
                     </span>
                   </p>
                 </div>

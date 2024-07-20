@@ -1,3 +1,4 @@
+import { CapitalizeFirstLetter } from "@/utils/helper";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -24,6 +25,11 @@ export default function MobileNavigation2() {
                       data-bs-target="#offcanvasExample"
                       aria-controls="offcanvasExample"
                     >
+                      {user?.userInfo?.user_type && (
+                        <span class="mb25 me-4 badge-success">
+                          {CapitalizeFirstLetter(user?.userInfo?.user_type)}
+                        </span>
+                      )}
                       <img
                         src={
                           profileData?.user_meta?.profile_pic ||

@@ -126,6 +126,7 @@ export const routes = {
   Home: "/",
   Login: "/login",
   MyProfile: "/my-profile",
+  Register: "/register",
   TranslatorRegister: "/register-translator",
   ClientRegister: "/register-client",
   Terms: "/terms",

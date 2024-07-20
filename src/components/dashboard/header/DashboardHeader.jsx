@@ -1,8 +1,9 @@
+import { CapitalizeFirstLetter } from "@/utils/helper";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function DashboardHeader() {
-  const { profileData } = useSelector((state) => state.auth);
+  const { profileData, user } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -25,6 +26,11 @@ export default function DashboardHeader() {
                     <li className="user_setting">
                       <div className="dropdown">
                         <Link className="btn" to="/my-profile">
+                          {user?.userInfo?.user_type && (
+                            <span class="mb25 me-4 badge-success">
+                              {CapitalizeFirstLetter(user?.userInfo?.user_type)}
+                            </span>
+                          )}
                           <img
                             src={
                               profileData?.user_meta?.profile_pic ||

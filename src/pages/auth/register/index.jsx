@@ -296,15 +296,17 @@ export default function RegisterPage() {
                     Id Check:
                   </label>
                   &nbsp;&nbsp;
-                  <input
-                    type="file"
-                    name="idCheck"
-                    accept=".png, .jpg, .jpeg, .pdf"
-                    onChange={(e) => handleFileUpload(e, "id_check")}
-                    required
-                  />
+                  <div className="card flex justify-content-center upload">
+                    <input
+                      type="file"
+                      name="idCheck"
+                      accept=".png, .jpg, .jpeg, .pdf"
+                      onChange={(e) => handleFileUpload(e, "id_check")}
+                      required
+                    />
+                  </div>
                   {!fileUpload?.idCheck && (
-                    <p style={{ color: "red" }}>Upload your Id Check</p>
+                    <p className="error-msg">Upload your Id Check</p>
                   )}
                 </div>
                 <div className="mb25">
@@ -312,15 +314,17 @@ export default function RegisterPage() {
                     Primary Id:
                   </label>
                   &nbsp;&nbsp;
-                  <input
-                    type="file"
-                    name="primaryId"
-                    accept=".png, .jpg, .jpeg, .pdf"
-                    onChange={(e) => handleFileUpload(e, "primary_id")}
-                    required
-                  />
+                  <div className="card flex justify-content-center upload">
+                    <input
+                      type="file"
+                      name="primaryId"
+                      accept=".png, .jpg, .jpeg, .pdf"
+                      onChange={(e) => handleFileUpload(e, "primary_id")}
+                      required
+                    />
+                  </div>
                   {!fileUpload?.primaryId && (
-                    <p style={{ color: "red" }}>Upload your Primary Id</p>
+                    <p className="error-msg">Upload your Primary Id</p>
                   )}
                 </div>
                 <div className="mb25">
@@ -328,15 +332,17 @@ export default function RegisterPage() {
                     Secondary Id:
                   </label>{" "}
                   &nbsp;&nbsp;
-                  <input
-                    type="file"
-                    name="secondaryId"
-                    accept=".png, .jpg, .jpeg, .pdf"
-                    onChange={(e) => handleFileUpload(e, "secondary_id")}
-                    required
-                  />
+                  <div className="card flex justify-content-center upload">
+                    <input
+                      type="file"
+                      name="secondaryId"
+                      accept=".png, .jpg, .jpeg, .pdf"
+                      onChange={(e) => handleFileUpload(e, "secondary_id")}
+                      required
+                    />
+                  </div>
                   {!fileUpload?.secondaryId && (
-                    <p style={{ color: "red" }}>Upload your Secondary Check</p>
+                    <p className="error-msg">Upload your Secondary Check</p>
                   )}
                 </div>
                 <div className="mb25">
@@ -344,15 +350,17 @@ export default function RegisterPage() {
                     Police Check:
                   </label>
                   &nbsp;&nbsp;
-                  <input
-                    type="file"
-                    name="policeCheck"
-                    accept=".png, .jpg, .jpeg, .pdf"
-                    onChange={(e) => handleFileUpload(e, "police_check")}
-                    required
-                  />
+                  <div className="card flex justify-content-center upload">
+                    <input
+                      type="file"
+                      name="policeCheck"
+                      accept=".png, .jpg, .jpeg, .pdf"
+                      onChange={(e) => handleFileUpload(e, "police_check")}
+                      required
+                    />
+                  </div>
                   {!fileUpload?.policeCheck && (
-                    <p style={{ color: "red" }}>
+                    <p className="error-msg">
                       Upload Id For Ploice Verification
                     </p>
                   )}
@@ -362,13 +370,15 @@ export default function RegisterPage() {
                     WWC Check:
                   </label>
                   &nbsp;&nbsp;
-                  <input
-                    type="file"
-                    accept=".png, .jpg, .jpeg, .pdf"
-                    name="wwcCheck"
-                    onChange={(e) => handleFileUpload(e, "wwc_check")}
-                    required
-                  />
+                  <div className="card flex justify-content-center upload">
+                    <input
+                      type="file"
+                      accept=".png, .jpg, .jpeg, .pdf"
+                      name="wwcCheck"
+                      onChange={(e) => handleFileUpload(e, "wwc_check")}
+                      required
+                    />
+                  </div>
                   {!fileUpload?.wwcCheck && (
                     <p style={{ color: "red" }}>Upload your Id for WWC Check</p>
                   )}

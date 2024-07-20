@@ -22,6 +22,7 @@ import TranslatorsProfile from "@/pages/profiles/translatorProfile";
 import HireNowPage from "@/pages/hire";
 import InvoiceComponent from "@/pages/dashboard/invoices";
 import UserApprovals from "@/pages/admin/userApproval";
+import ChooseUserType from "@/pages/auth/register/chooseUserType";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -57,6 +58,16 @@ const AppRoutes = () => {
           element={
             !user?.token?.length > 0 ? (
               <RegisterPage />
+            ) : (
+              <Navigate to={routes.MyProfile} replace />
+            )
+          }
+        />
+        <Route
+          path={routes.Register}
+          element={
+            !user?.token?.length > 0 ? (
+              <ChooseUserType />
             ) : (
               <Navigate to={routes.MyProfile} replace />
             )

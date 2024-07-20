@@ -386,3 +386,17 @@ a {
 .input-with-icon .toggle-password:focus {
   outline: none;
 }
+
+.register {
+  margin: 10%;
+}
+
+.upload {
+  padding: 9px;
+  border: 1px solid #ece3e3;
+}
+
+.error-msg {
+  color: red;
+  margin-bottom: -10px;
+}

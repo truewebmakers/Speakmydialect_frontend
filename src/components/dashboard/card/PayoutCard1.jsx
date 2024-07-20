@@ -19,7 +19,7 @@ export default function PayoutCard1({ data, openModal }) {
         <td className="vam">
           {data?.end_at ? moment(data?.end_at).format("lll") : "-"}
         </td>
-        <td className="vam" title={data?.reason}>
+        <td className="vam">
           <span
             className={`pending-style ${
               data?.payment_status === "paid" ? "style7" : ""

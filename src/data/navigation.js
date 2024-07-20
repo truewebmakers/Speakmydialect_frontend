@@ -1,3 +1,5 @@
+import { routes } from "@/constants/constant";
+
 export const menus = [
   {
     id: 1,
@@ -16,13 +18,8 @@ export const menus = [
   },
   {
     id: 4,
-    name: "Become a Translator",
-    path: "/register-translator",
-  },
-  {
-    id: 5,
-    name: "Join as a Client",
-    path: "/register-client",
+    name: "Sign up",
+    path: routes.Register,
   },
   {
     id: 6,
