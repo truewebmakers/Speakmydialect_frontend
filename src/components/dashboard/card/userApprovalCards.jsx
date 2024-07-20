@@ -1,7 +1,7 @@
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 
-export default function UserApprovalCard({ data, openModal }) {
+export default function UserApprovalCard({ data, openModal, openReasonModal }) {
   return (
     <>
       <tr>
@@ -18,7 +18,12 @@ export default function UserApprovalCard({ data, openModal }) {
         <td className="vam">
           {data?.user_type ? CapitalizeFirstLetter(data?.user_type) : "-"}
         </td>
-        <td className="vam" title={data?.reason}>
+        <td
+          className="vam"
+          title={data?.reason}
+          onClick={() => openReasonModal(data?.reason)}
+          style={{ cursor: "pointer" }}
+        >
           {data?.status ? (
             <span
               className={`pending-style ${

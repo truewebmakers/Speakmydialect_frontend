@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import UseApi from "@/hook/useApi";
 import { apiMethods, apiUrls } from "@/constants/constant";
 import { toast } from "react-toastify";
-import StatusChangeModal from "../modal/StatusChangeModal";
 import { PaymentStatusChangeDropdown } from "@/constants/structuralConstant";
+import PayoutStatusChangeModal from "../modal/PayoutStatusChangeModal";
 
 export default function PayoutInfo() {
   const [payoutListing, setPayoutListing] = useState([]);
@@ -138,7 +138,7 @@ export default function PayoutInfo() {
           </div>
         </div>
       </div>
-      <StatusChangeModal
+      <PayoutStatusChangeModal
         show={showModal}
         handleClose={handleCloseModal}
         option={PaymentStatusChangeDropdown}

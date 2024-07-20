@@ -8,6 +8,7 @@ import UserApprovalCard from "../card/userApprovalCards";
 import { toast } from "react-toastify";
 import StatusChangeModal from "../modal/StatusChangeModal";
 import { userApprovalDropdown } from "@/constants/structuralConstant";
+import ShowInfoModal from "../modal/showInfoModal";
 
 export default function UserApprovalInfo() {
   const [userApproval, setUserApproval] = useState([]);
@@ -16,6 +17,8 @@ export default function UserApprovalInfo() {
   const [userId, setUserId] = useState(0);
   const [action, setAction] = useState({ option: "Select", value: null });
   const [reason, setReason] = useState("");
+  const [showReason, setShowReason] = useState(false);
+  const [showData, setShowData] = useState("");
 
   //fetch user bookings listing
   const fetchData = async () => {
@@ -81,6 +84,17 @@ export default function UserApprovalInfo() {
     fetchData();
   };
 
+  //open Resaon Show Modal
+  const openReasonModal = (reason) => {
+    setShowReason(true);
+    setShowData(reason);
+  };
+
+  // close Reason Show modal while clicking on cross button
+  const handleCloseReasonModal = () => {
+    setShowReason(false);
+  };
+
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
@@ -117,6 +131,7 @@ export default function UserApprovalInfo() {
                         key={i}
                         data={item}
                         openModal={openModal}
+                        openReasonModal={openReasonModal}
                       />
                     ))}
                   </tbody>
@@ -137,6 +152,13 @@ export default function UserApprovalInfo() {
         setReason={setReason}
         handleSave={handleSave}
         content="User Approval"
+      />
+      <ShowInfoModal
+        show={showReason}
+        handleClose={handleCloseReasonModal}
+        reason={reason}
+        content="Reason"
+        showData={showData}
       />
     </>
   );
