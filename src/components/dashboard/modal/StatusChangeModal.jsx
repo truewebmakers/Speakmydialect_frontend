@@ -19,6 +19,7 @@ export default function StatusChangeModal({
 }) {
   const { user } = useSelector((state) => state.auth);
   const [images, setImages] = useState([]);
+  const [previewImage, setPreviewImage] = useState(null);
 
   const getUserDocuments = async () => {
     try {
@@ -45,10 +46,25 @@ export default function StatusChangeModal({
     }
   }, [userId]);
 
-  console.log(images, "ooiiiiiiiiii");
-
   return (
     <>
+      {previewImage && (
+        <div className="preview-container">
+          <div
+            className="preview-overlay"
+            onClick={() => setPreviewImage(null)}
+          ></div>
+          <div className="preview-content">
+            <button
+              className="btn-close preview-close"
+              onClick={() => setPreviewImage(null)}
+            >
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+            <img src={previewImage} alt="Preview" className="preview-image" />
+          </div>
+        </div>
+      )}
       <div
         className={`modal fade ${show ? "show d-block" : ""}`}
         tabIndex="-1"
@@ -78,8 +94,7 @@ export default function StatusChangeModal({
                     src={image?.path}
                     alt={image?.type}
                     className="icon-image"
-                    height={50}
-                    width={50}
+                    onClick={() => setPreviewImage(image?.path)}
                   />
                 ))}
               </div>
