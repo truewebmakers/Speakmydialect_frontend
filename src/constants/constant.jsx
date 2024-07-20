@@ -73,7 +73,7 @@ export const jobAvailaibiltyType = [
 
 export const paymentMode = [
   { id: 1, name: "Fix Rate", value: "fix" },
-  { id: 2, name: "Hourly", value: "hourly" },
+  // { id: 2, name: "Hourly", value: "hourly" },
 ];
 
 export const translatorBookingPaymentStatus = [

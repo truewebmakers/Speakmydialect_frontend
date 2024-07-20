@@ -22,8 +22,8 @@ export default function FreelancerAbout1({ data }) {
     <>
       <div className="price-widget pt25 bdrs8">
         <h3 className="widget-title">
-          {data?.user_meta?.hourly_rate || 0}
-          <small className="fz15 fw500">/per hour</small>
+          ${data?.user_meta?.fix_rate || 0}
+          {/* <small className="fz15 fw500">Fix Rate</small> */}
         </h3>
         <div className="category-list mt20">
           <a className="d-flex align-items-center justify-content-between bdrb1 pb-2">
@@ -71,7 +71,7 @@ export default function FreelancerAbout1({ data }) {
               <i className="flaticon-sliders text-thm2 pe-2 vam" />
               Fix Rate
             </span>
-            <span>{data?.user_meta?.fix_rate}</span>
+            <span>${data?.user_meta?.fix_rate}</span>
           </a>
         </div>
         {data?.fname && (

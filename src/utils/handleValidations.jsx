@@ -116,17 +116,17 @@ export const validateBookingForm = (hireNowForm) => {
   const errors = {};
 
   // Validate payment type
-  switch (true) {
-    case !hireNowForm?.payment_type?.value:
-      errors.payment_type = "Payment type is required";
-      break;
-    case typeof hireNowForm?.payment_type?.value !== "string" ||
-      hireNowForm?.payment_type?.value.trim() === "":
-      errors.payment_type = "Invalid payment type";
-      break;
-    default:
-      break;
-  }
+  // switch (true) {
+  //   case !hireNowForm?.payment_type?.value:
+  //     errors.payment_type = "Payment type is required";
+  //     break;
+  //   case typeof hireNowForm?.payment_type?.value !== "string" ||
+  //     hireNowForm?.payment_type?.value.trim() === "":
+  //     errors.payment_type = "Invalid payment type";
+  //     break;
+  //   default:
+  //     break;
+  // }
 
   // Validate availability
   switch (true) {

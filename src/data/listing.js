@@ -108,11 +108,6 @@ export const projectType = [
     title: "Fixed",
     value: "fix_rate",
   },
-  {
-    id: 2,
-    title: "Hourly",
-    value: "hourly_rate",
-  },
 ];
 
 export const englishLevel = [

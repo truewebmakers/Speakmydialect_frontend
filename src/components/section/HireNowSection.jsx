@@ -2,7 +2,6 @@ import {
   apiMethods,
   apiUrls,
   jobAvailaibiltyType,
-  paymentMode,
   routes,
 } from "@/constants/constant";
 import { useEffect, useState } from "react";
@@ -20,7 +19,7 @@ export default function HireNowSection({ translatorProfile }) {
   const [hireNowForm, setHireNowForm] = useState({
     client_id: "", //client_id from api
     translator_id: "", //translator_id from api
-    payment_type: { option: "Select", value: null }, // Type of payment client will buy translator on: fix or hourly
+    payment_type: "fix", // Type of payment client will buy translator on: fix or hourly
     present_rate: "", // It will contain the price at which client hired the translator,
     availability: { option: "Select", value: null }, // Mode of Work:remote,hybrid,onsite
     status: { option: "Select", value: null }, // Translator job Status: accept,reject,cancel,in-process
@@ -78,11 +77,8 @@ export default function HireNowSection({ translatorProfile }) {
       const bodyData = {
         client_id: profileData?.id,
         translator_id: translatorProfile?.id,
-        payment_type: hireNowForm?.payment_type?.value,
-        present_rate:
-          hireNowForm?.payment_type?.value == "fix"
-            ? +translatorProfile?.user_meta?.fix_rate
-            : +translatorProfile?.user_meta?.hourly_rate,
+        payment_type: "fix",
+        present_rate: +translatorProfile?.user_meta?.fix_rate,
         availability: hireNowForm?.availability?.value,
         status: "in-process ", // this is for transaltor's job
         work_status: "pending", // this status belongs to client's request
@@ -105,7 +101,7 @@ export default function HireNowSection({ translatorProfile }) {
         setHireNowForm({
           client_id: "",
           translator_id: "",
-          payment_type: { option: "Select", value: null },
+          payment_type: "fix",
           present_rate: "",
           availability: { option: "Select", value: null },
           status: { option: "Select", value: null },
@@ -127,6 +123,8 @@ export default function HireNowSection({ translatorProfile }) {
       return;
     }
   };
+
+  console.log(error);
   return (
     <>
       <section className="pt-0">
@@ -163,15 +161,9 @@ export default function HireNowSection({ translatorProfile }) {
                   <a className="d-flex align-items-center justify-content-between mb-3">
                     <span className="text">
                       <i className="flaticon-sliders text-thm2 pe-2 vam" />
-                      {hireNowForm?.payment_type?.value == "fix"
-                        ? " Fix Rate"
-                        : "Hourly Rate"}
+                      Fix Rate
                     </span>
-                    <span>
-                      {hireNowForm?.payment_type?.value == "fix"
-                        ? translatorProfile?.user_meta?.fix_rate
-                        : translatorProfile?.user_meta?.hourly_rate}
-                    </span>
+                    <span>${translatorProfile?.user_meta?.fix_rate}</span>
                   </a>
                 </div>
               </div>
@@ -255,20 +247,17 @@ export default function HireNowSection({ translatorProfile }) {
                     </div>
                     <div className="col-md-6">
                       <div className="mb20">
-                        <SelectInput
-                          label="Payment Type"
-                          defaultSelect={hireNowForm.payment_type}
-                          data={paymentMode?.map((item) => ({
-                            option: item?.name,
-                            value: item?.value,
-                          }))}
-                          handler={(option, value) =>
-                            handleFieldChange("payment_type", option, value)
-                          }
+                        <label className="heading-color ff-heading fw500 mb10">
+                          Payment Type
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Email"
+                          name="payment_type"
+                          value={"fix"}
+                          disabled={true}
                         />
-                        {error?.payment_type && (
-                          <p style={{ color: "red" }}>{error?.payment_type}</p>
-                        )}
                       </div>
                     </div>
                     <div className="col-md-6">

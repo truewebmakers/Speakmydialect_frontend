@@ -82,21 +82,17 @@ export default function ProjectCard1({ data }) {
       </div>
       <div className="col-lg-4 ps-0 ps-xl-3 pe-0">
         <div className="details">
-          {data?.user_meta?.hourly_rate ? (
-            <div className="text-lg-end">
-              <h4>${data?.user_meta?.hourly_rate}</h4>
-              <p className="text">Hourly Rate</p>
-            </div>
-          ) : (
-            <div className="text-lg-end">
-              <h4>
-                {data?.user_meta?.fix_rate
-                  ? "$" + data?.user_meta?.fix_rate
-                  : "Not Mentioned Yet"}
-              </h4>
-              <p className="text">Fixed Rate</p>
-            </div>
-          )}
+          {/* though it is hourky rayte but for now we only need to show fix rate */}
+
+          <div className="text-lg-end">
+            <h4>
+              {data?.user_meta?.fix_rate
+                ? "$" + data?.user_meta?.fix_rate
+                : "Not Mentioned Yet"}
+            </h4>
+            <p className="text">Fix Rate</p>
+          </div>
+
           <div className="d-grid mt15">
             <Link
               to={`/profile/${data?.uuid}`}

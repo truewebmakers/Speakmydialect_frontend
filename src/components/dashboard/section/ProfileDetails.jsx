@@ -15,7 +15,7 @@ export default function ProfileDetails() {
     lname: "",
     phone: "",
     fix_rate: "",
-    hourly_rate: "",
+    hourly_rate: 0,
     intro: "",
   });
   const { user, profileData } = useSelector((state) => state.auth);
@@ -70,7 +70,7 @@ export default function ProfileDetails() {
         lname: profileData?.lname || "",
         phone: profileData?.user_meta?.phone || "",
         fix_rate: profileData?.user_meta?.fix_rate || "",
-        hourly_rate: profileData?.user_meta?.hourly_rate || "",
+        hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
       });
       // Enter Gender
@@ -108,7 +108,7 @@ export default function ProfileDetails() {
         lname: profileDetails?.lname,
         phone: profileDetails?.phone,
         fix_rate: profileDetails.fix_rate || 0,
-        hourly_rate: profileDetails.hourly_rate || 0,
+        hourly_rate: 0,
         intro: profileDetails.intro,
         profile_pic: uploadPic,
         gender: getGender?.value,
@@ -261,7 +261,7 @@ export default function ProfileDetails() {
                     </div>
                   </div>
 
-                  <div className="col-sm-6">
+                  {/* <div className="col-sm-6">
                     <div className="mb20">
                       <label className="heading-color ff-heading fw500 mb10">
                         Hourly Rate
@@ -276,7 +276,7 @@ export default function ProfileDetails() {
                         onChange={handleOnChange}
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </>
               )}
               <div className="col-sm-6">
