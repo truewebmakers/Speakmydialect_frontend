@@ -374,7 +374,6 @@ export default function RegisterPage() {
                       required
                       style={{ display: "none" }}
                     />
-                    <p>Drop files here or</p>
                     <button type="button" className="upload-button">
                       Select Files
                     </button>

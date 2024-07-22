@@ -86,7 +86,9 @@ export default function StatusChangeModal({
               onClick={handleClose}
             />
             <div className="modal-body p-4 pt-2">
-              <h4 className="content mb15">Documents</h4>
+              <h4 className="content mb15">
+                {images?.length > 0 ? "Documents" : "No Document Uploaded"}
+              </h4>
               <div className="image-grid">
                 {images?.map((image, index) => (
                   <img
