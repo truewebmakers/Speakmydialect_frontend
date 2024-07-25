@@ -8,21 +8,22 @@ export default function AllTimeSelling() {
               <span className="flaticon-cv" />
             </div>
             <div className="details">
-              <h4 className="title mt10 mb-3">Search</h4>
-              <p className="text">Search the interpreter that you need. </p>
+              <h4 className="title mt10 mb-3">Sign Up</h4>
+              <p className="text">Join our platform to start using our services.</p>
             </div>
           </div>
         </div>
         <div className="col-sm-6 col-lg-3">
           <div className="iconbox-style1 border-less p-0">
             <div className="icon before-none">
-              <span className="flaticon-web-design" />
+            <span className="flaticon-customer-service" />
+
             </div>
             <div className="details">
-              <h4 className="title mt10 mb-3">Select</h4>
+              <h4 className="title mt10 mb-3">Find Interpreters</h4>
               <p className="text">
-                Select the best matched interpreter for{" "}
-                <br className="d-none d-xxl-block" /> the specific language.
+              Look for interpreters who fit your needs using our search tool.{" "}
+                {/* <br className="d-none d-xxl-block" /> the specific language. */}
               </p>
             </div>
           </div>
@@ -33,10 +34,10 @@ export default function AllTimeSelling() {
               <span className="flaticon-secure" />
             </div>
             <div className="details">
-              <h4 className="title mt10 mb-3">Collaborate</h4>
+              <h4 className="title mt10 mb-3">Book Your Interpreter</h4>
               <p className="text">
-                Collaborate with the interpreters which{" "}
-                <br className="d-none d-xxl-block" /> you prefer.
+              Pick an interpreter and schedule your session. {" "}
+                {/* <br className="d-none d-xxl-block" /> you prefer. */}
               </p>
             </div>
           </div>
@@ -44,13 +45,14 @@ export default function AllTimeSelling() {
         <div className="col-sm-6 col-lg-3">
           <div className="iconbox-style1 border-less p-0">
             <div className="icon before-none">
-              <span className="flaticon-customer-service" />
+            <span className="flaticon-web-design" />
             </div>
             <div className="details">
-              <h4 className="title mt10 mb-3">We’re here to help</h4>
+              <h4 className="title mt10 mb-3">Manage Your Session</h4>
               <p className="text">
-                It’s easy to post your profile. Simply login, & fill
-                <br className="d-none d-xxl-block" /> in your details.
+              Keep track of your booking and connect easily through our
+              platform.
+                {/* <br className="d-none d-xxl-block" /> in your details. */}
               </p>
             </div>
           </div>

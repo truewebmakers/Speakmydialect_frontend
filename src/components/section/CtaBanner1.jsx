@@ -3,12 +3,16 @@ import { useLocation } from "react-router-dom";
 export default function CtaBanner1() {
   const { pathname } = useLocation();
 
+  const whyChooseUs = [
+
+  ];
+
   return (
     <>
-      <section className="p-0">
+      <section className="p-0 mt-5 pb90 py-lg-0 mt-5">
         <div
           className={`cta-banner3 mx-auto maxw1600 pt120 pt60-lg pb90 pb60-lg position-relative overflow-hidden ${
-            pathname === "/" || pathname === "/about-1"
+            pathname === "/" || pathname === "/about"
               ? "bgc-light-yellow"
               : pathname === "/become-seller"
               ? "bgc-thm4"
@@ -20,44 +24,88 @@ export default function CtaBanner1() {
               <div className="col-xl-5 wow fadeInRight" data-wow-delay="300ms">
                 <div className="mb30">
                   <div className="main-title">
-                    <h2 className="title">
-                      Why Speak My Dialect? <br className="d-none d-xl-block" />{" "}
-                    </h2>
+
+                    {
+                           pathname === "/"?
+                           <h2 className="title">  Why Choose Us? <br className="d-none d-xl-block" />{" "}  </h2>
+                           :<h2 className="title">  What Our Platform Offers<br className="d-none d-xl-block" />{" "}  </h2>
+                    }
+                     {
+                           pathname === "/"?
+                            <p className="text  mb35">
+                            At SpeakMyDialect, we offer unparalleled access to a network of certified interpreters who
+                            specialize in a wide range of languages. Here’s why you should choose us for your interpreting
+                            needs:
+                            </p>:
+                            <p className="text  mb35">
+                            SpeakMyDialect is designed to streamline the process of finding and booking qualified
+                            interpreters. Our platform enables users to easily search for interpreters based on language
+                            expertise and availability, book sessions, and manage appointments through a user-friendly
+                            dashboard. We support a variety of session formats, including in-person, phone, and video calls,
+                            making our services accessible wherever you are. Whether for personal use, educational
+                            purposes, or professional needs, SpeakMyDialect ensures effective and reliable communication
+                            across different languages.
+                         </p>
+                     }
                   </div>
                 </div>
+
                 <div className="why-chose-list">
-                  <div className="list-one d-flex align-items-start mb30">
+
+                {
+                           pathname === "/"? <div className="list-one d-flex align-items-start mb30">
                     <span className="list-icon flex-shrink-0 flaticon-badge" />
                     <div className="list-content flex-grow-1 ml20">
-                      <h4 className="mb-1">Multicultural Connection</h4>
+                      <h4 className="mb-1">Expert Interpreters</h4>
                       <p className="text mb-0 fz15">
-                        Connecting people from diverse background to create a
-                        better
-                        <br className="d-none d-lg-block" /> understanding and
-                        build relationships.
+                         Our interpreters undergo rigorous testing to verify their language
+                        <br className="d-none d-lg-block" /> proficiency and interpreting skills, ensuring top-notch service.
                       </p>
                     </div>
-                  </div>
+                  </div> :
                   <div className="list-one d-flex align-items-start mb30">
+                  <span className="list-icon flex-shrink-0 flaticon-badge" />
+                  <div className="list-content flex-grow-1 ml20">
+                    <h4 className="mb-1">Our Mission</h4>
+                    <p className="text mb-0 fz15">
+                    To provide accessible, reliable, and high-quality interpreting services that bridge communication  gaps, ensuring that every individual and organization can thrive in a multilingual world.
+                    </p>
+                  </div>
+                </div> }
+
+                {
+                           pathname === "/"?   <div className="list-one d-flex align-items-start mb30">
                     <span className="list-icon flex-shrink-0 flaticon-money" />
                     <div className="list-content flex-grow-1 ml20">
-                      <h4 className="mb-1">Affordable</h4>
+                      <h4 className="mb-1">Wide Language Selection</h4>
                       <p className="text mb-0 fz15">
-                        Our services is affordable, easy to access and
-                        reasonable priced.
+                      We offer a vast array of languages, catering to both widely spoken
+                      and less common dialects
                       </p>
                     </div>
-                  </div>
-                  <div className="list-one d-flex align-items-start mb30">
+                  </div> :
+
+                    <div className="list-one d-flex align-items-start mb30">
+                    <span className="list-icon flex-shrink-0 flaticon-money" />
+                    <div className="list-content flex-grow-1 ml20">
+                    <h4 className="mb-1">Our Vision</h4>
+                    <p className="text mb-0 fz15">
+                    To be the leading platform for interpreting services, recognised for our commitment to integrity
+                    and customer satisfaction
+                    </p>
+                    </div>
+                    </div> }
+                    {
+                           pathname === "/" && <div className="list-one d-flex align-items-start mb30">
                     <span className="list-icon flex-shrink-0 flaticon-security" />
                     <div className="list-content flex-grow-1 ml20">
-                      <h4 className="mb-1">Service & Community</h4>
+                      <h4 className="mb-1">User-Friendly Platform</h4>
                       <p className="text mb-0 fz15">
-                        We link services and community members to work together
-                        in closing the language barrier
+                      Our platform is designed for ease of use, allowing for quick and
+                        efficient booking of interpreters.
                       </p>
                     </div>
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>

@@ -22,7 +22,7 @@ export default function Search1({ setSearch, search }) {
             onChange={(e) => setSearch(e.target.value)}
             value={search}
             placeholder={
-              pathname === "/service-1" ? "What are you looking for?" : "Search"
+              pathname === "/service-1" ? "Online Platform to Connect You with Global Interpreters" : "Search"
             }
           />
           <label>

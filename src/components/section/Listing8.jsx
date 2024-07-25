@@ -55,7 +55,7 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
-              <ListingSidebar2 />
+              <ListingSidebar2 /> asdasd
             </div>
             <div className="col-lg-9">
               <ListingOption2 itemLength={searchingResult?.length} />

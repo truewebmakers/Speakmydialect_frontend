@@ -22,15 +22,15 @@ export default function OurFunFact1() {
             >
               <div className="cta-style6 mb30-sm">
                 <h2 className="cta-title mb25">
-                  Find the talent needed to
-                  <br className="d-none d-lg-block" />
-                  get your business growing.
+                Our Values
+                  {/* <br className="d-none d-lg-block" />
+                  get your business growing. */}
                 </h2>
-                <p className="text-thm2 fz15 mb25">
+                {/* <p className="text-thm2 fz15 mb25">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   <br className="d-none d-md-block" /> do eiusmod tempor
                   incididunt.
-                </p>
+                </p> */}
                 <Link to="/contact" className="ud-btn btn-thm">
                   Get Started
                   <i className="fal fa-arrow-right-long" />
@@ -46,29 +46,25 @@ export default function OurFunFact1() {
                   <div className="funfact-style1 bdrs16 text-center ms-md-auto">
                     <ul className="ps-0 mb-0 d-flex justify-content-center">
                       <li>
-                        <div className="timer title mb15">4</div>
+                        <div className="timer title mb15">Integrity</div>
                       </li>
-                      <li>
-                        <span>.9/5</span>
-                      </li>
+
                     </ul>
                     <p className="fz15 dark-color">
-                      Clients rate <br />
-                      professionals on Freeio
+                    Upholding honesty and transparency in all our interactions
                     </p>
                   </div>
                   <div className="funfact-style1 bdrs16 text-center ms-md-auto">
                     <ul className="ps-0 mb-0 d-flex justify-content-center">
                       <li>
-                        <div className="timer title mb15">96</div>
+                        <div className="timer title mb15">Quality</div>
                       </li>
-                      <li>
+                      {/* <li>
                         <span>%</span>
-                      </li>
+                      </li> */}
                     </ul>
                     <p className="fz15 dark-color">
-                      95% of customers are satisfied through to see their <br />
-                      freelancers
+                    Ensuring excellence in every service we provide.
                     </p>
                   </div>
                 </div>
@@ -76,12 +72,12 @@ export default function OurFunFact1() {
                   <div className="funfact-style1 bdrs16 text-center">
                     <ul className="ps-0 mb-0 d-flex justify-content-center">
                       <li>
-                        <div className="title mb15">Award</div>
+                        <div className="title mb15">Inclusivity</div>
                       </li>
                     </ul>
                     <p className="fz15 dark-color">
-                      G2’s 2021 Best <br />
-                      Software Awards
+                    Embracing and supporting diversity within our community and across our
+                    services.
                     </p>
                   </div>
                 </div>

@@ -18,7 +18,7 @@ export default function Breadcumb9() {
           />
           <img
             className="service-v1-vector bounce-y d-none d-xl-block"
-            src="/images/vector-img/vector-service-v1.png"
+            src="/images/vector-img/vector-service-v1n.png"
             alt="vector-service"
           />
           <div className="container">

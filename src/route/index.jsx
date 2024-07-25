@@ -23,6 +23,7 @@ import HireNowPage from "@/pages/hire";
 import InvoiceComponent from "@/pages/dashboard/invoices";
 import UserApprovals from "@/pages/admin/userApproval";
 import ChooseUserType from "@/pages/auth/register/chooseUserType";
+import PrivacyPage from "@/pages/privacy";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -76,6 +77,8 @@ const AppRoutes = () => {
         {/* Publc Routesss */}
         <Route path={routes.Home} element={<HomePage1 />} />
         <Route path={routes.Terms} element={<TermsPage />} />
+        <Route path={routes.Privacy} element={<PrivacyPage />} />
+
         <Route path={routes.Contact} element={<ContactPage />} />
         <Route path={routes.Help} element={<HelpPage />} />
         <Route path={routes.About} element={<AboutPage2 />} />

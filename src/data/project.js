@@ -236,34 +236,30 @@ export const ourTeam1 = [
 export const testimonial = [
   {
     id: 1,
-    title:
-      "Through my own studies and the help of SpeackMyDialect's tutors, I was able to receive a score of 7.5 on my first IELTS test. ",
-    name: "Emma Johnson",
-    company: "Product Manager, Apple Inc",
+    title:  "celebrated his achievement of scoring 7.5 on his first IELTS test, attributing his success to the platform's tutors.",
+    name: "Andy",
+    company: "",
     image: "/images/testimonials/testi-1.png",
   },
   {
     id: 2,
-    title:
-      "I was a little bit skeptical in the beginning. I was used to studying with books and I was missing this. However, I quickly realized that it was the best tool I have ever found. ",
+    title:"initially skeptical about leaving traditional study methods, found SpeakMyDialect to be the best tool she's ever used.",
     name: "Olivia Smith",
-    company: "Travel Blogger",
+    company: "Linda",
     image: "/images/testimonials/testi-2.png",
   },
   {
     id: 3,
-    title:
-      " have noticed a significant improvement in the way I learn English. I have even already had some interviews in English, something that was not possible a few months ago.",
-    name: "Sophia Ramirez",
-    company: "Software Engineer",
+    title: "experienced significant improvement in learning English with SpeakMyDialect, leading to English interviews, which were previously impossible for him.",
+    name: "Max",
+    company: "",
     image: "/images/testimonials/testi-3.png",
   },
   {
     id: 4,
-    title:
-      "Through my own studies and the help of SpeackMyDialect's tutors, I was able to receive a score of 7.5 on my first IELTS test. ",
-    name: "Isabella Johnson",
-    company: "Graphic Designer",
+    title:"Initially unsure about learning Spanish online, I'm now thrilled with the progress I've made with SpeakMyDialect. The platform is user-friendly and the interactive lessons really make a difference",
+    name: "James",
+    company: " ",
     image: "/images/testimonials/testi-4.png",
   },
   {

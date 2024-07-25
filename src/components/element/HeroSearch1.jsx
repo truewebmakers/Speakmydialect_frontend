@@ -89,7 +89,7 @@ export default function HeroSearch1({ isSearchingPage }) {
                 className="form-control"
                 type="text"
                 name="search"
-                placeholder="What are you looking for?"
+                placeholder="Online Platform to Connect You with Global Interpreters"
                 onFocus={focusDropdown}
                 onBlur={blurDropdown}
                 autoComplete="off"
@@ -168,7 +168,7 @@ export default function HeroSearch1({ isSearchingPage }) {
                   className="form-control"
                   type="text"
                   name="search"
-                  placeholder="What are you looking for?"
+                  placeholder="Online Platform to Connect You with Global Interpreters"
                   onFocus={focusDropdown}
                   onBlur={blurDropdown}
                   autoComplete="off"

@@ -13,9 +13,7 @@ export default function Navigation() {
         className={`ace-responsive-menu ui-navigation ${
           pathname == "/home-3" ||
           pathname == "/home-4" ||
-          pathname == "/home-10"
-            ? "menu-without-paddingy"
-            : ""
+          pathname == "/home-10" ? "menu-without-paddingy" : ""
         } `}
       >
         {/* if logged In show profile image, and hide other tabs */}
@@ -64,8 +62,7 @@ export default function Navigation() {
               >
                 <Link
                   to={item.path}
-                  className={`list-item
-                                ${item.path === pathname ? "ui-active" : ""}`}
+                  className={`list-item  ${item.path === pathname ? "ui-active" : ""}`}
                 >
                   <span className="title">{item.name}</span>
                 </Link>

@@ -6,26 +6,35 @@ import "swiper/css/free-mode";
 import { Navigation } from "swiper";
 
 import TrendingServiceCard1 from "../card/TrendingServiceCard1";
-import { product1 } from "@/data/product";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { searchingApi } from "@/hook/searchingApi";
+import { useSearchParams } from "react-router-dom";
 
 export default function TrendingService1() {
   const [showSwiper, setShowSwiper] = useState(false);
+
+  const [searchingResult, setSearchingResult] = useState([]);
+   const [SearchingResult1, setSearchingResult1] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
+    const query = Object.fromEntries(searchParams.entries());
+    searchingApi(query).then((data) => setSearchingResult(data));
+    setSearchingResult1([]);
     setShowSwiper(true);
-  }, []);
+  }, [searchParams]);
+  console.log("searchingResult",searchingResult)
 
   return (
     <>
-      <section className="pb90 pb30-md bgc-thm3">
+      <section className="pt90 pb120-md bgc-thm3">
         <div className="container">
           <div className="row align-items-center wow fadeInUp">
             <div className="col-lg-9">
               <div className="main-title">
-                <h2 className="title">Popular Translators</h2>
+                <h2 className="title">Popular Interpreters</h2>
                 <p className="paragraph">
-                  Most viewed and all-time top-selling translators
+                  Most viewed and all-time top-selling interpreters
                 </p>
               </div>
             </div>
@@ -68,7 +77,7 @@ export default function TrendingService1() {
                       },
                     }}
                   >
-                    {product1.slice(0, 6).map((item, i) => (
+                    {searchingResult?.length > 0 && searchingResult?.map((item, i) => (
                       <SwiperSlide key={i}>
                         <TrendingServiceCard1 data={item} />
                       </SwiperSlide>

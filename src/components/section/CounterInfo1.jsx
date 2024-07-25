@@ -1,9 +1,10 @@
 import CountUp from "react-countup";
 
-export default function CounterInfo1(notBorder) {
+export default function CounterInfo1({notBorder,active}) {
+    console.log("active",active)
   return (
     <>
-      <section className="pb0 pt60">
+     {active&&  <section className="pb0 pt60">
         <div className={`container maxw1600 ${notBorder ? "" : "bdrb1"}  pb60`}>
           <div
             className="row justify-content-center wow fadeInUp"
@@ -17,7 +18,7 @@ export default function CounterInfo1(notBorder) {
                       <div className="timer">
                         <CountUp
                           decimals={1}
-                          end={834}
+                          end={890}
                           duration={2.75}
                           enableScrollSpy
                         />
@@ -99,7 +100,7 @@ export default function CounterInfo1(notBorder) {
             </div>
           </div>
         </div>
-      </section>
+      </section>}
     </>
   );
 }

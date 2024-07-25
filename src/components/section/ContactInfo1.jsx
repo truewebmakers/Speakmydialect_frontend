@@ -9,11 +9,10 @@ export default function ContactInfo1() {
                 <div className="main-title">
                   <h4 className="form-title mb25">Keep In Touch With Us.</h4>
                   <p className="text">
-                    Neque convallis a cras semper auctor. Libero id faucibus
-                    nisl tincidunt egetnvallis.
+                  Reach out to speakmydialect.com.au for support and inquiries.
                   </p>
                 </div>
-                <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
+                <div className="iconbox-style1 contact-style d-flex align-items-start mb30 d-none">
                   <div className="icon flex-shrink-0">
                     <span className="flaticon-tracking" />
                   </div>
@@ -25,11 +24,11 @@ export default function ContactInfo1() {
                     </p>
                   </div>
                 </div>
-                <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
+                <div className="iconbox-style1 contact-style d-flex align-items-start mb30 d-none">
                   <div className="icon flex-shrink-0">
                     <span className="flaticon-call" />
                   </div>
-                  <div className="details">
+                  <div className="details ">
                     <h5 className="title">Phone</h5>
                     <p className="mb-0 text">+(0) 392 94 03 01</p>
                   </div>
@@ -40,12 +39,12 @@ export default function ContactInfo1() {
                   </div>
                   <div className="details">
                     <h5 className="title">Email</h5>
-                    <p className="mb-0 text">hello@freeio.com</p>
+                    <p className="mb-0 text">Info@speakmydialect.com.au</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-6 ">
               <div className="contact-page-form default-box-shadow1 bdrs8 bdr1 p50 mb30-md bgc-white">
                 <h4 className="form-title mb25">Tell us about yourself</h4>
                 <p className="text mb30">

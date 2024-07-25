@@ -77,8 +77,12 @@ import InvoicePage from "../pages/invoices";
 import PricingPage from "../pages/pricing";
 import RegisterPage from "../pages/auth/register";
 import TermsPage from "../pages/terms";
+import PrivacyPage from "../pages/privacy";
+
+
 import UIElementsPage from "../pages/ui-elements";
 import HomePage1 from "../pages/home";
+import PrivacyPolicy from "@/components/section/privacyPolicy";
 
 export default function RoutesComponent() {
   return (
@@ -195,6 +199,7 @@ export default function RoutesComponent() {
           <Route path="pricing" element={<PricingPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="terms" element={<TermsPage />} />
+          <Route path="privacy" element={<PrivacyPage />} />
           <Route path="ui-elements" element={<UIElementsPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>

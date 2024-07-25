@@ -18,14 +18,14 @@ export default function OurPartner1() {
         className={`our-partners ${
           pathname === "/" ||
           pathname === "/home-3" ||
-          pathname === "/about-2" ||
+          pathname === "/about" ||
           pathname === "/home-15" ||
           pathname === "/home-6"
             ? "pt0"
             : ""
         } ${pathname === "/home-8" ? "pt0 pb0" : ""} ${
           pathname === "/home-14" ? "bdrt1 pt55 pb55" : ""
-        } 
+        }
         ${pathname === "/home-16" ? "pt55 pb55" : ""}
         ${pathname === "/home-13" ? "pt55 pb55" : ""}
         `}

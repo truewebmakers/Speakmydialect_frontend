@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import FooterSocial from "./FooterSocial";
 
 const links = [
-  { id: 1, name: "Terms of Service", path: "/" },
-  { id: 2, name: "Privacy Policy", path: "/" },
-  { id: 3, name: "Site Map", path: "/" },
+  { id: 1, name: "Terms & Conditions", path: "/terms" },
+  { id: 2, name: "Privacy Policy", path: "/privacy" },
+//   { id: 3, name: "Site Map", path: "/" },
 ];
 
 export default function FooterHeader() {

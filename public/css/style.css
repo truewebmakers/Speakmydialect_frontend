@@ -4012,7 +4012,7 @@ span.mb25.me-4.badge-success {
 /*	Brands  */
 /*  Commons Styles of Template  */
 section {
-  padding: 120px 0;
+  /* padding: 120px 0; */
   position: relative;
 }
 @media (max-width: 991.98px) {
@@ -8400,7 +8400,7 @@ header.nav-homepage-style
   transition: all 0.4s ease;
 }
 header.nav-homepage-style .ace-responsive-menu a {
-  color: #ffffff;
+  color: #000000;
   font-family: var(--title-font-family);
   font-weight: 500;
 }

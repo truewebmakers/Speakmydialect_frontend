@@ -5,7 +5,7 @@ import "swiper/css/effect-fade";
 import { EffectFade, Navigation } from "swiper";
 import HeroSearch1 from "../element/HeroSearch1";
 
-const hero = ["/images/home/home-1.webp", "/images/home/home-2.jpg"];
+const hero = ["/images/home/banner1.svg", "/images/home/banner1.jpg"];
 
 export default function Hero1() {
   const [showSwiper, setShowSwiper] = useState(false);
@@ -46,11 +46,11 @@ export default function Hero1() {
                       ))}
                     </Swiper>
                   )}
-                  <div className="carousel-btn-block banner-carousel-btn">
+                  <div className="carousel-btn-block banner-carousel-btn d-none">
                     <span className="carousel-btn left-btn">
                       <i className="fas fa-chevron-left left" />
                     </span>
-                    <span className="carousel-btn right-btn">
+                    <span className="carousel-btn right-btn  d-none">
                       <i className="fas fa-chevron-right right" />
                     </span>
                   </div>
@@ -64,8 +64,8 @@ export default function Hero1() {
             <div className="row">
               <div className="col-xl-10 col-xxl-7">
                 <div className="position-relative">
-                  <h3 className="banner-title animate-up-2">
-                    Find Trusted Local Interpreters{" "}
+                  <h3 className="banner-title animate-up-2 text-black">
+                  Connecting Cultures, One Language at a Time {" "}
                     <br className="d-none d-lg-block" />
                   </h3>
                   <div className="advance-search-tab bgc-white bgct-sm p10 p0-md bdrs4 banner-btn position-relative zi9 animate-up-4">

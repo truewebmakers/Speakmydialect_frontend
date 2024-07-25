@@ -6,7 +6,10 @@ export const overview = [
 ];
 
 export const about = [
-  { id: 1, name: "Company", path: "https://dialect.emodelslanka.com/company" },
+  {
+    id: 1,
+    name: "Company",
+    path: "https://dialect.emodelslanka.com/company" },
   {
     id: 2,
     name: "Business Subscriptions",
@@ -17,14 +20,18 @@ export const about = [
     name: "Business Center",
     path: "https://dialect.emodelslanka.com/business/center",
   },
-  { id: 4, name: "FAQs", path: "https://dialect.emodelslanka.com/faq" },
+  {
+    id: 4,
+    name: "FAQs",
+    path: "https://dialect.emodelslanka.com/faq"
+ }
 ];
 
 export const support = [
   { id: 1, name: "Email: Info@speakmydialect.com.au", path: "/" },
   { id: 2, name: "Contact Us", path: "/contact" },
   { id: 3, name: "Terms & Conditions", path: "/terms" },
-  { id: 4, name: "Privacy Policy", path: "/" },
+  { id: 4, name: "Privacy Policy", path: "/privacy" },
 ];
 
 export const momney = ["US$ USD", "Euro", "Pound"];
