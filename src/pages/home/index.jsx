@@ -20,7 +20,6 @@ export default function HomePage1() {
       <CtaBanner1 />
       <CounterInfo1 active={false}/>
       <NeedSomething1 />
-      <Testimonial1 />
       <OurCta1 />
     </>
   );

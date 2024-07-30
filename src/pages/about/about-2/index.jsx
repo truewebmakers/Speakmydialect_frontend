@@ -11,6 +11,7 @@ import Testimonial1 from "@/components/section/Testimonial1";
 import MetaComponent from "@/components/common/MetaComponent";
 import { metaData } from "@/constants/constant";
 import OurCta1 from "@/components/section/OurCar1";
+import OurStory from "../ourStory";
 
 export default function AboutPage2() {
   return (
@@ -24,12 +25,13 @@ export default function AboutPage2() {
         create a platform that guarantees reliable access to qualified and fairly priced interpreting
         services"
       />
+      <OurStory/>
 
       <About1 />
       <CounterInfo1 active={false} />
       <CtaBanner1 />
       <OurFunFact1 />
-      <Testimonial1 />
+      {/* <Testimonial1 /> */}
       {/* <CtaBanner1 /> */}
       <OurFaq1 />
       <OurCta1 />
