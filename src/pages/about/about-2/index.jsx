@@ -19,11 +19,7 @@ export default function AboutPage2() {
       <MetaComponent meta={metaData} />
       <Breadcumb2
         title="About"
-        brief="SpeakMyDialect was founded to address the frequent challenges encountered in the
-        interpreting industry, such as unreliable services, lack of qualified interpreters, and overpriced
-        offerings. Moses and Ayak, our founders, experienced these issues firsthand and were driven to
-        create a platform that guarantees reliable access to qualified and fairly priced interpreting
-        services"
+       
       />
       <OurStory/>
 

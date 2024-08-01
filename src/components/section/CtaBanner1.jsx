@@ -32,7 +32,7 @@ export default function CtaBanner1() {
                     }
                      {
                            pathname === "/"?
-                            <p className="text  mb35">
+                            <p className="c  mb35">
                             At SpeakMyDialect, we offer unparalleled access to a network of certified interpreters who
                             specialize in a wide range of languages. Here’s why you should choose us for your interpreting
                             needs:

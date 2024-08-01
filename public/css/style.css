@@ -13988,6 +13988,7 @@ input:focus-visible {
   color: var(--headings-color);
   font-family: var(--title-font-family);
   font-weight: 400;
+  text-align: justify;
 }
 
 .default-box-shadow1 {
