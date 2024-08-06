@@ -34,7 +34,6 @@ export default function TrendingServiceCard1({ data }) {
   }, []);
 
   const { pathname } = useLocation();
-  console.log("data",data)
 
   return (
     <>

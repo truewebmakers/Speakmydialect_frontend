@@ -1,7 +1,6 @@
 import CountUp from "react-countup";
 
 export default function CounterInfo1({notBorder,active}) {
-    console.log("active",active)
   return (
     <>
      {active&&  <section className="pb0 pt60">

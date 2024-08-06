@@ -42,6 +42,7 @@ export const footer = [
   "/proposal",
   "/jobs",
   "/bookings",
+  "/pay",
   "/message",
   "/reviews",
   "/invoice",

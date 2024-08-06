@@ -13,6 +13,7 @@ export const header3 = [
   "/search",
   "/admin/userApprovals",
   "/invoice",
+  "/pay",
   "/admin/payoutManagement",
   "/hire/:id",
   "/profile/:id",

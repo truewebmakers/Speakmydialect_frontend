@@ -24,6 +24,7 @@ import InvoiceComponent from "@/pages/dashboard/invoices";
 import UserApprovals from "@/pages/admin/userApproval";
 import ChooseUserType from "@/pages/auth/register/chooseUserType";
 import PrivacyPage from "@/pages/privacy";
+import PayNow from "@/pages/pay_now/Pay";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -162,6 +163,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <DasbPagePayouts />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={routes.PayNow}
+          element={
+            <ProtectedRoute>
+              <PayNow />
             </ProtectedRoute>
           }
         />

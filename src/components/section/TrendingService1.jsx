@@ -23,7 +23,6 @@ export default function TrendingService1() {
     setSearchingResult1([]);
     setShowSwiper(true);
   }, [searchParams]);
-  console.log("searchingResult",searchingResult)
 
   return (
     <>

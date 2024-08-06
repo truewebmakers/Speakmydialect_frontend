@@ -96,7 +96,14 @@ export default function HireNowSection({ translatorProfile }) {
       );
       if (response?.status == 201 || response?.status == 200) {
         toast.success(response?.data?.message);
-        navigate(routes.Bookings);
+        const data = {
+          jobId: response?.data?.data?.id,
+          description: `Title is: ${hireNowForm?.job_title}, Start Date is: ${hireNowForm?.start_at}, End Date is: ${hireNowForm?.end_at}`,
+          clientUserName: user?.userInfo?.username,
+          clientEmail: user?.userInfo?.email,
+          presentRate: response?.data?.data?.present_rate,
+        };
+        navigate(routes.PayNow, { state: data });
         setIsLoading(false);
         setHireNowForm({
           client_id: "",
@@ -119,7 +126,7 @@ export default function HireNowSection({ translatorProfile }) {
       }
     } catch (err) {
       setIsLoading(false);
-      toast.error(err);
+      toast.error(err?.message);
       return;
     }
   };

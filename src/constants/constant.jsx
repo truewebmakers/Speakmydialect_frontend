@@ -45,6 +45,7 @@ export const apiUrls = {
   adminChangePaymentStatus: "/admin/user/status/approved/bookings/",
   getUserDocuments: "/admin/user/get/docuemnts/",
   getInvoiceListing: "/admin/payout/get/client/",
+  payNow:"/admin/payout/charge"
 };
 
 export const metaData = {
@@ -151,6 +152,7 @@ export const routes = {
   HireNow: "/hire/:id",
   UserApprovals: "/admin/userApprovals",
   PayoutManagement: "/admin/payoutManagement",
+  PayNow:"/pay"
 };
 
 export const startYearDropdown = 1965;

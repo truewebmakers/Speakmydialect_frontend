@@ -9,7 +9,6 @@ import { store, persistor } from "./redux/store.jsx";
 import { PersistGate } from "redux-persist/integration/react";
 import "primereact/resources/themes/saga-blue/theme.css"; // or any other theme you prefer
 import "primereact/resources/primereact.min.css";
-import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
