@@ -95,7 +95,7 @@ export default function HireNowSection({ translatorProfile }) {
         headers
       );
       if (response?.status == 201 || response?.status == 200) {
-        toast.success(response?.data?.message);
+        // toast.success(response?.data?.message);
         const data = {
           jobId: response?.data?.data?.id,
           description: `Title is: ${hireNowForm?.job_title}, Start Date is: ${hireNowForm?.start_at}, End Date is: ${hireNowForm?.end_at}`,

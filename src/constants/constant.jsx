@@ -44,7 +44,7 @@ export const apiUrls = {
   adminGetPayoutsListing: "/admin/user/get/approved/bookings",
   adminChangePaymentStatus: "/admin/user/status/approved/bookings/",
   getUserDocuments: "/admin/user/get/docuemnts/",
-  getInvoiceListing: "/admin/payout/get/client/",
+  getInvoiceListing: "/admin/payout/invoices/",
   payNow:"/admin/payout/charge"
 };
 

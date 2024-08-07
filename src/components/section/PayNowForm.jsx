@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import Loader from '../common/loader';
+import './index.css';
 
 const PayNowForm = () => {
     const [totalAmount, setTotalAmount] = useState(0);
@@ -74,8 +75,11 @@ const PayNowForm = () => {
     };
 
     return (
+        <section className="pt-0">
+        <div class="checkout-page">
+
         <div className="checkout-form-container">
-            <h2>Checkout</h2>
+            <h2>Payout</h2>
             <form onSubmit={handleSubmit} className="checkout-form">
                 <div className="form-group">
                     <label htmlFor="card-element">Credit or Debit Card</label>
@@ -88,10 +92,10 @@ const PayNowForm = () => {
                             Download Receipt
                         </a>
                     )}
-                    <p>Stripe Processing Fee Percentage: Approximately 3.50%.</p>
-                    <p>Tax Percentage: 0.38%.</p>
-                    <p>Amount to Receive: ${state?.presentRate?.toFixed(2)}</p>
-                    <p>Total Amount Charged: ${totalAmount}</p>
+                    <p><b>Stripe Processing Fee Percentage:</b> 3.50% (approx.)</p>
+                    <p><b>Tax Percentage:</b> 0.38%</p>
+                    <p><b>Amount to Receive:</b> ${state?.presentRate?.toFixed(2)}</p>
+                    <p><b>Total Amount Charged:</b> ${totalAmount}</p>
                 </div>
 
                 <button type="submit" disabled={!stripe} className="submit-button">
@@ -106,6 +110,8 @@ const PayNowForm = () => {
                 </button>
             </form>
         </div>
+        </div>
+        </section>
     );
 };
 

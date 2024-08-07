@@ -25,7 +25,8 @@ export default function PayoutCard1({ data, openModal }) {
               data?.payment_status === "paid" ? "style7" : ""
             } ${data?.payment_status === "dispute" ? "style3" : ""} ${
               data?.payment_status === "none" ? "style2" : ""
-            } ${data?.payment_status === "hold" ? "style1" : ""}`}
+            } ${data?.payment_status === "hold" ? "style1" : ""} 
+            ${data?.payment_status === "escrow" ? "style1" : ""}`}
           >
             {CapitalizeFirstLetter(data?.payment_status)}
           </span>
@@ -37,7 +38,7 @@ export default function PayoutCard1({ data, openModal }) {
               id="view"
               onClick={() => openModal(data?.id)}
             >
-              <span className="flaticon-website me-2 vam"> Update</span>
+              <span> Update</span>
             </a>
           </td>
         )}

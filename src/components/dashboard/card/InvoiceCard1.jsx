@@ -1,31 +1,41 @@
+import { CapitalizeFirstLetter } from "@/utils/helper";
+import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 
 export default function InvoiceCard1({ data }) {
+  console.log(data?.payouts, 'dataat');
   return (
     <>
       <tr>
         <th scope="row">
           <div>
-            #{data.invoiceId} <span className="ms-3">{data.invoiceName}</span>
+            <span className="ms-3">{data?.job_title || '-'}
+            </span>
           </div>
         </th>
-        <td className="vam">{data.purchaseDate}</td>
-        <td className="vam">${data.amount.toFixed(3)}</td>
+        <td className="vam">{data?.payouts[0]?.billing_name || '-'}</td>
+        <td className="vam">{data?.payouts[0]?.billing_email || '-'}</td>
+        <td className="vam">{data?.payouts[0]?.amount || 0}</td>
+
         <td className="vam">
           <span
-            className={`pending-style ${data.status === 1 ? "style1" : ""} ${
-              data.status === 2 ? "style2" : ""
-            } ${data.status === 3 ? "style3" : ""}`}
+            className={`pending-style ${data?.payment_status
+              === 'escrow' ? "style1" : ""} ${data?.payment_status === 'none' || data?.payment_status === 'dispute' ? "style3" : ""
+              } ${data?.payment_status === 'not-paid' ? "style2" : ""}  ${data?.payment_status === 'paid' ? "style7" : ""}`}
           >
-            In Progress
+            {CapitalizeFirstLetter(data?.payment_status) || '-'}
           </span>
         </td>
         <td className="vam">
-          <a className="table-action fz15 fw500 text-thm2" id="view">
-            <Tooltip anchorSelect="#view" clickable className="ui-tooltip">
-              View
-            </Tooltip>
-            <span className="flaticon-website me-2 vam" /> View
+          <a className="table-action fz15 fw500 text-thm2" id="view" >
+            {data?.payouts[0]?.receipt_url ?
+              <>
+                <Link to={data?.payouts[0]?.receipt_url} target="_blank" clickable className="ui-tooltip">
+                  View
+                </Link>
+                <span className="flaticon-website me-2 vam" /></>
+              :
+              <span style={{ cursor: 'not-allowed' }}>No-Invoice {"  "}</span>}
           </a>
         </td>
       </tr>

@@ -32,6 +32,7 @@ export default function InvoiceInfo() {
   useEffect(() => {
     getInvoiceDetail();
   }, []);
+
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
@@ -73,18 +74,20 @@ export default function InvoiceInfo() {
                       <th scope="col">Email</th>
                       <th scope="col">Rate</th>
                       <th scope="col">Payment Status</th>
+                      <th scope="col">View Reciept</th>
+
                       {/* <th scope="col">Action</th> */}
                     </tr>
                   </thead>
                   <tbody className="t-body">
-                    {invoice.map((item, i) => (
+                    {invoiceListing?.map((item, i) => (
                       <InvoiceCard1 key={i} data={item} />
                     ))}
                   </tbody>
                 </table>
-                <div className="mt30">
+                {/* <div className="mt30">
                   <Pagination1 />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

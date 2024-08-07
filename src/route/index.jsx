@@ -152,7 +152,7 @@ const AppRoutes = () => {
         />
 
         <Route path={routes.Search} element={<SearchPage />} />
-        <Route path={routes.HireNow} element={<HireNowPage />} />
+        <Route path={routes.HireNow} element={<ProtectedRoute><HireNowPage /></ProtectedRoute>} />
 
         <Route
           path={routes.TranslatorProfile}

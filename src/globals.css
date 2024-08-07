@@ -55,9 +55,11 @@ a {
   background-color: #5bbb7b;
   color: #ffffff;
 }
+
 /* slider arrow end*/
 
 @media (min-width: 1400px) {
+
   .container,
   .container-lg,
   .container-md,
@@ -187,6 +189,7 @@ a {
   top: 0;
   right: 0;
 }
+
 .map-container {
   height: 100%;
   width: 100%;
@@ -231,6 +234,7 @@ a {
 .gm-style-iw button span {
   background-color: #fff !important;
 }
+
 .gm-style-iw .listing-style1 {
   margin-bottom: 0 !important;
 }
@@ -254,6 +258,7 @@ a {
   padding: 18px 10px !important;
   z-index: 99;
 }
+
 .ui-active,
 .ui-navigation .ui-active {
   color: #5bbb7b !important;
@@ -282,7 +287,7 @@ a {
   border-right: none;
 }
 
-.ui-mobile-active > .ps-menu-button {
+.ui-mobile-active>.ps-menu-button {
   color: #5bbb7b !important;
 }
 
@@ -354,10 +359,12 @@ a {
   border-top: 10px solid #ddd;
   border-bottom: 10px solid transparent;
 }
+
 .ui-social-media a i {
   transition: all 0.4s;
   color: #222222;
 }
+
 .ui-social-media a:hover i {
   color: #5bbb7b !important;
 }
@@ -406,7 +413,8 @@ a {
 }
 
 .search-suggestions {
-  z-index: 100001; /* Higher than 99999 */
+  z-index: 100001;
+  /* Higher than 99999 */
   position: absolute;
   width: 100%;
 }
@@ -438,83 +446,7 @@ a {
 
 
 .cta-banner3.mx-auto.maxw1600.pt120.pt60-lg.pb90.pb60-lg.position-relative.overflow-hidden.bgc-light-yellow {
-    margin: 50px;
+  margin: 50px;
 }
 
 
-/* pay now form */
-/* src/components/CheckoutForm.css */
-
-.checkout-form-container {
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.checkout-form-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.checkout-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-
-.card-element {
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.submit-button {
-  padding: 12px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.download-recipent {
-  padding: 12px 20px;
-  background-color: #5897b4;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-.amount-info a {
-  text-align: end;
-  display: inline-flex;
-  float: right;
-}
-
-.submit-button:disabled {
-  background-color: #9e9e9e;
-  cursor: not-allowed;
-}
-
-.submit-button:hover:not(:disabled) {
-  background-color: #45a049;
-}

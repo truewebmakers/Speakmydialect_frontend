@@ -1219,14 +1219,14 @@ span.mb25.me-4.badge-success {
 
 .pending-style.style1 {
   background-color: #f0e4e8;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  /* padding-top: 24px;
+  padding-bottom: 24px; */
   color: #ffa800;
-  max-width: 128px !important;
+  /* max-width: 128px !important;
   display: flex;
   height: 38px;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
 }
 
 .pending-style.style2 {
