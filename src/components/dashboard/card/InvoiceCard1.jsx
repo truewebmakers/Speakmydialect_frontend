@@ -2,8 +2,10 @@ import { CapitalizeFirstLetter } from "@/utils/helper";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 
-export default function InvoiceCard1({ data }) {
-  console.log(data?.payouts, 'dataat');
+export default function InvoiceCard1({ invoiceUrl, data }) {
+  const url = invoiceUrl?.split('/0');
+  const newUrl = url && (url[0] + '/' + data?.payouts[0]?.id)
+
   return (
     <>
       <tr>
@@ -13,9 +15,9 @@ export default function InvoiceCard1({ data }) {
             </span>
           </div>
         </th>
-        <td className="vam">{data?.payouts[0]?.billing_name || '-'}</td>
-        <td className="vam">{data?.payouts[0]?.billing_email || '-'}</td>
-        <td className="vam">{data?.payouts[0]?.amount || 0}</td>
+        <td className="vam">{data?.translator?.fname + ' ' + data?.translator?.lname || '-'}</td>
+        <td className="vam">{data?.translator?.email || '-'}</td>
+        <td className="vam">{data?.present_rate || 0}</td>
 
         <td className="vam">
           <span
@@ -28,9 +30,10 @@ export default function InvoiceCard1({ data }) {
         </td>
         <td className="vam">
           <a className="table-action fz15 fw500 text-thm2" id="view" >
-            {data?.payouts[0]?.receipt_url ?
+            {newUrl && invoiceUrl ?
               <>
-                <Link to={data?.payouts[0]?.receipt_url} target="_blank" clickable className="ui-tooltip">
+                <Link to={newUrl
+                } target="_blank" clickable className="ui-tooltip">
                   View
                 </Link>
                 <span className="flaticon-website me-2 vam" /></>

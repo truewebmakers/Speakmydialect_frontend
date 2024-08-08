@@ -53,13 +53,13 @@ const PayNowForm = () => {
                     amount: state?.presentRate,
                     token: token?.id,
                     currency: 'aud',
-                    job_id: 4,
+                    job_id: state?.jobId,
                     description: state?.description,
                     email: state?.clientEmail,
                     user_name: state?.clientUserName,
                 };
                 const { data } = await UseApi(apiUrls.payNow, apiMethods.POST, bodyData, headers);
-                if (data?.status === false) {
+                if (data?.status === true) {
                     setReceiptUrl(data?.invoice_url);
                     toast.success(data?.message);
                     navigate(routes.Bookings);
@@ -76,41 +76,41 @@ const PayNowForm = () => {
 
     return (
         <section className="pt-0">
-        <div class="checkout-page">
+            <div class="checkout-page">
 
-        <div className="checkout-form-container">
-            <h2>Payout</h2>
-            <form onSubmit={handleSubmit} className="checkout-form">
-                <div className="form-group">
-                    <label htmlFor="card-element">Credit or Debit Card</label>
-                    <CardElement id="card-element" className="card-element" />
+                <div className="checkout-form-container">
+                    <h2>Make Payment</h2>
+                    <form onSubmit={handleSubmit} className="checkout-form">
+                        <div className="form-group">
+                            <label htmlFor="card-element">Credit or Debit Card</label>
+                            <CardElement id="card-element" className="card-element" />
+                        </div>
+
+                        <div className="amount-info">
+                            {receiptUrl && (
+                                <a href={receiptUrl} className="download-recipent" download>
+                                    Download Receipt
+                                </a>
+                            )}
+                            <p><b>Stripe Processing Fee Percentage:</b> 3.50% (approx.)</p>
+                            <p><b>Tax Percentage:</b> 0.38%</p>
+                            <p><b>Amount to Receive:</b> ${state?.presentRate?.toFixed(2)}</p>
+                            <p><b>Total Amount Charged:</b> ${totalAmount}</p>
+                        </div>
+
+                        <button type="submit" disabled={!stripe} className="submit-button">
+
+                            {isLoading ? (
+                                <>
+                                    &nbsp;&nbsp; <Loader />
+                                </>
+                            ) :
+                                ` Pay $${totalAmount}`
+                            }
+                        </button>
+                    </form>
                 </div>
-
-                <div className="amount-info">
-                    {receiptUrl && (
-                        <a href={receiptUrl} className="download-recipent" download>
-                            Download Receipt
-                        </a>
-                    )}
-                    <p><b>Stripe Processing Fee Percentage:</b> 3.50% (approx.)</p>
-                    <p><b>Tax Percentage:</b> 0.38%</p>
-                    <p><b>Amount to Receive:</b> ${state?.presentRate?.toFixed(2)}</p>
-                    <p><b>Total Amount Charged:</b> ${totalAmount}</p>
-                </div>
-
-                <button type="submit" disabled={!stripe} className="submit-button">
-                    
-                    {isLoading ? (
-                        <>
-                            &nbsp;&nbsp; <Loader />
-                        </>
-                    ) : 
-                       ` Pay ${totalAmount}`
-                    }
-                </button>
-            </form>
-        </div>
-        </div>
+            </div>
         </section>
     );
 };

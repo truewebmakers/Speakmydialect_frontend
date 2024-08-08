@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 export default function InvoiceInfo() {
   const { user } = useSelector((state) => state.auth);
   const [invoiceListing, setInvoiceListing] = useState([]);
+const[invoiveUrl,setInvoiceUrl]=useState('');
 
   const getInvoiceDetail = async () => {
     try {
@@ -23,6 +24,7 @@ export default function InvoiceInfo() {
       );
       if (response?.status === 200 || response?.status === 201) {
         setInvoiceListing(response?.data?.data);
+        setInvoiceUrl(response?.data?.invoice_url)
       }
     } catch (error) {
       toast.error("Error fetching profile data");
@@ -81,7 +83,7 @@ export default function InvoiceInfo() {
                   </thead>
                   <tbody className="t-body">
                     {invoiceListing?.map((item, i) => (
-                      <InvoiceCard1 key={i} data={item} />
+                      <InvoiceCard1 key={i} data={item} invoiceUrl={invoiveUrl}/>
                     ))}
                   </tbody>
                 </table>
