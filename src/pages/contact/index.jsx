@@ -17,7 +17,7 @@ export default function ContactPage() {
         isBtnActive={false}
       />
       <ContactInfo1 />
-      <GoogleMap1 />
+      {/* <GoogleMap1 /> */}
       <OurFaq1 />
     </>
   );

@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 export default function InvoiceInfo() {
   const { user } = useSelector((state) => state.auth);
   const [invoiceListing, setInvoiceListing] = useState([]);
-const[invoiveUrl,setInvoiceUrl]=useState('');
+  const [invoiveUrl, setInvoiceUrl] = useState("");
 
   const getInvoiceDetail = async () => {
     try {
@@ -24,7 +24,7 @@ const[invoiveUrl,setInvoiceUrl]=useState('');
       );
       if (response?.status === 200 || response?.status === 201) {
         setInvoiceListing(response?.data?.data);
-        setInvoiceUrl(response?.data?.invoice_url)
+        setInvoiceUrl(response?.data?.invoice_url);
       }
     } catch (error) {
       toast.error("Error fetching profile data");
@@ -49,7 +49,7 @@ const[invoiveUrl,setInvoiceUrl]=useState('');
               <h2>Invoice</h2>
             </div>
           </div>
-          <div className="col-xl-4">
+          {/* <div className="col-xl-4">
             <div className="dashboard_search_meta">
               <div className="search_area">
                 <input
@@ -62,7 +62,7 @@ const[invoiveUrl,setInvoiceUrl]=useState('');
                 </label>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="row">
           <div className="col-xl-12">
@@ -74,7 +74,7 @@ const[invoiveUrl,setInvoiceUrl]=useState('');
                       <th scope="col">Job Title</th>
                       <th scope="col">Name</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Rate</th>
+                      <th scope="col">Tx Price ($/hr)</th>
                       <th scope="col">Payment Status</th>
                       <th scope="col">View Reciept</th>
 
@@ -83,7 +83,11 @@ const[invoiveUrl,setInvoiceUrl]=useState('');
                   </thead>
                   <tbody className="t-body">
                     {invoiceListing?.map((item, i) => (
-                      <InvoiceCard1 key={i} data={item} invoiceUrl={invoiveUrl}/>
+                      <InvoiceCard1
+                        key={i}
+                        data={item}
+                        invoiceUrl={invoiveUrl}
+                      />
                     ))}
                   </tbody>
                 </table>

@@ -24,7 +24,7 @@ export default function JobAndOrdersManagement() {
   const [getClientCurrentTab, setClientCurrentTab] = useState({
     id: 0,
     name: "",
-    status: "pending",
+    status: "in-process",
     type: "upcoming_booking",
   });
   const { pathname } = useLocation();

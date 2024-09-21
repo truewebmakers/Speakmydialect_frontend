@@ -1,4 +1,3 @@
-import { routes } from "@/constants/constant";
 import {
   getCountries,
   getCountryName,
@@ -31,6 +30,13 @@ export default function ProjectCard1({ data }) {
     };
     fetchData();
   }, []);
+  const picture = data?.user_meta?.profile_pic
+    ? data?.user_meta?.profile_pic?.split("profile_pictures/")[1]
+    : null;
+  const newPicUrl =
+    picture &&
+    "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
+      picture;
 
   return (
     <div className="freelancer-style1 bdr1 hover-box-shadow row ms-0 align-items-lg-center">
@@ -39,10 +45,7 @@ export default function ProjectCard1({ data }) {
           <div className="thumb w60 position-relative rounded-circle mb15-md">
             <img
               className="rounded-circle mx-auto"
-              src={
-                data?.user_meta?.profile_pic ||
-                "/images/default/defaultProfile.png"
-              }
+              src={newPicUrl || "/images/default/defaultProfile.png"}
               height={45}
               width={45}
               alt="profile"
@@ -83,15 +86,6 @@ export default function ProjectCard1({ data }) {
       <div className="col-lg-4 ps-0 ps-xl-3 pe-0">
         <div className="details">
           {/* though it is hourky rayte but for now we only need to show fix rate */}
-
-          <div className="text-lg-end">
-            <h4>
-              {data?.user_meta?.fix_rate
-                ? "$" + data?.user_meta?.fix_rate
-                : "Not Mentioned Yet"}
-            </h4>
-            <p className="text">Fix Rate</p>
-          </div>
 
           <div className="d-grid mt15">
             <Link

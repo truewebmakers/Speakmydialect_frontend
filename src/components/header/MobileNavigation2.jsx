@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 
 export default function MobileNavigation2() {
   const { user, profileData } = useSelector((state) => state.auth);
-
+  const picture = profileData?.user_meta?.profile_pic
+    ? profileData?.user_meta?.profile_pic?.split("profile_pictures/")[1]
+    : null;
+  const newPicUrl =
+    picture &&
+    "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
+      picture;
   return (
     <>
       <div className="mobilie_header_nav stylehome1">
@@ -31,10 +37,7 @@ export default function MobileNavigation2() {
                         </span>
                       )}
                       <img
-                        src={
-                          profileData?.user_meta?.profile_pic ||
-                          "/images/default/defaultProfile.png"
-                        }
+                        src={newPicUrl || "/images/default/defaultProfile.png"}
                         alt="User Image"
                         height={45}
                         width={45}

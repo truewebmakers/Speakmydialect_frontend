@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import LineChart from "../chart/LineChart";
 import DashboardNavigation from "../header/DashboardNavigation";
 import { useEffect, useState } from "react";
 import UseApi from "@/hook/useApi";
@@ -27,7 +26,7 @@ export default function DashboardInfo() {
         null,
         headers
       );
-      if (response?.status == 200 || response?.status == 201) {
+      if (response?.status === 200 || response?.status === 201) {
         const cards = response?.data?.data;
         setAdminCards(cards);
       }
@@ -42,7 +41,10 @@ export default function DashboardInfo() {
 
   return (
     <>
-      <div className="dashboard__content hover-bgc-color">
+      <div
+        className="dashboard__content hover-bgc-color"
+        style={{ height: "800px" }}
+      >
         <div className="row pb40">
           <div className="col-lg-12">
             <DashboardNavigation />
@@ -50,7 +52,6 @@ export default function DashboardInfo() {
           <div className="col-lg-12">
             <div className="dashboard_title_area">
               <h2>Dashboard</h2>
-              {/* <p className="text">Lorem ipsum dolor sit amet, consectetur.</p> */}
             </div>
           </div>
         </div>
@@ -96,12 +97,6 @@ export default function DashboardInfo() {
                   </div>
                 </div>
               ))}
-        </div>
-
-        <div className="row">
-          <div className="col-xl-12">
-            <LineChart />
-          </div>
         </div>
       </div>
     </>

@@ -102,6 +102,8 @@ export default function HireNowSection({ translatorProfile }) {
           clientUserName: user?.userInfo?.username,
           clientEmail: user?.userInfo?.email,
           presentRate: response?.data?.data?.present_rate,
+          startDate: hireNowForm?.start_at,
+          endDate: hireNowForm?.end_at,
         };
         navigate(routes.PayNow, { state: data });
         setIsLoading(false);

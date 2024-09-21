@@ -56,3 +56,29 @@ export const getProfileData = async (id, token) => {
     return toast.error("Error fetching profile data");
   }
 };
+
+// paymentUtils.js
+import moment from "moment";
+
+export const calculatePayment = (presentRate = 0, startDate, endDate) => {
+  const feePercentage = 0.035;
+  const fixedFee = 0.3;
+
+  // Calculate time difference in hours
+  const startMoment = moment(startDate);
+  const endMoment = moment(endDate);
+  const hoursDiff =
+    endMoment.diff(startMoment, "hours") +
+    (endMoment.diff(startMoment, "minutes") % 60) / 60;
+
+  // Calculate amount to receive
+  const amountToReceive = presentRate * hoursDiff;
+  // Calculate total amount based on hourly rate
+  const totalAmount = (amountToReceive + fixedFee) / (1 - feePercentage);
+
+  return {
+    amountToReceive: amountToReceive.toFixed(2),
+    totalAmount: totalAmount.toFixed(2),
+    hours: hoursDiff,
+  };
+};

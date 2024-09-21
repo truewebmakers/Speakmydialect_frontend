@@ -28,6 +28,14 @@ export default function TranslatorBooking({ data, i, currentTab, getData }) {
     }
   };
 
+  const picture = data?.client_meta?.profile_pic
+    ? data?.client_meta?.profile_pic?.split("profile_pictures/")[1]
+    : null;
+  const newPicUrl =
+    picture &&
+    "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
+      picture;
+
   return (
     <>
       <tr>
@@ -36,10 +44,7 @@ export default function TranslatorBooking({ data, i, currentTab, getData }) {
             <div className="icon2 mb10-lg mb-0 me-3 bg-transparent">
               <img
                 className="wa"
-                src={
-                  data?.client_meta?.profile_pic ||
-                  "/images/default/defaultProfile.png"
-                }
+                src={newPicUrl || "/images/default/defaultProfile.png"}
                 height={40}
                 width={40}
                 alt="icon2"

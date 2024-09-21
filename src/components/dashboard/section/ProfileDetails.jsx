@@ -22,10 +22,9 @@ export default function ProfileDetails() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadPic, setUploadedPic] = useState(null);
   const [getGender, setGender] = useState({ option: "Select", value: null });
-  const [getCountry, setCountry] = useState({ option: "Select", value: null });
+  const [getCountry, setCountry] = useState({ option: "Australia", value: 14 });
   const [countryList, setCountryList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -47,7 +46,13 @@ export default function ProfileDetails() {
 
   const handleOnChange = (e) => {
     const { value, name } = e.target;
-    setProfileDetails({ ...profileDetails, [name]: value });
+    if (name === "phone") {
+      if (value == "" || value?.length <= 10) {
+        setProfileDetails({ ...profileDetails, phone: value });
+      }
+    } else {
+      setProfileDetails({ ...profileDetails, [name]: value });
+    }
   };
 
   useEffect(() => {
@@ -90,7 +95,14 @@ export default function ProfileDetails() {
           });
         }
       }
-      setSelectedImage(profileData?.user_meta?.profile_pic);
+      const picture = profileData?.user_meta?.profile_pic
+        ? profileData?.user_meta?.profile_pic?.split("profile_pictures/")[1]
+        : null;
+      const newPicUrl =
+        picture &&
+        "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
+          picture;
+      setSelectedImage(newPicUrl);
     }
   }, [profileData]);
 
@@ -260,23 +272,6 @@ export default function ProfileDetails() {
                       />
                     </div>
                   </div>
-
-                  {/* <div className="col-sm-6">
-                    <div className="mb20">
-                      <label className="heading-color ff-heading fw500 mb10">
-                        Hourly Rate
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter your hourly rate"
-                        name="hourly_rate"
-                        autoComplete="off"
-                        value={profileDetails?.hourly_rate}
-                        onChange={handleOnChange}
-                      />
-                    </div>
-                  </div> */}
                 </>
               )}
               <div className="col-sm-6">
@@ -296,7 +291,7 @@ export default function ProfileDetails() {
                   />
                 </div>
               </div>
-              <div className="col-sm-6">
+              {/* <div className="col-sm-6">
                 <div className="mb20">
                   <SelectInput
                     label="Country"
@@ -308,7 +303,7 @@ export default function ProfileDetails() {
                     handler={countryHandler}
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="col-md-12">
                 <div className="mb10">
                   <label className="heading-color ff-heading fw500 mb10">

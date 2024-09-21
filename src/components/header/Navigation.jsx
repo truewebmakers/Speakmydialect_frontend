@@ -7,13 +7,22 @@ export default function Navigation() {
   const { pathname } = useLocation();
   const { user, profileData } = useSelector((state) => state.auth);
 
+  const picture = profileData?.user_meta?.profile_pic
+    ? profileData?.user_meta?.profile_pic?.split("profile_pictures/")[1]
+    : null;
+  const newPicUrl =
+    picture &&
+    "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
+      picture;
   return (
     <>
       <ul
         className={`ace-responsive-menu ui-navigation ${
           pathname == "/home-3" ||
           pathname == "/home-4" ||
-          pathname == "/home-10" ? "menu-without-paddingy" : ""
+          pathname == "/home-10"
+            ? "menu-without-paddingy"
+            : ""
         } `}
       >
         {/* if logged In show profile image, and hide other tabs */}
@@ -24,10 +33,7 @@ export default function Navigation() {
                   <div className="dropdown">
                     <Link className="btn" to="/my-profile">
                       <img
-                        src={
-                          profileData?.user_meta?.profile_pic ||
-                          "/images/default/defaultProfile.png"
-                        }
+                        src={newPicUrl || "/images/default/defaultProfile.png"}
                         alt="User Image"
                         height={45}
                         width={45}
@@ -62,7 +68,9 @@ export default function Navigation() {
               >
                 <Link
                   to={item.path}
-                  className={`list-item  ${item.path === pathname ? "ui-active" : ""}`}
+                  className={`list-item  ${
+                    item.path === pathname ? "ui-active" : ""
+                  }`}
                 >
                   <span className="title">{item.name}</span>
                 </Link>

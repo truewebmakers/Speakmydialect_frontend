@@ -48,8 +48,6 @@ export default function MyProfileInfo() {
                 <WorkExperience />
               </>
             )}
-            {/* Payment Method will only be visible to client */}
-            {user?.userInfo?.user_type == "client" && <PaymentMethod />}
             {/* Change Password will be visible to all  */}
             <ChangePassword />
           </div>

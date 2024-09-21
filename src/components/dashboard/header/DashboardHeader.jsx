@@ -5,6 +5,14 @@ import { Link } from "react-router-dom";
 export default function DashboardHeader() {
   const { profileData, user } = useSelector((state) => state.auth);
 
+  const picture = profileData?.user_meta?.profile_pic
+    ? profileData?.user_meta?.profile_pic?.split("profile_pictures/")[1]
+    : null;
+  const newPicUrl =
+    picture &&
+    "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
+      picture;
+
   return (
     <>
       <header className="header-nav nav-innerpage-style menu-home4 dashboard_header main-menu">
@@ -33,8 +41,7 @@ export default function DashboardHeader() {
                           )}
                           <img
                             src={
-                              profileData?.user_meta?.profile_pic ||
-                              "/images/default/defaultProfile.png"
+                              newPicUrl || "/images/default/defaultProfile.png"
                             }
                             alt="User Image"
                             height={45}

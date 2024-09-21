@@ -33,13 +33,14 @@ export default function Skill() {
 
   // Add another input field method
   const handleAddLanguage = () => {
+    toast.info("New Skill? Add It Here!");
     setSkills([
-      ...skills,
       {
         language: { option: "Select", value: null },
         level: { option: "Select", value: null },
         status: "active",
       },
+      ...skills,
     ]);
   };
 

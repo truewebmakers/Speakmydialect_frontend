@@ -14,7 +14,7 @@ export default function TrendingService1() {
   const [showSwiper, setShowSwiper] = useState(false);
 
   const [searchingResult, setSearchingResult] = useState([]);
-   const [SearchingResult1, setSearchingResult1] = useState([]);
+  const [SearchingResult1, setSearchingResult1] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -37,14 +37,6 @@ export default function TrendingService1() {
                 </p>
               </div>
             </div>
-            {/* <div className="col-lg-3">
-              <div className="text-start text-lg-end mb-4 mb-lg-2">
-                <Link className="ud-btn2" to="/service-1">
-                  All Categories
-                  <i className="fal fa-arrow-right-long" />
-                </Link>
-              </div>
-            </div> */}
           </div>
           <div className="row">
             <div className="col-lg-12">
@@ -76,11 +68,12 @@ export default function TrendingService1() {
                       },
                     }}
                   >
-                    {searchingResult?.length > 0 && searchingResult?.map((item, i) => (
-                      <SwiperSlide key={i}>
-                        <TrendingServiceCard1 data={item} />
-                      </SwiperSlide>
-                    ))}
+                    {searchingResult?.length > 0 &&
+                      searchingResult?.map((item, i) => (
+                        <SwiperSlide key={i}>
+                          <TrendingServiceCard1 data={item} />
+                        </SwiperSlide>
+                      ))}
                   </Swiper>
                 )}
                 <button type="button" className="prev-btn">

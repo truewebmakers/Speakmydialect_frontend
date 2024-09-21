@@ -3,7 +3,13 @@ import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 
 export default function Breadcumb17({ translatorProfile }) {
-  const storedCountries = sessionStorage.getItem("countries");
+  const picture = translatorProfile?.user_meta?.profile_pic
+    ? translatorProfile?.user_meta?.profile_pic?.split("profile_pictures/")[1]
+    : null;
+  const newPicUrl =
+    picture &&
+    "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
+      picture;
 
   return (
     <>
@@ -25,11 +31,10 @@ export default function Breadcumb17({ translatorProfile }) {
                 <div className="position-relative">
                   <div className="list-meta d-sm-flex align-items-center mt30">
                     <a className="position-relative freelancer-single-style">
-                      <span className="online" />
-                      {translatorProfile?.user_meta?.profile_pic ? (
+                      {newPicUrl ? (
                         <img
                           className="rounded-circle  wa-sm mb15-sm"
-                          src={translatorProfile?.user_meta?.profile_pic}
+                          src={newPicUrl}
                           alt="Profile Pic"
                           height={80}
                           width={80}
@@ -44,6 +49,7 @@ export default function Breadcumb17({ translatorProfile }) {
                     </a>
                     <div className="ml20 ml0-xs">
                       <h5 className="title mb-1">
+                        {" "}
                         {translatorProfile?.fname} {translatorProfile?.lname}
                       </h5>
                       <p className="mb-0">
@@ -53,26 +59,12 @@ export default function Breadcumb17({ translatorProfile }) {
                             )
                           : "-"}
                       </p>
-                      <p className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm">
-                        <i className="fas fa-star vam fz10 review-color me-2" />{" "}
-                        {translatorProfile?.user_meta?.gender
-                          ? CapitalizeFirstLetter(
-                              translatorProfile?.user_meta?.gender
-                            )
-                          : null}
-                      </p>
-                      <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
-                        <i className="flaticon-place vam fz20 me-2" />{" "}
-                        {storedCountries?.length > 0
-                          ? getCountryName(
-                              translatorProfile?.user_meta?.location,
-                              JSON.parse(storedCountries)
-                            )
-                          : "Not Specified Yet"}
-                      </p>
-                      <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
-                        <i className="flaticon-30-days vam fz20 me-2" /> Member
-                        since{" "}
+                      <p
+                        className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm ml0-xs"
+                        style={{ marginTop: "24px", position: "absolute" }}
+                      >
+                        <i className="flaticon-30-days vam fz20 me-2" />
+                        Member Since:
                         {translatorProfile?.user_meta?.created_at
                           ? moment(
                               translatorProfile?.user_meta?.created_at

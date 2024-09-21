@@ -9,8 +9,8 @@ export default function NeedSomething1() {
             <div className="col-lg-12">
               <div className="main-title text-center">
                 <h2>How it Works?</h2>
-                <p className="text">
-                Explore SpeakMyDialect with our 4-step simple process.
+                <p className="text" style={{ textAlign: "center" }}>
+                  Explore SpeakMyDialect with our 4-step simple process.
                 </p>
               </div>
             </div>

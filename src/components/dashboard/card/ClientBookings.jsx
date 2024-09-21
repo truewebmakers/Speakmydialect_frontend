@@ -1,5 +1,6 @@
 import { apiMethods, apiUrls } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
+import { calculatePayment } from "@/utils/commonFunctions";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 import { useEffect, useState } from "react";
@@ -67,7 +68,13 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
       }
     });
   };
-
+  const picture = data?.translator_meta?.profile_pic
+    ? data?.translator_meta?.profile_pic?.split("profile_pictures/")[1]
+    : null;
+  const newPicUrl =
+    picture &&
+    "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
+      picture;
   return (
     <>
       <tr>
@@ -76,10 +83,7 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
             <div className="icon2 mb10-lg mb-0 me-3 bg-transparent">
               <img
                 className="wa"
-                src={
-                  data?.translator_meta?.profile_pic ||
-                  "/images/default/defaultProfile.png"
-                }
+                src={newPicUrl || "/images/default/defaultProfile.png"}
                 height={40}
                 width={40}
                 alt="icon2"
@@ -103,7 +107,9 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
               {CapitalizeFirstLetter(data?.payment_type) + " Rate: " ||
                 "Not Mentioned Yet"}{" "}
             </b>
-            ${data?.present_rate || "Not specified yet"}{" "}
+            $
+            {calculatePayment(data?.present_rate, data?.start_at, data?.end_at)
+              ?.amountToReceive || "Not specified yet"}{" "}
           </p>
           <p className="list-inline-item mb-0 bdrl1 pl15 bdrn-lg pl5-lg">
             <b> Start At</b> : {moment(data?.start_at).format("lll") || "-"}

@@ -11,7 +11,7 @@ export default function PayoutForm() {
     bank_name: "",
     account_number: "",
     bsb: "",
-    ifsc: "",
+    ifsc: "Fghv5656",
   });
 
   const [isLoading, setIsLoading] = useState(false); // Loading state for API call
@@ -80,17 +80,12 @@ export default function PayoutForm() {
       return "Account holder name must contain only letters and spaces.";
     }
 
-    if (!/^\d+$/.test(account_number)) {
-      return "Account number must be numeric.";
+    if (!/^\d{9}$/.test(account_number)) {
+      return "Account number must be numeric & can't be more thanm 9 digits.";
     }
 
     if (!/^\d{6}$/.test(bsb)) {
       return "BSB must be exactly 6 digits.";
-    }
-
-    const ifscRegex = /^[A-Z]{4}\d{7}$/;
-    if (!ifscRegex.test(ifsc)) {
-      return "IFSC code must be in the format of 4 letters followed by 7 digits.";
     }
 
     return null;
@@ -230,8 +225,8 @@ export default function PayoutForm() {
             </div>
           </div>
 
-          {/* Bank IBAN */}
-          <div className="col-sm-6">
+          {/* Bank IFSC */}
+          {/* <div className="col-sm-6">
             <div className="mb20">
               <label className="heading-color ff-heading fw500 mb-1">
                 IFSC Code
@@ -245,7 +240,7 @@ export default function PayoutForm() {
                 onChange={handleChange}
               />
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Error Message */}
