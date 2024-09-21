@@ -17,7 +17,6 @@ export default function PayoutInfo() {
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState(0);
   const [action, setAction] = useState({ option: "Select", value: null });
-  // const [reason, setReason] = useState("");
 
   // close modal
   const handleCloseModal = () => {
@@ -128,17 +127,20 @@ export default function PayoutInfo() {
                 <div className="mt30">{/* <Pagination1 /> */}</div>
               </div>
             </div>
-            <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
-              <div className="row">
-                <div className="col-lg-9">
-                  <PaymentMethod />
+            {user?.userInfo?.user_type === "translator" && (
+              <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
+                <div className="row">
+                  <div className="col-lg-9">
+                    <PaymentMethod />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
       <PayoutStatusChangeModal
+        userId={userId}
         show={showModal}
         handleClose={handleCloseModal}
         option={PaymentStatusChangeDropdown}
