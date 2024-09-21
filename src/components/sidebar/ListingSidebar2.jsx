@@ -34,20 +34,7 @@ export default function ListingSidebar2() {
       <div className="list-sidebar-style1 d-none d-lg-block">
         <div className="accordion" id="accordionExample">
           <div className="card mb20 pb10 mt-0">
-            <div className="card-header" id="heading0">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 pt-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse0"
-                  aria-expanded="false"
-                  aria-controls="collapse0"
-                >
-                  Level
-                </button>
-              </h4>
-            </div>
+            <h4>Level</h4>
             <div
               id="collapse0"
               className="collapse show"
@@ -59,73 +46,9 @@ export default function ListingSidebar2() {
               </div>
             </div>
           </div>
-          <div className="card mb20 pb10">
-            <div className="card-header" id="heading01">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse01"
-                  aria-expanded="false"
-                  aria-controls="collapse01"
-                >
-                  Project type
-                </button>
-              </h4>
-            </div>
-            <div
-              id="collapse01"
-              className="collapse show"
-              aria-labelledby="heading01"
-              data-parent="#accordionExample"
-            >
-              <div className="card-body card-body px-0 pt-0">
-                <ProjectTypeOption1 />
-              </div>
-            </div>
-          </div>
-          <div className="card mb20 pb0">
-            <div className="card-header" id="heading1">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse1"
-                  aria-expanded="false"
-                  aria-controls="collapse1"
-                >
-                  Price
-                </button>
-              </h4>
-            </div>
-            <div
-              id="collapse1"
-              className="collapse show"
-              aria-labelledby="heading1"
-              data-parent="#accordionExample"
-            >
-              <div className="card-body card-body px-0 pt-4">
-                <BudgetOption2 />
-              </div>
-            </div>
-          </div>
+
           <div className="card mb20 pb5">
-            <div className="card-header" id="heading2">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse2"
-                  aria-expanded="false"
-                  aria-controls="collapse2"
-                >
-                  Location
-                </button>
-              </h4>
-            </div>
+            <h4>Location</h4>
             <div
               id="collapse2"
               className="collapse show"
@@ -138,20 +61,7 @@ export default function ListingSidebar2() {
             </div>
           </div>
           <div className="card mb20 pb5">
-            <div className="card-header" id="heading3">
-              <h4>
-                <button
-                  className="btn btn-link ps-0 collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse3"
-                  aria-expanded="false"
-                  aria-controls="collapse3"
-                >
-                  Languange
-                </button>
-              </h4>
-            </div>
+            <h4>Languange</h4>
             <div
               id="collapse3"
               className="collapse show"

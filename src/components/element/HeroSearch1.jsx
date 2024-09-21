@@ -9,11 +9,10 @@ export default function HeroSearch1({ isSearchingPage }) {
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [searchingList, setSearchingList] = useState([]);
+  const [isSuggestionSelected, setIsSuggestionSelected] = useState(false); // New state to track selection
   const setSpeak = listingStore((state) => state.setSpeak);
-
   const navigate = useNavigate();
 
-  // search dropdown
   const focusDropdown = () => {
     setSearchDropdownOpen(true);
   };
@@ -21,17 +20,19 @@ export default function HeroSearch1({ isSearchingPage }) {
   const blurDropdown = () => {
     setTimeout(() => {
       setSearchDropdownOpen(false);
-    }, 200); // Delay to allow click event on suggestion to register
+    }, 200);
   };
 
   const selectSearch = (select) => {
     setSearchValue(select);
+    setIsSuggestionSelected(true); // Set to true when a suggestion is selected
     setSearchDropdownOpen(false);
   };
 
   const onSearchChange = (e) => {
     const { value } = e.target;
     setSearchValue(value);
+    setIsSuggestionSelected(false); // Reset selection when typing manually
     if (value?.length > 2) {
       getSearchSuggestions(value);
     } else {
@@ -68,14 +69,17 @@ export default function HeroSearch1({ isSearchingPage }) {
   );
 
   const handleSearchClick = async () => {
-    setSpeak(searchValue);
-    const params = {
-      language: searchValue,
-    };
-    navigate({
-      pathname: routes.Search,
-      search: `?${createSearchParams(params)}`,
-    });
+    if (searchValue) {
+      setSpeak(searchValue);
+      const params = new URLSearchParams(window.location.search);
+      params.delete("language");
+      params.set("language", searchValue);
+
+      navigate({
+        pathname: routes.Search,
+        search: `?${params.toString()}`,
+      });
+    }
   };
 
   return !isSearchingPage ? (
@@ -89,32 +93,29 @@ export default function HeroSearch1({ isSearchingPage }) {
                 className="form-control"
                 type="text"
                 name="search"
-                placeholder="Online Platform to Connect You with Global Interpreters"
+                placeholder={
+                  isSuggestionSelected
+                    ? "Search For Languages"
+                    : "Select a suggestion to search"
+                }
                 onFocus={focusDropdown}
                 onBlur={blurDropdown}
                 autoComplete="off"
                 value={searchValue}
                 onChange={onSearchChange}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSearchClick();
+                  if (e.key === "Enter" && isSuggestionSelected)
+                    handleSearchClick();
                 }}
               />
               {searchingList?.length > 0 && (
                 <div
                   className="search-suggestions"
-                  style={
-                    isSearchDropdownOpen
-                      ? {
-                          visibility: "visible",
-                          opacity: "1",
-                          top: "70px",
-                        }
-                      : {
-                          visibility: "hidden",
-                          opacity: "0",
-                          top: "100px",
-                        }
-                  }
+                  style={{
+                    visibility: isSearchDropdownOpen ? "visible" : "hidden",
+                    opacity: isSearchDropdownOpen ? "1" : "0",
+                    top: isSearchDropdownOpen ? "70px" : "100px",
+                  }}
                 >
                   <h6 className="fz14 ml30 mt25 mb-3">Popular Search</h6>
                   <div className="box-suggestions">
@@ -150,6 +151,7 @@ export default function HeroSearch1({ isSearchingPage }) {
             onClick={handleSearchClick}
             className="ud-btn btn-thm w-100 px-4"
             type="button"
+            disabled={!isSuggestionSelected} // Disable button if no suggestion is selected
           >
             Search
           </button>
@@ -168,7 +170,11 @@ export default function HeroSearch1({ isSearchingPage }) {
                   className="form-control"
                   type="text"
                   name="search"
-                  placeholder="Online Platform to Connect You with Global Interpreters"
+                  placeholder={
+                    isSuggestionSelected
+                      ? "Search For Languages"
+                      : "Select a suggestion to search"
+                  }
                   onFocus={focusDropdown}
                   onBlur={blurDropdown}
                   autoComplete="off"
@@ -182,8 +188,8 @@ export default function HeroSearch1({ isSearchingPage }) {
                       visibility: isSearchDropdownOpen ? "visible" : "hidden",
                       opacity: isSearchDropdownOpen ? "1" : "0",
                       top: isSearchDropdownOpen ? "70px" : "100px",
-                      zIndex: 120001, // Higher than 99999
-                      position: "absolute", // Ensure it's positioned correctly
+                      zIndex: 120001,
+                      position: "absolute",
                       border: "1px solid black",
                     }}
                   >
@@ -221,6 +227,7 @@ export default function HeroSearch1({ isSearchingPage }) {
               onClick={handleSearchClick}
               className="ud-btn btn-thm w-100 px-4"
               type="button"
+              disabled={!isSuggestionSelected} // Disable button if no suggestion is selected
             >
               Search
             </button>
