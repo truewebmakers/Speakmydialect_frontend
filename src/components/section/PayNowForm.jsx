@@ -20,9 +20,9 @@ const PayNowForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const { presentRate, startDate, endDate } = state;
+    if (state?.presentRate && state?.startDate && state?.endDate) {
+      const { presentRate, startDate, endDate } = state;
 
-    if (presentRate && startDate && endDate) {
       setCalculating(true);
       const { amountToReceive, totalAmount } = calculatePayment(
         presentRate,
@@ -91,7 +91,13 @@ const PayNowForm = () => {
           <form onSubmit={handleSubmit} className="checkout-form">
             <div className="form-group">
               <label htmlFor="card-element">Credit or Debit Card</label>
-              <CardElement id="card-element" className="card-element" />
+              <CardElement
+                id="card-element"
+                className="card-element"
+                options={{
+                  hidePostalCode: true, // Disable ZIP code field
+                }}
+              />
             </div>
 
             <div className="amount-info">
@@ -120,7 +126,13 @@ const PayNowForm = () => {
               disabled={!stripe || calculating}
               className="submit-button"
             >
-              {calculating ? "Calculating..." : `Pay $${totalAmount}`}
+              {isLoading ? (
+                <Loader />
+              ) : calculating ? (
+                "Calculating..."
+              ) : (
+                `Pay $${totalAmount}`
+              )}
             </button>
           </form>
         </div>

@@ -21,6 +21,12 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
   useEffect(() => {
     const query = Object.fromEntries(searchParams.entries());
 
+    // If there are no filters and it's just "/search", call API without parameters
+    if (!searchParams.toString()) {
+      searchingApi({}).then((data) => setSearchingResult(data));
+      return; // Exit early
+    }
+
     // Check if no filters are selected
     if (
       !getLocation.length &&
