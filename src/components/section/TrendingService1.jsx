@@ -38,7 +38,7 @@ export default function TrendingService1() {
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className="row" style={{ paddingBottom: "25px" }}>
             <div className="col-lg-12">
               <div className="position-relative">
                 {showSwiper && (

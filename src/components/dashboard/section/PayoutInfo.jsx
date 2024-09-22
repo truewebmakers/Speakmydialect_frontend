@@ -109,7 +109,7 @@ export default function PayoutInfo() {
                     <tr>
                       <th scope="col">Job Title</th>
                       <th scope="col">Paid At</th>
-                      <th scope="col">Tx Price</th>
+                      <th scope="col">Total Pay</th>
                       <th scope="col">Start At</th>
                       <th scope="col">End At</th>
                       <th scope="col">Payment Status</th>

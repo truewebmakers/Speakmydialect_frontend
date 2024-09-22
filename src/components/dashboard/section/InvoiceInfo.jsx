@@ -74,7 +74,7 @@ export default function InvoiceInfo() {
                       <th scope="col">Job Title</th>
                       <th scope="col">Name</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Tx Price ($/hr)</th>
+                      <th scope="col">Total Pay</th>
                       <th scope="col">Payment Status</th>
                       <th scope="col">View Reciept</th>
 

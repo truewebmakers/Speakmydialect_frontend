@@ -1,16 +1,23 @@
-import { apiMethods, apiUrls } from "@/constants/constant";
+import {
+  apiMethods,
+  apiUrls,
+  australianStatesAndCities,
+} from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import { getProfileDetails } from "@/redux/auth";
 import { toast } from "react-toastify";
 
-export const getCountries = async (setCountryList) => {
+export const getCountries = (setCountryList) => {
   try {
-    const response = await UseApi(apiUrls.getCountries, apiMethods.GET);
-    if (response?.status == 200 || response?.status == 201) {
-      const countryData = response?.data?.data;
-      setCountryList(countryData);
-      sessionStorage.setItem("countries", JSON.stringify(countryData));
-    }
+    const formattedArray = australianStatesAndCities.map((city, index) => ({
+      id: index + 1,
+      name: city,
+    }));
+
+    setCountryList(formattedArray);
+
+    // Optionally store in session storage
+    sessionStorage.setItem("countries", JSON.stringify(formattedArray));
   } catch (error) {
     toast.error("Error fetching countries");
   }

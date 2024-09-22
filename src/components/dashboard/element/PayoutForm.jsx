@@ -81,7 +81,7 @@ export default function PayoutForm() {
     }
 
     if (!/^\d{9}$/.test(account_number)) {
-      return "Account number must be numeric & can't be more thanm 9 digits.";
+      return "Account number must be numeric & can't be more than 9 digits.";
     }
 
     if (!/^\d{6}$/.test(bsb)) {

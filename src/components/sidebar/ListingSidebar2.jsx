@@ -15,10 +15,11 @@ export default function ListingSidebar2() {
     const fetchData = async () => {
       const storedCountries = sessionStorage.getItem("countries");
       const storedLanguages = sessionStorage.getItem("languages");
+
       if (storedCountries?.length > 0) {
         setCountryList(JSON.parse(storedCountries));
       } else {
-        await getCountries(setCountryList);
+        getCountries(setCountryList);
       }
       if (storedLanguages?.length > 0) {
         setLanguageListing(JSON.parse(storedLanguages));

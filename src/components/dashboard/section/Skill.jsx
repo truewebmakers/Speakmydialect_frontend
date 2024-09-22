@@ -14,7 +14,6 @@ export default function Skill() {
   const { user } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Skills on Change method
   const handleFieldChange = (index, field, option, value) => {
     const newSkills = [...skills];
     newSkills[index][field] = {
@@ -24,14 +23,12 @@ export default function Skill() {
     setSkills(newSkills);
   };
 
-  // On Change Method for status
   const handleChecked = (index, e) => {
     const newSkills = [...skills];
     newSkills[index].status = e.target.checked ? "active" : "inactive";
     setSkills(newSkills);
   };
 
-  // Add another input field method
   const handleAddLanguage = () => {
     toast.info("New Skill? Add It Here!");
     setSkills([
@@ -44,12 +41,10 @@ export default function Skill() {
     ]);
   };
 
-  // Skill Delete method by Id
   const handleDeleteLanguage = (index) => {
     const newSkills = [...skills];
     const id = newSkills[index]?.id;
     if (id !== undefined) {
-      // If the item has an id, execute the deletion logic
       deleteExperienceId(id)
         .then(() => {
           newSkills.splice(index, 1);
@@ -59,13 +54,11 @@ export default function Skill() {
           toast.error("Failed to delete experience with id:", id, error);
         });
     } else {
-      // If the item doesn't have an id, remove it from the list
       newSkills.splice(index, 1);
       setSkills(newSkills);
     }
   };
 
-  // Delete Skill Api
   const deleteExperienceId = async (id) => {
     try {
       const headers = {
@@ -77,7 +70,7 @@ export default function Skill() {
         null,
         headers
       );
-      if (response?.status == 200 || response?.status == 201) {
+      if (response?.status === 200 || response?.status === 201) {
         toast.success("Deleted Successfully");
       }
     } catch (error) {
@@ -85,7 +78,6 @@ export default function Skill() {
     }
   };
 
-  // Get Previously Added Skills method
   const getSkills = async () => {
     try {
       const headers = {
@@ -123,7 +115,7 @@ export default function Skill() {
       toast.error("Error fetching skills");
     }
   };
-  // Calling get languages
+
   useEffect(() => {
     const fetchData = async () => {
       const storedLanguages = sessionStorage.getItem("languages");
@@ -138,10 +130,18 @@ export default function Skill() {
     fetchData();
   }, []);
 
-  // Add skills Method with Api call
   const handleSave = async () => {
     setIsLoading(true);
     try {
+      // Validation: Check for empty fields
+      for (const skill of skills) {
+        if (!skill.language.value || !skill.level.value) {
+          toast.error("Please fill in all fields for each skill.");
+          setIsLoading(false);
+          return; // Stop the function if a field is empty
+        }
+      }
+
       const headers = {
         Authorization: `Bearer ${user?.token}`,
       };
@@ -160,19 +160,18 @@ export default function Skill() {
       );
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
-        setIsLoading(false);
       } else {
         toast.error(response?.data?.message);
-        setIsLoading(false);
       }
     } catch (err) {
       toast.error(err);
+    } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="ps-widget bgc-white bdrs4 p30 mb30  position-relative">
+    <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
       <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between">
         <h5 className="list-title">Skills</h5>
         <a className="add-more-btn text-thm" onClick={handleAddLanguage}>
@@ -182,19 +181,19 @@ export default function Skill() {
       </div>
       <div className="col-lg-14">
         <div className="row">
-          {skills?.map((skill, index) => (
+          {skills.map((skill, index) => (
             <form key={index} className="form-style1">
               <div className="row align-items-center">
                 <div className="col-sm-3 mb20">
                   <SelectInput
                     label="Language"
                     defaultSelect={{
-                      option: skill?.language?.option || "Select",
-                      value: skill?.language?.value || null,
+                      option: skill.language.option || "Select",
+                      value: skill.language.value || null,
                     }}
-                    data={languageListing?.map((item) => ({
-                      option: item?.name,
-                      value: item?.id,
+                    data={languageListing.map((item) => ({
+                      option: item.name,
+                      value: item.id,
                     }))}
                     handler={(option, value) =>
                       handleFieldChange(index, "language", option, value)
@@ -206,12 +205,12 @@ export default function Skill() {
                   <SelectInput
                     label="Level"
                     defaultSelect={{
-                      option: skill?.level?.option || "Select",
-                      value: skill?.level?.value || null,
+                      option: skill.level.option || "Select",
+                      value: skill.level.value || null,
                     }}
-                    data={skillLevel?.map((item) => ({
-                      option: item?.name,
-                      value: item?.name?.toLowerCase(),
+                    data={skillLevel.map((item) => ({
+                      option: item.name,
+                      value: item.name.toLowerCase(),
                     }))}
                     handler={(option, value) =>
                       handleFieldChange(index, "level", option, value)

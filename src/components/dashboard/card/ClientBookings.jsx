@@ -43,7 +43,7 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
     setDisable(disableValue);
   }, [data]);
 
-  const handleApproveBooings = (id) => {
+  const handleApproveBookings = (id) => {
     Swal.fire({
       title: "Are you sure you want to Approve this Work?",
       showCancelButton: true,
@@ -63,11 +63,12 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
       confirmButtonText: "Reject",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Reject!", "", "success");
+        Swal.fire("Rejected!", "", "success");
         changeBookingStatus("reject", id);
       }
     });
   };
+
   const picture = data?.translator_meta?.profile_pic
     ? data?.translator_meta?.profile_pic?.split("profile_pictures/")[1]
     : null;
@@ -75,108 +76,113 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
     picture &&
     "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
       picture;
+
   return (
-    <>
-      <tr>
-        <th className={`ps-0 ${i === 0 ? "pt-0" : ""}`} scope="row">
-          <div className="job-list-style1 at-dashboard p-0 d-xl-flex align-items-start mb-0">
-            <div className="icon2 mb10-lg mb-0 me-3 bg-transparent">
-              <img
-                className="wa"
-                src={newPicUrl || "/images/default/defaultProfile.png"}
-                height={40}
-                width={40}
-                alt="icon2"
-              />
-            </div>
-            <div className="details">
-              <h5>{data?.job_title || "-"}</h5>
-              <h6 className="mb-3">
-                <Link to={`/profile/${data?.translator?.uuid}`} target="_blank">
-                  {data?.translator?.fname + " " + data?.translator?.lname ||
-                    "Unknown"}
-                </Link>
-              </h6>
-            </div>
+    <tr>
+      <th className={`ps-0 ${i === 0 ? "pt-0" : ""}`} scope="row">
+        <div className="job-list-style1 at-dashboard p-0 d-flex align-items-start mb-0">
+          <div className="icon2 me-3">
+            <img
+              className="wa"
+              src={newPicUrl || "/images/default/defaultProfile.png"}
+              height={40}
+              width={40}
+              alt="Profile"
+            />
           </div>
-        </th>
-        <td className="vam">
-          <p className="list-inline-item mb-0">
+          <div className="details">
+            <h5>
+              {data?.job_title ? CapitalizeFirstLetter(data?.job_title) : "-"}
+            </h5>
+            <h6 className="mb-3">
+              <Link to={`/profile/${data?.translator?.uuid}`} target="_blank">
+                {data?.translator?.fname + " " + data?.translator?.lname ||
+                  "Unknown"}
+              </Link>
+            </h6>
+          </div>
+        </div>
+      </th>
+      <td className="vam">
+        <div className="d-flex flex-column">
+          <p className="mb-0">
+            <b>Start At:</b> {moment(data?.start_at).format("lll") || "-"}
+          </p>
+          <p className="mb-0">
+            <b>Ends At:</b> {moment(data?.end_at).format("lll") || "-"}
+          </p>
+
+          <p className="mb-0">
+            <b>Work Mode: </b>{" "}
+            {CapitalizeFirstLetter(data?.availability) || "Not specified yet"}
+          </p>
+          <p className="mb-0">
+            <b> Payment Status: </b>
+            {data?.payment_status === "none"
+              ? "Not Paid"
+              : data?.payment_status === "escrow"
+              ? "Payment Escrow"
+              : data?.payment_status === "hold"
+              ? "Payment on hold"
+              : data?.payment_status === "dispute"
+              ? "Payment Not Confirmed"
+              : data?.payment_status === "Paid"
+              ? "Paid"
+              : "Unknown"}
+          </p>
+          <p className="mb-0">
             <b>
-              {" "}
               {CapitalizeFirstLetter(data?.payment_type) + " Rate: " ||
-                "Not Mentioned Yet"}{" "}
+                "Not Mentioned Yet"}
             </b>
             $
             {calculatePayment(data?.present_rate, data?.start_at, data?.end_at)
-              ?.amountToReceive || "Not specified yet"}{" "}
+              ?.amountToReceive || "Not specified yet"}
           </p>
-          <p className="list-inline-item mb-0 bdrl1 pl15 bdrn-lg pl5-lg">
-            <b> Start At</b> : {moment(data?.start_at).format("lll") || "-"}
-          </p>
-          <p className="list-inline-item mb-0 bdrl1 pl15 bdrn-lg pl5-lg">
-            <b> Ends At: </b>
-            {moment(data?.end_at).format("lll") || "-"}
-          </p>
-          <p className="list-inline-item mb-0 bdrl1 pl15 bdrn-lg pl5-lg">
-            {CapitalizeFirstLetter(data?.availability) || "Not specified yet"}
-          </p>
-          <p className="list-inline-item mb-0 bdrl1 pl15 bdrn-lg pl5-lg">
-            {data?.payment_status == "none"
-              ? "Not Paid"
-              : data?.payment_status == "escrow"
-              ? "Payment Escrow"
-              : data?.payment_status == "hold"
-              ? "Payment on hold"
-              : data?.payment_status == "dispute"
-              ? "Payment Not Confirmed"
-              : data?.payment_status == "Paid"}
-          </p>
+        </div>
+      </td>
+      {currentTab?.type === "completed_booking" ? (
+        <td className="vam">
+          <button
+            className="ud-btn btn-thm-border"
+            onClick={() => handleApproveBookings(data?.id)}
+          >
+            Approve
+          </button>
         </td>
-        {currentTab?.type == "completed_booking" ||
-        currentTab?.type == "completed_booking" ? (
-          <td className="vam">
-            <button
-              className="ud-btn btn-thm-border"
-              onClick={() => handleApproveBooings(data?.id)}
-            >
-              Approve
-            </button>
-          </td>
-        ) : null}
-        {currentTab?.type == "current_booking" ||
-        currentTab?.type == "upcoming_booking" ? (
-          <td className="vam">
-            <button
-              className="red-btn btn-red-border"
-              onClick={() => changeBookingStatus("cancel", data?.id)}
-              disabled={disable}
-            >
-              Cancel
-            </button>
-          </td>
-        ) : null}
-        {currentTab?.type == "completed_booking" ? (
-          <td className="vam">
-            <button
-              className={`red-btn btn-red-border`}
-              onClick={() => handleRejectedBookings(data?.id)}
-            >
-              Reject
-            </button>
-          </td>
-        ) : null}
-        {currentTab?.type == "rejected_booking" ? (
-          <td className="vam">
-            <button
-              className={`ud-btn btn-thm-border`}
-              onClick={() => handleApproveBooings(data?.id)}
-            >
-              ReApprove
-            </button>
-          </td>
-        ) : null}
-      </tr>
-    </>
+      ) : null}
+      {currentTab?.type === "current_booking" ||
+      currentTab?.type === "upcoming_booking" ? (
+        <td className="vam">
+          <button
+            className="red-btn btn-red-border"
+            onClick={() => changeBookingStatus("cancel", data?.id)}
+            disabled={disable}
+          >
+            Cancel
+          </button>
+        </td>
+      ) : null}
+      {currentTab?.type === "completed_booking" ? (
+        <td className="vam">
+          <button
+            className="red-btn btn-red-border"
+            onClick={() => handleRejectedBookings(data?.id)}
+          >
+            Reject
+          </button>
+        </td>
+      ) : null}
+      {currentTab?.type === "rejected_booking" ? (
+        <td className="vam">
+          <button
+            className="ud-btn btn-thm-border"
+            onClick={() => handleApproveBookings(data?.id)}
+          >
+            ReApprove
+          </button>
+        </td>
+      ) : null}
+    </tr>
   );
 }
