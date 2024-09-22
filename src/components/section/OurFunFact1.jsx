@@ -22,7 +22,7 @@ export default function OurFunFact1() {
             >
               <div className="cta-style6 mb30-sm">
                 <h2 className="cta-title mb25">
-                Our Values
+                  Our Values
                   {/* <br className="d-none d-lg-block" />
                   get your business growing. */}
                 </h2>
@@ -41,17 +41,19 @@ export default function OurFunFact1() {
               className="col-md-6 col-xl-6 offset-xl-1 wow fadeInLeft"
               data-wow-delay="300ms"
             >
-              <div className="row align-items-center">
+              <div
+                className="row align-items-center"
+                style={{ paddingTop: "50px" }}
+              >
                 <div className="col-sm-6">
                   <div className="funfact-style1 bdrs16 text-center ms-md-auto">
                     <ul className="ps-0 mb-0 d-flex justify-content-center">
                       <li>
                         <div className="timer title mb15">Integrity</div>
                       </li>
-
                     </ul>
                     <p className="fz15 dark-color">
-                    Upholding honesty and transparency in all our interactions
+                      Upholding honesty and transparency in all our interactions
                     </p>
                   </div>
                   <div className="funfact-style1 bdrs16 text-center ms-md-auto">
@@ -64,7 +66,7 @@ export default function OurFunFact1() {
                       </li> */}
                     </ul>
                     <p className="fz15 dark-color">
-                    Ensuring excellence in every service we provide.
+                      Ensuring excellence in every service we provide.
                     </p>
                   </div>
                 </div>
@@ -76,8 +78,8 @@ export default function OurFunFact1() {
                       </li>
                     </ul>
                     <p className="fz15 dark-color">
-                    Embracing and supporting diversity within our community and across our
-                    services.
+                      Embracing and supporting diversity within our community
+                      and across our services.
                     </p>
                   </div>
                 </div>

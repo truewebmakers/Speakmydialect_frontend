@@ -7,7 +7,7 @@ export default function CtaBanner1() {
 
   return (
     <>
-      <section className="p-0 mt-5 pb90 py-lg-0 mt-5">
+      <section className="p-0 mt-5  py-lg-0 mt-5">
         <div
           className={`cta-banner3 mx-auto pt120 pt60-lg pb90 pb60-lg position-relative overflow-hidden ${
             pathname === "/" || pathname === "/about"

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Breadcumb1({ title, brief, isBtnActive }) {
   return (
     <>
-      <section className="breadcumb-section wow fadeInUp mt40">
+      <section className="wow fadeInUp">
         <div className="cta-commmon-v1 cta-banner bgc-thm2 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg">
           <img
             className="left-top-img wow zoomIn"

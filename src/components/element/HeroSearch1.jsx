@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 export default function HeroSearch1({ isSearchingPage }) {
   const params = useLocation();
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState(searchVal);
+  const [searchValue, setSearchValue] = useState("");
   const [searchingList, setSearchingList] = useState([]);
   const setSpeak = listingStore((state) => state.setSpeak);
   const navigate = useNavigate();
