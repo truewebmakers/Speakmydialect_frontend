@@ -9,36 +9,16 @@ export default function ContactInfo1() {
                 <div className="main-title">
                   <h4 className="form-title mb25">Keep In Touch With Us.</h4>
                   <p className="text">
-                  Reach out to speakmydialect.com.au for support and inquiries.
+                    Reach out to speakmydialect.com.au for support and
+                    inquiries.
                   </p>
-                </div>
-                <div className="iconbox-style1 contact-style d-flex align-items-start mb30 d-none">
-                  <div className="icon flex-shrink-0">
-                    <span className="flaticon-tracking" />
-                  </div>
-                  <div className="details">
-                    <h5 className="title">Address</h5>
-                    <p className="mb-0 text">
-                      328 Queensberry Street, North <br /> Melbourne VIC 3051,
-                      Australia.
-                    </p>
-                  </div>
-                </div>
-                <div className="iconbox-style1 contact-style d-flex align-items-start mb30 d-none">
-                  <div className="icon flex-shrink-0">
-                    <span className="flaticon-call" />
-                  </div>
-                  <div className="details ">
-                    <h5 className="title">Phone</h5>
-                    <p className="mb-0 text">+(0) 392 94 03 01</p>
-                  </div>
                 </div>
                 <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
                   <div className="icon flex-shrink-0">
                     <span className="flaticon-mail" />
                   </div>
                   <div className="details">
-                    <h5 className="title">Email</h5>
+                    {/* <h5 className="title">Email</h5> */}
                     <p className="mb-0 text">Info@speakmydialect.com.au</p>
                   </div>
                 </div>

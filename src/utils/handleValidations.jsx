@@ -26,17 +26,6 @@ export const handleValidations = (name, value) => {
         newErr[name] = "";
         break;
       }
-    case "userName":
-      if (value === "") {
-        newErr[name] = "Enter your username";
-        break;
-      } else if (value?.length < 5) {
-        newErr[name] = "Username should be atleast 5 character long";
-        break;
-      } else {
-        newErr[name] = "";
-        break;
-      }
     case "email":
       if (value === "") {
         newErr[name] = "Enter valid email";

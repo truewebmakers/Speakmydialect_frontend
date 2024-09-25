@@ -482,7 +482,7 @@ a {
 
 .iconbox-style1 {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center; /* Center-aligns children horizontally */
   text-align: center; /* Center-aligns text */
   padding: 20px; /* Adjust padding as needed */

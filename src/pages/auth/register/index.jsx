@@ -12,7 +12,6 @@ export default function RegisterPage() {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
-    userName: "",
     email: "",
     password: "",
   });
@@ -20,7 +19,6 @@ export default function RegisterPage() {
   const [error, setError] = useState({
     firstName: "",
     lastName: "",
-    userName: "",
     email: "",
     password: "",
   });
@@ -82,7 +80,6 @@ export default function RegisterPage() {
         const bodyData = {
           fname: data.firstName,
           lname: data.lastName,
-          username: data.userName,
           email: data.email,
           password: data.password,
           user_type: route[1], // it is coming from the routes
@@ -226,23 +223,6 @@ export default function RegisterPage() {
                   />
                   {error?.lastName && (
                     <p style={{ color: "red" }}>{error?.lastName}</p>
-                  )}
-                </div>
-                <div className="mb25">
-                  <label className="form-label fw500 dark-color">
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter your username"
-                    name="userName"
-                    value={data?.userName}
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {error?.userName && (
-                    <p style={{ color: "red" }}>{error?.userName}</p>
                   )}
                 </div>
                 <div className="mb25">

@@ -72,9 +72,9 @@ export const experienceLocationType = [
 ];
 
 export const jobAvailaibiltyType = [
-  { id: 1, name: "On-site", value: "onsite" },
-  { id: 2, name: "Hybrid", value: "hybrid" },
-  { id: 3, name: "Remote", value: "remote" },
+  { id: 1, name: "Phone", value: "phone" },
+  { id: 2, name: "Video Call", value: "video call" },
+  { id: 3, name: "In-Person", value: "in-person" },
 ];
 
 export const paymentMode = [

@@ -1095,7 +1095,7 @@ span.mb25.me-4.badge-success {
 }
 
 .statistics_funfact .icon:before {
-  background-color: #fbf7ed;
+  /* background-color: #fbf7ed; */
   border-radius: 50%;
   bottom: -10px;
   content: "";
@@ -5689,14 +5689,15 @@ section {
 
 .iconbox-style1 .icon {
   color: #1f4b3f;
-  display: inline-block;
-  font-size: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 28px;
   position: relative;
   z-index: 1;
 }
 
 .iconbox-style1 .icon:before {
-  background-color: #fbf7ed;
+  /* background-color: #fbf7ed; */
   border-radius: 50%;
   bottom: -10px;
   content: "";

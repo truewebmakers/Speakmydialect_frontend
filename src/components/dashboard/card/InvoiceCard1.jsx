@@ -1,4 +1,3 @@
-import { calculatePayment } from "@/utils/commonFunctions";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import { Link } from "react-router-dom";
 
@@ -20,18 +19,7 @@ export default function InvoiceCard1({ invoiceUrl, data }) {
         <td className="vam">
           {data?.translator?.fname + " " + data?.translator?.lname || "-"}
         </td>
-        <td className="vam">{data?.translator?.email || "-"}</td>
-        <td className="vam">
-          $
-          {/* {data?.present_rate?.toFixed(2) +
-            "/" +
-            calculatePayment(
-              data?.present_rate,
-              data?.start_at,
-              data?.end_at
-            )?.hours.toFixed(2) || 0} */}
-          {data?.present_rate?.toFixed(2) || 0}
-        </td>
+        <td className="vam">${data?.present_rate?.toFixed(2) || 0}</td>
 
         <td className="vam">
           <span

@@ -138,44 +138,7 @@ export default function HireNowSection({ translatorProfile }) {
       <section className="pt-0">
         <div className="container">
           <div className="row wow fadeInUp" data-wow-delay="300ms">
-            <div className="col-lg-4">
-              <div className="position-relative price-widget bdrs8">
-                <h3 className="widget-title">
-                  <small className=" fw700">Translator Info</small>
-                </h3>
-                <div className="category-list mt20">
-                  <a className="d-flex align-items-center justify-content-between bdrb1 pb-2">
-                    <span className="text">
-                      <i className="flaticon-place text-thm2 pe-2 vam" />
-                      Email
-                    </span>
-                    <span>
-                      {translatorProfile?.email
-                        ? translatorProfile?.email
-                        : "Not Specified Yet"}
-                    </span>
-                  </a>
-                  <a className="d-flex align-items-center justify-content-between bdrb1 pb-2">
-                    <span className="text">
-                      <i className="flaticon-30-days text-thm2 pe-2 vam" />
-                      Mobile No{" "}
-                    </span>
-                    <span>
-                      {translatorProfile?.user_meta
-                        ? translatorProfile?.user_meta?.phone
-                        : "Not Specified Yet"}
-                    </span>
-                  </a>
-                  <a className="d-flex align-items-center justify-content-between mb-3">
-                    <span className="text">
-                      <i className="flaticon-sliders text-thm2 pe-2 vam" />
-                      Fix Rate
-                    </span>
-                    <span>${translatorProfile?.user_meta?.fix_rate}</span>
-                  </a>
-                </div>
-              </div>
-            </div>
+            <div className="col-lg-4"></div>
             <div className="col-lg-6 ml100">
               <div className="contact-page-form default-box-shadow1 bdrs8 bdr1 p50 mb30-md bgc-white">
                 <h4 className="form-title mb25">Book your Translator Now</h4>

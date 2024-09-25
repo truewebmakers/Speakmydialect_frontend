@@ -14,7 +14,7 @@ export default function ProfileDetails() {
     fname: "",
     lname: "",
     phone: "",
-    fix_rate: "",
+    fix_rate: "77",
     hourly_rate: 0,
     intro: "",
   });
@@ -74,7 +74,7 @@ export default function ProfileDetails() {
         fname: profileData?.fname || "",
         lname: profileData?.lname || "",
         phone: profileData?.user_meta?.phone || "",
-        fix_rate: profileData?.user_meta?.fix_rate || "",
+        fix_rate: "77" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
       });
@@ -259,7 +259,7 @@ export default function ProfileDetails() {
                   <div className="col-sm-6">
                     <div className="mb20">
                       <label className="heading-color ff-heading fw500 mb10">
-                        Fix Rate
+                        Fix Rate ($/hr)
                       </label>
                       <input
                         type="text"
@@ -268,7 +268,8 @@ export default function ProfileDetails() {
                         name="fix_rate"
                         value={profileDetails?.fix_rate}
                         autoComplete="off"
-                        onChange={handleOnChange}
+                        readOnly={true}
+                        // onChange={handleOnChange}
                       />
                     </div>
                   </div>

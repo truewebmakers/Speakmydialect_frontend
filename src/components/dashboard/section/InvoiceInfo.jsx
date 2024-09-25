@@ -49,20 +49,6 @@ export default function InvoiceInfo() {
               <h2>Invoice</h2>
             </div>
           </div>
-          {/* <div className="col-xl-4">
-            <div className="dashboard_search_meta">
-              <div className="search_area">
-                <input
-                  type="text"
-                  className="form-control bdrs4"
-                  placeholder="Search Invoice"
-                />
-                <label>
-                  <span className="far fa-magnifying-glass" />
-                </label>
-              </div>
-            </div>
-          </div> */}
         </div>
         <div className="row">
           <div className="col-xl-12">
@@ -72,13 +58,10 @@ export default function InvoiceInfo() {
                   <thead className="t-head">
                     <tr>
                       <th scope="col">Job Title</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Total Pay</th>
+                      <th scope="col">Interpreter Name</th>
+                      <th scope="col">Total Charge</th>
                       <th scope="col">Payment Status</th>
                       <th scope="col">View Reciept</th>
-
-                      {/* <th scope="col">Action</th> */}
                     </tr>
                   </thead>
                   <tbody className="t-body">
