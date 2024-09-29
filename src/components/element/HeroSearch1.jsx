@@ -153,77 +153,93 @@ export default function HeroSearch1({ isSearchingPage }) {
       </div>
     </>
   ) : (
-    <div className="advance-search-tab bgc-white p10 bdrs4 zi1 position-relative">
-      <div className="row">
-        <div className="col-md-8 col-xl-9">
-          <div className="advance-search-field ">
-            <form className="form-search position-relative">
-              <div className="box-search bb1-sm">
-                <span className="icon far fa-magnifying-glass" />
-                <input
-                  className="form-control"
-                  type="text"
-                  name="search"
-                  placeholder={"Search For Languages"}
-                  onFocus={focusDropdown}
-                  onBlur={blurDropdown}
-                  autoComplete="off"
-                  value={searchValue}
-                  onChange={onSearchChange}
-                />
-                {searchingList?.length > 0 && (
-                  <div
-                    className="search-suggestions"
-                    style={{
-                      visibility: isSearchDropdownOpen ? "visible" : "hidden",
-                      opacity: isSearchDropdownOpen ? "1" : "0",
-                      top: isSearchDropdownOpen ? "70px" : "100px",
-                      zIndex: 120001,
-                      position: "absolute",
-                      border: "1px solid black",
-                    }}
-                  >
-                    <h6 className="fz14 ml30 mt25 mb-3">Popular Search</h6>
-                    <div className="box-suggestions">
-                      <ul className="px-0 m-0 pb-4">
-                        {searchingList?.map((item, index) => (
-                          <li
-                            key={index}
-                            className={
-                              searchValue === item?.name ? "ui-list-active" : ""
-                            }
-                          >
-                            <div className="info-product cursor-pointer">
-                              <div
-                                className="item_title"
-                                onClick={() => selectSearch(item?.name)}
-                              >
-                                {item?.name}
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="col-md-4 col-xl-3">
-          <div className="text-center text-xl-start">
-            <button
-              onClick={handleSearchClick}
-              className="ud-btn btn-thm w-100 px-4"
-              type="button"
-              disabled={!searchValue?.length > 0} // Disable button if no suggestion is selected
+    <div
+      className="advance-search-field mb10-sm bdrr1 bdrn-sm"
+      style={{ position: "relative" }}
+    >
+      <form className="form-search position-relative">
+        <div className="box-search" style={{ position: "relative" }}>
+          <span className="icon far fa-magnifying-glass" />
+          <input
+            className="form-control"
+            type="text"
+            name="search"
+            placeholder={"Search For Languages"}
+            onFocus={focusDropdown}
+            onBlur={blurDropdown}
+            autoComplete="off"
+            value={searchValue}
+            onChange={onSearchChange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && searchValue !== "") handleSearchClick();
+            }}
+            style={{ paddingRight: "50px" }} // Space for the button inside
+          />
+          <button
+            type="button"
+            className="search-btn"
+            onClick={handleSearchClick}
+            disabled={!searchValue?.length > 0}
+            style={{
+              position: "absolute",
+              right: "10px", // Align button inside the input
+              top: "50%",
+              transform: "translateY(-50%)",
+              height: "75%", // Adjust height to match input
+              padding: "0 15px",
+              border: "none",
+              backgroundColor: "#5bbb7b", // Button color (adjust as needed)
+              color: "white",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            Search
+          </button>
+          {searchingList?.length > 0 && (
+            <div
+              className="search-suggestions"
+              style={{
+                position: "absolute",
+                zIndex: 9999, // Ensures it's on top of other components
+                top: "70px", // Adjust this based on your input field's height
+                left: 0,
+                width: "100%",
+                backgroundColor: "white",
+                visibility: isSearchDropdownOpen ? "visible" : "hidden",
+                opacity: isSearchDropdownOpen ? "1" : "0",
+                border: "1px solid #ccc",
+                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", // Optional: for a subtle shadow effect
+                maxHeight: "300px", // Set max height for scrolling
+                overflowY: "auto", // Enable vertical scroll
+              }}
             >
-              Search
-            </button>
-          </div>
+              <h6 className="fz14 ml30 mt25 mb-3">Popular Search</h6>
+              <div className="box-suggestions">
+                <ul className="px-0 m-0 pb-4">
+                  {searchingList?.map((item, index) => (
+                    <li
+                      key={index}
+                      className={
+                        searchValue === item?.name ? "ui-list-active" : ""
+                      }
+                    >
+                      <div className="info-product cursor-pointer">
+                        <div
+                          className="item_title"
+                          onClick={() => selectSearch(item?.name)}
+                        >
+                          {item?.name}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      </form>
     </div>
   );
 }

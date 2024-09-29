@@ -13812,7 +13812,7 @@ input:focus-visible {
 }
 
 .zi1 {
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .zi2 {
