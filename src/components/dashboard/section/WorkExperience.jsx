@@ -311,7 +311,7 @@ export default function WorkExperience() {
             className="add-more-btn text-thm"
             onClick={handleAddExperienceField}
           >
-            <i className="icon far fa-plus mr10" />
+            <i className="add-icon far fa-plus mr10" />
             Add Experience
           </a>
         </div>

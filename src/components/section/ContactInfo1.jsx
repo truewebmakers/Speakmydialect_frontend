@@ -14,12 +14,13 @@ export default function ContactInfo1() {
                   </p>
                 </div>
                 <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
-                  <div className="icon flex-shrink-0">
+                  <div className="icon flex-shrink-0 d-flex align-items-center">
                     <span className="flaticon-mail" />
-                  </div>
-                  <div className="details">
-                    {/* <h5 className="title">Email</h5> */}
-                    <p className="mb-0 text">Info@speakmydialect.com.au</p>
+                    <div className="details d-flex align-items-center">
+                      <p className="mb-0 text" style={{ fontSize: "17px" }}>
+                        Info@speakmydialect.com.au
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

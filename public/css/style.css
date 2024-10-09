@@ -4674,7 +4674,7 @@ section {
 }
 
 .advance-search-field .box-search .icon {
-  bottom: 4px;
+  bottom: -1px;
   color: var(--headings-color);
   font-size: 16px;
   left: 20px;
@@ -14232,4 +14232,19 @@ hr {
 
 .footer-widget {
   top: -7%
+}
+
+
+
+.add-more-btn {
+  display: flex; /* Ensures the icon and text are inline */
+  align-items: center; /* Centers them vertically */
+}
+
+.add-icon {
+  margin-right: 5px; /* Space between the icon and the text */
+  background-color: #ffede8;
+  border-radius: 16px;
+  width: 27px;
+  text-align: center;
 }

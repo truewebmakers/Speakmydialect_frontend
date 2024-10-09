@@ -47,7 +47,7 @@ export default function ProfileDetails() {
   const handleOnChange = (e) => {
     const { value, name } = e.target;
     if (name === "phone") {
-      if (value == "" || value?.length <= 10) {
+      if ((value == "" || value?.length <= 10) && !isNaN(value)) {
         setProfileDetails({ ...profileDetails, phone: value });
       }
     } else {
@@ -151,7 +151,12 @@ export default function ProfileDetails() {
     <>
       <div className="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
         <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between">
-          <h5 className="list-title">Profile Details</h5>
+          <h5
+            className="list-title"
+            style={{ textAlign: "center", paddingTop: "17px" }}
+          >
+            Profile Details
+          </h5>
           {user?.userInfo?.user_type == "translator" && (
             <a
               href={`/profile/${profileData?.uuid}`}

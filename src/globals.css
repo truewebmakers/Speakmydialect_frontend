@@ -517,7 +517,7 @@ a {
 
 .icon {
   margin-bottom: 15px; /* Space between icon and title */
-  font-size: 2rem; /* Adjust icon size if needed */
+  font-size: 1rem; /* Adjust icon size if needed */
 }
 
 .title {

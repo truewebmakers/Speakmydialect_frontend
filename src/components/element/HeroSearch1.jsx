@@ -182,13 +182,13 @@ export default function HeroSearch1({ isSearchingPage }) {
             disabled={!searchValue?.length > 0}
             style={{
               position: "absolute",
-              right: "10px", // Align button inside the input
+              right: "10px",
               top: "50%",
               transform: "translateY(-50%)",
-              height: "75%", // Adjust height to match input
+              height: "75%",
               padding: "0 15px",
               border: "none",
-              backgroundColor: "#5bbb7b", // Button color (adjust as needed)
+              backgroundColor: "#5bbb7b",
               color: "white",
               borderRadius: "4px",
               cursor: "pointer",

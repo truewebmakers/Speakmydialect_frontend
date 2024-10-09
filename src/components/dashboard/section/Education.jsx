@@ -236,7 +236,7 @@ export default function Education() {
             className="add-more-btn text-thm"
             onClick={handleAddEducationField}
           >
-            <i className="icon far fa-plus mr10" />
+            <i className="add-icon far fa-plus mr10" />
             Add Education
           </a>
         </div>
