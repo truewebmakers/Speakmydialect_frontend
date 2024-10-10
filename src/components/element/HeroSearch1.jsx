@@ -35,14 +35,14 @@ export default function HeroSearch1({ isSearchingPage, searchValue }) {
   const onSearchChange = (e) => {
     const { value } = e.target;
     setSearchValue(value);
-    if (value?.length > 2) {
+    if (value?.length > 0) {
       getSearchSuggestions(value);
     } else {
       setSearchingList([]);
     }
   };
 
-  function debounce(func, timeout = 300) {
+  function debounce(func, timeout = 500) {
     let timer;
     return (...args) => {
       clearTimeout(timer);
@@ -66,7 +66,7 @@ export default function HeroSearch1({ isSearchingPage, searchValue }) {
       } catch (error) {
         toast.error("Error fetching suggestions");
       }
-    }, 300),
+    }, 500),
     []
   );
 
