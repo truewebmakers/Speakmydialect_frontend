@@ -1,14 +1,14 @@
 import { apiMethods, apiUrls, routes } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import listingStore from "@/store/listingStore";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function HeroSearch1({ isSearchingPage }) {
+export default function HeroSearch1({ isSearchingPage, searchValue }) {
   const params = useLocation();
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValueState, setSearchValue] = useState(searchValue || "");
   const [searchingList, setSearchingList] = useState([]);
   const setSpeak = listingStore((state) => state.setSpeak);
   const navigate = useNavigate();
@@ -16,6 +16,10 @@ export default function HeroSearch1({ isSearchingPage }) {
   const focusDropdown = () => {
     setSearchDropdownOpen(true);
   };
+
+  useEffect(() => {
+    setSearchValue(searchValue); // Update local state when searchValue changes
+  }, [searchValue]);
 
   const blurDropdown = () => {
     setTimeout(() => {
@@ -67,11 +71,11 @@ export default function HeroSearch1({ isSearchingPage }) {
   );
 
   const handleSearchClick = async () => {
-    if (searchValue) {
-      setSpeak(searchValue);
+    if (searchValueState) {
+      setSpeak(searchValueState);
       const params = new URLSearchParams(window.location.search);
       params.delete("language");
-      params.set("language", searchValue);
+      params.set("language", searchValueState);
 
       navigate({
         pathname: routes.Search,
@@ -95,10 +99,10 @@ export default function HeroSearch1({ isSearchingPage }) {
                 onFocus={focusDropdown}
                 onBlur={blurDropdown}
                 autoComplete="off"
-                value={searchValue}
+                value={searchValueState}
                 onChange={onSearchChange}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" && searchValue !== "")
+                  if (e.key === "Enter" && searchValueState !== "")
                     handleSearchClick();
                 }}
               />
@@ -118,7 +122,9 @@ export default function HeroSearch1({ isSearchingPage }) {
                         <li
                           key={index}
                           className={
-                            searchValue === item?.name ? "ui-list-active" : ""
+                            searchValueState === item?.name
+                              ? "ui-list-active"
+                              : ""
                           }
                         >
                           <div className="info-product cursor-pointer">
@@ -145,7 +151,7 @@ export default function HeroSearch1({ isSearchingPage }) {
             onClick={handleSearchClick}
             className="ud-btn btn-thm w-100 px-4"
             type="button"
-            disabled={!searchValue?.length > 0} // Disable button if no suggestion is selected
+            disabled={!searchValueState?.length > 0} // Disable button if no suggestion is selected
           >
             Search
           </button>
@@ -168,10 +174,11 @@ export default function HeroSearch1({ isSearchingPage }) {
             onFocus={focusDropdown}
             onBlur={blurDropdown}
             autoComplete="off"
-            value={searchValue}
+            value={searchValueState}
             onChange={onSearchChange}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && searchValue !== "") handleSearchClick();
+              if (e.key === "Enter" && searchValueState !== "")
+                handleSearchClick();
             }}
             style={{ paddingRight: "50px" }} // Space for the button inside
           />
@@ -179,7 +186,7 @@ export default function HeroSearch1({ isSearchingPage }) {
             type="button"
             className="search-btn"
             onClick={handleSearchClick}
-            disabled={!searchValue?.length > 0}
+            disabled={!searchValueState?.length > 0}
             style={{
               position: "absolute",
               right: "10px",
@@ -221,7 +228,7 @@ export default function HeroSearch1({ isSearchingPage }) {
                     <li
                       key={index}
                       className={
-                        searchValue === item?.name ? "ui-list-active" : ""
+                        searchValueState === item?.name ? "ui-list-active" : ""
                       }
                     >
                       <div className="info-product cursor-pointer">

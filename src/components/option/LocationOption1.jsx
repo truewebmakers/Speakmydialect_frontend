@@ -20,7 +20,11 @@ export default function LocationOption1({ data }) {
   return (
     <>
       <div className="card-body card-body px-0 pt-0">
-        <Search1 setSearch={setSearch} search={search} />
+        <Search1
+          setSearch={setSearch}
+          search={search}
+          placeholder="Search For Location"
+        />
 
         {/* Show location list only if there's a search term */}
         {search && (

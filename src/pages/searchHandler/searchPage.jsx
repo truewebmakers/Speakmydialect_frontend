@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 export default function SearchPage() {
   const [searchingResult1, setSearchingResult1] = useState([]);
   const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("language") || ""; // Get the search query
 
   useEffect(() => {
     const query = Object.fromEntries(searchParams.entries());
@@ -17,7 +18,7 @@ export default function SearchPage() {
   return (
     <>
       <MetaComponent meta={metaData} />
-      <Breadcumb9 />
+      <Breadcumb9 searchValue={searchQuery} /> {/* Pass searchQuery here */}
       <Listing8
         searchingResult1={searchingResult1}
         setSearchingResult1={setSearchingResult1}

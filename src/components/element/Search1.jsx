@@ -1,8 +1,7 @@
 import React from "react";
-import listingStore from "@/store/listingStore";
 import { useLocation } from "react-router-dom";
 
-export default function Search1({ setSearch, search }) {
+export default function Search1({ setSearch, search, placeholder }) {
   const { pathname } = useLocation();
 
   return (
@@ -18,7 +17,7 @@ export default function Search1({ setSearch, search }) {
             className="form-control"
             onChange={(e) => setSearch(e.target.value)}
             value={search}
-            placeholder="Search For Languages"
+            placeholder={placeholder}
           />
           <label>
             <span className="flaticon-loupe" />
