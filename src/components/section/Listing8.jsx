@@ -11,7 +11,6 @@ import NoDataFound from "../noData/NoDataFound";
 export default function Listing8({ searchingResult1, setSearchingResult1 }) {
   const getCategory = listingStore((state) => state.getCategory);
   const getProjectType = listingStore((state) => state.getProjectType);
-  const getPrice = priceStore((state) => state.priceRange);
   const getLocation = listingStore((state) => state.getLocation);
   const getSpeak = listingStore((state) => state.getSpeak);
   const [searchingResult, setSearchingResult] = useState([]);
@@ -19,9 +18,9 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
   useEffect(() => {
     // Create a query based on selected filters
     const query = {
-      location: getLocation,
-      language: getSpeak,
-      level: getCategory,
+      location: getLocation || undefined,
+      language: getSpeak || undefined,
+      level: getCategory || undefined,
       type: getProjectType.length > 0 ? getProjectType : undefined,
     };
 
@@ -39,7 +38,7 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
     // Call API with the constructed query if any filter is selected
     searchingApi(query).then((data) => setSearchingResult(data));
     setSearchingResult1([]); // Reset previous results
-  }, [getLocation, getSpeak, getCategory]);
+  }, [getLocation, getSpeak, getCategory, getProjectType]);
 
   const content =
     searchingResult1?.length > 0
@@ -60,13 +59,12 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
-              <ListingSidebar2 />
+              <ListingSidebar2 setSearchingResult={setSearchingResult} />
             </div>
             <div className="col-lg-9">
               <div className="row">{content}</div>
               {searchingResult?.length === 0 &&
                 searchingResult1?.length === 0 && <NoDataFound />}
-
               {searchingResult?.length > 10 && (
                 <div className="mt30">
                   <Pagination1 />

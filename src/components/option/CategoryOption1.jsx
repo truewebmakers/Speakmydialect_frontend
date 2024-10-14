@@ -1,9 +1,11 @@
 import { skillLevel } from "@/constants/constant";
 import listingStore from "@/store/listingStore";
+import { useSearchParams } from "react-router-dom";
 
 export default function CategoryOption1() {
   const getCategory = listingStore((state) => state.getCategory);
   const setCategory = listingStore((state) => state.setCategory);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // handler
   const categoryHandler = (data) => {
@@ -13,6 +15,12 @@ export default function CategoryOption1() {
       setCategory(data); // Selecting a new location
     }
   };
+
+  useEffect(() => {
+    if (searchParams?.size) {
+      setSearchParams("");
+    }
+  }, [getCategory]);
 
   return (
     <div className="checkbox-style1 mb15">

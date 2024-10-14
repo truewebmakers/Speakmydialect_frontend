@@ -1,11 +1,13 @@
 import listingStore from "@/store/listingStore";
 import { useState } from "react";
 import Search1 from "../element/Search1";
+import { useSearchParams } from "react-router-dom";
 
 export default function SpeakOption1({ data }) {
   const getSpeak = listingStore((state) => state.getSpeak);
   const setSpeak = listingStore((state) => state.setSpeak);
   const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // Language Handler
   const speakHandler = (name) => {
@@ -15,6 +17,12 @@ export default function SpeakOption1({ data }) {
       setSpeak(name); // Selecting a new location
     }
   };
+
+  useEffect(() => {
+    if (searchParams?.size) {
+      setSearchParams("");
+    }
+  }, [getSpeak]);
 
   // Filtering data based on search input
   const filteredData = data?.filter((item) =>

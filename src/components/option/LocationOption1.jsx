@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search1 from "../element/Search1";
 import listingStore from "@/store/listingStore";
+import { useSearchParams } from "react-router-dom";
 
 export default function LocationOption1({ data }) {
   const getLocation = listingStore((state) => state.getLocation);
   const setLocation = listingStore((state) => state.setLocation);
   const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // Location Handler
   const locationHandler = (id) => {
@@ -16,6 +18,12 @@ export default function LocationOption1({ data }) {
       setLocation(id); // Selecting a new location
     }
   };
+
+  useEffect(() => {
+    if (searchParams?.size) {
+      setSearchParams("");
+    }
+  }, [getLocation]);
 
   // Filtering data based on search input
   const filteredData = data?.filter((item) =>
