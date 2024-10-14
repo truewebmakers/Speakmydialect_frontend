@@ -2,11 +2,10 @@ import { apiMethods, apiUrls, routes } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import listingStore from "@/store/listingStore";
 import { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function HeroSearch1({ isSearchingPage, searchValue }) {
-  const params = useLocation();
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false);
   const [searchValueState, setSearchValue] = useState(searchValue || "");
   const [searchingList, setSearchingList] = useState([]);
@@ -59,9 +58,9 @@ export default function HeroSearch1({ isSearchingPage, searchValue }) {
           apiUrls.getSearchingSuggestions + value,
           apiMethods.GET
         );
-        if (data?.status === true || data?.status == 200) {
-          const searhingData = data?.data;
-          setSearchingList(searhingData);
+        if (data?.status === true || data?.status === 200) {
+          const searchingData = data?.data;
+          setSearchingList(searchingData);
         }
       } catch (error) {
         toast.error("Error fetching suggestions");
@@ -76,7 +75,19 @@ export default function HeroSearch1({ isSearchingPage, searchValue }) {
       const params = new URLSearchParams(window.location.search);
       params.delete("language");
       params.set("language", searchValueState);
+      navigate({
+        pathname: routes.Search,
+        search: `?${params.toString()}`,
+      });
+    }
+  };
 
+  const handleSearchClickOnSearchingPage = async () => {
+    if (searchValueState) {
+      setSpeak(searchValueState);
+      const params = new URLSearchParams(window.location.search);
+      params.delete("language");
+      params.set("language", searchValueState);
       navigate({
         pathname: routes.Search,
         search: `?${params.toString()}`,
@@ -88,7 +99,10 @@ export default function HeroSearch1({ isSearchingPage, searchValue }) {
     <>
       <div className="col-md-9 col-lg-9 col-xl-9">
         <div className="advance-search-field mb10-sm bdrr1 bdrn-sm">
-          <form className="form-search position-relative">
+          <form
+            className="form-search position-relative"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <div className="box-search">
               <span className="icon far fa-magnifying-glass" />
               <input
@@ -102,8 +116,9 @@ export default function HeroSearch1({ isSearchingPage, searchValue }) {
                 value={searchValueState}
                 onChange={onSearchChange}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" && searchValueState !== "")
+                  if (e.key === "Enter" && searchValueState !== "") {
                     handleSearchClick();
+                  }
                 }}
               />
               {searchingList?.length > 0 && (
@@ -163,7 +178,10 @@ export default function HeroSearch1({ isSearchingPage, searchValue }) {
       className="advance-search-field mb10-sm bdrr1 bdrn-sm"
       style={{ position: "relative" }}
     >
-      <form className="form-search position-relative">
+      <form
+        className="form-search position-relative"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div className="box-search" style={{ position: "relative" }}>
           <span className="icon far fa-magnifying-glass" />
           <input
@@ -177,15 +195,16 @@ export default function HeroSearch1({ isSearchingPage, searchValue }) {
             value={searchValueState}
             onChange={onSearchChange}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && searchValueState !== "")
-                handleSearchClick();
+              if (e.key === "Enter" && searchValueState !== "") {
+                handleSearchClickOnSearchingPage();
+              }
             }}
             style={{ paddingRight: "50px" }} // Space for the button inside
           />
           <button
             type="button"
             className="search-btn"
-            onClick={handleSearchClick}
+            onClick={handleSearchClickOnSearchingPage}
             disabled={!searchValueState?.length > 0}
             style={{
               position: "absolute",

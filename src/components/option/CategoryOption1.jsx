@@ -7,24 +7,26 @@ export default function CategoryOption1() {
 
   // handler
   const categoryHandler = (data) => {
-    setCategory(data);
+    if (getCategory === data) {
+      setCategory(""); // Deselecting the location
+    } else {
+      setCategory(data); // Selecting a new location
+    }
   };
 
   return (
-    <>
-      <div className="checkbox-style1 mb15">
-        {skillLevel?.map((item, i) => (
-          <label key={i} className="custom_checkbox">
-            {item?.name}
-            <input
-              type="checkbox"
-              onChange={() => categoryHandler(item?.name)}
-              checked={getCategory.includes(item?.name)}
-            />
-            <span className="checkmark" />
-          </label>
-        ))}
-      </div>
-    </>
+    <div className="checkbox-style1 mb15">
+      {skillLevel?.map((item, i) => (
+        <label key={i} className="custom_checkbox">
+          {item?.name}
+          <input
+            type="checkbox"
+            onChange={() => categoryHandler(item?.name)}
+            checked={getCategory === item?.name} // Check if current item is the selected category
+          />
+          <span className="checkmark" />
+        </label>
+      ))}
+    </div>
   );
 }

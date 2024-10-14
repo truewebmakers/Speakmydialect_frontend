@@ -9,7 +9,11 @@ export default function SpeakOption1({ data }) {
 
   // Language Handler
   const speakHandler = (name) => {
-    setSpeak(name);
+    if (getSpeak === name) {
+      setSpeak(""); // Deselecting the location
+    } else {
+      setSpeak(name); // Selecting a new location
+    }
   };
 
   // Filtering data based on search input
@@ -18,31 +22,29 @@ export default function SpeakOption1({ data }) {
   );
 
   return (
-    <>
-      <div className="card-body card-body px-0 pt-0">
-        <Search1
-          setSearch={setSearch}
-          search={search}
-          placeholder="Search For Languages"
-        />
+    <div className="card-body card-body px-0 pt-0">
+      <Search1
+        setSearch={setSearch}
+        search={search}
+        placeholder="Search For Languages"
+      />
 
-        {/* Show language list only if there's a search term */}
-        {search && (
-          <div className="checkbox-style1 mb15">
-            {filteredData?.map((item, i) => (
-              <label key={i} className="custom_checkbox">
-                {item?.name}
-                <input
-                  type="checkbox"
-                  onChange={() => speakHandler(item?.name)}
-                  checked={getSpeak?.includes(item?.name)}
-                />
-                <span className="checkmark" />
-              </label>
-            ))}
-          </div>
-        )}
-      </div>
-    </>
+      {/* Show language list only if there's a search term */}
+      {search && (
+        <div className="checkbox-style1 mb15">
+          {filteredData?.map((item, i) => (
+            <label key={i} className="custom_checkbox">
+              {item?.name}
+              <input
+                type="checkbox"
+                onChange={() => speakHandler(item?.name)}
+                checked={getSpeak === item?.name} // Check if current item is the selected language
+              />
+              <span className="checkmark" />
+            </label>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

@@ -6,7 +6,6 @@ import priceStore from "@/store/priceStore";
 import ListingSidebarModal2 from "../modal/ListingSidebarModal2";
 import { useEffect, useState } from "react";
 import { searchingApi } from "@/hook/searchingApi";
-import { useSearchParams } from "react-router-dom";
 import NoDataFound from "../noData/NoDataFound";
 
 export default function Listing8({ searchingResult1, setSearchingResult1 }) {
@@ -15,53 +14,32 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
   const getPrice = priceStore((state) => state.priceRange);
   const getLocation = listingStore((state) => state.getLocation);
   const getSpeak = listingStore((state) => state.getSpeak);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [searchingResult, setSearchingResult] = useState([]);
 
   useEffect(() => {
-    const query = Object.fromEntries(searchParams.entries());
+    // Create a query based on selected filters
+    const query = {
+      location: getLocation,
+      language: getSpeak,
+      level: getCategory,
+      type: getProjectType.length > 0 ? getProjectType : undefined,
+    };
 
-    // If there are no filters and it's just "/search", call API without parameters
-    if (!searchParams.toString()) {
+    // Remove undefined values from query
+    Object.keys(query).forEach(
+      (key) => query[key] === undefined && delete query[key]
+    );
+
+    // If there are no selected filters, call API without parameters
+    if (Object.keys(query).length === 0) {
       searchingApi({}).then((data) => setSearchingResult(data));
       return; // Exit early
     }
 
-    // Check if no filters are selected
-    if (
-      !getLocation.length &&
-      !getSpeak.length &&
-      !getCategory.length &&
-      !getProjectType.length
-    ) {
-      setSearchingResult([]); // Reset searching result if no filters are applied
-      return; // Exit early
-    }
-
-    if (Object.keys(query).length) {
-      searchingApi(query).then((data) => setSearchingResult(data));
-    }
+    // Call API with the constructed query if any filter is selected
+    searchingApi(query).then((data) => setSearchingResult(data));
     setSearchingResult1([]); // Reset previous results
-  }, [
-    searchParams,
-    setSearchingResult1,
-    getLocation,
-    getSpeak,
-    getCategory,
-    getProjectType,
-  ]);
-
-  useEffect(() => {
-    const params = {
-      location: getLocation,
-      language: getSpeak,
-      level: getCategory,
-    };
-    if (getProjectType?.length > 0) {
-      params[getProjectType] = getPrice?.max;
-    }
-    setSearchParams(params); // This will update the URL params
-  }, [getLocation, getSpeak, getCategory, getPrice, getProjectType]);
+  }, [getLocation, getSpeak, getCategory]);
 
   const content =
     searchingResult1?.length > 0
