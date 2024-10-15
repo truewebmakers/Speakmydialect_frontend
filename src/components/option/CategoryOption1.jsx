@@ -1,5 +1,6 @@
 import { skillLevel } from "@/constants/constant";
 import listingStore from "@/store/listingStore";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function CategoryOption1() {

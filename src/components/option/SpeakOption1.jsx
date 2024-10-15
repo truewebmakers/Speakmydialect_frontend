@@ -1,5 +1,5 @@
 import listingStore from "@/store/listingStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search1 from "../element/Search1";
 import { useSearchParams } from "react-router-dom";
 
@@ -16,13 +16,8 @@ export default function SpeakOption1({ data }) {
     } else {
       setSpeak(name); // Selecting a new location
     }
+    setSearchParams("");
   };
-
-  useEffect(() => {
-    if (searchParams?.size) {
-      setSearchParams("");
-    }
-  }, [getSpeak]);
 
   // Filtering data based on search input
   const filteredData = data?.filter((item) =>
