@@ -39,7 +39,7 @@ export default function MyProfileInfo() {
         <div className="row">
           <div className="col-xl-12">
             {/* Profile Details will be visible to everone */}
-            <ProfileDetails />
+            {user?.userInfo?.user_type !== "admin" && <ProfileDetails />}
             {/* Only Transaltor can see skills, education & work Expierence modules */}
             {user?.userInfo?.user_type == "translator" && (
               <>

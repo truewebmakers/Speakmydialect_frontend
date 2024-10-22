@@ -43,7 +43,7 @@ export default function UserApprovalCard({ data, openModal, openReasonModal }) {
         </td>
         <td className="vam">
           <a
-            className="table-action fz15 fw500 text-thm2"
+            className="table-action-view fz15 fw500 text-thm2"
             id="view"
             onClick={() => openModal(data?.id)}
           >

@@ -1265,6 +1265,18 @@ span.mb25.me-4.badge-success {
   padding: 11px 20px;
 }
 
+.table-action-view {
+  font-size: 13px;
+  background-color: #ffede8;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
 .dashboard-img-service {
   position: relative;
 }

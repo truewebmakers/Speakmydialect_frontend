@@ -7,8 +7,8 @@ export default function DashboardFooter() {
             <div className="col-auto">
               <div className="copyright-widget">
                 <p className="mb-md-0">
-                  Copyright © 2024 {new Date().getFullYear()} Powered By
-                  SpeakMyDialect.com.au. All rights reserved.
+                  Copyright © {new Date().getFullYear()} SpeakMyDialect All
+                  rights reserved.
                 </p>
               </div>
             </div>

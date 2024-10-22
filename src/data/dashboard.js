@@ -72,28 +72,22 @@ export const clientNavigation = [
 
 export const adminNavigation = [
   {
-    id: 1,
-    name: "Dashboard",
-    icon: "flaticon-home",
-    path: "/dashboard",
-  },
-  {
     id: 2,
-    name: "My Profile",
-    icon: "flaticon-photo",
-    path: "/my-profile",
-  },
-  {
-    id: 3,
     name: "User Approvals",
-    icon: "flaticon-like",
+    icon: "flaticon-security", // Updated icon for multiple users
     path: "/admin/userApprovals",
   },
   {
-    id: 4,
+    id: 3,
     name: "Payouts",
-    icon: "flaticon-like",
+    icon: "flaticon-money",
     path: "/admin/payoutManagement",
+  },
+  {
+    id: 4,
+    name: "My Profile",
+    icon: "flaticon-photo",
+    path: "/my-profile",
   },
   {
     id: 5,

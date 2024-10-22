@@ -86,6 +86,7 @@ span[class*=" flaticon-"]:before {
 .flaticon-money:before {
   content: "\f114";
 }
+
 .flaticon-tick:before {
   content: "\f115";
 }
