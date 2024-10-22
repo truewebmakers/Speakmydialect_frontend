@@ -51,6 +51,7 @@ export default function DashboardSidebar() {
             }`}
           >
             <i className={`${item.icon} mr15`} />
+
             {item.name}
           </Link>
         ) : (

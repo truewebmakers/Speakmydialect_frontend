@@ -208,7 +208,7 @@ export default function ProfileDetails() {
             </div>
           </div>
         </div>
-        <div className="col-lg-7">
+        <div className="col-lg-12">
           <form className="form-style1">
             <div className="row">
               <div className="col-sm-6">
@@ -259,27 +259,6 @@ export default function ProfileDetails() {
                   />
                 </div>
               </div>
-              {user?.userInfo?.user_type == "translator" && (
-                <>
-                  <div className="col-sm-6">
-                    <div className="mb20">
-                      <label className="heading-color ff-heading fw500 mb10">
-                        Fix Rate ($/hr)
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter your fix rate"
-                        name="fix_rate"
-                        value={profileDetails?.fix_rate}
-                        autoComplete="off"
-                        readOnly={true}
-                        // onChange={handleOnChange}
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
               <div className="col-sm-6">
                 <div className="mb20">
                   <SelectInput

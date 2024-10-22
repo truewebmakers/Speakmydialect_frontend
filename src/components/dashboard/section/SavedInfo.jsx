@@ -98,7 +98,7 @@ export default function JobAndOrdersManagement() {
           <div className="col-lg-12">
             <div className="dashboard_title_area">
               {pathname?.includes("/jobs") ? (
-                <h2>Job Management</h2>
+                <h2>Booking Management</h2>
               ) : (
                 <h2>Bookings</h2>
               )}
@@ -128,6 +128,7 @@ export default function JobAndOrdersManagement() {
                             className={`nav-link fw500 ps-0 ${
                               getCurrentTab?.id === item?.id ? "active" : ""
                             }`}
+                            style={{ marginRight: "15px" }}
                           >
                             {item?.name}
                           </button>

@@ -161,40 +161,40 @@ export const routes = {
 export const startYearDropdown = 1965;
 
 export const translatorBookingTab = [
-  { id: 0, name: "New Bookings", status: "in-process", type: "new_booking" }, //pending jobs
+  { id: 0, name: "New", status: "in-process", type: "new_booking" }, //pending jobs
   {
     id: 1,
-    name: "Current Bookings",
+    name: "Current",
     status: "accept", //today's date
     type: "today_booking",
   },
   {
     id: 2,
-    name: "Upcoming Bookings",
+    name: "Upcoming",
     status: "accept", //>date jobs which are aligned for future
     type: "upcoming_booking",
   },
   {
     id: 3,
-    name: "Completed Bookings",
+    name: "Completed",
     status: "mark-completed", // job completed by translator not yet approved by client
     type: "completed_booking",
   },
   {
     id: 4,
-    name: "Approved Bookings",
+    name: "Approved",
     status: "approved", // job completed by translator & approved by client
     type: "approved_booking",
   },
   {
     id: 5,
-    name: "Canceled Bookings",
+    name: "Canceled",
     status: "cancel", // job canceled by client
     type: "canceled_booking", //not required
   },
   {
     id: 6,
-    name: "Rejected Bookings",
+    name: "Rejected",
     status: "reject", // translator reject the job
     type: "rejected_booking", //not required
   },

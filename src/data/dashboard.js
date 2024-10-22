@@ -19,8 +19,8 @@ export const translatorNavigation = [
   },
   {
     id: 4,
-    name: "Payout Management",
-    icon: "flaticon-dollar",
+    name: "Payouts",
+    icon: "flaticon-money",
     path: "/payouts",
   },
   {
@@ -32,6 +32,12 @@ export const translatorNavigation = [
 ];
 
 export const clientNavigation = [
+  {
+    id: 5,
+    name: "Search",
+    icon: "flaticon-search",
+    path: "/search",
+  },
   {
     id: 1,
     name: "Dashboard",
@@ -53,15 +59,10 @@ export const clientNavigation = [
   {
     id: 4,
     name: "Invoices",
-    icon: "flaticon-like",
+    icon: "fa-regular fa-file-lines",
     path: "/invoice",
   },
-  {
-    id: 5,
-    name: "Search",
-    icon: "flaticon-home",
-    path: "/search",
-  },
+
   {
     id: 6,
     name: "Logout",
@@ -74,7 +75,7 @@ export const adminNavigation = [
   {
     id: 2,
     name: "User Approvals",
-    icon: "flaticon-security", // Updated icon for multiple users
+    icon: "fa-regular fa-user", // Updated icon for multiple users
     path: "/admin/userApprovals",
   },
   {
