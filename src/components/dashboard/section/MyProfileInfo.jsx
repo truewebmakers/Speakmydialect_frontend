@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import DashboardNavigation from "../header/DashboardNavigation";
 import ChangePassword from "./ChangePassword";
 import Education from "./Education";
-import ProfileDetails from "./ProfileDetails";
+import ClientProfileDetails from "./ClientProfileDetails";
 import Skill from "./Skill";
 import WorkExperience from "./WorkExperience";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileDetails } from "@/redux/auth";
 import { getProfileData } from "@/utils/commonFunctions";
 import PaymentMethod from "./PaymentMethod";
+import TranslatorProfileDetails from "./TranslatorProfileDetails";
 
 export default function MyProfileInfo() {
   const dispatch = useDispatch();
@@ -39,10 +40,12 @@ export default function MyProfileInfo() {
         <div className="row">
           <div className="col-xl-12">
             {/* Profile Details will be visible to everone */}
-            {user?.userInfo?.user_type !== "admin" && <ProfileDetails />}
+            {user?.userInfo?.user_type == "client" && <ClientProfileDetails />}
+
             {/* Only Transaltor can see skills, education & work Expierence modules */}
             {user?.userInfo?.user_type == "translator" && (
               <>
+                <TranslatorProfileDetails />
                 <Skill />
                 <Education />
                 <WorkExperience />

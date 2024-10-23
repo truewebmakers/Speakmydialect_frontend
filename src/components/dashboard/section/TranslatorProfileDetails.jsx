@@ -9,7 +9,7 @@ import Loader from "@/components/common/loader";
 import { getCountries } from "@/utils/commonFunctions";
 import { useNavigate } from "react-router-dom";
 
-export default function ProfileDetails() {
+export default function TranslatorProfileDetails() {
   const [profileDetails, setProfileDetails] = useState({
     fname: "",
     lname: "",
