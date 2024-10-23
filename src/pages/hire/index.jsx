@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 
 export default function HireNowPage() {
   const { state } = useLocation();
+
   return (
     <>
       <MetaComponent meta={metaData} />
