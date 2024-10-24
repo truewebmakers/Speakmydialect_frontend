@@ -23,6 +23,19 @@ export const getCountries = (setCountryList) => {
   }
 };
 
+export const getDialects = async (setDialectListing) => {
+  try {
+    const response = await UseApi(apiUrls.getDialects, apiMethods.GET);
+    if (response?.status === 200 || response?.status === 201) {
+      const dialectData = response?.data?.data;
+      setDialectListing(dialectData);
+      sessionStorage.setItem("dialect", JSON.stringify(dialectData));
+    }
+  } catch (error) {
+    toast.error("Error fetching languages");
+  }
+};
+
 export const getLanguages = async (setLanguageListing) => {
   try {
     const response = await UseApi(apiUrls.getLanguages, apiMethods.GET);

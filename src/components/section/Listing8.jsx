@@ -13,6 +13,8 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
   const getProjectType = listingStore((state) => state.getProjectType);
   const getLocation = listingStore((state) => state.getLocation);
   const getSpeak = listingStore((state) => state.getSpeak);
+  const getDialect = listingStore((state) => state.getDialect);
+
   const [searchingResult, setSearchingResult] = useState([]);
 
   useEffect(() => {
@@ -22,6 +24,7 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
       language: getSpeak || undefined,
       level: getCategory || undefined,
       type: getProjectType.length > 0 ? getProjectType : undefined,
+      dialect: getDialect || undefined,
     };
 
     // Remove undefined values from query
@@ -38,7 +41,7 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
     // Call API with the constructed query if any filter is selected
     searchingApi(query).then((data) => setSearchingResult(data));
     setSearchingResult1([]); // Reset previous results
-  }, [getLocation, getSpeak, getCategory, getProjectType]);
+  }, [getLocation, getSpeak, getCategory, getProjectType, getDialect]);
 
   const content =
     searchingResult1?.length > 0

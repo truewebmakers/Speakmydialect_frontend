@@ -4,7 +4,8 @@ import SelectInput from "../dashboard/option/SelectInput";
 import { useState } from "react";
 
 export default function DialectOption1({ data }) {
-  const [getDialect, setDialect] = useState("");
+  const getDialect = listingStore((state) => state.getDialect);
+  const setDialect = listingStore((state) => state.setDialect);
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Language Handler
@@ -24,8 +25,8 @@ export default function DialectOption1({ data }) {
       <SelectInput
         defaultSelect={defaultSelect} // Pass the prepared defaultSelect object
         data={data?.map((item) => ({
-          option: item?.name,
-          value: item?.name,
+          option: item?.dialect,
+          value: item?.dialect,
         }))} // Populate dropdown with languages
         handler={speakHandler} // Handle language selection
       />

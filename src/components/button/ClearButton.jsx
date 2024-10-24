@@ -9,6 +9,7 @@ export default function ClearButton() {
   const setBestSeller = listingStore((state) => state.setBestSeller);
   const setDesginTool = listingStore((state) => state.setDesginTool);
   const setSpeak = listingStore((state) => state.setSpeak);
+  const setDialect = listingStore((state) => state.setDialect);
   const setPriceRange = priceStore((state) => state.priceRangeHandler);
   const setSearch = listingStore((state) => state.setSearch);
   const setCategory = listingStore((state) => state.setCategory);
@@ -40,6 +41,7 @@ export default function ClearButton() {
     setBestSeller("best-seller");
     setDesginTool([]);
     setSpeak([]);
+    setDialect([]);
     setPriceRange(0, 100000);
     setSearch("");
     setCategory([]);

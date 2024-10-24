@@ -20,6 +20,7 @@ export const apiUrls = {
   getCountries: "/get-countries",
   getUserProfile: "/admin/getProfile/",
   getLanguages: "/get-languages",
+  getDialects: "/get/skillsall/dialect",
   getSkills: "/admin/get/skills/",
   deleteSkills: "/admin/delete/skills/",
   updateUserSkill: "/admin/update/skills/",

@@ -5,17 +5,23 @@ import CategoryOption1 from "../option/CategoryOption1";
 import LocationOption1 from "../option/LocationOption1";
 import ProjectTypeOption1 from "../option/ProjectTypeOption1";
 import SpeakOption1 from "../option/SpeakOption1";
-import { getCountries, getLanguages } from "@/utils/commonFunctions";
+import {
+  getCountries,
+  getDialects,
+  getLanguages,
+} from "@/utils/commonFunctions";
 import DialectOption1 from "../option/DialectOption";
 
 export default function ListingSidebar2() {
   const [countryList, setCountryList] = useState([]);
   const [languageListing, setLanguageListing] = useState([]);
+  const [dialectListing, setDialectListing] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const storedCountries = sessionStorage.getItem("countries");
       const storedLanguages = sessionStorage.getItem("languages");
+      const storedDialect = sessionStorage.getItem("dialect");
 
       if (storedCountries?.length > 0) {
         setCountryList(JSON.parse(storedCountries));
@@ -26,6 +32,11 @@ export default function ListingSidebar2() {
         setLanguageListing(JSON.parse(storedLanguages));
       } else {
         await getLanguages(setLanguageListing);
+      }
+      if (storedDialect?.length > 0) {
+        setDialectListing(JSON.parse(storedDialect));
+      } else {
+        await getDialects(setDialectListing);
       }
     };
     fetchData();
@@ -84,7 +95,7 @@ export default function ListingSidebar2() {
               data-parent="#accordionExample"
             >
               <div className="card-body card-body px-0 pt-0">
-                <DialectOption1 data={languageListing} />
+                <DialectOption1 data={dialectListing} />
               </div>
             </div>
           </div>

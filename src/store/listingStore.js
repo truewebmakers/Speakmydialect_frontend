@@ -3,6 +3,7 @@ import { create } from "zustand";
 const listingStore = create((set) => ({
   getDeliveryTime: "",
   getLevel: "",
+  getDialect: "",
   getLocation: "",
   getBestSeller: "best-seller",
   getDesginTool: [],
@@ -59,6 +60,14 @@ const listingStore = create((set) => ({
         return { getSpeak: payload }; // Store the selected language as a string
       } else {
         return { getSpeak: "" }; // Handle case for no selection
+      }
+    }),
+  setDialect: (payload) =>
+    set((state) => {
+      if (payload?.length !== 0) {
+        return { getDialect: payload }; // Store the selected language as a string
+      } else {
+        return { getDialect: "" }; // Handle case for no selection
       }
     }),
   setSearch: (payload) => set(() => ({ getSearch: payload })),
