@@ -1,7 +1,40 @@
 import { CapitalizeFirstLetter } from "@/utils/helper";
+import { Tooltip } from "react-tooltip";
+import eyeIcon from "../../../../public/images/eye.svg";
 import moment from "moment";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { apiMethods, apiUrls } from "@/constants/constant";
+import UseApi from "@/hook/useApi";
 
-export default function UserApprovalCard({ data, openModal, openReasonModal }) {
+export default function UserApprovalCard({
+  data,
+  openModal,
+  openReasonModal,
+  fetchData,
+}) {
+  const { user } = useSelector((state) => state.auth);
+
+  const deleteExperienceId = async (id) => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${user?.token}`,
+      };
+      const response = await UseApi(
+        apiUrls.deleteUserApprovals + id,
+        apiMethods.POST,
+        null,
+        headers
+      );
+      if (response?.status === 200 || response?.status === 201) {
+        toast.success("Deleted Successfully");
+        fetchData();
+      }
+    } catch (error) {
+      toast.error("Error fetching experience");
+    }
+  };
+
   return (
     <>
       <tr>
@@ -17,6 +50,13 @@ export default function UserApprovalCard({ data, openModal, openReasonModal }) {
         <td className="vam">{data?.email ? data?.email : "-"}</td>
         <td className="vam">
           {data?.user_type ? CapitalizeFirstLetter(data?.user_type) : "-"}
+        </td>
+        <td className="vam">
+          {data?.email_verified_at ? (
+            <span className="pending-style style7"> Approved </span>
+          ) : (
+            <span className={`pending-style style1`}> Pending</span>
+          )}
         </td>
         <td
           className="vam"
@@ -42,13 +82,41 @@ export default function UserApprovalCard({ data, openModal, openReasonModal }) {
           {data?.created_at ? moment(data?.created_at).format("lll") : "-"}
         </td>
         <td className="vam">
-          <a
-            className="table-action-view fz15 fw500 text-thm2"
-            id="view"
-            onClick={() => openModal(data?.id)}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
-            <span className="flaticon-website me-2 vam"> View</span>
-          </a>
+            <a
+              className="table-action-view fz15 fw500 text-thm2"
+              id="view"
+              onClick={() => openModal(data?.id)}
+              style={{ marginRight: "10px" }}
+            >
+              <Tooltip anchorSelect={`#view`} className="ui-tooltip">
+                View & Take Action
+              </Tooltip>
+              <span>
+                <img className="flaticon-view" src={eyeIcon} alt="View" />
+              </span>
+            </a>
+            <a
+              type="button"
+              className="table-action-view fz15 fw500 text-thm2"
+              id={`delete-${data?.id}`}
+              onClick={() => deleteExperienceId(data?.id)}
+            >
+              <Tooltip
+                anchorSelect={`#delete-${data?.id}`}
+                className="ui-tooltip"
+              >
+                Delete
+              </Tooltip>
+              <span className="flaticon-delete" />
+            </a>
+          </div>
         </td>
       </tr>
     </>

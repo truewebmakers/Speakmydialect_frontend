@@ -6,6 +6,7 @@ import LocationOption1 from "../option/LocationOption1";
 import ProjectTypeOption1 from "../option/ProjectTypeOption1";
 import SpeakOption1 from "../option/SpeakOption1";
 import { getCountries, getLanguages } from "@/utils/commonFunctions";
+import DialectOption1 from "../option/DialectOption";
 
 export default function ListingSidebar2() {
   const [countryList, setCountryList] = useState([]);
@@ -71,6 +72,19 @@ export default function ListingSidebar2() {
             >
               <div className="card-body card-body px-0 pt-0">
                 <SpeakOption1 data={languageListing} />
+              </div>
+            </div>
+          </div>
+          <div className="card mb20 pb5">
+            <h4>Dialect</h4>
+            <div
+              id="collapse3"
+              className="collapse show"
+              aria-labelledby="heading3"
+              data-parent="#accordionExample"
+            >
+              <div className="card-body card-body px-0 pt-0">
+                <DialectOption1 data={languageListing} />
               </div>
             </div>
           </div>

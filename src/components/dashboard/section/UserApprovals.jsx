@@ -120,6 +120,7 @@ export default function UserApprovalInfo() {
                       <th scope="col">Name</th>
                       <th scope="col">Email</th>
                       <th scope="col">User Type</th>
+                      <th scope="col">Email Verified</th>
                       <th scope="col">Status</th>
                       <th scope="col">Joined on</th>
                       <th scope="col">Action</th>
@@ -132,6 +133,7 @@ export default function UserApprovalInfo() {
                         data={item}
                         openModal={openModal}
                         openReasonModal={openReasonModal}
+                        fetchData={fetchData}
                       />
                     ))}
                   </tbody>

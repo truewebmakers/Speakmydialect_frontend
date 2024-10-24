@@ -1,22 +1,22 @@
 import listingStore from "@/store/listingStore";
 import { useSearchParams } from "react-router-dom";
 import SelectInput from "../dashboard/option/SelectInput";
+import { useState } from "react";
 
-export default function SpeakOption1({ data }) {
-  const getSpeak = listingStore((state) => state.getSpeak);
-  const setSpeak = listingStore((state) => state.setSpeak);
+export default function DialectOption1({ data }) {
+  const [getDialect, setDialect] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Language Handler
   const speakHandler = (option, value) => {
-    setSpeak(value); // Set the selected language
+    setDialect(value); // Set the selected language
     setSearchParams(""); // Clear search params
   };
 
   // Prepare the default select object
   const defaultSelect = {
-    option: getSpeak || "Select Language", // Show placeholder when no language is selected
-    value: getSpeak,
+    option: getDialect || "Select Dialect", // Show placeholder when no language is selected
+    value: getDialect,
   };
 
   return (

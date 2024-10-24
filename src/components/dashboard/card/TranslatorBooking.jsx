@@ -71,6 +71,14 @@ export default function TranslatorBooking({ data, i, currentTab, getData }) {
             <b>Work Mode: </b>
             {CapitalizeFirstLetter(data?.availability) || "Not specified yet"}
           </p>
+          {data?.availability &&
+          data?.availability?.toLowerCase() === "in-person" ? (
+            <p className="mb-0">
+              <b>Address: </b>
+              {CapitalizeFirstLetter(data?.client_meta?.address) ||
+                "Not specified yet"}
+            </p>
+          ) : null}
           <p className="mb-0">
             <b>Payment Status: </b>
             {data?.payment_status === "none"

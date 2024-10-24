@@ -23,6 +23,12 @@ export default function Skill() {
     setSkills(newSkills);
   };
 
+  const handleDialectChange = (index, field, e) => {
+    const newSkills = [...skills];
+    newSkills[index][field] = e.target.value;
+    setSkills(newSkills);
+  };
+
   const handleChecked = (index, e) => {
     const newSkills = [...skills];
     newSkills[index].status = e.target.checked ? "active" : "inactive";
@@ -35,6 +41,7 @@ export default function Skill() {
       {
         language: { option: "Select", value: null },
         level: { option: "Select", value: null },
+        dialect: "",
         status: "active",
       },
       ...skills,
@@ -98,16 +105,18 @@ export default function Skill() {
             option:
               (storedLanguages &&
                 JSON.parse(storedLanguages)?.find(
-                  (lang) => lang.id == skill.language
+                  (lang) => lang?.id == skill?.language
                 )?.name) ||
               "Select",
-            value: skill.language,
+            value: skill?.language,
           },
+          dialect: skill?.dialect,
           level: {
-            option: skill.level.charAt(0).toUpperCase() + skill.level.slice(1),
-            value: skill.level,
+            option:
+              skill?.level?.charAt(0)?.toUpperCase() + skill?.level?.slice(1),
+            value: skill?.level,
           },
-          status: skill.status,
+          status: skill?.status,
         }));
         setSkills(formattedSkills);
       }
@@ -135,7 +144,11 @@ export default function Skill() {
     try {
       // Validation: Check for empty fields
       for (const skill of skills) {
-        if (!skill.language.value || !skill.level.value) {
+        if (
+          !skill?.language?.value ||
+          !skill?.level?.value ||
+          !skill?.dialect
+        ) {
           toast.error("Please fill in all fields for each skill.");
           setIsLoading(false);
           return; // Stop the function if a field is empty
@@ -150,6 +163,7 @@ export default function Skill() {
           language: skill?.language?.value,
           level: skill?.level?.value,
           status: skill?.status?.toLowerCase(),
+          dialect: skill?.dialect,
         })),
       };
       const response = await UseApi(
@@ -184,42 +198,54 @@ export default function Skill() {
       </div>
       <div className="col-lg-14">
         <div className="row">
-          {skills.map((skill, index) => (
+          {skills?.map((skill, index) => (
             <form key={index} className="form-style1">
               <div className="row align-items-center">
                 <div className="col-sm-3 mb20">
                   <SelectInput
                     label="Language"
                     defaultSelect={{
-                      option: skill.language.option || "Select",
-                      value: skill.language.value || null,
+                      option: skill?.language?.option || "Select",
+                      value: skill?.language?.value || null,
                     }}
-                    data={languageListing.map((item) => ({
-                      option: item.name,
-                      value: item.id,
+                    data={languageListing?.map((item) => ({
+                      option: item?.name,
+                      value: item?.id,
                     }))}
                     handler={(option, value) =>
                       handleFieldChange(index, "language", option, value)
                     }
                   />
                 </div>
-
+                <div className="col-sm-3 mb20">
+                  <label className="heading-color ff-heading fw500 mb10">
+                    Dialect
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Dialect"
+                    value={skill?.dialect}
+                    onChange={(e) => handleDialectChange(index, "dialect", e)}
+                  />
+                </div>
                 <div className="col-sm-3 mb20">
                   <SelectInput
                     label="Level"
                     defaultSelect={{
-                      option: skill.level.option || "Select",
-                      value: skill.level.value || null,
+                      option: skill?.level?.option || "Select",
+                      value: skill?.level?.value || null,
                     }}
-                    data={skillLevel.map((item) => ({
-                      option: item.name,
-                      value: item.name.toLowerCase(),
+                    data={skillLevel?.map((item) => ({
+                      option: item?.name,
+                      value: item?.name.toLowerCase(),
                     }))}
                     handler={(option, value) =>
                       handleFieldChange(index, "level", option, value)
                     }
                   />
                 </div>
+
                 <div className="col-sm-3 mb20">
                   <label className="heading-color ff-heading fw500 mb10">
                     Status
@@ -230,7 +256,7 @@ export default function Skill() {
                         className="form-check-input"
                         type="checkbox"
                         id={`flexSwitchCheckDefault-${index}`}
-                        checked={skill.status === "active"}
+                        checked={skill?.status === "active"}
                         onChange={(e) => handleChecked(index, e)}
                       />
                     </div>

@@ -1,3 +1,4 @@
+import { fixRate } from "@/constants/constant";
 import { getCountryName, getLanguageName } from "@/utils/commonFunctions";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
@@ -71,7 +72,7 @@ export default function FreelancerAbout1({ data }) {
               <i className="flaticon-sliders text-thm2 pe-2 vam" />
               Fix Rate
             </span>
-            <span>${data?.user_meta?.fix_rate}</span>
+            <span>${data?.user_meta?.fix_rate || fixRate}</span>
           </a>
         </div>
         {data?.fname && (

@@ -1047,8 +1047,8 @@ span.mb25.me-4.badge-success {
 
 .dashboard__content {
   border-radius: 4px;
-  padding: 60px 60px 20px;
-  width: 100%;
+    padding: 23px 18px 4px;
+    width: 100%;
 }
 
 @media (max-width: 767.98px) {

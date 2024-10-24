@@ -105,6 +105,7 @@ export default function ClientProfileDetails() {
         fix_rate: "77" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
+        address: profileData?.user_meta?.address || "",
       });
       // Enter Gender
       setGender({
@@ -153,6 +154,7 @@ export default function ClientProfileDetails() {
         profile_pic: uploadPic,
         gender: getGender?.value,
         location: getCountry?.value,
+        address: profileDetails?.address,
       };
       // Call signup API
       const response = await UseApi(

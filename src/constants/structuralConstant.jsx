@@ -10,10 +10,10 @@ export const adminDashboardWidgets = [
 ];
 
 export const clientDashboardWidgets = [
-  { name: "Upcoming Bookings", key: "in-process" },
-  { name: "Current Bookings", key: "accept" },
-  { name: "Completed Bookings", key: "mark-completed" },
-  { name: "Approved Bookings", key: "approved" },
+  { name: "Upcoming", key: "in-process" },
+  { name: "Current", key: "accept" },
+  { name: "Completed", key: "mark-completed" },
+  { name: "Approved", key: "approved" },
   { name: "Canceled", key: "cancel" },
   { name: "Rejected", key: "reject" },
 ];

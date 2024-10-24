@@ -1,6 +1,7 @@
 import {
   apiMethods,
   apiUrls,
+  fixRate,
   jobAvailaibiltyType,
   routes,
 } from "@/constants/constant";
@@ -30,7 +31,7 @@ export default function HireNowSection({ translatorProfile }) {
     start_at: "",
     end_at: "",
     job_title: "",
-    duration: { days: 0, hours: 0, minutes: 0 }, // Duration fields
+    duration: { hours: 0, minutes: 0 }, // Duration fields
   });
 
   const { user, profileData } = useSelector((state) => state.auth);
@@ -86,7 +87,6 @@ export default function HireNowSection({ translatorProfile }) {
     const endDate = new Date(startDate.getTime()); // Clone the start date
 
     // Add duration to the endDate
-    endDate.setUTCDate(endDate.getUTCDate() + duration.days); // Add days
     endDate.setUTCHours(endDate.getUTCHours() + duration.hours); // Add hours
     endDate.setUTCMinutes(endDate.getUTCMinutes() + duration.minutes); // Add minutes
 
@@ -112,7 +112,7 @@ export default function HireNowSection({ translatorProfile }) {
         client_id: profileData?.id,
         translator_id: translatorProfile?.id,
         payment_type: "fix",
-        present_rate: +translatorProfile?.user_meta?.fix_rate,
+        present_rate: +translatorProfile?.user_meta?.fix_rate || fixRate,
         availability: hireNowForm?.availability?.value,
         status: "in-process",
         work_status: "pending",
@@ -120,6 +120,10 @@ export default function HireNowSection({ translatorProfile }) {
         start_at: hireNowForm?.start_at,
         end_at: hireNowForm?.end_at,
         job_title: hireNowForm?.job_title,
+        duration: {
+          hours: hireNowForm?.duration?.hours,
+          minutes: hireNowForm?.duration?.minutes,
+        },
       };
       const response = await UseApi(
         apiUrls.addBooking,
@@ -136,6 +140,10 @@ export default function HireNowSection({ translatorProfile }) {
           presentRate: response?.data?.data?.present_rate,
           startDate: hireNowForm?.start_at,
           endDate: hireNowForm?.end_at,
+          duration: {
+            hours: hireNowForm?.duration?.hours,
+            minutes: hireNowForm?.duration?.minutes,
+          },
         };
         navigate(routes.PayNow, { state: data });
         setIsLoading(false);
@@ -151,7 +159,7 @@ export default function HireNowSection({ translatorProfile }) {
           start_at: "",
           end_at: "",
           job_title: "",
-          duration: { days: 0, hours: 0, minutes: 0 },
+          duration: { hours: 0, minutes: 0 },
         });
         return;
       } else {
@@ -171,7 +179,7 @@ export default function HireNowSection({ translatorProfile }) {
       ...prev,
       start_at: dateString,
     }));
-    calculateEndTime(dateString, hireNowForm.duration);
+    calculateEndTime(dateString, hireNowForm?.duration);
   };
 
   return (
@@ -241,7 +249,7 @@ export default function HireNowSection({ translatorProfile }) {
                     <div className="mb20">
                       <SelectInput
                         label="Mode of Work"
-                        defaultSelect={hireNowForm.availability}
+                        defaultSelect={hireNowForm?.availability}
                         data={jobAvailaibiltyType?.map((item) => ({
                           option: item?.name,
                           value: item?.value,
@@ -296,7 +304,9 @@ export default function HireNowSection({ translatorProfile }) {
                         format="YYYY-MM-DD HH:mm"
                         className="form-control"
                         value={
-                          hireNowForm.end_at ? moment(hireNowForm.end_at) : null
+                          hireNowForm?.end_at
+                            ? moment(hireNowForm?.end_at)
+                            : null
                         }
                         onChange={(date, dateString) => {
                           setHireNowForm((prev) => ({
@@ -311,28 +321,8 @@ export default function HireNowSection({ translatorProfile }) {
                       )}
                     </div>
                   </div>
-                  <div className="col-md-4">
-                    <div className="mb20">
-                      <label className="heading-color ff-heading fw500 mb10">
-                        Duration (Days)
-                      </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        name="days"
-                        value={hireNowForm.duration.days || ""}
-                        onFocus={() =>
-                          setHireNowForm((prev) => ({
-                            ...prev,
-                            duration: { ...prev.duration, days: "" },
-                          }))
-                        }
-                        onChange={handleDurationChange}
-                      />
-                    </div>
-                  </div>
 
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <div className="mb20">
                       <label className="heading-color ff-heading fw500 mb10">
                         Duration (Hours)
@@ -341,11 +331,12 @@ export default function HireNowSection({ translatorProfile }) {
                         type="number"
                         className="form-control"
                         name="hours"
-                        value={hireNowForm.duration.hours || ""}
+                        placeholder="Enter Hours"
+                        value={hireNowForm?.duration?.hours || ""}
                         onFocus={() =>
                           setHireNowForm((prev) => ({
                             ...prev,
-                            duration: { ...prev.duration, hours: "" },
+                            duration: { ...prev?.duration, hours: "" },
                           }))
                         }
                         onChange={handleDurationChange}
@@ -353,7 +344,7 @@ export default function HireNowSection({ translatorProfile }) {
                     </div>
                   </div>
 
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <div className="mb20">
                       <label className="heading-color ff-heading fw500 mb10">
                         Duration (Minutes)
@@ -362,11 +353,12 @@ export default function HireNowSection({ translatorProfile }) {
                         type="number"
                         className="form-control"
                         name="minutes"
-                        value={hireNowForm.duration.minutes || ""}
+                        placeholder="Enter Minutes"
+                        value={hireNowForm?.duration?.minutes || ""}
                         onFocus={() =>
                           setHireNowForm((prev) => ({
                             ...prev,
-                            duration: { ...prev.duration, minutes: "" },
+                            duration: { ...prev?.duration, minutes: "" },
                           }))
                         }
                         onChange={handleDurationChange}

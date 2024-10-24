@@ -5,6 +5,8 @@ export const apiMethods = {
   DELETE: "delete",
 };
 
+export const fixRate = 77;
+
 export const env = {
   API_URL: import.meta.env.VITE_APP_API_URL,
 };
@@ -49,6 +51,7 @@ export const apiUrls = {
   addBankDetails: "/admin/translator/bank/store",
   getBankDetails: "/admin/translator/get/bank/",
   updateBankDetails: "/admin/translator/bank/update/",
+  deleteUserApprovals: "/admin/user/delete/",
 };
 
 export const metaData = {
