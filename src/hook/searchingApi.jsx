@@ -10,7 +10,7 @@ export const searchingApi = async (params) => {
       }
     );
     // Return the data received from the API response
-    return response.data.data;
+    return response?.data;
   } catch (error) {
     // Handle any errors that occur during the API request
     console.error("Error fetching search results:", error);

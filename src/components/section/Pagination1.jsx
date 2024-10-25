@@ -1,53 +1,64 @@
-import { useLocation } from "react-router-dom";
+import { pageLimit } from "@/constants/constant";
+import React from "react";
 
-export default function Pagination1() {
-  const { pathname } = useLocation();
+export default function Pagination1({
+  currentPage,
+  setCurrentPage,
+  total,
+  fetchData,
+}) {
+  const totalPages = Math.ceil(total / pageLimit); // Assuming 10 items per page
+
+  const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages) return; // Prevent out-of-bounds pages
+    setCurrentPage(page);
+    fetchData(page); // Call the API to fetch data for the selected page
+  };
+
+  const renderPaginationItems = () => {
+    const items = [];
+    for (let i = 1; i <= totalPages; i++) {
+      items.push(
+        <li
+          key={i}
+          className={`page-item ${i === currentPage ? "active" : ""}`}
+        >
+          <a className="page-link" onClick={() => handlePageChange(i)}>
+            {i}
+          </a>
+        </li>
+      );
+    }
+    return items;
+  };
+
   return (
-    <>
-      <div
-        className={`mbp_pagination text-center ${
-          pathname === "/blog-2" || pathname === "/blog-3" ? "mb40-md" : ""
-        } ${pathname === "/shop-list" ? "mt30" : ""}`}
-      >
-        <ul className="page_navigation">
-          <li className="page-item">
-            <a className="page-link">
-              <span className="fas fa-angle-left" />
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link">1</a>
-          </li>
-          <li className="page-item active" aria-current="page">
-            <a className="page-link">
-              2 <span className="sr-only">(current)</span>
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link">3</a>
-          </li>
-          <li className="page-item">
-            <a className="page-link">4</a>
-          </li>
-          <li className="page-item">
-            <a className="page-link">5</a>
-          </li>
-          <li className="page-item">
-            <a className="page-link">...</a>
-          </li>
-          <li className="page-item">
-            <a className="page-link">20</a>
-          </li>
-          <li className="page-item">
-            <a className="page-link">
-              <span className="fas fa-angle-right" />
-            </a>
-          </li>
-        </ul>
-        <p className="mt10 mb-0 pagination_page_count text-center">
-          1 – 20 of 300+ property available
-        </p>
-      </div>
-    </>
+    <div className="mbp_pagination text-center">
+      <ul className="page_navigation">
+        <li className="page-item">
+          <a
+            className="page-link"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            <span className="fas fa-angle-left" />
+          </a>
+        </li>
+        {renderPaginationItems()}
+        <li className="page-item">
+          <a
+            className="page-link"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            <span className="fas fa-angle-right" />
+          </a>
+        </li>
+      </ul>
+      <p className="mt10 mb-0 pagination_page_count text-center">
+        {(currentPage - 1) * 10 + 1} – {Math.min(currentPage * 10, total)} of{" "}
+        {total} properties available
+      </p>
+    </div>
   );
 }

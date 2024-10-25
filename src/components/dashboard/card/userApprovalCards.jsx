@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { apiMethods, apiUrls } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 export default function UserApprovalCard({
   data,
@@ -31,8 +32,25 @@ export default function UserApprovalCard({
         fetchData();
       }
     } catch (error) {
-      toast.error("Error fetching experience");
+      toast.error("Error deleting experience");
     }
+  };
+
+  const confirmDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteExperienceId(id);
+      }
+    });
   };
 
   return (
@@ -53,7 +71,7 @@ export default function UserApprovalCard({
         </td>
         <td className="vam">
           {data?.email_verified_at ? (
-            <span className="pending-style style7"> Approved </span>
+            <span className="pending-style style7"> Verified </span>
           ) : (
             <span className={`pending-style style1`}> Pending</span>
           )}
@@ -70,7 +88,7 @@ export default function UserApprovalCard({
                 data?.status === "hold" ? "style1" : ""
               } ${data.status === "in-review" ? "style1" : ""} ${
                 data.status === "inactive" ? "style3" : ""
-              }${data?.status === "reject" ? "style2" : ""} `}
+              } ${data?.status === "reject" ? "style2" : ""}`}
             >
               {CapitalizeFirstLetter(data?.status)}
             </span>
@@ -106,7 +124,7 @@ export default function UserApprovalCard({
               type="button"
               className="table-action-view fz15 fw500 text-thm2"
               id={`delete-${data?.id}`}
-              onClick={() => deleteExperienceId(data?.id)}
+              onClick={() => confirmDelete(data?.id)} // Use confirmDelete
             >
               <Tooltip
                 anchorSelect={`#delete-${data?.id}`}

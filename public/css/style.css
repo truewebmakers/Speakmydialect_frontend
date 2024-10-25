@@ -1047,8 +1047,8 @@ span.mb25.me-4.badge-success {
 
 .dashboard__content {
   border-radius: 4px;
-    padding: 23px 18px 4px;
-    width: 100%;
+  padding: 23px 18px 4px;
+  width: 100%;
 }
 
 @media (max-width: 767.98px) {
@@ -14259,4 +14259,23 @@ hr {
   border-radius: 16px;
   width: 27px;
   text-align: center;
+}
+
+
+.our-login .container {
+  padding: 50px 0;
+}
+
+
+.our-register .container {
+  padding: 50px 0;
+}
+
+
+.query-cell {
+  max-width: 200px; /* Set a maximum width for the query cell */
+  white-space: normal; /* Allow text to wrap */
+  word-wrap: break-word; /* Break long words onto the next line */
+  overflow-wrap: break-word; /* Ensure long words are broken down */
+  line-height: 1.5; /* Adjust line height for better readability */
 }

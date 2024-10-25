@@ -9,7 +9,8 @@ export const about = [
   {
     id: 1,
     name: "Company",
-    path: "https://dialect.emodelslanka.com/company" },
+    path: "https://dialect.emodelslanka.com/company",
+  },
   {
     id: 2,
     name: "Business Subscriptions",
@@ -23,8 +24,8 @@ export const about = [
   {
     id: 4,
     name: "FAQs",
-    path: "https://dialect.emodelslanka.com/faq"
- }
+    path: "https://dialect.emodelslanka.com/faq",
+  },
 ];
 
 export const support = [
@@ -47,6 +48,7 @@ export const footer = [
   "/reviews",
   "/invoice",
   "/admin/userApprovals",
+  "/admin/contactInquiry",
   "/admin/payoutManagement",
   "/payouts",
   "/statements",

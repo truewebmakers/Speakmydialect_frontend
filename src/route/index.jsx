@@ -25,6 +25,7 @@ import UserApprovals from "@/pages/admin/userApproval";
 import ChooseUserType from "@/pages/auth/register/chooseUserType";
 import PrivacyPage from "@/pages/privacy";
 import PayNow from "@/pages/pay_now/Pay";
+import ContactInquiry from "@/pages/admin/contactInquiry";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -135,6 +136,14 @@ const AppRoutes = () => {
           }
         />
         <Route
+          path={routes.contactInquiry}
+          element={
+            <ProtectedRoute>
+              <ContactInquiry />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path={routes.PayoutManagement}
           element={
             <ProtectedRoute>
@@ -152,7 +161,14 @@ const AppRoutes = () => {
         />
 
         <Route path={routes.Search} element={<SearchPage />} />
-        <Route path={routes.HireNow} element={<ProtectedRoute><HireNowPage /></ProtectedRoute>} />
+        <Route
+          path={routes.HireNow}
+          element={
+            <ProtectedRoute>
+              <HireNowPage />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path={routes.TranslatorProfile}

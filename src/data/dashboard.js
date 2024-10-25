@@ -73,10 +73,16 @@ export const clientNavigation = [
 
 export const adminNavigation = [
   {
-    id: 2,
+    id: 1,
     name: "User Approvals",
     icon: "fa-regular fa-user", // Updated icon for multiple users
     path: "/admin/userApprovals",
+  },
+  {
+    id: 2,
+    name: " Contact Inquiry",
+    icon: "flaticon-mail", // Updated icon for multiple users
+    path: "/admin/contactInquiry",
   },
   {
     id: 3,

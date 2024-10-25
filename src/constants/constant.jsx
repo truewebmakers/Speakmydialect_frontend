@@ -6,6 +6,7 @@ export const apiMethods = {
 };
 
 export const fixRate = 77;
+export const pageLimit = 2;
 
 export const env = {
   API_URL: import.meta.env.VITE_APP_API_URL,
@@ -53,6 +54,8 @@ export const apiUrls = {
   getBankDetails: "/admin/translator/get/bank/",
   updateBankDetails: "/admin/translator/bank/update/",
   deleteUserApprovals: "/admin/user/delete/",
+  contactUsSendEmail: "/send-email",
+  getContactInquiries: "/admin/get-contactform-entries",
 };
 
 export const metaData = {
@@ -158,6 +161,7 @@ export const routes = {
   Nothing: "*",
   HireNow: "/hire/:id",
   UserApprovals: "/admin/userApprovals",
+  contactInquiry: "/admin/contactInquiry",
   PayoutManagement: "/admin/payoutManagement",
   PayNow: "/pay",
 };
@@ -207,37 +211,37 @@ export const translatorBookingTab = [
 export const ordersManagementTab = [
   {
     id: 0,
-    name: "Upcoming Bookings",
+    name: "Upcoming",
     status: "in-process",
     type: "upcoming_booking",
   }, // pending or accepted from translator +future date,
   {
     id: 1,
-    name: "Current Bookings",
+    name: "Current",
     status: "accept",
     type: "current_booking",
   }, //accepted from from translator + today's date
   {
     id: 2,
-    name: "Completed Bookings",
+    name: "Completed",
     status: "mark-completed",
     type: "completed_booking",
   }, //  client can approve & user as well
   {
     id: 3,
-    name: "Approved Bookings",
+    name: "Approved",
     status: "approved",
     type: "approved_booking",
   }, //  approved by client  & user as well
   {
     id: 4,
-    name: "Canceled Bookings",
+    name: "Canceled",
     status: "cancel",
     type: "canceled_booking",
   }, // rejected by client
   {
     id: 5,
-    name: "Rejected Bookings",
+    name: "Rejected",
     status: "reject", // translator reject the job
     type: "rejected_booking", //not required
   },
