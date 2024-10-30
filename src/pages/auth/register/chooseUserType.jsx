@@ -18,10 +18,12 @@ const ChooseUserType = () => {
                 >
                   <div className="bg-white border rounded p-5 text-center shadow-sm">
                     <img
-                      src="/argos-shared/img/findSupport.06e889f2.svg"
-                      alt=""
+                      src="   https://cdn-icons-png.flaticon.com/512/10485/10485059.png "
+                      width="48"
                       height="48"
-                      className="mt-3 mb-4"
+                      alt=""
+                      title=""
+                      class="img-small"
                     />
                     <p className="text-dark font-weight-bold fs-5 mb-3">
                       Join As A Client
@@ -39,10 +41,12 @@ const ChooseUserType = () => {
                 >
                   <div className="bg-white border rounded p-5 text-center shadow-sm">
                     <img
-                      src="/argos-shared/img/findSupport.06e889f2.svg"
-                      alt=""
+                      src="   https://cdn-icons-png.flaticon.com/512/4303/4303979.png "
+                      width="48"
                       height="48"
-                      className="mt-3 mb-4"
+                      alt=""
+                      title=""
+                      class="img-small"
                     />
                     <p className="text-dark font-weight-bold fs-5 mb-3">
                       Join As An Interpreter

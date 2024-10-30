@@ -18,7 +18,7 @@ export default function RegisterPage() {
   const [disable, setDisable] = useState(false);
   const [error, setError] = useState({});
   const [fileUpload, setFileUpload] = useState({
-    idCheck: null,
+    supportingDocs: null,
     primaryId: null,
     secondaryId: null,
     policeCheck: null,
@@ -26,7 +26,6 @@ export default function RegisterPage() {
   });
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -62,10 +61,19 @@ export default function RegisterPage() {
       setStep(2);
     }
   };
+  console.log(uploadedFiles);
 
   const handleSubmit = async () => {
-    if (uploadedFiles.length < 5) {
-      toast.error("Please upload all required files.");
+    // Ensure that primaryId, secondaryId, and policeCheck are uploaded
+    const requiredFiles = ["primary_id", "secondary_id", "police_check"];
+    const allRequiredUploaded = requiredFiles?.every((file) =>
+      uploadedFiles?.some((uploadedFile) => uploadedFile?.type === file)
+    );
+
+    if (!allRequiredUploaded) {
+      toast.error(
+        "Please upload all required files: Primary ID, Secondary ID, and Police Check."
+      );
       return;
     }
 
@@ -241,54 +249,77 @@ export default function RegisterPage() {
                   <div>
                     <h4>Upload your documents</h4>
                     {[
-                      "idCheck",
-                      "primaryId",
-                      "secondaryId",
-                      "policeCheck",
-                      "wwcCheck",
-                    ].map((fileType) => (
-                      <div className="mb25" key={fileType}>
+                      {
+                        type: "primaryId",
+                        desc: "Your primary identification document.",
+                      },
+                      {
+                        type: "secondaryId",
+                        desc: "A secondary identification document to verify your identity.",
+                      },
+                      {
+                        type: "policeCheck",
+                        desc: "A recent police clearance certificate.",
+                      },
+                      {
+                        type: "wwcCheck",
+                        desc: "A Working With Children Check (optional).",
+                      },
+                      {
+                        type: "supportingDocs",
+                        desc: "Optional government-issued ID (e.g., passport).",
+                      },
+                    ].map(({ type, desc }) => (
+                      <div className="mb25" key={type}>
                         <label className="form-label fw500 dark-color">
-                          {fileType
+                          {type
                             .replace(/([A-Z])/g, " $1")
                             .replace(/^./, (str) => str.toUpperCase())}
                           :
                         </label>
+                        <p
+                          className="description"
+                          style={{ marginTop: "-19px" }}
+                        >
+                          {desc}
+                        </p>
                         <div
                           className="upload-box"
                           onClick={() =>
-                            document.getElementById(`${fileType}Input`).click()
+                            document.getElementById(`${type}Input`).click()
                           }
                         >
                           <input
-                            id={`${fileType}Input`}
+                            id={`${type}Input`}
                             type="file"
-                            name={fileType}
+                            name={type}
                             accept=".png, .jpg, .jpeg, .pdf"
                             onChange={(e) =>
                               handleFileUpload(
                                 e,
-                                fileType
-                                  .replace(/([A-Z])/g, "_$1")
-                                  .toLowerCase()
+                                type.replace(/([A-Z])/g, "_$1").toLowerCase()
                               )
                             }
-                            required
+                            required={
+                              type !== "supportingDocs" && type !== "wwcCheck"
+                            }
                             style={{ display: "none" }}
                           />
                           <button type="button" className="upload-button">
                             Select Files
                           </button>
                         </div>
-                        {fileUpload[fileType] ? (
+                        {fileUpload[type] ? (
                           <p className="file-name">
-                            Selected file: {fileUpload[fileType]?.name}
+                            Selected file: {fileUpload[type]?.name}
                           </p>
                         ) : (
-                          <p className="error-msg">
-                            Upload your{" "}
-                            {fileType.replace(/([A-Z])/g, " $1").toLowerCase()}
-                          </p>
+                          !["supportingDocs", "wwcCheck"].includes(type) && (
+                            <p className="error-msg">
+                              Upload your{" "}
+                              {type.replace(/([A-Z])/g, " $1").toLowerCase()}
+                            </p>
+                          )
                         )}
                       </div>
                     ))}
