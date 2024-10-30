@@ -1,17 +1,27 @@
 import {
   apiMethods,
   apiUrls,
-  australianStatesAndCities,
+  dialectData,
+  languageData,
 } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import { getProfileDetails } from "@/redux/auth";
 import { toast } from "react-toastify";
 
-export const getCountries = (setCountryList) => {
+export const getCountries = async (setCountryList) => {
   try {
-    const formattedArray = australianStatesAndCities.map((city, index) => ({
+    // Fetch the location data from location.json
+    const response = await fetch("/location.json");
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response?.json();
+
+    // Format the array based on the data from location.json
+    const formattedArray = data?.map((location, index) => ({
       id: index + 1,
-      name: city,
+      name: location?.suburb, // Assuming 'name' is a property in your JSON
     }));
 
     setCountryList(formattedArray);
@@ -19,18 +29,22 @@ export const getCountries = (setCountryList) => {
     // Optionally store in session storage
     sessionStorage.setItem("countries", JSON.stringify(formattedArray));
   } catch (error) {
-    toast.error("Error fetching countries");
+    toast.error("Error fetching countries: " + error.message);
   }
 };
 
 export const getDialects = async (setDialectListing) => {
   try {
-    const response = await UseApi(apiUrls.getDialects, apiMethods.GET);
-    if (response?.status === 200 || response?.status === 201) {
-      const dialectData = response?.data?.data;
-      setDialectListing(dialectData);
-      sessionStorage.setItem("dialect", JSON.stringify(dialectData));
-    }
+    const formattedArray = dialectData?.map((lang, index) => ({
+      id: index + 1,
+      dialect: lang,
+    }));
+    // const response = await UseApi(apiUrls.getDialects, apiMethods.GET);
+    // if (response?.status === 200 || response?.status === 201) {
+    //   const dialectData = response?.data?.data;
+    setDialectListing(formattedArray);
+    sessionStorage.setItem("dialect", JSON.stringify(formattedArray));
+    // }
   } catch (error) {
     toast.error("Error fetching languages");
   }
@@ -38,12 +52,16 @@ export const getDialects = async (setDialectListing) => {
 
 export const getLanguages = async (setLanguageListing) => {
   try {
-    const response = await UseApi(apiUrls.getLanguages, apiMethods.GET);
-    if (response?.status === 200 || response?.status === 201) {
-      const languageData = response?.data?.data;
-      setLanguageListing(languageData);
-      sessionStorage.setItem("languages", JSON.stringify(languageData));
-    }
+    // const response = await UseApi(apiUrls.getLanguages, apiMethods.GET);
+    // if (response?.status === 200 || response?.status === 201) {
+    //   const languageData = response?.data?.data;
+    const formattedArray = languageData?.map((lang, index) => ({
+      id: index + 1,
+      name: lang,
+    }));
+    setLanguageListing(formattedArray);
+    sessionStorage.setItem("languages", JSON.stringify(formattedArray));
+    // }
   } catch (error) {
     toast.error("Error fetching languages");
   }

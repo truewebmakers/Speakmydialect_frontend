@@ -24,7 +24,13 @@ export const about = [
   {
     id: 4,
     name: "FAQs",
-    path: "https://dialect.emodelslanka.com/faq",
+    path: "/about#faq",
+  },
+
+  {
+    id: 5,
+    name: "Explore",
+    path: "https://speakmydialect.hyperiontech.com.au/",
   },
 ];
 

@@ -189,7 +189,7 @@ export default function HireNowSection({ translatorProfile }) {
           <div className="col-lg-4"></div>
           <div className="col-lg-6 ml100">
             <div className="contact-page-form default-box-shadow1 bdrs8 bdr1 p50 mb30-md bgc-white">
-              <h4 className="form-title mb25">Book your Translator Now</h4>
+              <h4 className="form-title mb25">Book your Interpreter Now</h4>
               <p className="text mb30">
                 If you would like to hire, contact us.
               </p>

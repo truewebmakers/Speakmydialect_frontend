@@ -61,7 +61,7 @@ export default function FreelancerAbout1({ data }) {
           <a className="d-flex align-items-center justify-content-between bdrb1 pb-2">
             <span className="text">
               <i className="flaticon-translator text-thm2 pe-2 vam" />
-              Translator Status
+              Interpreter Status
             </span>
             <span>
               {data?.status ? CapitalizeFirstLetter(data?.status) : "-"}

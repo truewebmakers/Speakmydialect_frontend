@@ -56,8 +56,9 @@ export default function Pagination1({
         </li>
       </ul>
       <p className="mt10 mb-0 pagination_page_count text-center">
-        {(currentPage - 1) * 10 + 1} – {Math.min(currentPage * 10, total)} of{" "}
-        {total} properties available
+        {(currentPage - 1) * +pageLimit + 1} –{" "}
+        {Math.min(currentPage * +pageLimit, total)} of {total} properties
+        available
       </p>
     </div>
   );

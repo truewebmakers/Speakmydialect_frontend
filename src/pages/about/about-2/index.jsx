@@ -17,11 +17,8 @@ export default function AboutPage2() {
   return (
     <>
       <MetaComponent meta={metaData} />
-      <Breadcumb2
-        title="About"
-       
-      />
-      <OurStory/>
+      <Breadcumb2 title="About" />
+      <OurStory />
 
       <About1 />
       <CounterInfo1 active={false} />

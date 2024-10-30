@@ -8,7 +8,7 @@ export default function Search1({ setSearch, search, placeholder }) {
     <>
       <div
         className={`default-box-shadow1 ${
-          pathname === "/service-1" ? "mb15" : "mb30"
+          pathname === "/service-1" ? "mb15" : ""
         }`}
       >
         <div className="search_area">

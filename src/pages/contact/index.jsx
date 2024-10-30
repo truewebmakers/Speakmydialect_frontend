@@ -18,7 +18,7 @@ export default function ContactPage() {
       />
       <ContactInfo1 />
       {/* <GoogleMap1 /> */}
-      <OurFaq1 />
+      {/* <OurFaq1 /> */}
     </>
   );
 }

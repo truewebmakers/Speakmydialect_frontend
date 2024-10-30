@@ -23,7 +23,7 @@ const ChooseUserType = () => {
                       Join As A Client
                     </p>
                     <p class="text-secondary fs-6 mb-0">
-                      I want to hire translators.
+                      I want to hire interpreters.
                     </p>
                   </div>
                 </a>
@@ -41,7 +41,7 @@ const ChooseUserType = () => {
                       class="mt-3 mb-4"
                     />
                     <p class="text-dark font-weight-bold fs-5 mb-3">
-                      Join As A Translator
+                      Join As A Interpreter
                     </p>
                     <p class="text-secondary fs-6 mb-0">I want to get hired.</p>
                   </div>

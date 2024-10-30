@@ -46,7 +46,7 @@ export default function ListingSidebar2() {
     <>
       <div className="list-sidebar-style1 d-none d-lg-block">
         <div className="accordion" id="accordionExample">
-          <div className="card mb20 pb10 mt-0">
+          <div className="card mb20 mt-0">
             <h4>Level</h4>
             <div
               id="collapse0"
@@ -60,7 +60,7 @@ export default function ListingSidebar2() {
             </div>
           </div>
 
-          <div className="card mb20 pb5">
+          <div className="card mb20">
             <h4>Location</h4>
             <div
               id="collapse2"
@@ -73,7 +73,7 @@ export default function ListingSidebar2() {
               </div>
             </div>
           </div>
-          <div className="card mb20 pb5">
+          <div className="card mb20">
             <h4>Languange</h4>
             <div
               id="collapse3"
@@ -81,12 +81,15 @@ export default function ListingSidebar2() {
               aria-labelledby="heading3"
               data-parent="#accordionExample"
             >
-              <div className="card-body card-body px-0 pt-0">
+              <div
+                className="card-body card-body px-0 pt-0"
+                style={{ marginTop: "-25px" }}
+              >
                 <SpeakOption1 data={languageListing} />
               </div>
             </div>
           </div>
-          <div className="card mb20 pb5">
+          <div className="card mb20">
             <h4>Dialect</h4>
             <div
               id="collapse3"
@@ -94,7 +97,10 @@ export default function ListingSidebar2() {
               aria-labelledby="heading3"
               data-parent="#accordionExample"
             >
-              <div className="card-body card-body px-0 pt-0">
+              <div
+                className="card-body card-body px-0 pt-0"
+                style={{ marginTop: "-25px" }}
+              >
                 <DialectOption1 data={dialectListing} />
               </div>
             </div>

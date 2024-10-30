@@ -6,10 +6,10 @@ export default function OurFaq1() {
   return (
     <>
       <section
-        className={`our-faqs pb50 pt30 ${pathname === "/contact"
-          ? "pb70"
-          : ""
-          }`}
+        id="faq"
+        className={`our-faqs pb50 pt30 ${
+          pathname === "/contact" ? "pb70" : ""
+        }`}
       >
         <div className="container">
           <div className="row wow fadeInUp">
@@ -34,7 +34,9 @@ export default function OurFaq1() {
                           aria-expanded="true"
                           aria-controls="collapseOne"
                         >
-                          Why should I feel confident that SpeakMyDialect can help me ?                        </button>
+                          Why should I feel confident that SpeakMyDialect can
+                          help me ?{" "}
+                        </button>
                       </h2>
                       <div
                         id="collapseOne"
@@ -43,9 +45,10 @@ export default function OurFaq1() {
                         data-parent="#accordionExample"
                       >
                         <div className="accordion-body">
-                          We only work with experienced interpreters who have experienced
-                          on lots of languages before they joined our platform,
-                          you will be getting the quality output that you get any other places.
+                          We only work with experienced interpreters who have
+                          experienced on lots of languages before they joined
+                          our platform, you will be getting the quality output
+                          that you get any other places.
                         </div>
                       </div>
                     </div>
@@ -59,7 +62,8 @@ export default function OurFaq1() {
                           aria-expanded="false"
                           aria-controls="collapseTwo"
                         >
-                          How long has SpeakMyDialect been doing this ?                        </button>
+                          How long has SpeakMyDialect been doing this ?{" "}
+                        </button>
                       </h2>
                       <div
                         id="collapseTwo"
@@ -68,7 +72,8 @@ export default function OurFaq1() {
                         data-parent="#accordionExample"
                       >
                         <div className="accordion-body">
-                          We are a start-up that simply connecting the right Interpreters with the right clients.
+                          We are a start-up that simply connecting the right
+                          Interpreters with the right clients.
                         </div>
                       </div>
                     </div>
@@ -106,7 +111,9 @@ export default function OurFaq1() {
                           aria-expanded="false"
                           aria-controls="collapseFour"
                         >
-                          What kind of help can I get from your language professionals?                        </button>
+                          What kind of help can I get from your language
+                          professionals?{" "}
+                        </button>
                       </h2>
                       <div
                         id="collapseFour"
@@ -115,8 +122,8 @@ export default function OurFaq1() {
                         data-parent="#accordionExample"
                       >
                         <div className="accordion-body">
-                          We want to provide specialized services by our experienced Interpreters.
-
+                          We want to provide specialized services by our
+                          experienced Interpreters.
                         </div>
                       </div>
                     </div>
@@ -130,7 +137,9 @@ export default function OurFaq1() {
                           aria-expanded="false"
                           aria-controls="collapseFive"
                         >
-                          How can SpeakMyDialect match me with the right service professional?                        </button>
+                          How can SpeakMyDialect match me with the right service
+                          professional?{" "}
+                        </button>
                       </h2>
                       <div
                         id="collapseFive"
@@ -139,10 +148,11 @@ export default function OurFaq1() {
                         data-parent="#accordionExample"
                       >
                         <div className="accordion-body">
-                          To find the right Interpreter, you first enter the language,
-                          dialect and the date you are available, then we will list the
-                          interpreters who match the specific language and dialect and let
-                          you choose who to contact.
+                          To find the right Interpreter, you first enter the
+                          language, dialect and the date you are available, then
+                          we will list the interpreters who match the specific
+                          language and dialect and let you choose who to
+                          contact.
                         </div>
                       </div>
                     </div>
@@ -157,7 +167,9 @@ export default function OurFaq1() {
                           aria-expanded="false"
                           aria-controls="collapseSix"
                         >
-                          What if I change my mind during a project and want to cancel a contract ?                        </button>
+                          What if I change my mind during a project and want to
+                          cancel a contract ?{" "}
+                        </button>
                       </h2>
                       <div
                         id="collapseSix"
@@ -166,10 +178,11 @@ export default function OurFaq1() {
                         data-parent="#accordionExample"
                       >
                         <div className="accordion-body">
-                          The decision to stop a project will have to be worked out
-                          between you and the Interpreter. Expect to pay for work and
-                          materials performed up to that point. We ask that you remember
-                          to come back to our website to complete your Ratings & Reviews survey.
+                          The decision to stop a project will have to be worked
+                          out between you and the Interpreter. Expect to pay for
+                          work and materials performed up to that point. We ask
+                          that you remember to come back to our website to
+                          complete your Ratings & Reviews survey.
                         </div>
                       </div>
                     </div>
@@ -183,7 +196,8 @@ export default function OurFaq1() {
                           aria-expanded="false"
                           aria-controls="collapseSeven"
                         >
-                          Will SpeakMyDialect cancel a service professional's member status upon receiving a customer complaint ?
+                          Will SpeakMyDialect cancel a service professional's
+                          member status upon receiving a customer complaint ?
                         </button>
                       </h2>
                       <div
@@ -193,12 +207,15 @@ export default function OurFaq1() {
                         data-parent="#accordionExample"
                       >
                         <div className="accordion-body">
-                          Your feedback is vital to the quality of service our member professionals
-                          provide. As with any credible grievance process, we first evaluate both
-                          sides of the story before making a final decision. Often, an unpleasant
-                          experience is the result of a simple misunderstanding between the two
-                          parties. However, if there is a negative trend against the service
-                          professional, we reserve the right to remove a interpreter from our network.
+                          Your feedback is vital to the quality of service our
+                          member professionals provide. As with any credible
+                          grievance process, we first evaluate both sides of the
+                          story before making a final decision. Often, an
+                          unpleasant experience is the result of a simple
+                          misunderstanding between the two parties. However, if
+                          there is a negative trend against the service
+                          professional, we reserve the right to remove a
+                          interpreter from our network.
                         </div>
                       </div>
                     </div>

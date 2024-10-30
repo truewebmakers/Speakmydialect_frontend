@@ -21,73 +21,36 @@ export default function Footer() {
               <div className="footer-widget">
                 <div className="footer-logo">
                   <Link to="#">
-                    <img src='/images/logo-transprent.png' alt="logo" />
+                    <img src="/images/logo-transprent.png" alt="logo" />
                   </Link>
                 </div>
                 <div className="footer-content">
                   <p className="footer-content-text">
-                    SpeakMyDialect was founded to address the frequent challenges encountered in the
-                    interpreting industry, such as unreliable services, lack of qualified interpreters, and overpriced
-                    offerings.{" "}
+                    SpeakMyDialect was founded to address the frequent
+                    challenges encountered in the interpreting industry, such as
+                    unreliable services, lack of qualified interpreters, and
+                    overpriced offerings.{" "}
                   </p>
                 </div>
-
               </div>
             </div>
+            <div className="col-sm-6 col-lg-2"></div>
             <div className="col-sm-6 col-lg-3">
               <div
-                className={`link-style1 mb-4 mb-sm-5 ${pathname === "/home-4"
+                className={`link-style1 mb-4 mb-sm-5 ${
+                  pathname === "/home-4"
                     ? "light-style at-home8"
                     : pathname === "/home-11"
-                      ? "light-style at-home11"
-                      : ""
-                  }`}
+                    ? "light-style at-home11"
+                    : ""
+                }`}
               >
                 <h5
-                  className={`mb15 ${pathname !== "/home-4" ? "text-white" : ""
-                    }`}
-                >
-                  Overview
-                </h5>
-                <div className="link-list">
-                  {user?.token?.length > 0
-                    ? overview.map((item, i) => (
-                      <Link key={i} to={item.path}>
-                        {item.name}
-                      </Link>
-                    ))
-                    : overview.map((item, i) =>
-                      item.name == "My Account" ? (
-                        <Link key={i} to={"/login"}>
-                          {item.name}
-                        </Link>
-                      ) : item.name == "Join" ? (
-                        <Link key={i} to={"/register"}>
-                          {item.name}
-                        </Link>
-                      ) : (
-                        <Link key={i} to={item.path}>
-                          {item.name}
-                        </Link>
-                      )
-                    )}
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 col-lg-3">
-              <div
-                className={`link-style1 mb-4 mb-sm-5 ${pathname === "/home-4"
-                    ? "light-style at-home8"
-                    : pathname === "/home-11"
-                      ? "light-style at-home11"
-                      : ""
+                  className={`mb15 ${
+                    pathname !== "/home-4" ? "text-white" : ""
                   }`}
-              >
-                <h5
-                  className={`mb15 ${pathname !== "/home-4" ? "text-white" : ""
-                    }`}
                 >
-                  About
+                  Quick Links
                 </h5>
                 <ul className="ps-0">
                   {about.map((item, i) => (
@@ -100,16 +63,18 @@ export default function Footer() {
             </div>
             <div className="col-sm-6 col-lg-3">
               <div
-                className={`link-style1 mb-4 mb-sm-5 ${pathname === "/home-4"
+                className={`link-style1 mb-4 mb-sm-5 ${
+                  pathname === "/home-4"
                     ? "light-style at-home8"
                     : pathname === "/home-11"
-                      ? "light-style at-home11"
-                      : ""
-                  }`}
+                    ? "light-style at-home11"
+                    : ""
+                }`}
               >
                 <h5
-                  className={`mb15 ${pathname !== "/home-4" ? "text-white" : ""
-                    }`}
+                  className={`mb15 ${
+                    pathname !== "/home-4" ? "text-white" : ""
+                  }`}
                 >
                   Support
                 </h5>
@@ -177,8 +142,9 @@ export default function Footer() {
             <div className="col-md-6">
               <div className="text-center text-lg-start">
                 <p
-                  className={`copyright-text mb-2 mb-md-0  ${pathname === "/home-11" ? "text-white" : "text-white-light"
-                    } ff-heading`}
+                  className={`copyright-text mb-2 mb-md-0  ${
+                    pathname === "/home-11" ? "text-white" : "text-white-light"
+                  } ff-heading`}
                 >
                   Copyright © 2024
                   {new Date().getFullYear()}{" "}
