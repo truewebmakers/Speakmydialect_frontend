@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Loader from "@/components/common/loader";
 
 export default function RegisterPage() {
-  <MetaComponent meta={metaData} />;
+  const [step, setStep] = useState(1);
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -16,13 +16,7 @@ export default function RegisterPage() {
     password: "",
   });
   const [disable, setDisable] = useState(false);
-  const [error, setError] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
-
+  const [error, setError] = useState({});
   const [fileUpload, setFileUpload] = useState({
     idCheck: null,
     primaryId: null,
@@ -31,11 +25,10 @@ export default function RegisterPage() {
     wwcCheck: null,
   });
   const [uploadedFiles, setUploadedFiles] = useState([]);
-
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -46,13 +39,10 @@ export default function RegisterPage() {
     }
   };
 
-  const hasErrors = (error) => {
-    return Object.values(error).some((err) => err);
-  };
+  const hasErrors = (error) => Object.values(error).some((err) => err);
 
-  const areAllFieldsFilled = (data) => {
-    return Object.values(data).every((field) => field);
-  };
+  const areAllFieldsFilled = (data) =>
+    Object.values(data).every((field) => field);
 
   useEffect(() => {
     if (hasErrors(error)) {
@@ -62,89 +52,69 @@ export default function RegisterPage() {
     setDisable(false);
   }, [error]);
 
-  const handleClick = async () => {
+  const handleNext = () => {
     let newErr = {};
     for (let key in data) {
       newErr = { ...newErr, ...handleValidations(key, data[key]) };
     }
     setError(newErr);
-    if (
-      !hasErrors(error) &&
-      areAllFieldsFilled(data) &&
-      uploadedFiles?.length == 5
-    ) {
-      setIsLoading(true);
-      try {
-        // Prepare data for signup API
-        let route = pathname.split("-");
-        const bodyData = {
-          fname: data.firstName,
-          lname: data.lastName,
-          email: data.email,
-          password: data.password,
-          user_type: route[1], // it is coming from the routes
-          files: uploadedFiles,
-        };
-        // Call signup API
-        const response = await UseApi(
-          apiUrls.signup,
-          apiMethods.POST,
-          bodyData
-        );
-        if (response?.status == 201 || response?.status == 200) {
-          toast.success(response?.data?.message);
-          navigate("/login");
-          setIsLoading(false);
-          return;
-        } else {
-          toast.error(response?.data?.message);
-          setIsLoading(false);
-        }
-      } catch (err) {
-        toast.error(err?.message);
-        setIsLoading(false);
-      }
+    if (!hasErrors(newErr) && areAllFieldsFilled(data)) {
+      setStep(2);
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const handleSubmit = async () => {
+    if (uploadedFiles.length < 5) {
+      toast.error("Please upload all required files.");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const route = pathname.split("-");
+      const bodyData = {
+        fname: data.firstName,
+        lname: data.lastName,
+        email: data.email,
+        password: data.password,
+        user_type: route[1],
+        files: uploadedFiles,
+      };
+
+      const response = await UseApi(apiUrls.signup, apiMethods.POST, bodyData);
+      if (response?.status === 201 || response?.status === 200) {
+        toast.success(response?.data?.message);
+        navigate("/login");
+      } else {
+        toast.error(response?.data?.message);
+      }
+    } catch (err) {
+      toast.error(err?.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleFileUpload = async (e, fileType) => {
     const { name, files } = e.target;
     const file = files[0];
-
-    // Updating the state with the selected file
-    setFileUpload((prevState) => ({
-      ...prevState,
-      [name]: file,
-    }));
+    setFileUpload((prevState) => ({ ...prevState, [name]: file }));
 
     try {
-      const headers = {
-        "Content-Type": "multipart/form-data",
-      };
-      const bodyData = {
-        file: file,
-        type: fileType,
-        side: "front",
-      };
+      const headers = { "Content-Type": "multipart/form-data" };
+      const bodyData = { file, type: fileType, side: "front" };
       const response = await UseApi(
         apiUrls.uploadDoc,
         apiMethods.POST,
         bodyData,
         headers
       );
-
-      if (response?.status == 201 || response?.status == 200) {
+      if (response?.status === 201 || response?.status === 200) {
         const newFileData = {
           path: response.data.path,
           type: fileType,
           side: "front",
         };
-
-        // Replace the file if it already exists, else add it
         setUploadedFiles((prev) => {
           const existingIndex = prev?.findIndex(
             (file) => file?.type === fileType
@@ -167,6 +137,7 @@ export default function RegisterPage() {
 
   return (
     <>
+      <MetaComponent meta={metaData} />
       <section className="our-register">
         <div className="container">
           <div className="row">
@@ -182,266 +153,161 @@ export default function RegisterPage() {
           <div className="row wow fadeInRight" data-wow-delay="300ms">
             <div className="col-xl-6 mx-auto">
               <div className="log-reg-form search-modal form-style1 bgc-white p50 p30-sm default-box-shadow1 bdrs12">
-                <div className="mb30">
-                  <h4>Let's create your account!</h4>
-                  <p className="text mt20">
-                    Already have an account?{" "}
-                    <Link to="/login" className="text-thm">
-                      Log In!
-                    </Link>
-                  </p>
-                </div>
-                <div className="mb25">
-                  <label className="form-label fw500 dark-color">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter your first name"
-                    name="firstName"
-                    value={data?.firstName}
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {error?.firstName && (
-                    <p style={{ color: "red" }}>{error?.firstName}</p>
-                  )}
-                </div>
-                <div className="mb25">
-                  <label className="form-label fw500 dark-color">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter your last name"
-                    name="lastName"
-                    value={data?.lastName}
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {error?.lastName && (
-                    <p style={{ color: "red" }}>{error?.lastName}</p>
-                  )}
-                </div>
-                <div className="mb25">
-                  <label className="form-label fw500 dark-color">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter your email"
-                    name="email"
-                    value={data?.email}
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {error?.email && (
-                    <p style={{ color: "red" }}>{error?.email}</p>
-                  )}
-                </div>
-                <div className="mb15">
-                  <label className="form-label fw500 dark-color">
-                    Password
-                  </label>
-                  <div className="input-with-icon">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="form-control"
-                      placeholder="Enter your password"
-                      name="password"
-                      value={data?.password}
-                      onChange={handleChange}
-                      autoComplete="off"
-                    />
-                    <button
-                      type="button"
-                      className="toggle-password"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? (
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                      ) : (
-                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                {step === 1 ? (
+                  <div>
+                    <h4>Let's create your account!</h4>
+                    <p className="text mt20">
+                      Already have an account?{" "}
+                      <Link to="/login" className="text-thm">
+                        Log In!
+                      </Link>
+                    </p>
+                    <div className="mb25">
+                      <label className="form-label fw500 dark-color">
+                        First Name
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter your first name"
+                        name="firstName"
+                        value={data.firstName}
+                        onChange={handleChange}
+                      />
+                      {error.firstName && (
+                        <p style={{ color: "red" }}>{error.firstName}</p>
                       )}
-                    </button>
+                    </div>
+                    <div className="mb25">
+                      <label className="form-label fw500 dark-color">
+                        Last Name
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter your last name"
+                        name="lastName"
+                        value={data.lastName}
+                        onChange={handleChange}
+                      />
+                      {error.lastName && (
+                        <p style={{ color: "red" }}>{error.lastName}</p>
+                      )}
+                    </div>
+                    <div className="mb25">
+                      <label className="form-label fw500 dark-color">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Enter your email"
+                        name="email"
+                        value={data.email}
+                        onChange={handleChange}
+                      />
+                      {error.email && (
+                        <p style={{ color: "red" }}>{error.email}</p>
+                      )}
+                    </div>
+                    <div className="mb15">
+                      <label className="form-label fw500 dark-color">
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        placeholder="Enter your password"
+                        name="password"
+                        value={data.password}
+                        onChange={handleChange}
+                      />
+                      {error.password && (
+                        <p style={{ color: "red" }}>{error.password}</p>
+                      )}
+                    </div>
+                    <div className="d-grid mb20">
+                      <button
+                        className="ud-btn btn-thm default-box-shadow2"
+                        type="button"
+                        onClick={handleNext}
+                        disabled={disable}
+                      >
+                        Next
+                      </button>
+                    </div>
                   </div>
-
-                  {error?.password && (
-                    <p style={{ color: "red" }}>{error?.password}</p>
-                  )}
-                </div>
-                <div className="mb25">
-                  <label className="form-label fw500 dark-color">
-                    Id Check:
-                  </label>
-                  <div
-                    className="upload-box"
-                    onClick={() =>
-                      document.getElementById("idCheckInput").click()
-                    }
-                  >
-                    <input
-                      id="idCheckInput"
-                      type="file"
-                      name="idCheck"
-                      accept=".png, .jpg, .jpeg, .pdf"
-                      onChange={(e) => handleFileUpload(e, "id_check")}
-                      required
-                      style={{ display: "none" }}
-                    />
-                    <button type="button" className="upload-button">
-                      Select Files
-                    </button>
+                ) : (
+                  <div>
+                    <h4>Upload your documents</h4>
+                    {[
+                      "idCheck",
+                      "primaryId",
+                      "secondaryId",
+                      "policeCheck",
+                      "wwcCheck",
+                    ].map((fileType) => (
+                      <div className="mb25" key={fileType}>
+                        <label className="form-label fw500 dark-color">
+                          {fileType
+                            .replace(/([A-Z])/g, " $1")
+                            .replace(/^./, (str) => str.toUpperCase())}
+                          :
+                        </label>
+                        <div
+                          className="upload-box"
+                          onClick={() =>
+                            document.getElementById(`${fileType}Input`).click()
+                          }
+                        >
+                          <input
+                            id={`${fileType}Input`}
+                            type="file"
+                            name={fileType}
+                            accept=".png, .jpg, .jpeg, .pdf"
+                            onChange={(e) =>
+                              handleFileUpload(
+                                e,
+                                fileType
+                                  .replace(/([A-Z])/g, "_$1")
+                                  .toLowerCase()
+                              )
+                            }
+                            required
+                            style={{ display: "none" }}
+                          />
+                          <button type="button" className="upload-button">
+                            Select Files
+                          </button>
+                        </div>
+                        {fileUpload[fileType] ? (
+                          <p className="file-name">
+                            Selected file: {fileUpload[fileType]?.name}
+                          </p>
+                        ) : (
+                          <p className="error-msg">
+                            Upload your{" "}
+                            {fileType.replace(/([A-Z])/g, " $1").toLowerCase()}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                    <div className="d-grid mb20">
+                      <button
+                        className="ud-btn btn-thm default-box-shadow2"
+                        type="button"
+                        onClick={handleSubmit}
+                      >
+                        Create Account{" "}
+                        {isLoading ? (
+                          <Loader />
+                        ) : (
+                          <i className="fal fa-arrow-right-long" />
+                        )}
+                      </button>
+                    </div>
                   </div>
-                  {fileUpload.idCheck ? (
-                    <p className="file-name">
-                      Selected file: {fileUpload?.idCheck?.name}
-                    </p>
-                  ) : (
-                    <p className="error-msg">Upload your Id Check</p>
-                  )}
-                </div>
-                <div className="mb25">
-                  <label className="form-label fw500 dark-color">
-                    Primary Id:
-                  </label>
-                  <div
-                    className="upload-box"
-                    onClick={() =>
-                      document.getElementById("primaryIdInput").click()
-                    }
-                  >
-                    <input
-                      id="primaryIdInput"
-                      type="file"
-                      name="primaryId"
-                      accept=".png, .jpg, .jpeg, .pdf"
-                      onChange={(e) => handleFileUpload(e, "primary_id")}
-                      required
-                      style={{ display: "none" }}
-                    />
-                    <button type="button" className="upload-button">
-                      Select Files
-                    </button>
-                  </div>
-                  {fileUpload.primaryId ? (
-                    <p className="file-name">
-                      Selected file: {fileUpload?.primaryId?.name}
-                    </p>
-                  ) : (
-                    <p className="error-msg">Upload your Primary Id</p>
-                  )}
-                </div>
-                <div className="mb25">
-                  <label className="form-label fw500 dark-color">
-                    Secondary Id:
-                  </label>
-                  <div
-                    className="upload-box"
-                    onClick={() =>
-                      document.getElementById("secondaryIdInput").click()
-                    }
-                  >
-                    <input
-                      id="secondaryIdInput"
-                      type="file"
-                      name="secondaryId"
-                      accept=".png, .jpg, .jpeg, .pdf"
-                      onChange={(e) => handleFileUpload(e, "secondary_id")}
-                      required
-                      style={{ display: "none" }}
-                    />
-                    <button type="button" className="upload-button">
-                      Select Files
-                    </button>
-                  </div>
-                  {fileUpload?.secondaryId ? (
-                    <p className="file-name">
-                      Selected file: {fileUpload?.secondaryId?.name}
-                    </p>
-                  ) : (
-                    <p className="error-msg">Upload your Secondary Id</p>
-                  )}
-                </div>
-                <div className="mb25">
-                  <label className="form-label fw500 dark-color">
-                    Police Check:
-                  </label>
-                  <div
-                    className="upload-box"
-                    onClick={() =>
-                      document.getElementById("policeCheckInput").click()
-                    }
-                  >
-                    <input
-                      id="policeCheckInput"
-                      type="file"
-                      name="policeCheck"
-                      accept=".png, .jpg, .jpeg, .pdf"
-                      onChange={(e) => handleFileUpload(e, "police_check")}
-                      required
-                      style={{ display: "none" }}
-                    />
-                    <button type="button" className="upload-button">
-                      Select Files
-                    </button>
-                  </div>
-                  {fileUpload?.policeCheck ? (
-                    <p className="file-name">
-                      Selected file: {fileUpload?.policeCheck?.name}
-                    </p>
-                  ) : (
-                    <p className="error-msg">Upload your Id for Police Check</p>
-                  )}
-                </div>
-                <div className="mb25">
-                  <label className="form-label fw500 dark-color">
-                    WWC Check:
-                  </label>
-                  <div
-                    className="upload-box"
-                    onClick={() =>
-                      document.getElementById("wwcCheckInput").click()
-                    }
-                  >
-                    <input
-                      id="wwcCheckInput"
-                      type="file"
-                      name="wwcCheck"
-                      accept=".png, .jpg, .jpeg, .pdf"
-                      onChange={(e) => handleFileUpload(e, "wwc_check")}
-                      required
-                      style={{ display: "none" }}
-                    />
-                    <button type="button" className="upload-button">
-                      Select Files
-                    </button>
-                  </div>
-                  {fileUpload?.wwcCheck ? (
-                    <p className="file-name">
-                      Selected file: {fileUpload?.wwcCheck?.name}
-                    </p>
-                  ) : (
-                    <p className="error-msg">Upload your Id for WWC Check</p>
-                  )}
-                </div>
-
-                <div className="d-grid mb20">
-                  <button
-                    className="ud-btn btn-thm default-box-shadow2"
-                    type="button"
-                    onClick={handleClick}
-                    disabled={disable}
-                  >
-                    Create Account{" "}
-                    {isLoading ? (
-                      <Loader />
-                    ) : (
-                      <i className="fal fa-arrow-right-long" />
-                    )}
-                  </button>
-                </div>
+                )}
               </div>
             </div>
           </div>

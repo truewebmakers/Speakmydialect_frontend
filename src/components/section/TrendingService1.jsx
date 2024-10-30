@@ -68,8 +68,8 @@ export default function TrendingService1() {
                       },
                     }}
                   >
-                    {searchingResult?.length > 0 &&
-                      searchingResult?.map((item, i) => (
+                    {searchingResult?.data?.length > 0 &&
+                      searchingResult?.data?.map((item, i) => (
                         <SwiperSlide key={i}>
                           <TrendingServiceCard1 data={item} />
                         </SwiperSlide>
