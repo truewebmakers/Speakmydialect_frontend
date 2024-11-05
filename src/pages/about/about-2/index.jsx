@@ -22,7 +22,6 @@ export default function AboutPage2() {
 
       <About1 />
       <CounterInfo1 active={false} />
-      <CtaBanner1 />
       <OurFunFact1 />
       {/* <Testimonial1 /> */}
       {/* <CtaBanner1 /> */}

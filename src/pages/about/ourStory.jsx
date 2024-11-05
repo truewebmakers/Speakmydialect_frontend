@@ -11,7 +11,7 @@ export default function OurStory() {
         <div
           className={`cta-banner3 mx-auto pt120 pt60-lg pb90 pb60-lg position-relative overflow-hidden ${
             pathname === "/" || pathname === "/about"
-              ? "bgc-light-yellow"
+              ? "bgc-white"
               : pathname === "/become-seller"
               ? "bgc-thm4"
               : ""

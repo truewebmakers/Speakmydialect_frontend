@@ -14,6 +14,8 @@ export default function ContactInquiryCard({ data }) {
         </div>
       </th>
       <td className="vam">{data?.email ? data?.email : "-"}</td>
+      <td className="vam">{data?.phone ? data?.phone : "-"}</td>
+
       <td className="vam">
         {data?.subject ? CapitalizeFirstLetter(data?.subject) : "-"}
       </td>

@@ -10,17 +10,7 @@ export default function Breadcumb9({ searchValue }) {
           <img
             className="left-top-img wow zoomIn"
             src="/images/vector-img/left-top.png"
-            alt="left-top"
-          />
-          <img
-            className="right-bottom-img wow zoomIn"
-            src="/images/vector-img/right-bottom.png"
-            alt="right-bottom"
-          />
-          <img
-            className="service-v1-vector bounce-y d-none d-xl-block"
-            src="/images/vector-img/vector-service-v1n.png"
-            alt="vector-service"
+            alt="object 1"
           />
           <div className="container">
             <div className="row wow fadeInUp">

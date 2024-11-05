@@ -4501,7 +4501,7 @@ section {
 .main-title,
 .main-title2 {
   position: relative;
-  margin-bottom: 60px;
+  margin-bottom: 34px;
 }
 
 @media (max-width: 991.98px) {
@@ -8323,11 +8323,11 @@ textarea {
 }
 
 .btn-thm:hover {
-  border: 2px solid #1f4b3f;
+  /* border: 2px solid #1f4b3f; */
 }
 
 .btn-thm:hover:before {
-  background-color: #1f4b3f;
+  /* background-color: #1f4b3f; */
 }
 
 .btn-light-thm {

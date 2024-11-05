@@ -18,7 +18,7 @@ const ChooseUserType = () => {
                 >
                   <div className="bg-white border rounded p-5 text-center shadow-sm">
                     <img
-                      src="   https://cdn-icons-png.flaticon.com/512/10485/10485059.png "
+                      src="/images/hire.png"
                       width="48"
                       height="48"
                       alt=""
@@ -41,7 +41,7 @@ const ChooseUserType = () => {
                 >
                   <div className="bg-white border rounded p-5 text-center shadow-sm">
                     <img
-                      src="   https://cdn-icons-png.flaticon.com/512/4303/4303979.png "
+                      src="/images/hireMe.png"
                       width="48"
                       height="48"
                       alt=""

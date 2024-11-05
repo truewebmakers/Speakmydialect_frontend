@@ -68,10 +68,6 @@ export default function ProjectCard1({ data }) {
               {CapitalizeFirstLetter(data?.user_meta?.gender) ||
                 "Gender not specified"}
             </p>
-            <p className="mb-0 fz14 list-inline-item mb5-sm">
-              <i className="flaticon-contract fz16 vam text-thm2 me-1 bdrl1 pl15 pl0-xs bdrn-xs" />{" "}
-              {CapitalizeFirstLetter(data?.status) || "-"}
-            </p>
             <p className="text mt10">{data?.user_meta?.intro}</p>
             <div className="skill-tags d-flex align-items-center justify-content-start">
               {data?.user_skills?.map((item, i) => (

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import FooterHeader from "./FooterHeader";
 import { useLocation } from "react-router-dom";
 
-import { overview, about, support } from "@/data/footer";
+import { support, quickLinks1, quickLinks2 } from "@/data/footer";
 import { useSelector } from "react-redux";
 
 export default function Footer() {
@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="container">
           <FooterHeader />
           <div className="row">
-            <div className="col-lg-3 col-md-6">
+            <div className="col-sm-6 col-lg-3">
               <div className="footer-widget">
                 <div className="footer-logo">
                   <Link to="#">
@@ -34,8 +34,7 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div className="col-sm-6 col-lg-2"></div>
-            <div className="col-sm-6 col-lg-3">
+            <div className="col-sm-6 col-lg-3" style={{ paddingLeft: "124px" }}>
               <div
                 className={`link-style1 mb-4 mb-sm-5 ${
                   pathname === "/home-4"
@@ -53,9 +52,39 @@ export default function Footer() {
                   Quick Links
                 </h5>
                 <ul className="ps-0">
-                  {about.map((item, i) => (
+                  {quickLinks1.map((item, i) => (
                     <li key={i}>
-                      <Link to={item.path}>{item.name}</Link>
+                      <Link to={item.path} target="_blank">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="col-sm-6 col-lg-3" style={{ paddingLeft: "60px" }}>
+              <div
+                className={`link-style1 mb-4 mb-sm-5 ${
+                  pathname === "/home-4"
+                    ? "light-style at-home8"
+                    : pathname === "/home-11"
+                    ? "light-style at-home11"
+                    : ""
+                }`}
+              >
+                <h5
+                  className={`mb15 ${
+                    pathname !== "/home-4" ? "text-white" : ""
+                  }`}
+                >
+                  Quick Links
+                </h5>
+                <ul className="ps-0">
+                  {quickLinks2.map((item, i) => (
+                    <li key={i}>
+                      <Link to={item.path} target="_blank">
+                        {item.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -87,54 +116,6 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
-            {/* <div className="col-sm-6 col-lg-3">
-              <div className="footer-widget">
-                <div className="footer-widget mb-4 mb-sm-5">
-                  <div className="mailchimp-widget">
-                    <h5 className="title text-white mb20">Subscribe</h5>
-                    <div
-                      className={`mailchimp-style1 ${
-                        pathname === "/home-11" ? " at-home11" : ""
-                      }`}
-                    >
-                      <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Your email address"
-                      />
-                      <button type="submit">Send</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="app-widget mb-4 mb-sm-5">
-                  <h5 className="title text-white mb20">Apps</h5>
-                  <div className="row mb-4 mb-lg-5">
-                    <div className="col-lg-12">
-                      <a className="app-list d-flex align-items-center mb10">
-                        <i className="fab fa-apple fz17 mr15" />
-                        <h6
-                          className={`app-title fz15 fw400 mb-0 ${
-                            pathname === "/home-11" ? "text-white" : ""
-                          }`}
-                        >
-                          iOS App
-                        </h6>
-                      </a>
-                      <a className="app-list d-flex align-items-center">
-                        <i className="fab fa-google-play fz15 mr15" />
-                        <h6
-                          className={`app-title fz15 fw400 mb-0 ${
-                            pathname === "/home-11" ? "text-white" : ""
-                          }`}
-                        >
-                          Android App
-                        </h6>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
         <div className="container white-bdrt1 py-4">
@@ -146,14 +127,13 @@ export default function Footer() {
                     pathname === "/home-11" ? "text-white" : "text-white-light"
                   } ff-heading`}
                 >
-                  Copyright © 2024
-                  {new Date().getFullYear()}{" "}
+                  Copyright © {new Date().getFullYear()}{" "}
                   <a
                     href="https://themeforest.net/user/ib-themes/portfolio"
                     target="_blank"
                     style={{ color: "inherit" }}
                   >
-                    Powered By SpeakMyDialect.com.au ,{" "}
+                    SpeakMyDialect,{" "}
                   </a>
                   All rights reserved.
                 </p>

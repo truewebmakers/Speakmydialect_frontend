@@ -9,7 +9,7 @@ export default function CtaBanner1() {
     <>
       <section className="p-0 mt-5  py-lg-0 mt-5">
         <div
-          className={`cta-banner3 mx-auto pt120 pt60-lg pb90 pb60-lg position-relative overflow-hidden ${
+          className={`cta-banner3 mx-auto pt40 pt60-lg pb90 pb60-lg position-relative overflow-hidden ${
             pathname === "/" || pathname === "/about"
               ? "bgc-light-yellow"
               : pathname === "/become-seller"
@@ -90,7 +90,14 @@ export default function CtaBanner1() {
 
                   {pathname === "/" ? (
                     <div className="list-one d-flex align-items-start mb30">
-                      <span className="list-icon flex-shrink-0 flaticon-money" />
+                      <span className="list-icon flex-shrink-0 ">
+                        <img
+                          src="/images/language.png"
+                          height={30}
+                          width={30}
+                        />
+                      </span>
+
                       <div className="list-content flex-grow-1 ml20">
                         <h4 className="mb-1">Wide Language Selection</h4>
                         <p className="text mb-0 fz15">

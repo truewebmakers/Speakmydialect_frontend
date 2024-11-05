@@ -5,40 +5,54 @@ export const overview = [
   { id: 4, name: "How it works", path: "/" },
 ];
 
-export const about = [
+export const quickLinks1 = [
   {
     id: 1,
-    name: "Company",
-    path: "https://dialect.emodelslanka.com/company",
+    name: "Home",
+    path: "https://speakmydialect.com.au/",
   },
   {
     id: 2,
-    name: "Business Subscriptions",
-    path: "https://dialect.emodelslanka.com/business/subscription",
+    name: "Search",
+    path: "https://speakmydialect.com.au/search",
   },
   {
     id: 3,
-    name: "Business Center",
-    path: "https://dialect.emodelslanka.com/business/center",
+    name: "About Us",
+    path: "https://speakmydialect.com.au/about",
   },
   {
     id: 4,
-    name: "FAQs",
-    path: "/about#faq",
+    name: "Privacy Policy",
+    path: "https://speakmydialect.com.au/privacy",
   },
+];
 
+export const quickLinks2 = [
   {
-    id: 5,
-    name: "Explore",
-    path: "https://speakmydialect.hyperiontech.com.au/",
+    id: 1,
+    name: "Sign Up",
+    path: "https://speakmydialect.com.au/register",
+  },
+  {
+    id: 2,
+    name: "Sign In",
+    path: "https://speakmydialect.com.au/login",
+  },
+  {
+    id: 3,
+    name: "Contact Us",
+    path: "https://speakmydialect.com.au/contact",
+  },
+  {
+    id: 4,
+    name: "Terms & Conditions",
+    path: "https://speakmydialect.com.au/terms",
   },
 ];
 
 export const support = [
   { id: 1, name: "Email: Info@speakmydialect.com.au", path: "/" },
-  { id: 2, name: "Contact Us", path: "/contact" },
-  { id: 3, name: "Terms & Conditions", path: "/terms" },
-  { id: 4, name: "Privacy Policy", path: "/privacy" },
 ];
 
 export const momney = ["US$ USD", "Euro", "Pound"];

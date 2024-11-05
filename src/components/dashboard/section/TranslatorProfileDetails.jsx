@@ -25,13 +25,14 @@ export default function TranslatorProfileDetails() {
   const [getCountry, setCountry] = useState({ option: "Australia", value: 14 });
   const [countryList, setCountryList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [introError, setIntroError] = useState(""); // State to store intro error
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    setUploadedPic(file); // Store the File object directly, this will be sent to api
+    setUploadedPic(file); // Store the File object directly, this will be sent to API
     const reader = new FileReader();
     reader.onload = function (event) {
-      setSelectedImage(event.target.result); // This image will be shown on the ui
+      setSelectedImage(event.target.result); // This image will be shown on the UI
     };
     reader.readAsDataURL(file);
   };
@@ -69,7 +70,6 @@ export default function TranslatorProfileDetails() {
 
   useEffect(() => {
     if (profileData) {
-      // Enter Profile Details
       setProfileDetails({
         fname: profileData?.fname || "",
         lname: profileData?.lname || "",
@@ -78,20 +78,18 @@ export default function TranslatorProfileDetails() {
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
       });
-      // Enter Gender
       setGender({
         option: CapitalizeFirstLetter(profileData?.user_meta?.gender),
         value: profileData?.user_meta?.gender,
       });
-      // Enter Country
       if (profileData?.user_meta?.location && countryList?.length > 0) {
         const country = countryList?.find(
           (coun) => coun?.id == profileData?.user_meta?.location
         );
         if (country) {
           setCountry({
-            option: country?.name, // Set the country name as the option
-            value: country?.id, // Set the country ID as the value
+            option: country?.name,
+            value: country?.id,
           });
         }
       }
@@ -106,15 +104,27 @@ export default function TranslatorProfileDetails() {
     }
   }, [profileData]);
 
+  // Validation function
+  const validateForm = () => {
+    if (profileDetails?.intro?.length < 100) {
+      setIntroError("Intro must be at least 100 characters.");
+      return false;
+    }
+    setIntroError(""); // Reset error if valid
+    return true;
+  };
+
   const handleSave = async () => {
+    if (!validateForm()) {
+      return; // Do not proceed if validation fails
+    }
+
     setIsLoading(true);
     try {
-      // set headers
       const headers = {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${user?.token}`,
       };
-      // set body
       const bodyData = {
         fname: profileDetails?.fname,
         lname: profileDetails?.lname,
@@ -126,7 +136,7 @@ export default function TranslatorProfileDetails() {
         gender: getGender?.value,
         location: getCountry?.value,
       };
-      // Call signup API
+
       const response = await UseApi(
         apiUrls.updateProfile + user?.userInfo?.id,
         apiMethods.POST,
@@ -276,23 +286,10 @@ export default function TranslatorProfileDetails() {
                   />
                 </div>
               </div>
-              {/* <div className="col-sm-6">
-                <div className="mb20">
-                  <SelectInput
-                    label="Country"
-                    defaultSelect={getCountry}
-                    data={countryList?.map((item) => ({
-                      option: item?.name,
-                      value: item?.id,
-                    }))}
-                    handler={countryHandler}
-                  />
-                </div>
-              </div> */}
               <div className="col-md-12">
                 <div className="mb10">
                   <label className="heading-color ff-heading fw500 mb10">
-                    About you
+                    About you (Min. 100 characters)
                   </label>
                   <textarea
                     cols={30}
@@ -303,6 +300,7 @@ export default function TranslatorProfileDetails() {
                     autoComplete="off"
                     onChange={handleOnChange}
                   />
+                  {introError && <p className="text-danger">{introError}</p>}
                 </div>
               </div>
               <div className="col-md-12">

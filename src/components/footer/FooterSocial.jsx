@@ -14,9 +14,6 @@ export default function FooterSocial() {
           <a>
             <i className="fab fa-instagram list-inline-item" />
           </a>
-          <a>
-            <i className="fab fa-linkedin-in list-inline-item" />
-          </a>
         </div>
       </div>
     </>

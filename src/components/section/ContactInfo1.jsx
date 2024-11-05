@@ -9,6 +9,7 @@ export default function ContactInfo1() {
     first_name: "",
     last_name: "",
     email: "",
+    phone: "",
     subject: "",
     query: "",
   });
@@ -16,48 +17,79 @@ export default function ContactInfo1() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false); // Track if the form has been submitted
 
+  // Function to validate the form
   const validate = () => {
     const newErrors = {};
 
+    // Validate First Name
     if (!data.first_name) {
       newErrors.first_name = "First name is required.";
     } else if (data.first_name.length < 3) {
       newErrors.first_name = "First name must be at least 3 characters.";
     }
 
+    // Validate Last Name
     if (!data.last_name) {
       newErrors.last_name = "Last name is required.";
     } else if (data.last_name.length < 3) {
       newErrors.last_name = "Last name must be at least 3 characters.";
     }
 
+    // Validate Email
     if (!data.email) {
       newErrors.email = "Email is required.";
     } else if (!/\S+@\S+\.\S+/.test(data.email)) {
       newErrors.email = "Email is invalid.";
     }
 
+    // Validate Subject
     if (!data.subject) {
       newErrors.subject = "Subject is required.";
     } else if (data.subject.length < 5 || data.subject.length > 10) {
       newErrors.subject = "Subject must be 5 to 10 characters long.";
     }
 
+    // Validate Query
     if (!data.query) {
       newErrors.query = "Query is required.";
     } else if (data.query.length < 20 || data.query.length > 40) {
       newErrors.query = "Query must be between 20 to 40 characters long.";
     }
 
+    // Validate Phone Number
+    if (!data.phone) {
+      newErrors.phone = "Phone number is required.";
+    } else if (isNaN(data.phone)) {
+      newErrors.phone = "Phone number must be numeric.";
+    } else if (data.phone.length < 10 || data.phone.length > 11) {
+      newErrors.phone = "Phone number must be between 10 to 11 digits.";
+    }
+
     return newErrors;
   };
 
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    // For phone number, check if value is numeric and within length range
+    if (name === "phone") {
+      // Allow only numbers and spaces
+      if (
+        (value === "" || value.length <= 11) &&
+        !isNaN(value.replace(/\s/g, ""))
+      ) {
+        setData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      }
+    } else {
+      setData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
 
     // Validate field only if the form has been submitted at least once
     if (isSubmitted) {
@@ -69,6 +101,7 @@ export default function ContactInfo1() {
     }
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true); // Set form submitted state to true
@@ -92,6 +125,7 @@ export default function ContactInfo1() {
         first_name: "",
         last_name: "",
         email: "",
+        phone: "",
         subject: "",
         query: "",
       });
@@ -150,6 +184,7 @@ export default function ContactInfo1() {
                           name="first_name"
                           value={data.first_name}
                           onChange={handleChange}
+                          autoComplete="off"
                         />
                         {errors.first_name && (
                           <p className="text-danger">{errors.first_name}</p>
@@ -168,6 +203,7 @@ export default function ContactInfo1() {
                           name="last_name"
                           value={data.last_name}
                           onChange={handleChange}
+                          autoComplete="off"
                         />
                         {errors.last_name && (
                           <p className="text-danger">{errors.last_name}</p>
@@ -186,6 +222,7 @@ export default function ContactInfo1() {
                           name="email"
                           value={data.email}
                           onChange={handleChange}
+                          autoComplete="off"
                         />
                         {errors.email && (
                           <p className="text-danger">{errors.email}</p>
@@ -193,6 +230,25 @@ export default function ContactInfo1() {
                       </div>
                     </div>
                     <div className="col-md-6">
+                      <div className="mb20">
+                        <label className="heading-color ff-heading fw500 mb10">
+                          Phone No.
+                        </label>
+                        <input
+                          type="text" // Change type to text to handle formatting
+                          className="form-control"
+                          placeholder="Enter Phone Number"
+                          name="phone"
+                          value={data.phone}
+                          onChange={handleChange}
+                          autoComplete="off"
+                        />
+                        {errors.phone && (
+                          <p className="text-danger">{errors.phone}</p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="col-md-12">
                       <div className="mb20">
                         <label className="heading-color ff-heading fw500 mb10">
                           Subject
@@ -204,6 +260,7 @@ export default function ContactInfo1() {
                           name="subject"
                           value={data.subject}
                           onChange={handleChange}
+                          autoComplete="off"
                         />
                         {errors.subject && (
                           <p className="text-danger">{errors.subject}</p>
@@ -222,6 +279,7 @@ export default function ContactInfo1() {
                           name="query"
                           value={data.query}
                           onChange={handleChange}
+                          autoComplete="off"
                         />
                         {errors.query && (
                           <p className="text-danger">{errors.query}</p>
@@ -235,7 +293,7 @@ export default function ContactInfo1() {
                           className="ud-btn btn-thm"
                           disabled={isLoading}
                         >
-                          {isLoading ? <Loader /> : "Send Messages"}
+                          {isLoading ? <Loader /> : "Submit"}
                           <i className="fal fa-arrow-right-long" />
                         </button>
                       </div>

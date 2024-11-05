@@ -187,7 +187,7 @@ export default function Skill() {
   return (
     <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
       <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between align-items-center">
-        <h5 className="list-title">Skills</h5>
+        <h5 className="list-title">Languages</h5>
         <a
           className="add-more-btn text-thm d-flex align-items-center"
           onClick={handleAddLanguage}

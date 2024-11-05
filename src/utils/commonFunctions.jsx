@@ -75,7 +75,7 @@ export const getCountryName = (countryId, countryList) => {
 
 export const getLanguageName = (languageId, languageList) => {
   const language = languageList.find((coun) => coun.id == languageId);
-  return language ? language.name : "Unknown Language";
+  return language ? language.name : null;
 };
 
 export const getProfileData = async (id, token) => {

@@ -57,6 +57,7 @@ export default function ContactInquiryInfo() {
                     <tr>
                       <th scope="col">Name</th>
                       <th scope="col">Email</th>
+                      <th scope="col">Phone</th>
                       <th scope="col">Subject</th>
                       <th scope="col">Query</th>
                       <th scope="col">Date & Time</th>

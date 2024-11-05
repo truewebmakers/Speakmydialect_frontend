@@ -95,12 +95,6 @@ export default function PayoutStatusChangeModal({
                         <strong>BSB:</strong> {bankingDetails?.bsb || "N/A"}
                       </p>
                     </div>
-                    <div className="col-sm-6">
-                      <p>
-                        <strong>IFSC Code:</strong>{" "}
-                        {bankingDetails?.ifsc || "N/A"}
-                      </p>
-                    </div>
                   </div>
                 )}
               </div>
