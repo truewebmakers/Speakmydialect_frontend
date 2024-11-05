@@ -251,23 +251,23 @@ export default function RegisterPage() {
                     {[
                       {
                         type: "primaryId",
-                        desc: "Your primary identification document.",
+                        desc: "Primary Identification is used to verify an individual’s identity with documents like a Passport, Australian Birth Certificate, or Australian Citizenship Certificate. This document must clearly display the individual’s full legal name and date of birth. Primary ID is crucial for legal verification and compliance purposes.",
                       },
                       {
                         type: "secondaryId",
-                        desc: "A secondary identification document to verify your identity.",
+                        desc: "Secondary Identification includes documents that support an individual’s identity but do not have the same level of verification as Primary ID.",
                       },
                       {
                         type: "policeCheck",
-                        desc: "A recent police clearance certificate.",
+                        desc: "A Police Check, or National Police Clearance, is a certificate issued to show any recorded criminal history of an individual in Australia. ",
                       },
                       {
                         type: "wwcCheck",
-                        desc: "A Working With Children Check (optional).",
+                        desc: "The Working With Children (WWC) Check is a background check required for anyone working with or volunteering with children in Australia.",
                       },
                       {
                         type: "supportingDocs",
-                        desc: "Optional government-issued ID (e.g., passport).",
+                        desc: "Supporting Documents may include additional information that verifies an individual’s credentials or background, such as employment history, educational certificates, or references. ",
                       },
                     ].map(({ type, desc }) => (
                       <div className="mb25" key={type}>
@@ -279,7 +279,7 @@ export default function RegisterPage() {
                         </label>
                         <p
                           className="description"
-                          style={{ marginTop: "-19px" }}
+                          // style={{ marginTop: "-19px" }}
                         >
                           {desc}
                         </p>

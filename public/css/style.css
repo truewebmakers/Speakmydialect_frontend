@@ -14279,3 +14279,10 @@ hr {
   overflow-wrap: break-word; /* Ensure long words are broken down */
   line-height: 1.5; /* Adjust line height for better readability */
 }
+
+.description {
+  margin-top: -10px; /* Adjust or remove if needed */
+  margin-bottom: 10px; /* Adjust the bottom margin to ensure it’s not too large */
+  line-height: 1.4; /* Adjust the line-height to reduce excessive space */
+  font-size: 14px; /* You can adjust the font size if needed */
+}

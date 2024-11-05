@@ -59,16 +59,19 @@ export default function About1() {
                   <ul className="mb30">
                     <li>
                       <i className="far fa-check" />
-                      Connect to freelancers with proven business experience
+                      Connect with Skilled, Certified Interpreters
                     </li>
                     <li>
                       <i className="far fa-check" />
-                      Get matched with the perfect talent by a customer success
-                      manager
+                      Flexible, High-Quality Interpretation Services
                     </li>
                     <li>
                       <i className="far fa-check" />
-                      Unmatched quality of remote, hybrid, and flexible jobs
+                      Easy-to-Use Platform
+                    </li>
+                    <li>
+                      <i className="far fa-check" />
+                      Flexible, High-Quality Interpretation Services{" "}
                     </li>
                   </ul>
 
