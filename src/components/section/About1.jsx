@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 
 export default function About1() {
+  const hideSection = (location.pathname === "/about") ? 'd-none' :'';
+  const homePage = (location.pathname === "/") ? 'd-none' :'';
+  console.log("location.pathname",location.pathname)
   return (
     <>
-      <section className="our-about pt90 pb120 bgc-thm2">
+  
+      <section className="our-about pt90 pb120 bgc-thm2 ">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-xl-6">
@@ -40,6 +44,9 @@ export default function About1() {
                 className="position-relative wow fadeInLeft"
                 data-wow-delay="300ms"
               >
+                <div className={hideSection+" who-we-are"}>
+
+                
                 <h2 className="text-white mb35">
                   Who Are We?{" "}
                   {/* <br className="d-none d-lg-block" /> Welcome to SpeakMyDialect */}
@@ -75,6 +82,9 @@ export default function About1() {
                     </li>
                   </ul>
 
+                  </div>
+                  </div>
+                  <div className={homePage +" what-platform-offers"}>
                   <h2 className="text-white mb35">
                     {" "}
                     What Our Platform Offers
@@ -93,6 +103,7 @@ export default function About1() {
                     effective and reliable communication across different
                     languages.
                   </p>
+                  </div>
                   <Link to="/search" className="ud-btn btn-thm">
                     Find Interpreters
                     <i className="fal fa-arrow-right-long" />
@@ -101,8 +112,9 @@ export default function About1() {
               </div>
             </div>
           </div>
-        </div>
+        
       </section>
+        
     </>
   );
 }

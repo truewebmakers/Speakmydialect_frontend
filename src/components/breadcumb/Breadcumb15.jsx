@@ -52,13 +52,13 @@ export default function Breadcumb17({ translatorProfile }) {
                         {" "}
                         {translatorProfile?.fname} {translatorProfile?.lname}
                       </h5>
-                      <p className="mb-0">
+                      {/* <p className="mb-0">
                         {translatorProfile?.user_meta?.intro
                           ? CapitalizeFirstLetter(
                               translatorProfile?.user_meta?.intro
                             )
                           : "-"}
-                      </p>
+                      </p> */}
                       <p
                         className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm ml0-xs"
                         style={{ marginTop: "24px", position: "absolute" }}

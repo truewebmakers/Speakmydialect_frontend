@@ -91,9 +91,10 @@ export default function TrendingServiceCard1({ data }) {
         <p className="text mt10">{data?.user_meta?.intro}</p>
         <div className="skill-tags d-flex align-items-center justify-content-start">
           {data?.user_skills?.map((item, i) => (
-            <span key={i} className={`tag ${i === 1 ? "mx10" : ""}`}>
+          
+            <span key={i} className={`tag ${i === 1 ? "mx10" : "asdasd"}`}>
               {getLanguageName(item?.language, languageList)}
-            </span>
+            </span>  
           ))}
         </div>
         <hr className="my-2" />

@@ -70,11 +70,14 @@ export default function ProjectCard1({ data }) {
             </p>
             <p className="text mt10">{data?.user_meta?.intro}</p>
             <div className="skill-tags d-flex align-items-center justify-content-start">
-              {data?.user_skills?.map((item, i) => (
-                <span key={i} className={`tag ${i === 1 ? "mx10" : ""}`}>
-                  {getLanguageName(item?.language, languageList)}
-                </span>
-              ))}
+              {data?.user_skills?.length > 0 && // Check if user_skills is not empty
+                data.user_skills.map((item, i) =>
+                  getLanguageName(item?.language, languageList) ? ( // Check if item?.language is not empty or null
+                    <span key={i} className={`tag asd${i === 1 ? "mx10" : ""}`}>
+                      {getLanguageName(item?.language, languageList)}
+                    </span>
+                  ) : ''
+                )}
             </div>
           </div>
         </div>

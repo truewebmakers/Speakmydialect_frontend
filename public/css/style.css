@@ -14286,3 +14286,18 @@ hr {
   line-height: 1.4; /* Adjust the line-height to reduce excessive space */
   font-size: 14px; /* You can adjust the font size if needed */
 }
+
+.details p.text {
+  word-wrap: break-word;
+  max-width: 500px !important;
+}
+.home-one , .footer-style1{
+  margin: 0 !important; 
+}
+section {
+  margin: 20px 0px;
+}
+.service-about .text {
+  width: 100%;
+  word-wrap: break-word;
+}

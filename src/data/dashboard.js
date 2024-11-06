@@ -14,7 +14,7 @@ export const translatorNavigation = [
   {
     id: 3,
     name: "Booking Management",
-    icon: "flaticon-like",
+    icon: "flaticon-calendar",
     path: "/jobs",
   },
   {
@@ -53,7 +53,7 @@ export const clientNavigation = [
   {
     id: 3,
     name: "Bookings",
-    icon: "flaticon-like",
+    icon: "flaticon-calendar",
     path: "/bookings",
   },
   {

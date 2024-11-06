@@ -4,9 +4,9 @@ export default function Breadcumb1({ title, brief, isBtnActive }) {
   return (
     <>
       <section className="wow fadeInUp">
-        <div className="cta-commmon-v1 cta-banner bgc-thm2 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg">
+        <div className="cta-commmon-v1 cta-banner bgc-thm2 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidd2en d-flex align-items-center mx20-lg">
           <img
-            className="left-top-img wow zoomIn"
+            className="left-top-img wow zoomIn" 
             src="/images/vector-img/left-top.png"
             alt="object 1"
           />

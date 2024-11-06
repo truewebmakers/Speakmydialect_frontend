@@ -36,7 +36,9 @@ export default function DashboardHeader() {
                         <Link className="btn" to="/my-profile">
                           {user?.userInfo?.user_type && (
                             <span class="mb25 me-4 badge-success">
-                              {CapitalizeFirstLetter(user?.userInfo?.user_type)}
+                              {
+                                (user?.userInfo?.user_type == 'translator') ? 'Interpreter' : CapitalizeFirstLetter(user?.userInfo?.user_type)
+                              } 
                             </span>
                           )}
                           <img
