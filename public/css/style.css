@@ -14294,10 +14294,17 @@ hr {
 .home-one , .footer-style1{
   margin: 0 !important; 
 }
-section {
+/* section {
   margin: 20px 0px;
-}
+} */
 .service-about .text {
   width: 100%;
   word-wrap: break-word;
+}
+
+.iconbox-small1.at-home1.d-none.d-md-block.wow.fadeInRight {
+  display: none !important;
+}
+.iconbox-small2.d-none.d-md-block.wow.fadeInLeft {
+  display: none !important;
 }
