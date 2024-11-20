@@ -46,7 +46,7 @@ export default function ListingSidebar2() {
     <>
       <div className="list-sidebar-style1 d-none d-lg-block">
         <div className="accordion" id="accordionExample">
-          <div className="card mb20 mt-0">
+          {/* <div className="card mb20 mt-0">
             <h4>Level</h4>
             <div
               id="collapse0"
@@ -58,7 +58,7 @@ export default function ListingSidebar2() {
                 <CategoryOption1 />
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="card mb20">
             <h4>Location</h4>

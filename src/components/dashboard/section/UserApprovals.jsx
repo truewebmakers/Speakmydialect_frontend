@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import StatusChangeModal from "../modal/StatusChangeModal";
 import { userApprovalDropdown } from "@/constants/structuralConstant";
 import ShowInfoModal from "../modal/showInfoModal";
+import PageNotFound from "@/components/section/PageNotFound";
+import NoDataFound from "@/components/noData/NoDataFound";
 
 export default function UserApprovalInfo() {
   const [userApproval, setUserApproval] = useState([]);
@@ -19,12 +21,12 @@ export default function UserApprovalInfo() {
   const [reason, setReason] = useState("");
   const [showReason, setShowReason] = useState(false);
   const [showData, setShowData] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   //fetch user bookings listing
   const fetchData = async () => {
     try {
       const headers = { Authorization: `Bearer ${user?.token}` };
-
       const response = await UseApi(
         apiUrls.adminGetUserApprovals,
         apiMethods.GET,
@@ -47,6 +49,7 @@ export default function UserApprovalInfo() {
   //updtae status api
   const handleSave = async () => {
     try {
+      setIsLoading(true);
       const headers = {
         Authorization: `Bearer ${user?.token}`,
       };
@@ -69,6 +72,8 @@ export default function UserApprovalInfo() {
       }
     } catch (err) {
       toast.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -110,39 +115,43 @@ export default function UserApprovalInfo() {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-xl-12">
-            <div className="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
-              <div className="packages_table table-responsive">
-                <table className="table-style3 table at-savesearch">
-                  <thead className="t-head">
-                    <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">User Type</th>
-                      <th scope="col">Email Verified</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Joined on</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="t-body">
-                    {userApproval?.map((item, i) => (
-                      <UserApprovalCard
-                        key={i}
-                        data={item}
-                        openModal={openModal}
-                        openReasonModal={openReasonModal}
-                        fetchData={fetchData}
-                      />
-                    ))}
-                  </tbody>
-                </table>
-                <div className="mt30">{/* <Pagination1 /> */}</div>
+        {userApproval?.length ? (
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
+                <div className="packages_table table-responsive">
+                  <table className="table-style3 table at-savesearch">
+                    <thead className="t-head">
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">User Type</th>
+                        <th scope="col">Email Verified</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Joined on</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="t-body">
+                      {userApproval?.map((item, i) => (
+                        <UserApprovalCard
+                          key={i}
+                          data={item}
+                          openModal={openModal}
+                          openReasonModal={openReasonModal}
+                          fetchData={fetchData}
+                        />
+                      ))}
+                    </tbody>
+                  </table>
+                  <div className="mt30">{/* <Pagination1 /> */}</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <PageNotFound />
+        )}
       </div>
       <StatusChangeModal
         show={showModal}
@@ -155,6 +164,7 @@ export default function UserApprovalInfo() {
         handleSave={handleSave}
         content="User Approval"
         userId={userId}
+        isLoading={isLoading}
       />
       <ShowInfoModal
         show={showReason}

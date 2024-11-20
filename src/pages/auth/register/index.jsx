@@ -61,7 +61,6 @@ export default function RegisterPage() {
       setStep(2);
     }
   };
-  console.log(uploadedFiles);
 
   const handleSubmit = async () => {
     // Ensure that primaryId, secondaryId, and policeCheck are uploaded
@@ -272,17 +271,13 @@ export default function RegisterPage() {
                     ].map(({ type, desc }) => (
                       <div className="mb25" key={type}>
                         <label className="form-label fw500 dark-color">
-                          {type
-                            .replace(/([A-Z])/g, " $1")
-                            .replace(/^./, (str) => str.toUpperCase())}
-                          :
+                          {type === "primaryId" && "Primary ID:"}
+                          {type === "secondaryId" && "Secondary ID:"}
+                          {type === "policeCheck" && "Police Check:"}
+                          {type === "wwcCheck" && "WWC Check:"}
+                          {type === "supportingDocs" && "Supporting Documents:"}
                         </label>
-                        <p
-                          className="description"
-                          // style={{ marginTop: "-19px" }}
-                        >
-                          {desc}
-                        </p>
+                        <p className="description">{desc}</p>
                         <div
                           className="upload-box"
                           onClick={() =>

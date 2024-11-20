@@ -56,6 +56,7 @@ export const apiUrls = {
   deleteUserApprovals: "/admin/user/delete/",
   contactUsSendEmail: "/send-email",
   getContactInquiries: "/admin/get-contactform-entries",
+  checkProfileCompletion: "/translators/profile-incomplete/",
 };
 
 export const metaData = {

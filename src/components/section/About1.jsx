@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 
 export default function About1() {
-  const hideSection = (location.pathname === "/about") ? 'd-none' :'';
-  const homePage = (location.pathname === "/") ? 'd-none' :'';
-  console.log("location.pathname",location.pathname)
+  const hideSection = location.pathname === "/about" ? "d-none" : "";
+  const homePage = location.pathname === "/" ? "d-none" : "";
+
   return (
     <>
-  
       <section className="our-about pt90 pb120 bgc-thm2 ">
         <div className="container">
           <div className="row align-items-center">
@@ -44,47 +43,44 @@ export default function About1() {
                 className="position-relative wow fadeInLeft"
                 data-wow-delay="300ms"
               >
-                <div className={hideSection+" who-we-are"}>
-
-                
-                <h2 className="text-white mb35">
-                  Who Are We?{" "}
-                  {/* <br className="d-none d-lg-block" /> Welcome to SpeakMyDialect */}
-                </h2>
-                <p className="text text-white mb35">
-                  Welcome to SpeakMyDialect, your premier platform for finding
-                  local interpreters. We connect individuals and organisations
-                  with qualified interpreters fluent in a myriad of languages,
-                  enhancing communication and cultural understanding. At
-                  SpeakMyDialect, we are committed to bridging communication
-                  gaps, providing skilled interpreters who facilitate essential
-                  multicultural connections. Whether your needs are personal,
-                  educational, or professional, we ensure that our services are
-                  accessible and affordable for everyone.
-                </p>
-                <div className="list-style2 light-style">
-                  <ul className="mb30">
-                    <li>
-                      <i className="far fa-check" />
-                      Connect with Skilled, Certified Interpreters
-                    </li>
-                    <li>
-                      <i className="far fa-check" />
-                      Flexible, High-Quality Interpretation Services
-                    </li>
-                    <li>
-                      <i className="far fa-check" />
-                      Easy-to-Use Platform
-                    </li>
-                    <li>
-                      <i className="far fa-check" />
-                      Flexible, High-Quality Interpretation Services{" "}
-                    </li>
-                  </ul>
-
+                <div className={hideSection + " who-we-are"}>
+                  <h2 className="text-white mb35">
+                    Who Are We?{" "}
+                    {/* <br className="d-none d-lg-block" /> Welcome to SpeakMyDialect */}
+                  </h2>
+                  <p className="text text-white mb35">
+                    Welcome to SpeakMyDialect, your premier platform for finding
+                    local interpreters. We connect individuals and organisations
+                    with qualified interpreters fluent in a myriad of languages,
+                    enhancing communication and cultural understanding. At
+                    SpeakMyDialect, we are committed to bridging communication
+                    gaps, providing skilled interpreters who facilitate
+                    essential multicultural connections. Whether your needs are
+                    personal, educational, or professional, we ensure that our
+                    services are accessible and affordable for everyone.
+                  </p>
+                  <div className="list-style2 light-style">
+                    <ul className="mb30">
+                      <li>
+                        <i className="far fa-check" />
+                        Connect with Skilled, Certified Interpreters
+                      </li>
+                      <li>
+                        <i className="far fa-check" />
+                        Flexible, High-Quality Interpretation Services
+                      </li>
+                      <li>
+                        <i className="far fa-check" />
+                        Easy-to-Use Platform
+                      </li>
+                      <li>
+                        <i className="far fa-check" />
+                        Flexible, High-Quality Interpretation Services{" "}
+                      </li>
+                    </ul>
                   </div>
-                  </div>
-                  <div className={homePage +" what-platform-offers"}>
+                </div>
+                <div className={homePage + " what-platform-offers"}>
                   <h2 className="text-white mb35">
                     {" "}
                     What Our Platform Offers
@@ -103,18 +99,16 @@ export default function About1() {
                     effective and reliable communication across different
                     languages.
                   </p>
-                  </div>
-                  <Link to="/search" className="ud-btn btn-thm">
-                    Find Interpreters
-                    <i className="fal fa-arrow-right-long" />
-                  </Link>
                 </div>
+                <Link to="/search" className="ud-btn btn-thm">
+                  Find Interpreters
+                  <i className="fal fa-arrow-right-long" />
+                </Link>
               </div>
             </div>
           </div>
-        
+        </div>
       </section>
-        
     </>
   );
 }

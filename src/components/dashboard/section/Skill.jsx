@@ -6,11 +6,12 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Tooltip } from "react-tooltip";
 import Loader from "@/components/common/loader";
-import { getLanguages } from "@/utils/commonFunctions";
+import { getDialects, getLanguages } from "@/utils/commonFunctions";
 
 export default function Skill() {
   const [skills, setSkills] = useState([]);
   const [languageListing, setLanguageListing] = useState([]);
+  const [dialectOptions, setDialectOptions] = useState([]); // Store dialect options for each language
   const { user } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,12 +21,6 @@ export default function Skill() {
       option: option,
       value: value,
     };
-    setSkills(newSkills);
-  };
-
-  const handleDialectChange = (index, field, e) => {
-    const newSkills = [...skills];
-    newSkills[index][field] = e.target.value;
     setSkills(newSkills);
   };
 
@@ -41,7 +36,7 @@ export default function Skill() {
       {
         language: { option: "Select", value: null },
         level: { option: "Select", value: null },
-        dialect: "",
+        dialect: { option: "Select", value: null },
         status: "active",
       },
       ...skills,
@@ -99,6 +94,8 @@ export default function Skill() {
       if (response?.status === 200 || response?.status === 201) {
         const skillsData = response?.data?.data;
         const storedLanguages = sessionStorage.getItem("languages");
+        const storedDialect = sessionStorage.getItem("dialect");
+
         const formattedSkills = skillsData?.map((skill) => ({
           id: skill.id,
           language: {
@@ -110,7 +107,15 @@ export default function Skill() {
               "Select",
             value: skill?.language,
           },
-          dialect: skill?.dialect,
+          dialect: {
+            option:
+              (storedDialect &&
+                JSON.parse(storedDialect)?.find(
+                  (dialect) => dialect?.dialect == skill?.dialect // Match by id for dialect
+                )?.dialect) ||
+              "Select", // Default to "Select" if no match is found
+            value: skill?.dialect, // Use the id or value of the dialect
+          },
           level: {
             option:
               skill?.level?.charAt(0)?.toUpperCase() + skill?.level?.slice(1),
@@ -118,6 +123,7 @@ export default function Skill() {
           },
           status: skill?.status,
         }));
+
         setSkills(formattedSkills);
       }
     } catch (error) {
@@ -128,11 +134,20 @@ export default function Skill() {
   useEffect(() => {
     const fetchData = async () => {
       const storedLanguages = sessionStorage.getItem("languages");
+      const storedDialect = sessionStorage.getItem("dialect");
+
       if (storedLanguages?.length > 0) {
         setLanguageListing(JSON.parse(storedLanguages));
         getSkills();
       } else {
         await getLanguages(setLanguageListing);
+        getSkills();
+      }
+      if (storedDialect?.length > 0) {
+        setDialectOptions(JSON.parse(storedDialect));
+        getSkills();
+      } else {
+        await getDialects(setDialectOptions);
         getSkills();
       }
     };
@@ -147,7 +162,7 @@ export default function Skill() {
         if (
           !skill?.language?.value ||
           !skill?.level?.value ||
-          !skill?.dialect
+          !skill?.dialect?.value
         ) {
           toast.error("Please fill in all fields for each skill.");
           setIsLoading(false);
@@ -163,7 +178,7 @@ export default function Skill() {
           language: skill?.language?.value,
           level: skill?.level?.value,
           status: skill?.status?.toLowerCase(),
-          dialect: skill?.dialect,
+          dialect: skill?.dialect?.value,
         })),
       };
       const response = await UseApi(
@@ -218,15 +233,19 @@ export default function Skill() {
                   />
                 </div>
                 <div className="col-sm-3 mb20">
-                  <label className="heading-color ff-heading fw500 mb10">
-                    Dialect
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter Dialect"
-                    value={skill?.dialect}
-                    onChange={(e) => handleDialectChange(index, "dialect", e)}
+                  <SelectInput
+                    label="Dialect"
+                    defaultSelect={{
+                      option: skill?.dialect?.option || "Select",
+                      value: skill?.dialect?.value || null,
+                    }}
+                    data={dialectOptions?.map((item) => ({
+                      option: item?.dialect,
+                      value: item?.dialect,
+                    }))}
+                    handler={(option, value) =>
+                      handleFieldChange(index, "dialect", option, value)
+                    }
                   />
                 </div>
                 <div className="col-sm-3 mb20">

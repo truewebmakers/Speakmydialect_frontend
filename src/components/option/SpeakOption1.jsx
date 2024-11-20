@@ -9,13 +9,14 @@ export default function SpeakOption1({ data }) {
 
   // Language Handler
   const speakHandler = (option, value) => {
-    setSpeak(value); // Set the selected language
+    setSpeak(value); // Set the selected language's id
     setSearchParams(""); // Clear search params
   };
 
   // Prepare the default select object
   const defaultSelect = {
-    option: getSpeak || "Select Language", // Show placeholder when no language is selected
+    option:
+      data?.find((item) => item?.id === getSpeak)?.name || "Select Language", // Show the name of the selected language
     value: getSpeak,
   };
 
@@ -24,8 +25,8 @@ export default function SpeakOption1({ data }) {
       <SelectInput
         defaultSelect={defaultSelect} // Pass the prepared defaultSelect object
         data={data?.map((item) => ({
-          option: item?.name,
-          value: item?.name,
+          option: item?.name, // Language name to display
+          value: item?.id, // Language id for internal use (e.g. searching)
         }))} // Populate dropdown with languages
         handler={speakHandler} // Handle language selection
       />

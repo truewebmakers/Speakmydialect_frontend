@@ -9,6 +9,7 @@ import { apiMethods, apiUrls } from "@/constants/constant";
 import { toast } from "react-toastify";
 import { PaymentStatusChangeDropdown } from "@/constants/structuralConstant";
 import PayoutStatusChangeModal from "../modal/PayoutStatusChangeModal";
+import PageNotFound from "@/components/section/PageNotFound";
 
 export default function PayoutInfo() {
   const [payoutListing, setPayoutListing] = useState([]);
@@ -100,44 +101,52 @@ export default function PayoutInfo() {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-xl-12">
-            <div className="ps-widget bgc-white bdrs4 p30 mb60 overflow-hidden position-relative">
-              <div className="packages_table table-responsive">
-                <table className="table-style3 table at-savesearch">
-                  <thead className="t-head">
-                    <tr>
-                      <th scope="col">Job Title</th>
-                      <th scope="col">Start At</th>
-                      <th scope="col">End At</th>
-                      <th scope="col">Paid At</th>
-                      <th scope="col">Total Pay</th>
-                      <th scope="col">Payment Status</th>
-                      {user?.userInfo?.user_type === "admin" && (
-                        <th scope="col">Action</th>
-                      )}
-                    </tr>
-                  </thead>
-                  <tbody className="t-body">
-                    {payoutListing?.map((item, i) => (
-                      <PayoutCard1 key={i} data={item} openModal={handleView} />
-                    ))}
-                  </tbody>
-                </table>
-                <div className="mt30">{/* <Pagination1 /> */}</div>
-              </div>
-            </div>
-            {user?.userInfo?.user_type === "translator" && (
-              <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
-                <div className="row">
-                  <div className="col-lg-9">
-                    <PaymentMethod />
-                  </div>
+        {payoutListing?.length ? (
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="ps-widget bgc-white bdrs4 p30 mb60 overflow-hidden position-relative">
+                <div className="packages_table table-responsive">
+                  <table className="table-style3 table at-savesearch">
+                    <thead className="t-head">
+                      <tr>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Start At</th>
+                        <th scope="col">End At</th>
+                        <th scope="col">Paid At</th>
+                        <th scope="col">Total Pay</th>
+                        <th scope="col">Payment Status</th>
+                        {user?.userInfo?.user_type === "admin" && (
+                          <th scope="col">Action</th>
+                        )}
+                      </tr>
+                    </thead>
+                    <tbody className="t-body">
+                      {payoutListing?.map((item, i) => (
+                        <PayoutCard1
+                          key={i}
+                          data={item}
+                          openModal={handleView}
+                        />
+                      ))}
+                    </tbody>
+                  </table>
+                  <div className="mt30">{/* <Pagination1 /> */}</div>
                 </div>
               </div>
-            )}
+              {user?.userInfo?.user_type === "translator" && (
+                <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
+                  <div className="row">
+                    <div className="col-lg-9">
+                      <PaymentMethod />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        ) : (
+          <PageNotFound />
+        )}
       </div>
       <PayoutStatusChangeModal
         userId={userId}

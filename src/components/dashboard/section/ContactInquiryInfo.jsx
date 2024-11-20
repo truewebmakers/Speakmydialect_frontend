@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ContactInquiryCard from "../card/ContactInquiryCard";
+import PageNotFound from "@/components/section/PageNotFound";
 
 export default function ContactInquiryInfo() {
   const { user } = useSelector((state) => state.auth);
@@ -48,32 +49,36 @@ export default function ContactInquiryInfo() {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-xl-12">
-            <div className="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
-              <div className="packages_table table-responsive">
-                <table className="table-style3 table at-savesearch">
-                  <thead className="t-head">
-                    <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Phone</th>
-                      <th scope="col">Subject</th>
-                      <th scope="col">Query</th>
-                      <th scope="col">Date & Time</th>
-                    </tr>
-                  </thead>
-                  <tbody className="t-body">
-                    {contactInquiries?.map((item, i) => (
-                      <ContactInquiryCard key={i} data={item} />
-                    ))}
-                  </tbody>
-                </table>
-                <div className="mt30">{/* <Pagination1 /> */}</div>
+        {contactInquiries?.length ? (
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
+                <div className="packages_table table-responsive">
+                  <table className="table-style3 table at-savesearch">
+                    <thead className="t-head">
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Query</th>
+                        <th scope="col">Date & Time</th>
+                      </tr>
+                    </thead>
+                    <tbody className="t-body">
+                      {contactInquiries?.map((item, i) => (
+                        <ContactInquiryCard key={i} data={item} />
+                      ))}
+                    </tbody>
+                  </table>
+                  <div className="mt30">{/* <Pagination1 /> */}</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <PageNotFound />
+        )}
       </div>
     </>
   );

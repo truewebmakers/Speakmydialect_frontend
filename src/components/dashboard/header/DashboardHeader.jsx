@@ -1,9 +1,14 @@
+import Banner from "@/components/common/banner";
+import { apiMethods, apiUrls } from "@/constants/constant";
+import UseApi from "@/hook/useApi";
 import { CapitalizeFirstLetter } from "@/utils/helper";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function DashboardHeader() {
   const { profileData, user } = useSelector((state) => state.auth);
+  const [profileCompletionMessage, setProfileCompletionMessage] = useState("");
 
   const picture = profileData?.user_meta?.profile_pic
     ? profileData?.user_meta?.profile_pic?.split("profile_pictures/")[1]
@@ -12,6 +17,33 @@ export default function DashboardHeader() {
     picture &&
     "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
       picture;
+
+  const isProfileComplete = async () => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${user?.token}`,
+      };
+      const { data } = await UseApi(
+        apiUrls.checkProfileCompletion + user?.userInfo?.id, // API URL
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (data?.status == false) {
+        setProfileCompletionMessage(data?.message);
+      } else {
+        setProfileCompletionMessage("");
+      }
+    } catch (err) {
+      return err;
+    }
+  };
+
+  useEffect(() => {
+    if (user?.token?.length) {
+      isProfileComplete();
+    }
+  }, [user]);
 
   return (
     <>
@@ -28,6 +60,11 @@ export default function DashboardHeader() {
                   </div>
                 </div>
               </div>
+              {user?.userInfo?.user_type == "translator"
+                ? profileCompletionMessage && (
+                    <Banner message={profileCompletionMessage} />
+                  )
+                : null}
               <div className="col-6 col-lg-auto">
                 <div className="text-center text-lg-end header_right_widgets">
                   <ul className="dashboard_dd_menu_list d-flex align-items-center justify-content-center justify-content-sm-end mb-0 p-0">
@@ -36,9 +73,11 @@ export default function DashboardHeader() {
                         <Link className="btn" to="/my-profile">
                           {user?.userInfo?.user_type && (
                             <span class="mb25 me-4 badge-success">
-                              {
-                                (user?.userInfo?.user_type == 'translator') ? 'Interpreter' : CapitalizeFirstLetter(user?.userInfo?.user_type)
-                              } 
+                              {user?.userInfo?.user_type == "translator"
+                                ? "Interpreter"
+                                : CapitalizeFirstLetter(
+                                    user?.userInfo?.user_type
+                                  )}
                             </span>
                           )}
                           <img

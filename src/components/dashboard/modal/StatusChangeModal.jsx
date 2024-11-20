@@ -4,6 +4,7 @@ import SelectInput from "../option/SelectInput";
 import UseApi from "@/hook/useApi";
 import { apiMethods, apiUrls } from "@/constants/constant";
 import { useSelector } from "react-redux";
+import Loader from "@/components/common/loader";
 
 export default function StatusChangeModal({
   show,
@@ -16,6 +17,7 @@ export default function StatusChangeModal({
   reason,
   content,
   userId,
+  isLoading,
 }) {
   const { user } = useSelector((state) => state.auth);
   const [images, setImages] = useState([]);
@@ -143,7 +145,7 @@ export default function StatusChangeModal({
                   className="ud-btn btn-thm"
                   onClick={() => handleSave()}
                 >
-                  Save
+                  {isLoading ? <Loader /> : "Save"}
                   <i className="fal fa-arrow-right-long" />
                 </button>
               </form>

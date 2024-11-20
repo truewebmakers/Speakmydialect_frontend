@@ -45,15 +45,13 @@ export default function ContactInfo1() {
     // Validate Subject
     if (!data.subject) {
       newErrors.subject = "Subject is required.";
-    } else if (data.subject.length < 5 || data.subject.length > 10) {
-      newErrors.subject = "Subject must be 5 to 10 characters long.";
     }
 
     // Validate Query
     if (!data.query) {
       newErrors.query = "Query is required.";
-    } else if (data.query.length < 20 || data.query.length > 40) {
-      newErrors.query = "Query must be between 20 to 40 characters long.";
+    } else if (data?.query?.length < 5 || data?.query?.length > 50) {
+      newErrors.query = "Query must be between 5 to 50 characters long.";
     }
 
     // Validate Phone Number

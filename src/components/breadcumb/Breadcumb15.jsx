@@ -64,11 +64,11 @@ export default function Breadcumb17({ translatorProfile }) {
                         style={{ marginTop: "24px", position: "absolute" }}
                       >
                         <i className="flaticon-30-days vam fz20 me-2" />
-                        Member Since:
-                        {translatorProfile?.user_meta?.created_at
-                          ? moment(
-                              translatorProfile?.user_meta?.created_at
-                            ).format("YYYY, DD MMM")
+                        Member Since:{" "}
+                        {translatorProfile?.created_at
+                          ? moment(translatorProfile?.created_at).format(
+                              "YYYY, DD MMM"
+                            )
                           : null}
                       </p>
                     </div>
