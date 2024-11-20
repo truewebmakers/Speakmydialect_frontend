@@ -285,3 +285,25 @@ export const dialectData = [
   "Tanzanian",
   "Ugandan",
 ];
+
+
+export const planFeatures = [
+  "Business Name",
+  "Phone Number",
+  "Website URL",
+  "Email",
+  "Address",
+  "Map Location",
+  "Add up to 3 business locations (separate listings)",
+  "Verified Badge  (up to 24 hours required for verification)",
+  "Highest Search Display Priority 🥇",
+  "Business Tagline (appears under business name)",
+  "Business Description (can include custom links)",
+  "Display your Work Hours",
+  "Upload Logo",
+  "Upload Cover Image",
+  "Upload Gallery Images",
+  "Video URL (Display YouTube video e.g.)",
+  "Links to your social media profile (Facebook, Instagram e.g)",
+  "these are features based on the plan user can make them enable and disable"
+]; 
