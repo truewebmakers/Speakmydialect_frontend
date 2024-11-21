@@ -6,6 +6,7 @@ import UseApi from "@/hook/useApi";
 import { apiMethods, apiUrls, metaData } from "@/constants/constant";
 import { toast } from "react-toastify";
 import Loader from "@/components/common/loader";
+import CountryList from "country-list-with-dial-code-and-flag";
 
 export default function RegisterPage() {
   const [step, setStep] = useState(1);
@@ -14,6 +15,9 @@ export default function RegisterPage() {
     lastName: "",
     email: "",
     password: "",
+    phoneNumber: "",
+    otp: "",
+    countryCode: "+61", // Default country code set to Australia
   });
   const [disable, setDisable] = useState(false);
   const [error, setError] = useState({});
@@ -28,6 +32,11 @@ export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [countryList, setCountryList] = useState([]);
+  const [isOtpSent, setIsOtpSent] = useState(false); // Track OTP sent status
+  const [isOtpVerified, setIsOtpVerified] = useState(false); // Track OTP verification status
+  const [isSendOtpLoading, setIsSendOtpLoading] = useState(false);
+  const [isVerifyOtpLoading, setIsVerifyOtpLoading] = useState(false);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -35,6 +44,13 @@ export default function RegisterPage() {
     if (disable) {
       const newErr = handleValidations(name, value);
       setError((prevError) => ({ ...prevError, ...newErr }));
+    }
+  };
+
+  const handlePhoneChange = (e) => {
+    const { value } = e.target;
+    if (value.length <= 10 && /^[0-9]*$/.test(value)) {
+      setData({ ...data, phoneNumber: value });
     }
   };
 
@@ -57,7 +73,7 @@ export default function RegisterPage() {
       newErr = { ...newErr, ...handleValidations(key, data[key]) };
     }
     setError(newErr);
-    if (!hasErrors(newErr) && areAllFieldsFilled(data)) {
+    if (!hasErrors(newErr) && areAllFieldsFilled(data) && isOtpVerified) {
       setStep(2);
     }
   };
@@ -86,6 +102,9 @@ export default function RegisterPage() {
         password: data.password,
         user_type: route[1],
         files: uploadedFiles,
+        phone_number: data.phoneNumber,
+        country_code: data.countryCode,
+        otp: data.otp,
       };
 
       const response = await UseApi(apiUrls.signup, apiMethods.POST, bodyData);
@@ -139,6 +158,73 @@ export default function RegisterPage() {
       }
     } catch (err) {
       toast.error(err.message);
+    }
+  };
+
+  const getCountryCode = () => {
+    const country = CountryList.getAll();
+    setCountryList(country);
+  };
+
+  useEffect(() => {
+    getCountryCode();
+  }, []);
+
+  const handleSendOtp = async (e) => {
+    e.preventDefault();
+    if (data?.phoneNumber?.length === 10) {
+      try {
+        setIsSendOtpLoading(true);
+        const bodyData = {
+          country_code: data?.countryCode,
+          phone_number: data?.phoneNumber,
+        };
+        const response = await UseApi(
+          apiUrls.sendOtp,
+          apiMethods.POST,
+          bodyData,
+          null
+        );
+        if (response?.status == 200 || response?.status == 201) {
+          setIsOtpSent(true);
+          toast.success(response?.data?.message);
+        }
+      } catch (err) {
+        toast.error(err?.message);
+      } finally {
+        setIsSendOtpLoading(false);
+      }
+    } else {
+      toast.error("Phone number should be 10 digits.");
+    }
+  };
+
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+
+    try {
+      setIsVerifyOtpLoading(true);
+      const bodyData = {
+        otp: data?.otp,
+        phone_number: data?.phoneNumber,
+      };
+      const response = await UseApi(
+        apiUrls.verifyOtp,
+        apiMethods.POST,
+        bodyData,
+        null
+      );
+
+      if (response?.status === 200 || response?.status === 201) {
+        toast.success(response?.data?.message);
+        setIsOtpVerified(true); // Set OTP as verified
+      } else {
+        toast.error(response?.data?.message || "OTP verification failed.");
+      }
+    } catch (err) {
+      toast.error(err?.message || "An error occurred while verifying OTP.");
+    } finally {
+      setIsVerifyOtpLoading(false);
     }
   };
 
@@ -203,6 +289,110 @@ export default function RegisterPage() {
                     </div>
                     <div className="mb25">
                       <label className="form-label fw500 dark-color">
+                        Phone Number
+                      </label>
+                      <div className="d-flex">
+                        <select
+                          name="countryCode"
+                          className="form-control"
+                          value={data?.countryCode}
+                          onChange={handleChange}
+                          style={{ width: "40%" }}
+                        >
+                          {countryList?.map((country, index) => (
+                            <option key={index} value={country?.dial_code}>
+                              {country?.dial_code} ({country?.name})
+                            </option>
+                          ))}
+                        </select>
+                        <div
+                          style={{
+                            position: "relative",
+                            display: "inline-block",
+                            marginLeft: "10px",
+                          }}
+                        >
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter your phone number"
+                            name="phoneNumber"
+                            value={data?.phoneNumber}
+                            onChange={handlePhoneChange}
+                            maxLength="10" // Limit to 10 digits
+                            style={{ width: " 349px" }}
+                          />
+                          <button
+                            type="button"
+                            className="ud-btn btn-thm default-box-shadow2"
+                            style={{
+                              position: "absolute",
+                              right: "10px",
+                              top: "50%",
+                              transform: "translateY(-50%)",
+                              padding: "5px 10px",
+                              borderRadius: "5px",
+                            }}
+                            onClick={(e) => handleSendOtp(e)}
+                            disabled={data?.phoneNumber?.length !== 10}
+                          >
+                            {isSendOtpLoading ? <Loader /> : "Send OTP"}
+                          </button>
+                        </div>
+                      </div>
+                      {error?.phoneNumber && (
+                        <p style={{ color: "red" }}>{error?.phoneNumber}</p>
+                      )}
+                    </div>
+
+                    {/* OTP field should be visible only if OTP has been sent */}
+                    {isOtpSent && (
+                      <div className="mb15">
+                        <label className="form-label fw500 dark-color">
+                          OTP
+                        </label>
+                        <div className="d-flex">
+                          <div
+                            style={{
+                              position: "relative",
+                              display: "inline-block",
+                            }}
+                          >
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Enter OTP"
+                              name="otp"
+                              value={data?.otp}
+                              onChange={handleChange}
+                              style={{ width: "600px" }}
+                            />
+                            <button
+                              type="button"
+                              className="ud-btn btn-thm default-box-shadow2"
+                              style={{
+                                position: "absolute",
+                                right: "10px",
+                                top: "50%",
+                                transform: "translateY(-50%)",
+                                padding: "5px 10px",
+                                borderRadius: "5px",
+                              }}
+                              onClick={(e) => handleVerifyOtp(e)}
+                              disabled={!data?.otp?.length} // Enable when OTP is entered
+                            >
+                              {isVerifyOtpLoading ? <Loader /> : "Verify OTP"}
+                            </button>
+                          </div>
+                        </div>
+                        {error?.otp && (
+                          <p style={{ color: "red" }}>{error?.otp}</p>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="mb25">
+                      <label className="form-label fw500 dark-color">
                         Email
                       </label>
                       <input
@@ -238,7 +428,7 @@ export default function RegisterPage() {
                         className="ud-btn btn-thm default-box-shadow2"
                         type="button"
                         onClick={handleNext}
-                        disabled={disable}
+                        disabled={disable || !isOtpVerified} // Disable unless OTP is verified
                       >
                         Next
                       </button>
@@ -248,6 +438,7 @@ export default function RegisterPage() {
                   <div>
                     <h4>Upload your documents</h4>
                     {[
+                      /* Your document upload fields here */
                       {
                         type: "primaryId",
                         desc: "Primary Identification is used to verify an individual’s identity with documents like a Passport, Australian Birth Certificate, or Australian Citizenship Certificate. This document must clearly display the individual’s full legal name and date of birth. Primary ID is crucial for legal verification and compliance purposes.",

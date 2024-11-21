@@ -12,9 +12,13 @@ export const env = {
   API_URL: import.meta.env.VITE_APP_API_URL,
 };
 
+export const apiKey = "AIzaSyBcOYeXlEwDhSyJO86CPq8C_PH54cjvN6M";
+
 export const apiUrls = {
   signup: "/signup",
   login: "/login",
+  sendOtp: "/request-otp",
+  verifyOtp: "/verify-otp",
   uploadDoc: "/upload/temp-documents",
   logout: "/admin/logout",
   updateProfile: "/admin/update/",
@@ -286,7 +290,6 @@ export const dialectData = [
   "Ugandan",
 ];
 
-
 export const planFeatures = [
   "Business Name",
   "Phone Number",
@@ -305,5 +308,5 @@ export const planFeatures = [
   "Upload Gallery Images",
   "Video URL (Display YouTube video e.g.)",
   "Links to your social media profile (Facebook, Instagram e.g)",
-  "these are features based on the plan user can make them enable and disable"
-]; 
+  "these are features based on the plan user can make them enable and disable",
+];
