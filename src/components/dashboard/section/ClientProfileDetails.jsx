@@ -278,18 +278,37 @@ export default function ClientProfileDetails() {
                   <label className="heading-color ff-heading fw500 mb10">
                     Phone Number
                   </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter your phone number"
-                    name="phone_number"
-                    value={profileDetails?.phone_number}
-                    autoComplete="off"
-                    onChange={handleOnChange}
-                    readOnly={true}
-                  />
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter your phone number"
+                      name="phone_number"
+                      value={profileDetails?.phone_number}
+                      autoComplete="off"
+                      onChange={handleOnChange}
+                      readOnly={true}
+                    />
+                    {/* Display "Verified" text if the phone number has a value */}
+                    {profileDetails?.phone_number?.length > 0 ? (
+                      <span
+                        style={{
+                          position: "absolute",
+                          right: "10px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          color: "green",
+                          fontWeight: "bold",
+                          fontSize: "12px",
+                        }}
+                      >
+                        Verified
+                      </span>
+                    ) : null}
+                  </div>
                 </div>
               </div>
+
               <div className="col-sm-6">
                 <div className="mb20">
                   <SelectInput
