@@ -34,7 +34,7 @@ export default function RegisterPage() {
   const { pathname } = useLocation();
   const [countryList, setCountryList] = useState([]);
   const [isOtpSent, setIsOtpSent] = useState(false); // Track OTP sent status
-  const [isOtpVerified, setIsOtpVerified] = useState(false); // Track OTP verification status
+  const [isOtpVerified, setIsOtpVerified] = useState(""); // Track OTP verification status
   const [isSendOtpLoading, setIsSendOtpLoading] = useState(false);
   const [isVerifyOtpLoading, setIsVerifyOtpLoading] = useState(false);
 
@@ -73,7 +73,11 @@ export default function RegisterPage() {
       newErr = { ...newErr, ...handleValidations(key, data[key]) };
     }
     setError(newErr);
-    if (!hasErrors(newErr) && areAllFieldsFilled(data) && isOtpVerified) {
+    if (
+      !hasErrors(newErr) &&
+      areAllFieldsFilled(data) &&
+      isOtpVerified?.length
+    ) {
       setStep(2);
     }
   };
@@ -96,15 +100,15 @@ export default function RegisterPage() {
     try {
       const route = pathname.split("-");
       const bodyData = {
-        fname: data.firstName,
-        lname: data.lastName,
-        email: data.email,
-        password: data.password,
+        fname: data?.firstName,
+        lname: data?.lastName,
+        email: data?.email,
+        password: data?.password,
         user_type: route[1],
         files: uploadedFiles,
-        phone_number: data.phoneNumber,
-        country_code: data.countryCode,
-        otp: data.otp,
+        phone_number: data?.phoneNumber,
+        country_code: data?.countryCode,
+        otp_verified_at: isOtpVerified,
       };
 
       const response = await UseApi(apiUrls.signup, apiMethods.POST, bodyData);
@@ -217,7 +221,7 @@ export default function RegisterPage() {
 
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
-        setIsOtpVerified(true); // Set OTP as verified
+        setIsOtpVerified(response?.data?.verified_at); // Set OTP as verified
       } else {
         toast.error(response?.data?.message || "OTP verification failed.");
       }
@@ -346,7 +350,7 @@ export default function RegisterPage() {
                     </div>
 
                     {/* OTP field should be visible only if OTP has been sent */}
-                    {isOtpSent && (
+                    {isOtpSent && !isOtpVerified?.length ? (
                       <div className="mb15">
                         <label className="form-label fw500 dark-color">
                           OTP
@@ -389,8 +393,14 @@ export default function RegisterPage() {
                           <p style={{ color: "red" }}>{error?.otp}</p>
                         )}
                       </div>
-                    )}
-
+                    ) : null}
+                    {isOtpVerified?.length ? (
+                      <div className="mb3">
+                        <p className="text-success">
+                          Your phone number has been verified!
+                        </p>
+                      </div>
+                    ) : null}
                     <div className="mb25">
                       <label className="form-label fw500 dark-color">
                         Email
@@ -428,7 +438,7 @@ export default function RegisterPage() {
                         className="ud-btn btn-thm default-box-shadow2"
                         type="button"
                         onClick={handleNext}
-                        disabled={disable || !isOtpVerified} // Disable unless OTP is verified
+                        disabled={disable || !isOtpVerified?.length} // Disable unless OTP is verified
                       >
                         Next
                       </button>

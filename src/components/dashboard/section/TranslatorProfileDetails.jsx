@@ -13,7 +13,7 @@ export default function TranslatorProfileDetails() {
   const [profileDetails, setProfileDetails] = useState({
     fname: "",
     lname: "",
-    phone: "",
+    phone_number: "",
     fix_rate: "77",
     hourly_rate: 0,
     intro: "",
@@ -47,9 +47,9 @@ export default function TranslatorProfileDetails() {
 
   const handleOnChange = (e) => {
     const { value, name } = e.target;
-    if (name === "phone") {
+    if (name === "phone_number") {
       if ((value == "" || value?.length <= 10) && !isNaN(value)) {
-        setProfileDetails({ ...profileDetails, phone: value });
+        setProfileDetails({ ...profileDetails, phone_number: value });
       }
     } else {
       setProfileDetails({ ...profileDetails, [name]: value });
@@ -73,7 +73,7 @@ export default function TranslatorProfileDetails() {
       setProfileDetails({
         fname: profileData?.fname || "",
         lname: profileData?.lname || "",
-        phone: profileData?.user_meta?.phone || "",
+        phone_number: profileData?.user_meta?.phone_number || "",
         fix_rate: "77" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
@@ -128,7 +128,7 @@ export default function TranslatorProfileDetails() {
       const bodyData = {
         fname: profileDetails?.fname,
         lname: profileDetails?.lname,
-        phone: profileDetails?.phone,
+        phone_number: profileDetails?.phone_number,
         fix_rate: profileDetails.fix_rate || 0,
         hourly_rate: 0,
         intro: profileDetails.intro,
@@ -262,10 +262,11 @@ export default function TranslatorProfileDetails() {
                     type="text"
                     className="form-control"
                     placeholder="Enter your phone number"
-                    name="phone"
-                    value={profileDetails?.phone}
+                    name="phone_number"
+                    value={profileDetails?.phone_number}
                     autoComplete="off"
                     onChange={handleOnChange}
+                    readOnly={true}
                   />
                 </div>
               </div>
