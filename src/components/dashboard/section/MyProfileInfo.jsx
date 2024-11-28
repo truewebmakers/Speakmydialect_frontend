@@ -8,8 +8,8 @@ import WorkExperience from "./WorkExperience";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileDetails } from "@/redux/auth";
 import { getProfileData } from "@/utils/commonFunctions";
-import PaymentMethod from "./PaymentMethod";
 import TranslatorProfileDetails from "./TranslatorProfileDetails";
+import UserAvailability from "./UserAvailability";
 
 export default function MyProfileInfo() {
   const dispatch = useDispatch();
@@ -47,6 +47,7 @@ export default function MyProfileInfo() {
               <>
                 <TranslatorProfileDetails />
                 <Skill />
+                <UserAvailability />
                 <Education />
                 <WorkExperience />
               </>

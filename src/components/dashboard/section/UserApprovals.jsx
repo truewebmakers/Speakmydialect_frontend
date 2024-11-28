@@ -68,7 +68,6 @@ export default function UserApprovalInfo() {
         handleCloseModal();
       } else {
         toast.error(response?.data?.message);
-        handleCloseModal();
       }
     } catch (err) {
       toast.error(err);

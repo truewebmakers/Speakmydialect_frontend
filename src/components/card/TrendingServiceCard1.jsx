@@ -87,14 +87,26 @@ export default function TrendingServiceCard1({ data }) {
             </Link>
           </h5>
         </div>
-        <p className="list-text body-color fz14 mb-1">{data.category}</p>
-        <p className="text mt10">{data?.user_meta?.intro}</p>
+        <p className="list-text body-color fz14 mb-1">{data?.category}</p>
+        <p className="text mt10">
+          {data?.user_meta?.intro
+            ? (() => {
+                const words = data?.user_meta?.intro?.split(" ");
+                if (words[0]?.length > 20) {
+                  // If the first word is too long, truncate it to 12 characters
+                  return words[0]?.substring(0, 20) + "...";
+                } else {
+                  // Otherwise, show up to 5 words
+                  return words?.slice(0, 8)?.join(" ") + " ...";
+                }
+              })()
+            : "No Intro"}
+        </p>
         <div className="skill-tags d-flex align-items-center justify-content-start">
           {data?.user_skills?.map((item, i) => (
-          
             <span key={i} className={`tag ${i === 1 ? "mx10" : "asdasd"}`}>
               {getLanguageName(item?.language, languageList)}
-            </span>  
+            </span>
           ))}
         </div>
         <hr className="my-2" />

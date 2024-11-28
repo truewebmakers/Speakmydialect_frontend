@@ -7,7 +7,6 @@ import { CapitalizeFirstLetter } from "@/utils/helper";
 import { useSelector } from "react-redux";
 import Loader from "@/components/common/loader";
 import { getCountries } from "@/utils/commonFunctions";
-import { useNavigate } from "react-router-dom";
 
 export default function TranslatorProfileDetails() {
   const [profileDetails, setProfileDetails] = useState({
@@ -41,10 +40,6 @@ export default function TranslatorProfileDetails() {
     setGender({ option, value });
   };
 
-  const countryHandler = (option, value) => {
-    setCountry({ option, value });
-  };
-
   const handleOnChange = (e) => {
     const { value, name } = e.target;
     if (name === "phone_number") {
@@ -73,7 +68,7 @@ export default function TranslatorProfileDetails() {
       setProfileDetails({
         fname: profileData?.fname || "",
         lname: profileData?.lname || "",
-        phone_number: profileData?.user_meta?.phone_number || "",
+        phone_number: profileData?.user_meta?.phone || "",
         fix_rate: "77" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",

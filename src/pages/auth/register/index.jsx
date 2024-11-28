@@ -37,6 +37,7 @@ export default function RegisterPage() {
   const [isOtpVerified, setIsOtpVerified] = useState(""); // Track OTP verification status
   const [isSendOtpLoading, setIsSendOtpLoading] = useState(false);
   const [isVerifyOtpLoading, setIsVerifyOtpLoading] = useState(false);
+  const [isEmailAvailable, setIsEmailAvailable] = useState(true); // Default to true, meaning available
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -44,6 +45,38 @@ export default function RegisterPage() {
     if (disable) {
       const newErr = handleValidations(name, value);
       setError((prevError) => ({ ...prevError, ...newErr }));
+    }
+  };
+
+  const handleEmailBlur = async () => {
+    const { email } = data;
+
+    if (email) {
+      try {
+        // Call the API to check if email is already taken
+        const response = await UseApi(
+          apiUrls.checkEmail,
+          apiMethods.POST,
+          { email },
+          null
+        );
+        if (response?.status === 200 && response?.data?.exists == false) {
+          setIsEmailAvailable(true); // Email is available
+          setError((prev) => ({ ...prev, email: "" })); // Clear email error
+        } else {
+          setIsEmailAvailable(false); // Email is not available
+          setError((prev) => ({
+            ...prev,
+            email: "This email is already taken. Please use a different one.",
+          }));
+        }
+      } catch (err) {
+        setIsEmailAvailable(false);
+        setError((prev) => ({
+          ...prev,
+          email: "An error occurred while checking email availability.",
+        }));
+      }
     }
   };
 
@@ -192,6 +225,8 @@ export default function RegisterPage() {
         if (response?.status == 200 || response?.status == 201) {
           setIsOtpSent(true);
           toast.success(response?.data?.message);
+        } else {
+          toast.error(response?.data?.message);
         }
       } catch (err) {
         toast.error(err?.message);
@@ -412,6 +447,7 @@ export default function RegisterPage() {
                         name="email"
                         value={data.email}
                         onChange={handleChange}
+                        onBlur={handleEmailBlur} // Add the onBlur event handler
                       />
                       {error.email && (
                         <p style={{ color: "red" }}>{error.email}</p>
@@ -438,7 +474,9 @@ export default function RegisterPage() {
                         className="ud-btn btn-thm default-box-shadow2"
                         type="button"
                         onClick={handleNext}
-                        disabled={disable || !isOtpVerified?.length} // Disable unless OTP is verified
+                        disabled={
+                          disable || !isOtpVerified?.length || !isEmailAvailable
+                        } // Disable if email is not available
                       >
                         Next
                       </button>

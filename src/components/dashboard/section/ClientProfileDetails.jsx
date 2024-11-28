@@ -101,7 +101,7 @@ export default function ClientProfileDetails() {
       setProfileDetails({
         fname: profileData?.fname || "",
         lname: profileData?.lname || "",
-        phone_number: profileData?.user_meta?.phone_number || "",
+        phone_number: profileData?.user_meta?.phone || "",
         fix_rate: "77" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",

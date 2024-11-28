@@ -30,7 +30,7 @@ export default function ShowInfoModal({
               onClick={handleClose}
             />
             <div className="modal-body p-4">
-              <div className="content">{showData}</div>
+              <div className="content">{showData || "No Data Found"}</div>
             </div>
           </div>
         </div>

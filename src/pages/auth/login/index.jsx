@@ -13,6 +13,7 @@ export default function LoginPage() {
     password: "",
   });
   const [disable, setDisable] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false); // Track if "Forgot Password" is active
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -35,18 +36,28 @@ export default function LoginPage() {
     setDisable(false);
   }, [loginData]);
 
-  const handleClick = async () => {
-    if (areAllFieldsFilled(loginData)) {
-      setIsLoading(true);
-      try {
-        // Prepare data for signup API
+  const handleLoginOrReset = async () => {
+    setIsLoading(true);
+    try {
+      if (isForgotPassword) {
+        // Forgot Password API call
+        const response = await UseApi(apiUrls.forgotPassword, apiMethods.POST, {
+          email: loginData?.email,
+        });
+        if (response?.status === 200 || response?.status === 201) {
+          toast.success(response?.data?.message || "Password reset link sent!");
+          setIsForgotPassword(false);
+        } else {
+          toast.error(response?.data?.message || "Failed to send reset link.");
+        }
+      } else {
+        // Log In API call
         const bodyData = {
           email: loginData.email,
           password: loginData.password,
         };
-        // Call signup API
         const response = await UseApi(apiUrls.login, apiMethods.POST, bodyData);
-        if (response?.status == 200 || response?.status == 201) {
+        if (response?.status === 200 || response?.status === 201) {
           const userData = {
             token: response?.data?.token,
             userInfo: response?.data?.userInfo,
@@ -55,22 +66,25 @@ export default function LoginPage() {
           const redirectPath =
             sessionStorage.getItem("redirectAfterLogin") || "/my-profile";
           navigate(redirectPath);
-          setIsLoading(false);
           toast.success(response?.data?.message);
-          return;
         } else {
-          toast.error(response?.data?.message);
-          setIsLoading(false);
+          toast.error(response?.data?.message || "Login failed.");
         }
-      } catch (err) {
-        toast.error(err);
-        setIsLoading(false);
       }
+    } catch (err) {
+      toast.error(err.message || "Something went wrong.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleForgotPassword = () => {
+    setIsForgotPassword(true);
+    setLoginData({ email: "", password: "" }); // Clear password field
   };
 
   return (
@@ -83,7 +97,9 @@ export default function LoginPage() {
               data-wow-delay="300ms"
             >
               <div className="main-title text-center">
-                <h2 className="title">Log In</h2>
+                <h2 className="title">
+                  {isForgotPassword ? "Reset Password" : "Log In"}
+                </h2>
               </div>
             </div>
           </div>
@@ -91,15 +107,21 @@ export default function LoginPage() {
             <div className="col-xl-6 mx-auto">
               <div className="log-reg-form search-modal form-style1 bgc-white p50 p30-sm default-box-shadow1 bdrs12">
                 <div className="mb30">
-                  <h4>We're glad to see you again!</h4>
-                  <p className="text">
-                    Don't have an account?{" "}
-                    <span>
-                      <Link to="/register" className="text-thm">
-                        Sign up
-                      </Link>{" "}
-                    </span>
-                  </p>
+                  <h4>
+                    {isForgotPassword
+                      ? "Forgot your password? No worries!"
+                      : "We're glad to see you again!"}
+                  </h4>
+                  {!isForgotPassword && (
+                    <p className="text">
+                      Don't have an account?{" "}
+                      <span>
+                        <Link to="/register" className="text-thm">
+                          Sign up
+                        </Link>{" "}
+                      </span>
+                    </p>
+                  )}
                 </div>
                 <div className="mb20">
                   <label className="form-label fw600 dark-color">
@@ -115,54 +137,67 @@ export default function LoginPage() {
                     autoComplete="off"
                   />
                 </div>
-                <div className="mb15">
-                  <label
-                    className="form-label fw600 dark-color"
-                    htmlFor="password"
-                  >
-                    Password
-                  </label>
-                  <div className="input-with-icon">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="form-control"
-                      placeholder="Enter your password"
-                      name="password"
-                      id="password"
-                      value={loginData?.password}
-                      onChange={handleChange}
-                      autoComplete="off"
-                    />
-                    <button
-                      type="button"
-                      className="toggle-password"
-                      onClick={togglePasswordVisibility}
+                {!isForgotPassword && (
+                  <div className="mb15">
+                    <label
+                      className="form-label fw600 dark-color"
+                      htmlFor="password"
                     >
-                      {showPassword ? (
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                      ) : (
-                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                      )}
-                    </button>
+                      Password
+                    </label>
+                    <div className="input-with-icon">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        className="form-control"
+                        placeholder="Enter your password"
+                        name="password"
+                        id="password"
+                        value={loginData?.password}
+                        onChange={handleChange}
+                        autoComplete="off"
+                      />
+                      <button
+                        type="button"
+                        className="toggle-password"
+                        onClick={togglePasswordVisibility}
+                      >
+                        {showPassword ? (
+                          <i className="fa fa-eye" aria-hidden="true"></i>
+                        ) : (
+                          <i className="fa fa-eye-slash" aria-hidden="true"></i>
+                        )}
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className="d-grid mb20">
                   <button
                     className="ud-btn btn-thm"
                     type="button"
-                    onClick={handleClick}
-                    disabled={disable}
+                    onClick={handleLoginOrReset}
+                    disabled={
+                      (!isForgotPassword && disable) || !loginData?.email
+                    }
                   >
-                    Log In
-                    {isLoading ? (
+                    {isForgotPassword ? "Reset Password" : "Log In"}
+                    {isLoading && (
                       <>
                         &nbsp;&nbsp; <Loader />
                       </>
-                    ) : (
-                      <i className="fal fa-arrow-right-long" />
                     )}
                   </button>
                 </div>
+                {!isForgotPassword && (
+                  <div className="text-end">
+                    <button
+                      className="btn btn-link text-thm"
+                      type="button"
+                      onClick={handleForgotPassword}
+                    >
+                      Forgot Password?
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
