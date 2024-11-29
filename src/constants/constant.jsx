@@ -31,6 +31,7 @@ export const apiUrls = {
   getSkills: "/admin/get/skills/",
   deleteSkills: "/admin/delete/skills/",
   userAvailability: "/admin/translator/availability",
+  getUserAvailability: "/admin/translator/availability/",
   updateUserSkill: "/admin/update/skills/",
   addEducation: "/admin/education/add/",
   getEducation: "/admin/education/get/",

@@ -13,6 +13,7 @@ export default function TranslatorProfileDetails() {
     fname: "",
     lname: "",
     phone_number: "",
+    email: "",
     fix_rate: "77",
     hourly_rate: 0,
     intro: "",
@@ -68,7 +69,12 @@ export default function TranslatorProfileDetails() {
       setProfileDetails({
         fname: profileData?.fname || "",
         lname: profileData?.lname || "",
-        phone_number: profileData?.user_meta?.phone || "",
+        phone_number: profileData?.user_meta?.phone
+          ? profileData?.user_meta?.phone
+          : profileData?.phone_number
+          ? profileData?.phone_number
+          : "",
+        email: profileData?.email || "",
         fix_rate: "77" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
@@ -101,8 +107,8 @@ export default function TranslatorProfileDetails() {
 
   // Validation function
   const validateForm = () => {
-    if (profileDetails?.intro?.length < 100) {
-      setIntroError("Intro must be at least 100 characters.");
+    if (profileDetails?.intro?.length < 10) {
+      setIntroError("Intro must be at least 10 characters.");
       return false;
     }
     setIntroError(""); // Reset error if valid
@@ -124,6 +130,7 @@ export default function TranslatorProfileDetails() {
         fname: profileDetails?.fname,
         lname: profileDetails?.lname,
         phone_number: profileDetails?.phone_number,
+        email: profileDetails?.email,
         fix_rate: profileDetails.fix_rate || 0,
         hourly_rate: 0,
         intro: profileDetails.intro,
@@ -253,16 +260,52 @@ export default function TranslatorProfileDetails() {
                   <label className="heading-color ff-heading fw500 mb10">
                     Phone Number
                   </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter your phone number"
-                    name="phone_number"
-                    value={profileDetails?.phone_number}
-                    autoComplete="off"
-                    onChange={handleOnChange}
-                    readOnly={true}
-                  />
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter your phone number"
+                      name="phone_number"
+                      value={profileDetails?.phone_number}
+                      autoComplete="off"
+                      onChange={handleOnChange}
+                      readOnly={true}
+                      style={{ cursor: "not-allowed" }}
+                    />
+                    {/* Display "Verified" text if the phone number has a value */}
+                    {profileData?.otp_verified_at !== null ? (
+                      <span className="verified">Verified</span>
+                    ) : (
+                      <span className="unverified">Unverified</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-6">
+                <div className="mb20">
+                  <label className="heading-color ff-heading fw500 mb10">
+                    Email
+                  </label>
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter your email"
+                      name="email"
+                      value={profileDetails?.email}
+                      autoComplete="off"
+                      onChange={handleOnChange}
+                      readOnly={true}
+                      style={{ cursor: "not-allowed" }}
+                    />
+                    {/* Display "Verified" text if the email has a value */}
+                    {profileData?.email_verified_at !== null ? (
+                      <span className="verified">Verified</span>
+                    ) : (
+                      <span className="unverified">Unverified</span>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="col-sm-6">
@@ -285,7 +328,7 @@ export default function TranslatorProfileDetails() {
               <div className="col-md-12">
                 <div className="mb10">
                   <label className="heading-color ff-heading fw500 mb10">
-                    About you (Min. 100 characters)
+                    About you (Min. 10 characters)
                   </label>
                   <textarea
                     cols={30}

@@ -14,6 +14,7 @@ export default function ClientProfileDetails() {
     fname: "",
     lname: "",
     phone_number: "",
+    email: "",
     fix_rate: "77",
     hourly_rate: 0,
     intro: "",
@@ -101,7 +102,12 @@ export default function ClientProfileDetails() {
       setProfileDetails({
         fname: profileData?.fname || "",
         lname: profileData?.lname || "",
-        phone_number: profileData?.user_meta?.phone || "",
+        phone_number: profileData?.user_meta?.phone
+          ? profileData?.user_meta?.phone
+          : profileData?.phone_number
+          ? profileData?.phone_number
+          : "",
+        email: profileData?.email || "",
         fix_rate: "77" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
@@ -147,7 +153,8 @@ export default function ClientProfileDetails() {
       const bodyData = {
         fname: profileDetails?.fname,
         lname: profileDetails?.lname,
-        phone_number: profileDetails?.phone_number,
+        phone_number: profileDetails?.phone_number || "",
+        email: profileDetails?.email,
         fix_rate: profileDetails.fix_rate || 0,
         hourly_rate: 0,
         intro: profileDetails.intro,
@@ -176,6 +183,7 @@ export default function ClientProfileDetails() {
       setIsLoading(false);
     }
   };
+  console.log(profileData, "pppppppppppp");
 
   return (
     <>
@@ -288,27 +296,43 @@ export default function ClientProfileDetails() {
                       autoComplete="off"
                       onChange={handleOnChange}
                       readOnly={true}
+                      style={{ cursor: "not-allowed" }}
                     />
                     {/* Display "Verified" text if the phone number has a value */}
-                    {profileDetails?.phone_number?.length > 0 ? (
-                      <span
-                        style={{
-                          position: "absolute",
-                          right: "10px",
-                          top: "50%",
-                          transform: "translateY(-50%)",
-                          color: "green",
-                          fontWeight: "bold",
-                          fontSize: "12px",
-                        }}
-                      >
-                        Verified
-                      </span>
-                    ) : null}
+                    {profileData?.otp_verified_at !== null ? (
+                      <span className="verified">Verified</span>
+                    ) : (
+                      <span className="unverified">Unverified</span>
+                    )}
                   </div>
                 </div>
               </div>
-
+              <div className="col-sm-6">
+                <div className="mb20">
+                  <label className="heading-color ff-heading fw500 mb10">
+                    Email
+                  </label>
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter your email"
+                      name="email"
+                      value={profileDetails?.email}
+                      autoComplete="off"
+                      onChange={handleOnChange}
+                      readOnly={true}
+                      style={{ cursor: "not-allowed" }}
+                    />
+                    {/* Display "Verified" text if the email has a value */}
+                    {profileData?.email_verified_at !== null ? (
+                      <span className="verified">Verified</span>
+                    ) : (
+                      <span className="unverified">Unverified</span>
+                    )}
+                  </div>
+                </div>
+              </div>
               <div className="col-sm-6">
                 <div className="mb20">
                   <SelectInput
@@ -326,7 +350,7 @@ export default function ClientProfileDetails() {
                   />
                 </div>
               </div>
-              <div className="col-sm-12">
+              <div className="col-sm-6">
                 <div className="mb20">
                   <label className="heading-color ff-heading fw500 mb10">
                     Address
@@ -346,7 +370,7 @@ export default function ClientProfileDetails() {
               <div className="col-md-12">
                 <div className="mb10">
                   <label className="heading-color ff-heading fw500 mb10">
-                    About you
+                    About you (Min. 10 characters)
                   </label>
                   <textarea
                     cols={30}

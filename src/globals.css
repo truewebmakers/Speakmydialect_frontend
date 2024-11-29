@@ -533,7 +533,7 @@ p {
 }
 
 .day-section {
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .day-header {
@@ -566,4 +566,24 @@ p {
 
 .add-time-btn:hover {
   text-decoration: underline;
+}
+
+.verified {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: green;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.unverified {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
 }

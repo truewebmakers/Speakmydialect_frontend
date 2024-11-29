@@ -1,9 +1,9 @@
-import Loader from "@/components/common/loader";
-import React, { useState } from "react";
-import { toast } from "react-toastify"; // Assuming you're using toast for notifications
-import UseApi from "@/hook/useApi"; // Your custom API hook
-import { apiMethods, apiUrls } from "@/constants/constant"; // API constants
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify"; // For notifications
 import { useSelector } from "react-redux";
+import Loader from "@/components/common/loader"; // Loader component
+import UseApi from "@/hook/useApi"; // Custom API hook
+import { apiMethods, apiUrls } from "@/constants/constant"; // API constants
 
 export default function UserAvailability() {
   const [availability, setAvailability] = useState({
@@ -27,6 +27,79 @@ export default function UserAvailability() {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useSelector((state) => state.auth);
 
+  // Fetch availability on page load
+  const fetchAvailability = async () => {
+    setIsLoading(true);
+    const headers = {
+      Authorization: `Bearer ${user?.token}`,
+    };
+
+    try {
+      const response = await UseApi(
+        apiUrls.getUserAvailability + user?.userInfo?.id,
+        apiMethods.GET,
+        null,
+        headers
+      );
+      if (response?.status === 200) {
+        const fetchedData = response?.data?.data;
+        console.log(fetchedData, "ddddddddd");
+
+        // Initialize the transformed states
+        const transformedAvailability = {
+          Monday: [],
+          Tuesday: [],
+          Wednesday: [],
+          Thursday: [],
+          Friday: [],
+          Saturday: [],
+          Sunday: [],
+        };
+        const transformedEnabledDays = {
+          Monday: false,
+          Tuesday: false,
+          Wednesday: false,
+          Thursday: false,
+          Friday: false,
+          Saturday: false,
+          Sunday: false,
+        };
+
+        // Populate states from the fetched data
+        fetchedData.forEach((item) => {
+          const day = item.day;
+          transformedEnabledDays[day] = item.is_enabled === 1;
+
+          transformedAvailability[day].push({
+            start: item.start_time,
+            end: item.end_time,
+          });
+        });
+
+        // Fill empty days with a placeholder time slot if no times are set
+        Object.keys(transformedAvailability).forEach((day) => {
+          if (transformedAvailability[day].length === 0) {
+            transformedAvailability[day].push({ start: "", end: "" });
+          }
+        });
+
+        setAvailability(transformedAvailability);
+        setEnabledDays(transformedEnabledDays);
+      } else {
+        toast.error("Failed to fetch availability.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while fetching availability.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAvailability();
+  }, []);
+
+  // Handle adding new time slot
   const handleAddTime = (day) => {
     setAvailability({
       ...availability,
@@ -34,16 +107,19 @@ export default function UserAvailability() {
     });
   };
 
+  // Handle input changes
   const handleInputChange = (day, index, field, value) => {
     const updatedTimes = [...availability[day]];
     updatedTimes[index][field] = value;
     setAvailability({ ...availability, [day]: updatedTimes });
   };
 
+  // Handle day enable/disable toggle
   const handleChecked = (day, e) => {
     setEnabledDays({ ...enabledDays, [day]: e.target.checked });
   };
 
+  // Save updated availability
   const handleSave = async () => {
     setIsLoading(true);
 
@@ -63,12 +139,13 @@ export default function UserAvailability() {
 
     // Prepare data for the API
     const bodyData = {
-      translator_id: 1, // Replace with the actual translator ID
+      translator_id: user?.userInfo?.id,
       availability: formattedAvailability,
     };
     const headers = {
       Authorization: `Bearer ${user?.token}`,
     };
+
     try {
       const response = await UseApi(
         apiUrls.userAvailability,
@@ -78,6 +155,8 @@ export default function UserAvailability() {
       );
       if (response?.status === 200 || response?.status === 201) {
         toast.success("Availability updated successfully!");
+        // Re-fetch availability after successful save
+        fetchAvailability();
       } else {
         toast.error(
           response?.data?.message || "Failed to update availability."

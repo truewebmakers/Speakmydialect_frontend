@@ -5,7 +5,7 @@ export default function FreelancerSkill1({ data }) {
   return (
     <>
       <div className="sidebar-widget mb30 pb20 bdrs8">
-        <h4 className="widget-title">My Skills</h4>
+        <h4 className="widget-title">Languages Known</h4>
         <div className="tag-list mt30">
           {data?.user_skills?.map((item, index) => (
             <a key={index}>
