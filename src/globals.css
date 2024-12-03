@@ -587,3 +587,17 @@ p {
   font-weight: bold;
   font-size: 12px;
 }
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.time-slots .btn {
+  flex: 1 1 auto;
+}
+
+.react-datepicker-wrapper {
+  width: 286px;
+}

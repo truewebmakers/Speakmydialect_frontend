@@ -16,7 +16,6 @@ import { getProfileDetails } from "@/redux/auth";
 import { useNavigate } from "react-router-dom";
 import { validateBookingForm } from "@/utils/handleValidations";
 import { DatePicker } from "antd";
-import moment from "moment";
 
 export default function HireNowSection({ translatorProfile }) {
   const [hireNowForm, setHireNowForm] = useState({
@@ -31,6 +30,8 @@ export default function HireNowSection({ translatorProfile }) {
     start_at: "",
     end_at: "",
     job_title: "",
+    start_time: "",
+    end_time: "",
     duration: { hours: 0, minutes: 0 }, // Duration fields
   });
 
@@ -42,9 +43,13 @@ export default function HireNowSection({ translatorProfile }) {
     job_title: "",
     availability: "",
     payment_type: "",
+    start_time: "",
     start_at: "",
-    end_at: "",
+    end_time: "",
   });
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [getSlotsLoading, setGetSlotsLoading] = useState("idle");
+  const [selectedDay, setSelectedDay] = useState("");
 
   const handleFieldChange = (field, option, value) => {
     setHireNowForm({
@@ -64,37 +69,6 @@ export default function HireNowSection({ translatorProfile }) {
   const handleInputChanges = (e) => {
     const { name, value } = e.target;
     setHireNowForm({ ...hireNowForm, [name]: value });
-  };
-
-  const handleDurationChange = (e) => {
-    const { name, value } = e.target;
-    const newValue = Math.max(0, Number(value)); // Ensure the value is not negative
-    const updatedDuration = { ...hireNowForm.duration, [name]: newValue };
-
-    setHireNowForm({ ...hireNowForm, duration: updatedDuration });
-
-    // Calculate end_at when duration changes
-    calculateEndTime(hireNowForm.start_at, updatedDuration);
-  };
-
-  const calculateEndTime = (startAt, duration) => {
-    if (!startAt) return;
-
-    // Create a Date object from the start_at string in UTC
-    const startDate = new Date(startAt + "Z"); // Append 'Z' to treat as UTC
-
-    // Calculate the new date by adding the duration
-    const endDate = new Date(startDate.getTime()); // Clone the start date
-
-    // Add duration to the endDate
-    endDate.setUTCHours(endDate.getUTCHours() + duration.hours); // Add hours
-    endDate.setUTCMinutes(endDate.getUTCMinutes() + duration.minutes); // Add minutes
-
-    // Update the end_at field with the new date in local time format
-    setHireNowForm((prev) => ({
-      ...prev,
-      end_at: endDate.toISOString().slice(0, 16), // Format as 'YYYY-MM-DDTHH:mm'
-    }));
   };
 
   const addBooking = async () => {
@@ -118,12 +92,15 @@ export default function HireNowSection({ translatorProfile }) {
         work_status: "pending",
         payment_status: "none",
         start_at: hireNowForm?.start_at,
-        end_at: hireNowForm?.end_at,
+        end_at: hireNowForm?.start_at,
         job_title: hireNowForm?.job_title,
         duration: {
-          hours: hireNowForm?.duration?.hours,
-          minutes: hireNowForm?.duration?.minutes,
+          hours: "",
+          minutes: "",
         },
+        start_time: hireNowForm?.start_time,
+        end_time: hireNowForm?.end_time,
+        day: selectedDay,
       };
       const response = await UseApi(
         apiUrls.addBooking,
@@ -134,16 +111,19 @@ export default function HireNowSection({ translatorProfile }) {
       if (response?.status === 201 || response?.status === 200) {
         const data = {
           jobId: response?.data?.data?.id,
-          description: `Title is: ${hireNowForm?.job_title}, Start Date is: ${hireNowForm?.start_at}, End Date is: ${hireNowForm?.end_at}`,
+          description: `Title is: ${hireNowForm?.job_title}, Start time is: ${hireNowForm?.start_time}, End time is: ${hireNowForm?.end_time}`,
           clientUserName: user?.userInfo?.username,
           clientEmail: user?.userInfo?.email,
           presentRate: response?.data?.data?.present_rate,
           startDate: hireNowForm?.start_at,
           endDate: hireNowForm?.end_at,
           duration: {
-            hours: hireNowForm?.duration?.hours,
-            minutes: hireNowForm?.duration?.minutes,
+            hours: "",
+            minutes: "",
           },
+          day: selectedDay,
+          start_time: hireNowForm?.start_time,
+          end_time: hireNowForm?.end_time,
         };
         navigate(routes.PayNow, { state: data });
         setIsLoading(false);
@@ -158,6 +138,8 @@ export default function HireNowSection({ translatorProfile }) {
           payment_status: { option: "Select", value: null },
           start_at: "",
           end_at: "",
+          start_time: "",
+          end_time: "",
           job_title: "",
           duration: { hours: 0, minutes: 0 },
         });
@@ -179,7 +161,31 @@ export default function HireNowSection({ translatorProfile }) {
       ...prev,
       start_at: dateString,
     }));
-    calculateEndTime(dateString, hireNowForm?.duration);
+    const day = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
+      date
+    );
+    setSelectedDay(day);
+    getAvailableSlot(day);
+  };
+
+  const getAvailableSlot = async (day) => {
+    setGetSlotsLoading("fetching");
+    try {
+      const headers = {
+        Authorization: `Bearer ${user?.token}`,
+      };
+      const { data } = await UseApi(
+        `${apiUrls.getAvailableSlots}${translatorProfile?.id}&day=${day}`,
+        apiMethods.POST,
+        null,
+        headers
+      );
+      setTimeSlots(data?.data || []);
+    } catch (err) {
+      toast.error("Failed to fetch time slots. Please try again.");
+    } finally {
+      setGetSlotsLoading("finish");
+    }
   };
 
   return (
@@ -281,90 +287,58 @@ export default function HireNowSection({ translatorProfile }) {
                   <div className="col-md-6">
                     <div className="mb20">
                       <label className="heading-color ff-heading fw500 mb10">
-                        Start Date & Time
+                        Book Your Slot
                       </label>
                       <DatePicker
-                        showTime={{ minuteStep: 15 }} // Set step for minutes
-                        format="YYYY-MM-DD HH:mm"
-                        className="form-control"
                         onChange={handleStartDateChange}
+                        className="form-control"
+                        placeholderText="Select a Date"
+                        style={{ width: "100%", maxWidth: "800px" }} // Increased width
                       />
-                      {error.start_at && (
+                      {error?.start_at && (
                         <p style={{ color: "red" }}>{error.start_at}</p>
                       )}
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="mb20">
-                      <label className="heading-color ff-heading fw500 mb10">
-                        End Date & Time
-                      </label>
-                      <DatePicker
-                        showTime={{ minuteStep: 15 }} // Set step for minutes
-                        format="YYYY-MM-DD HH:mm"
-                        className="form-control"
-                        value={
-                          hireNowForm?.end_at
-                            ? moment(hireNowForm?.end_at)
-                            : null
-                        }
-                        onChange={(date, dateString) => {
-                          setHireNowForm((prev) => ({
-                            ...prev,
-                            end_at: dateString,
-                          }));
-                        }}
-                        disabled // Make it read-only since we calculate it based on duration
-                      />
-                      {error?.end_at && (
-                        <p style={{ color: "red" }}>{error?.end_at}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="mb20">
-                      <label className="heading-color ff-heading fw500 mb10">
-                        Duration (Hours)
-                      </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        name="hours"
-                        placeholder="Enter Hours"
-                        value={hireNowForm?.duration?.hours || ""}
-                        onFocus={() =>
-                          setHireNowForm((prev) => ({
-                            ...prev,
-                            duration: { ...prev?.duration, hours: "" },
-                          }))
-                        }
-                        onChange={handleDurationChange}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="mb20">
-                      <label className="heading-color ff-heading fw500 mb10">
-                        Duration (Minutes)
-                      </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        name="minutes"
-                        placeholder="Enter Minutes"
-                        value={hireNowForm?.duration?.minutes || ""}
-                        onFocus={() =>
-                          setHireNowForm((prev) => ({
-                            ...prev,
-                            duration: { ...prev?.duration, minutes: "" },
-                          }))
-                        }
-                        onChange={handleDurationChange}
-                      />
-                    </div>
-                  </div>
+                  {getSlotsLoading == "finish" ? (
+                    hireNowForm?.start_at &&
+                    (timeSlots?.length > 0 ? (
+                      <div className="col-md-12 mb20">
+                        <h5 className="heading-color ff-heading fw500">
+                          Available Time Slots
+                        </h5>
+                        <div className="time-slots">
+                          {timeSlots?.map((slot, index) => (
+                            <button
+                              key={index}
+                              className={`btn btn-outline-primary ${
+                                slot?.start_time === hireNowForm?.start_time
+                                  ? "active"
+                                  : ""
+                              }`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setHireNowForm({
+                                  ...hireNowForm,
+                                  start_time: slot?.start_time,
+                                  end_time: slot?.end_time,
+                                });
+                              }}
+                            >
+                              {`${slot?.start_time}-${slot?.end_time}`}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-danger">
+                        No slots available for the selected day. Please choose
+                        another day.
+                      </p>
+                    ))
+                  ) : (
+                    <p className="text-warning">Fetching available slots...</p>
+                  )}
 
                   <div className="col-md-12">
                     <div>
@@ -372,6 +346,14 @@ export default function HireNowSection({ translatorProfile }) {
                         type="button"
                         className="ud-btn btn-thm"
                         onClick={addBooking}
+                        disabled={
+                          isLoading ||
+                          !hireNowForm?.job_title ||
+                          !hireNowForm?.availability?.value ||
+                          !hireNowForm?.start_time ||
+                          !hireNowForm?.end_time ||
+                          timeSlots?.length === 0
+                        }
                       >
                         Book Now{" "}
                         {isLoading ? (

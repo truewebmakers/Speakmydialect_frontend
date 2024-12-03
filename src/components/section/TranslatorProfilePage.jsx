@@ -21,8 +21,12 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                     : "-"}
                 </p>
                 {/* Education */}
-                <hr className="opacity-100 mb60 mt60" />
-                <h4 className="mb30">Education</h4>
+                {translatorProfile?.user_education?.length ? (
+                  <>
+                    <hr className="opacity-100 mb60 mt60" />
+                    <h4 className="mb30">Education</h4>
+                  </>
+                ) : null}
                 <div className="educational-quality">
                   {translatorProfile?.user_education?.map((item, index) => (
                     <div key={index}>
@@ -42,8 +46,13 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                 </div>
 
                 {/* Skills */}
-                <hr className="opacity-100 mb60 mt60" />
-                <h4 className="mb30">Languages & Skills</h4>
+                {translatorProfile?.user_skills?.length ? (
+                  <>
+                    <hr className="opacity-100 mb60 mt60" />
+
+                    <h4 className="mb30">Languages & Skills</h4>
+                  </>
+                ) : null}
                 <div className="educational-quality">
                   {translatorProfile?.user_skills?.map((item, index) => (
                     <div key={index}>
@@ -68,8 +77,12 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                   ))}
                 </div>
                 {/* Work & Experience */}
-                <hr className="opacity-100 mb60 mt60" />
-                <h4 className="mb30">Work & Experience</h4>
+                {translatorProfile?.user_work_experince?.length ? (
+                  <>
+                    <hr className="opacity-100 mb60 mt60" />
+                    <h4 className="mb30">Work & Experience</h4>
+                  </>
+                ) : null}
                 <div className="educational-quality">
                   {translatorProfile?.user_work_experince?.map(
                     (item, index) => (

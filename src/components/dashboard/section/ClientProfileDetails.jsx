@@ -183,7 +183,6 @@ export default function ClientProfileDetails() {
       setIsLoading(false);
     }
   };
-  console.log(profileData, "pppppppppppp");
 
   return (
     <>

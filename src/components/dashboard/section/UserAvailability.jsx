@@ -43,7 +43,6 @@ export default function UserAvailability() {
       );
       if (response?.status === 200) {
         const fetchedData = response?.data?.data;
-        console.log(fetchedData, "ddddddddd");
 
         // Initialize the transformed states
         const transformedAvailability = {
@@ -182,8 +181,8 @@ export default function UserAvailability() {
           {Object.keys(availability).map((day, index) => (
             <div key={day} className="day-section">
               <div className="day-header">
-                <div className="col-sm-3 mb20">
-                  <label className="heading-color ff-heading fw500 mb10">
+                <div className="col-sm-3 mb4">
+                  <label className="heading-color ff-heading fw500">
                     {day}
                   </label>
                   <div className="switch-style1">

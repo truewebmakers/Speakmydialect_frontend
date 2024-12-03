@@ -144,20 +144,20 @@ export const validateBookingForm = (hireNowForm) => {
   }
 
   // Validate end date and time
-  const endDate = new Date(hireNowForm?.end_at);
-  switch (true) {
-    case !hireNowForm?.end_at:
-      errors.end_at = "End date and time are required";
-      break;
-    case isNaN(endDate.getTime()) || endDate <= new Date():
-      errors.end_at = "End date and time must be after today";
-      break;
-    case endDate <= startDate:
-      errors.end_at = "End date and time must be after start date and time";
-      break;
-    default:
-      break;
-  }
+  // const endDate = new Date(hireNowForm?.end_at);
+  // switch (true) {
+  //   case !hireNowForm?.end_at:
+  //     errors.end_at = "End date and time are required";
+  //     break;
+  //   case isNaN(endDate.getTime()) || endDate <= new Date():
+  //     errors.end_at = "End date and time must be after today";
+  //     break;
+  //   // case endDate <= startDate:
+  //   //   errors.end_at = "End date and time must be after start date and time";
+  //   //   break;
+  //   default:
+  //     break;
+  // }
 
   // Validate job title
   switch (true) {

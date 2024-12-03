@@ -65,6 +65,7 @@ export const apiUrls = {
   contactUsSendEmail: "/send-email",
   getContactInquiries: "/admin/get-contactform-entries",
   checkProfileCompletion: "/translators/profile-incomplete/",
+  getAvailableSlots: "/admin/translator/availability/get-slots?translator_id=",
 };
 
 export const metaData = {
