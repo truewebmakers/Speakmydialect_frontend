@@ -6,6 +6,7 @@ import {
 } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import { getProfileDetails } from "@/redux/auth";
+import moment from "moment";
 import { toast } from "react-toastify";
 
 export const getCountries = async (setCountryList) => {
@@ -95,22 +96,34 @@ export const getProfileData = async (id, token) => {
   }
 };
 
-// paymentUtils.js
-import moment from "moment";
-
-export const calculatePayment = (presentRate = 0, startDate, endDate) => {
+export const calculatePayment = (presentRate = 0, start_time, end_time) => {
   const feePercentage = 0.035;
   const fixedFee = 0.3;
 
+  // Define possible formats for parsing time
+  const timeFormats = ["h:mm A", "HH:mm", "HH:mm:ss"];
+
+  // Parse start_time and end_time with moment
+  const startMoment = moment(start_time, timeFormats, true);
+  const endMoment = moment(end_time, timeFormats, true);
+
+  // Check if parsing was successful
+  if (!startMoment.isValid() || !endMoment.isValid()) {
+    throw new Error("Invalid time format. Please provide a valid time.");
+  }
+
   // Calculate time difference in hours
-  const startMoment = moment(startDate);
-  const endMoment = moment(endDate);
   const hoursDiff =
     endMoment.diff(startMoment, "hours") +
     (endMoment.diff(startMoment, "minutes") % 60) / 60;
 
+  if (hoursDiff <= 0) {
+    throw new Error("End time must be later than start time.");
+  }
+
   // Calculate amount to receive
   const amountToReceive = presentRate * hoursDiff;
+
   // Calculate total amount based on hourly rate
   const totalAmount = (amountToReceive + fixedFee) / (1 - feePercentage);
 
@@ -119,4 +132,12 @@ export const calculatePayment = (presentRate = 0, startDate, endDate) => {
     totalAmount: totalAmount.toFixed(2),
     hours: hoursDiff,
   };
+};
+
+export const formatTo12Hour = (time) => {
+  if (!time) return "";
+  const [hours, minutes] = time.split(":");
+  const period = +hours >= 12 ? "PM" : "AM";
+  const adjustedHours = +hours % 12 || 12; // Convert 0 to 12 for 12 AM
+  return `${adjustedHours}:${minutes} ${period}`;
 };

@@ -589,13 +589,22 @@ p {
 }
 
 .time-slots {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Limit to 3 buttons per row */
+  gap: 10px; /* Spacing between buttons */
   margin-top: 10px;
 }
+
 .time-slots .btn {
-  flex: 1 1 auto;
+  flex: none;
+  width: 100%; /* Full width for grid column */
+  max-width: 175px; /* Cap the width to 25px if it's a single button */
+  text-align: center; /* Center-align text inside the button */
+}
+
+.time-slots .btn.single {
+  max-width: 175px; /* Set width specifically for a single button */
+  justify-self: center; /* Center the button in the row */
 }
 
 .react-datepicker-wrapper {

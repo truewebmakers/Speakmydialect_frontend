@@ -1,3 +1,4 @@
+import { formatTo12Hour } from "@/utils/commonFunctions";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 import { useSelector } from "react-redux";
@@ -13,10 +14,18 @@ export default function PayoutCard1({ data, openModal }) {
             {data?.job_title ? CapitalizeFirstLetter(data?.job_title) : "-"}
           </th>
           <td className="vam">
-            {data?.start_at ? moment(data?.start_at).format("lll") : "-"}
+            {data?.start_at
+              ? moment(data?.start_at).format("ll") +
+                " " +
+                formatTo12Hour(data?.start_time)
+              : "-"}
           </td>
           <td className="vam">
-            {data?.end_at ? moment(data?.end_at).format("lll") : "-"}
+            {data?.end_at
+              ? moment(data?.end_at).format("ll") +
+                " " +
+                formatTo12Hour(data?.end_time)
+              : "-"}
           </td>
           <td className="vam">
             {data?.payment_by_client_at ? data?.payment_by_client_at : "-"}

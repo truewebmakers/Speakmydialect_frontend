@@ -44,7 +44,6 @@ export default function UserAvailability() {
       if (response?.status === 200) {
         const fetchedData = response?.data?.data;
 
-        // Initialize the transformed states
         const transformedAvailability = {
           Monday: [],
           Tuesday: [],
@@ -64,7 +63,6 @@ export default function UserAvailability() {
           Sunday: false,
         };
 
-        // Populate states from the fetched data
         fetchedData.forEach((item) => {
           const day = item.day;
           transformedEnabledDays[day] = item.is_enabled === 1;
@@ -75,7 +73,6 @@ export default function UserAvailability() {
           });
         });
 
-        // Fill empty days with a placeholder time slot if no times are set
         Object.keys(transformedAvailability).forEach((day) => {
           if (transformedAvailability[day].length === 0) {
             transformedAvailability[day].push({ start: "", end: "" });
@@ -118,17 +115,39 @@ export default function UserAvailability() {
     setEnabledDays({ ...enabledDays, [day]: e.target.checked });
   };
 
+  // Validation for time difference
+  const isTimeDifferenceValid = () => {
+    for (const day in availability) {
+      if (enabledDays[day]) {
+        for (const time of availability[day]) {
+          const startTime = new Date(`1970-01-01T${time.start}:00`);
+          const endTime = new Date(`1970-01-01T${time.end}:00`);
+          const differenceInHours = (endTime - startTime) / (1000 * 60 * 60);
+
+          if (time.start && time.end && differenceInHours < 2) {
+            toast.error(
+              `The difference b/w ${day}'s start time & end time should be at least 2 hours.`
+            );
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  };
+
   // Save updated availability
   const handleSave = async () => {
+    if (!isTimeDifferenceValid()) return;
+
     setIsLoading(true);
 
-    // Convert availability data to the required format
     const formattedAvailability = {};
     Object.keys(availability).forEach((day) => {
       formattedAvailability[day] = {
         is_enabled: enabledDays[day],
         times: availability[day]
-          .filter((time) => time.start && time.end) // Exclude incomplete time ranges
+          .filter((time) => time.start && time.end)
           .map((time) => ({
             start_time: time.start,
             end_time: time.end,
@@ -136,7 +155,6 @@ export default function UserAvailability() {
       };
     });
 
-    // Prepare data for the API
     const bodyData = {
       translator_id: user?.userInfo?.id,
       availability: formattedAvailability,
@@ -154,7 +172,6 @@ export default function UserAvailability() {
       );
       if (response?.status === 200 || response?.status === 201) {
         toast.success("Availability updated successfully!");
-        // Re-fetch availability after successful save
         fetchAvailability();
       } else {
         toast.error(

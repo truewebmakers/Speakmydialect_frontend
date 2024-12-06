@@ -1,6 +1,6 @@
 import { apiMethods, apiUrls } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
-import { calculatePayment } from "@/utils/commonFunctions";
+import { calculatePayment, formatTo12Hour } from "@/utils/commonFunctions";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 import { useEffect, useState } from "react";
@@ -106,10 +106,16 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
       <td className="vam">
         <div className="d-flex flex-column">
           <p className="mb-0">
-            <b>Start At:</b> {moment(data?.start_at).format("lll") || "-"}
+            <b>Start At:</b>{" "}
+            {moment(data?.start_at).format("ll") +
+              " " +
+              formatTo12Hour(data?.start_time) || "-"}
           </p>
           <p className="mb-0">
-            <b>Ends At:</b> {moment(data?.end_at).format("lll") || "-"}
+            <b>Ends At:</b>{" "}
+            {moment(data?.end_at).format("ll") +
+              " " +
+              formatTo12Hour(data?.end_time) || "-"}
           </p>
 
           <p className="mb-0">
@@ -136,8 +142,11 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
                 "Not Mentioned Yet"}
             </b>
             $
-            {calculatePayment(data?.present_rate, data?.start_at, data?.end_at)
-              ?.amountToReceive || "Not specified yet"}
+            {calculatePayment(
+              data?.present_rate,
+              data?.start_time,
+              data?.end_time
+            )?.amountToReceive || "Not specified yet"}
           </p>
         </div>
       </td>

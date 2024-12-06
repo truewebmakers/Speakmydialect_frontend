@@ -11,11 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import UseApi from "@/hook/useApi";
 import { toast } from "react-toastify";
 import Loader from "../common/loader";
-import { getProfileData } from "@/utils/commonFunctions";
+import { formatTo12Hour, getProfileData } from "@/utils/commonFunctions";
 import { getProfileDetails } from "@/redux/auth";
 import { useNavigate } from "react-router-dom";
 import { validateBookingForm } from "@/utils/handleValidations";
 import { DatePicker } from "antd";
+import moment from "moment";
 
 export default function HireNowSection({ translatorProfile }) {
   const [hireNowForm, setHireNowForm] = useState({
@@ -294,6 +295,9 @@ export default function HireNowSection({ translatorProfile }) {
                         className="form-control"
                         placeholderText="Select a Date"
                         style={{ width: "100%", maxWidth: "800px" }} // Increased width
+                        disabledDate={(current) => {
+                          return current && current < moment().startOf("day");
+                        }}
                       />
                       {error?.start_at && (
                         <p style={{ color: "red" }}>{error.start_at}</p>
@@ -325,7 +329,9 @@ export default function HireNowSection({ translatorProfile }) {
                                 });
                               }}
                             >
-                              {`${slot?.start_time}-${slot?.end_time}`}
+                              {`${formatTo12Hour(
+                                slot?.start_time
+                              )} - ${formatTo12Hour(slot?.end_time)}`}
                             </button>
                           ))}
                         </div>
