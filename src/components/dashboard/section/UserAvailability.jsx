@@ -185,10 +185,16 @@ export default function UserAvailability() {
     }
   };
 
+  // Handle removing a time slot
+  const handleDeleteTime = (day, index) => {
+    const updatedTimes = availability[day].filter((_, idx) => idx !== index);
+    setAvailability({ ...availability, [day]: updatedTimes });
+  };
+
   return (
     <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
       <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between align-items-center">
-        <h5 className="list-title">Available days and times (24h format)</h5>
+        <h5 className="list-title">Available days and times</h5>
         <p>
           Keep this up to date so you get booked for the time that suits you.
         </p>
@@ -216,24 +222,39 @@ export default function UserAvailability() {
                 </div>
               </div>
               {enabledDays[day] &&
-                availability[day].map((time, index) => (
-                  <div key={index} className="time-row">
+                availability[day].map((time, idx) => (
+                  <div
+                    key={idx}
+                    className="time-row d-flex align-items-center mb-2"
+                  >
                     <input
                       type="time"
                       value={time.start}
                       onChange={(e) =>
-                        handleInputChange(day, index, "start", e.target.value)
+                        handleInputChange(day, idx, "start", e.target.value)
                       }
-                      placeholder="Start time (24h format)"
+                      placeholder="Start time"
                     />
                     <input
                       type="time"
                       value={time.end}
                       onChange={(e) =>
-                        handleInputChange(day, index, "end", e.target.value)
+                        handleInputChange(day, idx, "end", e.target.value)
                       }
-                      placeholder="End time (24h format)"
+                      placeholder="End time"
                     />
+                    <button
+                      className="delete-time-btn ml-2"
+                      onClick={() => handleDeleteTime(day, idx)}
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "red",
+                        cursor: "pointer",
+                      }}
+                    >
+                      ✕
+                    </button>
                   </div>
                 ))}
               {enabledDays[day] && (
