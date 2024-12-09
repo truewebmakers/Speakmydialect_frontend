@@ -342,9 +342,9 @@ export default function HireNowSection({ translatorProfile }) {
                         another day.
                       </p>
                     ))
-                  ) : (
+                  ) : getSlotsLoading === "fetching" ? (
                     <p className="text-warning">Fetching available slots...</p>
-                  )}
+                  ) : null}
 
                   <div className="col-md-12">
                     <div>
