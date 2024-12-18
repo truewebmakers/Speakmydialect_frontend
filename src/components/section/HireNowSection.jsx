@@ -158,6 +158,8 @@ export default function HireNowSection({ translatorProfile }) {
   };
 
   const handleStartDateChange = (date, dateString) => {
+
+
     setHireNowForm((prev) => ({
       ...prev,
       start_at: dateString,
@@ -165,18 +167,20 @@ export default function HireNowSection({ translatorProfile }) {
     const day = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
       date
     );
+
+    // console.log("dateString",dateString)
     setSelectedDay(day);
-    getAvailableSlot(day);
+    getAvailableSlot(day,dateString);
   };
 
-  const getAvailableSlot = async (day) => {
+  const getAvailableSlot = async (day,dateString) => {
     setGetSlotsLoading("fetching");
     try {
       const headers = {
         Authorization: `Bearer ${user?.token}`,
       };
       const { data } = await UseApi(
-        `${apiUrls.getAvailableSlots}${translatorProfile?.id}&day=${day}`,
+        `${apiUrls.getAvailableSlots}${translatorProfile?.id}&day=${day}&currentDate=${dateString}`,
         apiMethods.POST,
         null,
         headers
