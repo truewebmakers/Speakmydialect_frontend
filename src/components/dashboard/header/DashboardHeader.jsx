@@ -55,7 +55,7 @@ export default function DashboardHeader() {
                 <div className="text-center text-lg-start d-flex align-items-center">
                   <div className="dashboard_header_logo position-relative me-2 me-xl-5">
                     <Link to="/" className="logo">
-                      <img src="/images/logo.jpeg" alt="logo" />
+                      <img src="/images/logo.png" alt="logo" />
                     </Link>
                   </div>
                 </div>

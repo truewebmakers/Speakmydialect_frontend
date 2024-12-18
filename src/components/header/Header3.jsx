@@ -20,8 +20,8 @@ export default function Header3() {
                       alt="Header Logo"
                     />
                   </Link> */}
-                  <Link className="w-100 h-100 object-fit-contain" to="/">
-                    <img src="/images/logo.jpeg" alt="Header Logo" />
+                  <Link className="logo" to="/">
+                    <img src="/images/logo.png" alt="Header Logo" />
                   </Link>
                 </div>
               </div>

@@ -19,8 +19,8 @@ export default function MobileNavigation2() {
             <div className="menu_and_widgets">
               <div className="mobile_menu_bar d-flex justify-content-between align-items-center">
                 {/* Logo */}
-                <Link className="mobile_logo" to="/">
-                  <img src="/images/logo.jpeg" alt="Header Logo" />
+                <Link className="mobile_logo logo" to="/">
+                  <img src="/images/logo.png" alt="Header Logo" />
                 </Link>
                 {/* Profile Image */}
                 {user?.token && (

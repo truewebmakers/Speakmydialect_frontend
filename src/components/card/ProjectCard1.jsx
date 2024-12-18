@@ -68,7 +68,12 @@ export default function ProjectCard1({ data }) {
               {CapitalizeFirstLetter(data?.user_meta?.gender) ||
                 "Gender not specified"}
             </p>
-            <p className="text mt10">{data?.user_meta?.intro}</p>
+            <p className="text mt10">
+              {data?.user_meta?.intro
+                ? data?.user_meta?.intro?.split(" ")?.slice(0, 10)?.join(" ") +
+                  "...."
+                : ""}
+            </p>
             <div className="skill-tags d-flex align-items-center justify-content-start">
               {data?.user_skills?.length > 0 && // Check if user_skills is not empty
                 data.user_skills.map((item, i) =>
@@ -76,7 +81,9 @@ export default function ProjectCard1({ data }) {
                     <span key={i} className={`tag asd${i === 1 ? "mx10" : ""}`}>
                       {getLanguageName(item?.language, languageList)}
                     </span>
-                  ) : ''
+                  ) : (
+                    ""
+                  )
                 )}
             </div>
           </div>

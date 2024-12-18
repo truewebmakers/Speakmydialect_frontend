@@ -471,7 +471,7 @@ a {
   padding: 20px; /* Padding inside the card */
   display: flex;
   flex-direction: column; /* Arrange children vertically */
-  height: 273px; /* Allow full height */
+  height: 288px; /* Allow full height */
 }
 
 .skill-tags .tag {

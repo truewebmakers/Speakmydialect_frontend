@@ -96,7 +96,7 @@ export default function PayoutInfo() {
         </div>
         <div className="row align-items-center justify-content-between pb40">
           <div className="col-lg-6">
-            <div className="dashboard_title_area">
+            <div className="">
               <h2>Payouts</h2>
             </div>
           </div>

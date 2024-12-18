@@ -20,8 +20,8 @@ export default function NavSidebar() {
         aria-labelledby="offcanvasExampleLabel"
       >
         <div className="offcanvas-header border-bottom">
-          <Link to="/">
-            <img alt="Header Logo" src="/images/logo.jpeg" />
+          <Link to="/" className="logo">
+            <img alt="Header Logo" src="/images/logo.png" />
           </Link>
           <button
             ref={crossRef}

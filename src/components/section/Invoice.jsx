@@ -31,8 +31,8 @@ export default function Invoice() {
                 <div className="wrapper">
                   <div className="row mb20 align-items-center">
                     <div className="col-lg-7">
-                      <Link to="/" className="main_logo mb30-md">
-                        <img src="/images/logo.jpeg" alt="logo" />
+                      <Link to="/" className="logo main_logo mb30-md">
+                        <img src="/images/logo.png" alt="logo" />
                       </Link>
                     </div>
                     <div className="col-lg-5">

@@ -20,14 +20,8 @@ export default function Header1() {
               <div className="col-auto px-0">
                 <div className="d-flex align-items-center justify-content-between">
                   <div className="logos br-white-light pr30 pr5-xl">
-                    <Link className="header-logo logo1" to="/">
-                      <img
-                        src="/images/logo-transprent.png"
-                        alt="Header Logo"
-                      />
-                    </Link>
-                    <Link className="header-logo logo2" to="/">
-                      <img src="/images/logo.jpeg" alt="Header Logo" />
+                    <Link className="logo" to="/">
+                      <img src="/images/logo.png" alt="Header Logo" />
                     </Link>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SelectInput from "../option/SelectInput";
 import { apiMethods, apiUrls } from "@/constants/constant";
 import { toast } from "react-toastify";
@@ -17,6 +17,7 @@ export default function TranslatorProfileDetails() {
     fix_rate: "77",
     hourly_rate: 0,
     intro: "",
+    address: "",
   });
   const { user, profileData } = useSelector((state) => state.auth);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -26,6 +27,7 @@ export default function TranslatorProfileDetails() {
   const [countryList, setCountryList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [introError, setIntroError] = useState(""); // State to store intro error
+  const addressInputRef = useRef(null); // Create a ref for the address input
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -78,6 +80,7 @@ export default function TranslatorProfileDetails() {
         fix_rate: "77" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
+        address: profileData?.user_meta?.address || "",
       });
       setGender({
         option: CapitalizeFirstLetter(profileData?.user_meta?.gender),
@@ -137,6 +140,7 @@ export default function TranslatorProfileDetails() {
         profile_pic: uploadPic,
         gender: getGender?.value,
         location: getCountry?.value,
+        address: profileDetails?.address,
       };
 
       const response = await UseApi(
@@ -158,6 +162,32 @@ export default function TranslatorProfileDetails() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    const input = addressInputRef.current; // Use the ref for the address input
+    const autocompleteInstance = new window.google.maps.places.Autocomplete(
+      input,
+      {
+        fields: ["formatted_address"],
+        types: ["address"],
+      }
+    );
+
+    autocompleteInstance.addListener("place_changed", () => {
+      const place = autocompleteInstance.getPlace();
+      if (place && place?.formatted_address) {
+        setProfileDetails((prevDetails) => ({
+          ...prevDetails,
+          address: place?.formatted_address, // Populate address from autocomplete
+        }));
+      }
+    });
+
+    // Clean up the listener on component unmount
+    return () => {
+      window.google.maps.event.clearInstanceListeners(autocompleteInstance);
+    };
+  }, []);
 
   return (
     <>
@@ -322,6 +352,23 @@ export default function TranslatorProfileDetails() {
                       { option: "Other", value: "other" },
                     ]}
                     handler={genderHandler}
+                  />
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="mb20">
+                  <label className="heading-color ff-heading fw500 mb10">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter your address"
+                    name="address"
+                    value={profileDetails?.address}
+                    autoComplete="off"
+                    onChange={handleOnChange}
+                    ref={addressInputRef} // Attach the ref here
                   />
                 </div>
               </div>
