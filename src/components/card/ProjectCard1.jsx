@@ -37,6 +37,7 @@ export default function ProjectCard1({ data }) {
     picture &&
     "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
       picture;
+  console.log(data, "ddddd");
 
   return (
     <div className="freelancer-style1 bdr1 hover-box-shadow row ms-0 align-items-lg-center">
@@ -59,7 +60,9 @@ export default function ProjectCard1({ data }) {
             </h5>
             <p className="mb-0 fz14 list-inline-item mb5-sm pe-1">
               <i className="flaticon-place fz16 vam text-thm2 me-1" />{" "}
-              {data?.user_meta?.location && countryList?.length > 0
+              {data?.user_meta?.address
+                ? data?.user_meta?.address
+                : data?.user_meta?.location && countryList?.length > 0
                 ? getCountryName(data?.user_meta?.location, countryList)
                 : "Location not specified"}
             </p>
@@ -70,7 +73,7 @@ export default function ProjectCard1({ data }) {
             </p>
             <p className="text mt10">
               {data?.user_meta?.intro
-                ? data?.user_meta?.intro?.split(" ")?.slice(0, 10)?.join(" ") +
+                ? data?.user_meta?.intro?.split(" ")?.slice(0, 20)?.join(" ") +
                   "...."
                 : ""}
             </p>
