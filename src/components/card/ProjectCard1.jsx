@@ -37,7 +37,6 @@ export default function ProjectCard1({ data }) {
     picture &&
     "https://speakmydialect.s3.ap-southeast-1.amazonaws.com/profile_pictures/" +
       picture;
-  console.log(data, "ddddd");
 
   return (
     <div className="freelancer-style1 bdr1 hover-box-shadow row ms-0 align-items-lg-center">
