@@ -27,18 +27,16 @@ export default function FreelancerAbout1({ data }) {
           {/* <small className="fz15 fw500">Fix Rate</small> */}
         </h3>
         <div className="category-list mt20">
-          <a className="d-flex align-items-center justify-content-between bdrb1 pb-2">
-            <span className="text">
+          <a className="d-flex align-items-start justify-content-between bdrb1 pb-2">
+            <span className="d-flex align-items-center text">
               <i className="flaticon-place text-thm2 pe-2 vam" />
-              Location
+              <span>Location</span>
             </span>
-            <span>
-              {storedCountries?.length > 0
-                ? getCountryName(
-                    data?.user_meta?.location,
-                    JSON.parse(storedCountries)
-                  )
-                : "Not Specified Yet"}
+            <span
+              className="text-wrap text-secondary text-end ms-5"
+              style={{ color: "#222222 !important" }}
+            >
+              {data?.user_meta?.address || "Not Specified Yet"}
             </span>
           </a>
           <a className="d-flex align-items-center justify-content-between bdrb1 pb-2">
@@ -78,6 +76,7 @@ export default function FreelancerAbout1({ data }) {
             <span>${data?.user_meta?.fix_rate || fixRate}</span>
           </a>
         </div>
+
         {data?.fname && (
           <p>
             Do you want to work with {data?.fname} {data?.lname}?

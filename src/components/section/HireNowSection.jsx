@@ -158,8 +158,6 @@ export default function HireNowSection({ translatorProfile }) {
   };
 
   const handleStartDateChange = (date, dateString) => {
-
-
     setHireNowForm((prev) => ({
       ...prev,
       start_at: dateString,
@@ -168,12 +166,11 @@ export default function HireNowSection({ translatorProfile }) {
       date
     );
 
-    // console.log("dateString",dateString)
     setSelectedDay(day);
-    getAvailableSlot(day,dateString);
+    getAvailableSlot(day, dateString);
   };
 
-  const getAvailableSlot = async (day,dateString) => {
+  const getAvailableSlot = async (day, dateString) => {
     setGetSlotsLoading("fetching");
     try {
       const headers = {

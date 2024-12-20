@@ -14518,3 +14518,27 @@ hr {
   height: 70px !important;
   margin-left: 50px;
 }
+
+
+.category-list a .text-wrap {
+  word-break: break-word; /* Ensures long text breaks properly */
+  text-align: right;      /* Aligns the address text to the right */
+  white-space: pre-wrap;  /* Allows wrapping and preserves spacing */
+}
+
+.category-list a {
+  text-decoration: none;
+}
+
+.text-end {
+  text-align: end; /* Aligns text to the right for better readability */
+}
+
+.ms-3 {
+  margin-left: 1rem; /* Adds space between the Location label and address */
+}
+
+.text-secondary {
+  color: #6c757d; /* Adjust to match the style of your design */
+  font-size: 14px; /* Optional: adjust font size */
+}
