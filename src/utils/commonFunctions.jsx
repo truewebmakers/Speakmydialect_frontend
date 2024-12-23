@@ -1,9 +1,4 @@
-import {
-  apiMethods,
-  apiUrls,
-  dialectData,
-  languageData,
-} from "@/constants/constant";
+import { apiMethods, apiUrls, dialectData } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
 import { getProfileDetails } from "@/redux/auth";
 import moment from "moment";
@@ -51,18 +46,35 @@ export const getDialects = async (setDialectListing) => {
   }
 };
 
+export const getSelectedDialect = async (setDialectListing, id) => {
+  try {
+    const response = await UseApi(apiUrls.getDialects + id, apiMethods.GET);
+    if (response?.status === 200 || response?.status === 201) {
+      const dialectData = response?.data?.data;
+      const formattedArray = dialectData?.map((lang, index) => ({
+        id: index + 1,
+        name: lang?.dialect,
+      }));
+
+      setDialectListing(formattedArray);
+    }
+  } catch (error) {
+    toast.error("Error fetching Dialects");
+  }
+};
+
 export const getLanguages = async (setLanguageListing) => {
   try {
-    // const response = await UseApi(apiUrls.getLanguages, apiMethods.GET);
-    // if (response?.status === 200 || response?.status === 201) {
-    //   const languageData = response?.data?.data;
-    const formattedArray = languageData?.map((lang, index) => ({
-      id: index + 1,
-      name: lang,
-    }));
-    setLanguageListing(formattedArray);
-    sessionStorage.setItem("languages", JSON.stringify(formattedArray));
-    // }
+    const response = await UseApi(apiUrls.getLanguages, apiMethods.GET);
+    if (response?.status === 200 || response?.status === 201) {
+      const languageData = response?.data?.data;
+      const formattedArray = languageData?.map((lang, index) => ({
+        id: lang?.id,
+        name: lang?.name,
+      }));
+      setLanguageListing(formattedArray);
+      sessionStorage.setItem("languages", JSON.stringify(formattedArray));
+    }
   } catch (error) {
     toast.error("Error fetching languages");
   }

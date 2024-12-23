@@ -9,6 +9,7 @@ import {
   getCountries,
   getDialects,
   getLanguages,
+  getSelectedDialect,
 } from "@/utils/commonFunctions";
 import DialectOption1 from "../option/DialectOption";
 
@@ -16,6 +17,7 @@ export default function ListingSidebar2() {
   const [countryList, setCountryList] = useState([]);
   const [languageListing, setLanguageListing] = useState([]);
   const [dialectListing, setDialectListing] = useState([]);
+  const [speakId, setSpeakId] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,14 +35,16 @@ export default function ListingSidebar2() {
       } else {
         await getLanguages(setLanguageListing);
       }
-      if (storedDialect?.length > 0) {
-        setDialectListing(JSON.parse(storedDialect));
-      } else {
-        await getDialects(setDialectListing);
-      }
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getSelectedDialect(setDialectListing, speakId);
+    };
+    fetchData();
+  }, [speakId]);
 
   return (
     <>
@@ -85,7 +89,7 @@ export default function ListingSidebar2() {
                 className="card-body card-body px-0 pt-0"
                 style={{ marginTop: "-25px" }}
               >
-                <SpeakOption1 data={languageListing} />
+                <SpeakOption1 data={languageListing} setSpeakId={setSpeakId} />
               </div>
             </div>
           </div>

@@ -31,7 +31,7 @@ export default function SelectInput({
                 </div>
               </div>
             </button>
-            <div className="dropdown-menu ">
+            <div className="dropdown-menu">
               <div
                 className="inner show"
                 style={{
@@ -41,15 +41,28 @@ export default function SelectInput({
               >
                 <ul className="dropdown-menu inner show">
                   {data?.map((item, i) => (
-                    <li key={i} className="selected active">
+                    <li
+                      key={i}
+                      className={`${
+                        defaultSelect?.value !== null &&
+                        item?.value === defaultSelect?.value
+                          ? "selected active"
+                          : ""
+                      }`}
+                    >
                       <a
-                        onClick={() => handler(item?.option, item?.value)}
+                        onClick={() => {
+                          if (item?.disabled) return; // Prevent handler from being triggered
+                          handler(item?.option, item?.value);
+                        }}
                         className={`dropdown-item ${
-                          defaultSelect?.value !== null &&
-                          item?.value === defaultSelect?.value
-                            ? "active selected"
-                            : ""
+                          item?.disabled ? "disabled" : ""
                         }`}
+                        style={
+                          item?.disabled
+                            ? { pointerEvents: "none", opacity: 0.6 }
+                            : {}
+                        }
                       >
                         <span className="text">{item?.option}</span>
                       </a>
