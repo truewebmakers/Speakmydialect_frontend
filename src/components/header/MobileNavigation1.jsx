@@ -9,7 +9,12 @@ export default function MobileNavigation1() {
             <div className="menu_and_widgets">
               <div className="mobile_menu_bar d-flex justify-content-between align-items-center">
                 <Link className="mobile_logo" to="/">
-                  <img src="/images/logo.png" alt="Header Logo" />
+                  <img
+                    src="/images/logo.png"
+                    alt="Header Logo"
+                    width={50}
+                    height={50}
+                  />
                 </Link>
                 <div className="right-side text-end">
                   <a

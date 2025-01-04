@@ -4,7 +4,7 @@ import FooterSocial from "./FooterSocial";
 const links = [
   { id: 1, name: "Terms & Conditions", path: "/terms" },
   { id: 2, name: "Privacy Policy", path: "/privacy" },
-//   { id: 3, name: "Site Map", path: "/" },
+  //   { id: 3, name: "Site Map", path: "/" },
 ];
 
 export default function FooterHeader() {
@@ -24,9 +24,9 @@ export default function FooterHeader() {
             ))}
           </div>
         </div>
-        <div className="col-md-5">
-          <FooterSocial />
-        </div>
+        {/* <div className="col-md-5"> */}
+        {/* <FooterSocial />
+        </div> */}
       </div>
     </>
   );
