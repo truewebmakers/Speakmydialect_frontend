@@ -31,7 +31,7 @@ export default function About1() {
                 >
                   <img
                     className="w100 object-fit-contain"
-                    src="/images/about/about-1.png"
+                    src="/images/new/smd1.jpg"
                     alt="object"
                   />
                 </div>

@@ -4,6 +4,8 @@ import MetaComponent from "@/components/common/MetaComponent";
 import { metaData } from "@/constants/constant";
 import ContactInfo1 from "@/components/section/ContactInfo1";
 export default function Breadcumb9({ searchValue }) {
+
+  console.log("searchValue",searchValue)
   // Accept searchValue as a prop
   return (
   <>

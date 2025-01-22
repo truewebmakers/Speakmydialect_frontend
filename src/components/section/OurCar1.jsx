@@ -39,9 +39,9 @@ export default function OurCta1() {
                   className="w-100 h-100 object-fit-contain"
                   src={
                     pathname === "/" || pathname === "/about"
-                      ? "/images/about/cta-img1.png"
+                      ? "/images/new/smd4-rm.png"
                       : pathname === "/home-3" || pathname === "/home-10"
-                      ? "/images/about/about-5.png"
+                      ? "/images/new/smd4-rm.png"
                       : ""
                   }
                   alt="woman"

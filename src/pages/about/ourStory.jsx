@@ -38,7 +38,7 @@ export default function OurStory() {
           </div>
           <img
             className="cta-banner3-img wow fadeInLeft h-100 object-fit-cover"
-            src="/images/about/about-5.jpg"
+            src="/images/new/smd3.jpg"
             alt="cta banner 3"
             data-wow-delay="300ms"
           />
