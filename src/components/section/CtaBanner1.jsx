@@ -43,17 +43,7 @@ export default function CtaBanner1() {
                       </p>
                     ) : (
                       <p className="text  mb35">
-                        SpeakMyDialect is designed to streamline the process of
-                        finding and booking qualified interpreters. Our platform
-                        enables users to easily search for interpreters based on
-                        language expertise and availability, book sessions, and
-                        manage appointments through a user-friendly dashboard.
-                        We support a variety of session formats, including
-                        in-person, phone, and video calls, making our services
-                        accessible wherever you are. Whether for personal use,
-                        educational purposes, or professional needs,
-                        SpeakMyDialect ensures effective and reliable
-                        communication across different languages.
+                        Speakmydialect simplifies the process of finding and booking interpreters. Our platform allows you to effortlessly search for interpreters based on language and dialect, availability, schedule sessions, and manage appointments through an intuitive dashboard. We offer a range of session formats, including in-person, phone, and video calls, ensuring our services are accessible wherever you need them. Whether for personal, educational, or professional purposes, Speakmydialect guarantees clear and dependable communication across languages.
                       </p>
                     )}
                   </div>

@@ -97,7 +97,7 @@ export default function OurFaq1() {
                         data-parent="#accordionExample"
                       >
                         <div className="accordion-body">
-                          We currently only service in metro Harare.
+                          We currently only service in Melbourne.
                         </div>
                       </div>
                     </div>

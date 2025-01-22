@@ -9,6 +9,7 @@ export default function SpeakOption1({ data, setSpeakId }) {
 
   // Language Handler
   const speakHandler = (option, value) => {
+    // console.log("id",value)
     setSpeakId(value);
     setSpeak(value); // Set the selected language's id
     setSearchParams(""); // Clear search params
@@ -18,7 +19,7 @@ export default function SpeakOption1({ data, setSpeakId }) {
   const defaultSelect = {
     option:
       data?.find((item) => item?.id === getSpeak)?.name || "Select Language", // Show the name of the selected language
-    value: getSpeak,
+      value: getSpeak,
   };
 
   return (

@@ -31,7 +31,7 @@ export default function TrendingService1() {
           <div className="row align-items-center wow fadeInUp">
             <div className="col-lg-9">
               <div className="main-title">
-                <h2 className="title">Popular Interpreters</h2>
+                <h2 className="title">Interpreters</h2>
                 <p className="paragraph">Most viewed interpreters</p>
               </div>
             </div>

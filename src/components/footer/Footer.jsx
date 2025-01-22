@@ -26,10 +26,9 @@ export default function Footer() {
                 </div>
                 <div className="footer-content">
                   <p className="footer-content-text">
-                    SpeakMyDialect was founded to address the frequent
-                    challenges encountered in the interpreting industry, such as
-                    unreliable services, lack of qualified interpreters, and
-                    overpriced offerings.{" "}
+                  Speakmydialect acknowledges the Traditional Owners of Country throughout Australia. We pay our respects to Elders past and present. 
+
+We recognise the First Peoples of this Nation and their ongoing cultural and spiritual connections to the lands, waters, seas, skies, and communities. We acknowledge First Nations Peoples as the Traditional Custodians and Lore Keepers of the oldest living culture and pay respects to their Elders past and present. We extend that respect to all First Nations Peoples.{" "}
                   </p>
                 </div>
               </div>

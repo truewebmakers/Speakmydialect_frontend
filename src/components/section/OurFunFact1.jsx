@@ -53,7 +53,7 @@ export default function OurFunFact1() {
                       </li>
                     </ul>
                     <p className="fz15 dark-color">
-                      Upholding honesty and transparency in all our interactions
+                    We prioritise honesty, transparency, and ethical conduct in every interaction. By being clear, upfront, and accountable in our communication and processes, we build trust with clients, interpreters, and partners, ensuring accurate and reliable service every time. 
                     </p>
                   </div>
                   <div className="funfact-style1 bdrs16 text-center ms-md-auto">
@@ -66,7 +66,7 @@ export default function OurFunFact1() {
                       </li> */}
                     </ul>
                     <p className="fz15 dark-color">
-                      Ensuring excellence in every service we provide.
+                    We are committed to ensuring excellence in every service we provide. Our dedication to being responsive ensures that we meet your needs promptly, while our reliability gives you the confidence that we will always deliver on our promises. With us, quality means peace of mind, knowing that you can depend on us at any time. 
                     </p>
                   </div>
                 </div>
@@ -78,8 +78,7 @@ export default function OurFunFact1() {
                       </li>
                     </ul>
                     <p className="fz15 dark-color">
-                      Embracing and supporting diversity within our community
-                      and across our services.
+                    We embrace a supportive and welcoming environment where all individuals, regardless of their background, identity, or language, are respected and valued. We are committed to offering accessible and equitable services that cater to diverse needs, ensuring that everyone can communicate effectively and confidently.
                     </p>
                   </div>
                 </div>

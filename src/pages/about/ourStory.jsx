@@ -29,13 +29,7 @@ export default function OurStory() {
                     </h2>
 
                     <p className="text  mb35">
-                      SpeakMyDialect was founded to address the frequent
-                      challenges encountered in the interpreting industry, such
-                      as unreliable services, lack of qualified interpreters,
-                      and overpriced offerings. Moses and Ayak, our founders,
-                      experienced these issues firsthand and were driven to
-                      create a platform that guarantees reliable access to
-                      qualified and fairly priced interpreting services
+                    At Speakmydialect, we specialise in providing interpreting services to support local community members and organisations to bridge communication and language barriers. Our goal is to deliver clear, accurate, and reliable information through local interpreters, ensuring efficiency while minimising frustration, costs, and time delays. Our founders experienced issues in the industry with connecting people with the right interpreter based on misidentified dialects, and are dedicated to connecting you with the right person, facilitating seamless communication every time.
                     </p>
                   </div>
                 </div>

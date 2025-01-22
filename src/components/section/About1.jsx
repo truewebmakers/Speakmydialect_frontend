@@ -49,15 +49,9 @@ export default function About1() {
                     {/* <br className="d-none d-lg-block" /> Welcome to SpeakMyDialect */}
                   </h2>
                   <p className="text text-white mb35">
-                    Welcome to SpeakMyDialect, your premier platform for finding
-                    local interpreters. We connect individuals and organisations
-                    with qualified interpreters fluent in a myriad of languages,
-                    enhancing communication and cultural understanding. At
-                    SpeakMyDialect, we are committed to bridging communication
-                    gaps, providing skilled interpreters who facilitate
-                    essential multicultural connections. Whether your needs are
-                    personal, educational, or professional, we ensure that our
-                    services are accessible and affordable for everyone.
+                  At Speakmydialect, we specialise in providing interpreting services to support local community members and organisations to bridge communication and language barriers. Our goal is to deliver clear, accurate, and reliable information through local interpreters, ensuring efficiency while minimising frustration, costs, and time delays. Our founders experienced issues in the industry with connecting people with the right interpreter based on misidentified dialects, and are dedicated to connecting you with the right person, facilitating seamless communication every time. 
+
+
                   </p>
                   <div className="list-style2 light-style">
                     <ul className="mb30">
@@ -87,17 +81,7 @@ export default function About1() {
                     <br className="d-none d-xl-block" />{" "}
                   </h2>
                   <p className="text text-white mb35">
-                    SpeakMyDialect is designed to streamline the process of
-                    finding and booking qualified interpreters. Our platform
-                    enables users to easily search for interpreters based on
-                    language expertise and availability, book sessions, and
-                    manage appointments through a user-friendly dashboard. We
-                    support a variety of session formats, including in-person,
-                    phone, and video calls, making our services accessible
-                    wherever you are. Whether for personal use, educational
-                    purposes, or professional needs, SpeakMyDialect ensures
-                    effective and reliable communication across different
-                    languages.
+                  Speakmydialect simplifies the process of finding and booking interpreters. Our platform allows you to effortlessly search for interpreters based on language and dialect, availability, schedule sessions, and manage appointments through an intuitive dashboard. We offer a range of session formats, including in-person, phone, and video calls, ensuring our services are accessible wherever you need them. Whether for personal, educational, or professional purposes, Speakmydialect guarantees clear and dependable communication across languages.
                   </p>
                 </div>
                 <Link to="/search" className="ud-btn btn-thm">

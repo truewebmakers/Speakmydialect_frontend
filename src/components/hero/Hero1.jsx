@@ -65,7 +65,7 @@ export default function Hero1() {
               <div className="col-xl-10 col-xxl-7">
                 <div className="position-relative">
                   <h3 className="banner-title animate-up-2 text-black">
-                  Connecting Cultures, One Language at a Time {" "}
+                  Connecting Cultures, One Dialect at a Time {" "}
                     <br className="d-none d-lg-block" />
                   </h3>
                   <div className="advance-search-tab bgc-white bgct-sm p10 p0-md bdrs4 banner-btn position-relative zi9 animate-up-4">
