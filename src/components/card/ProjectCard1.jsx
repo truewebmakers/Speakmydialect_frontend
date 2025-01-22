@@ -67,8 +67,7 @@ export default function ProjectCard1({ data }) {
             </p>
             <p className="mb-0 fz14 list-inline-item mb5-sm pe-1">
               <i className="flaticon-gender fz16 vam text-thm2 me-1 bdrl1 pl15 pl0-xs bdrn-xs" />{" "}
-              {CapitalizeFirstLetter(data?.user_meta?.gender) ||
-                "Gender not specified"}
+              {CapitalizeFirstLetter(data?.user_meta?.gender) || ""}
             </p>
             <p className="text mt10">
               {data?.user_meta?.intro

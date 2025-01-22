@@ -26,9 +26,9 @@ export default function Footer() {
                 </div>
                 <div className="footer-content">
                   <p className="footer-content-text">
-                  Speakmydialect acknowledges the Traditional Owners of Country throughout Australia. We pay our respects to Elders past and present. 
-
-We recognise the First Peoples of this Nation and their ongoing cultural and spiritual connections to the lands, waters, seas, skies, and communities. We acknowledge First Nations Peoples as the Traditional Custodians and Lore Keepers of the oldest living culture and pay respects to their Elders past and present. We extend that respect to all First Nations Peoples.{" "}
+                    Speakmydialect acknowledges the Traditional Owners of
+                    Country throughout Australia. We pay our respects to Elders
+                    past and present.
                   </p>
                 </div>
               </div>
@@ -116,6 +116,22 @@ We recognise the First Peoples of this Nation and their ongoing cultural
               </div>
             </div>
           </div>
+        </div>
+        <div className="container">
+          <span
+            className={`copyright-text mb-2 mb-md-0  ${
+              pathname === "/home-11" ? "text-white" : "text-white-light"
+            } ff-heading`}
+          >
+            Speakmydialect acknowledges the Traditional Owners of Country
+            throughout Australia. We pay our respects to Elders past and
+            present. We recognise the First Peoples of this Nation and their
+            ongoing cultural and spiritual connections to the lands, waters,
+            seas, skies, and communities. We acknowledge First Nations Peoples
+            as the Traditional Custodians and Lore Keepers of the oldest living
+            culture and pay respects to their Elders past and present. We extend
+            that respect to all First Nations Peoples.
+          </span>
         </div>
         <div className="container white-bdrt1 py-4">
           <div className="row align-items-center">

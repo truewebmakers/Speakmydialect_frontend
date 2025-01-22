@@ -6,7 +6,7 @@ export const apiMethods = {
 };
 
 export const fixRate = 77;
-export const pageLimit = 5;
+export const pageLimit = 20;
 
 export const env = {
   API_URL: import.meta.env.VITE_APP_API_URL,

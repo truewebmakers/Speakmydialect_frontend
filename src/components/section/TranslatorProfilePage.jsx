@@ -46,7 +46,7 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                 </div>
 
                 {/* Skills */}
-                {translatorProfile?.user_skills?.length ? (
+                {/* {translatorProfile?.user_skills?.length ? (
                   <>
                     <hr className="opacity-100 mb60 mt60" />
 
@@ -75,7 +75,7 @@ export default function TranslatorProfilePage({ translatorProfile }) {
                       </div>
                     </div>
                   ))}
-                </div>
+                </div> */}
                 {/* Work & Experience */}
                 {translatorProfile?.user_work_experince?.length ? (
                   <>

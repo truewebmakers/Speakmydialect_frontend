@@ -118,8 +118,7 @@ export default function TrendingServiceCard1({ data }) {
               : "Location not specified "}
             <br />
             <img src="/images/gender.png" height={23} width={23} />{" "}
-            {CapitalizeFirstLetter(data?.user_meta?.gender) ||
-              "Gender not specified"}
+            {CapitalizeFirstLetter(data?.user_meta?.gender) || ""}
           </div>
         </div>
       </div>

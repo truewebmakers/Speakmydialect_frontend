@@ -4,15 +4,12 @@ import MetaComponent from "@/components/common/MetaComponent";
 import { metaData } from "@/constants/constant";
 import ContactInfo1 from "@/components/section/ContactInfo1";
 export default function Breadcumb9({ searchValue }) {
-
-  console.log("searchValue",searchValue)
-  // Accept searchValue as a prop
   return (
-  <>
-    <section className="wow fadeInUp">
+    <>
+      <section className="wow fadeInUp">
         <div className="cta-commmon-v1 cta-banner bgc-thm2 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative  asd d-flex align-items-center mx20-lg">
           <img
-            className="left-top-img wow zoomIn" 
+            className="left-top-img wow zoomIn"
             src="/images/vector-img/left-top.png"
             alt="object 1"
           />
@@ -30,15 +27,17 @@ export default function Breadcumb9({ searchValue }) {
                 >
                   <h2 className="text-white">{"Search Results"}</h2>
                   <p className="text mb30 text-white">{""}</p>
-                  <HeroSearch1 isSearchingPage={true} searchValue={searchValue} />{" "}
+                  <HeroSearch1
+                    isSearchingPage={true}
+                    searchValue={searchValue}
+                  />{" "}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-  
-    
+
       <section className="breadcumb-section pt-0 d-none">
         <div className="cta-service-v1  TEs cta-banner mx-auto maxw1700 pt120 pb120 bdrs16 position-relative d-flex align-items-center mx20-lg px30-lg">
           <img

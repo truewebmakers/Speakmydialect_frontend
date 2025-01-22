@@ -41,12 +41,30 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
       });
       return; // Exit early
     }
+    if (query?.language && isNaN(query?.language)) {
+      const languages = sessionStorage.getItem("languages");
+      const getLanguage = languages ? JSON.parse(languages) : null;
 
-    // Call API with the constructed query if any filter is selected
-    searchingApi(query).then((data) => {
-      setTotal(data?.total_count);
-      setSearchingResult(data?.data);
-    });
+      const response = getLanguage?.find(
+        (item) => item?.name?.toLowerCase() === query?.language?.toLowerCase()
+      );
+
+      const searchQuery = response?.id
+        ? { ...query, language: response.id }
+        : query;
+
+      // Call API with the constructed query if any filter is selected
+      searchingApi(searchQuery).then((data) => {
+        setTotal(data?.total_count);
+        setSearchingResult(data?.data);
+      });
+    } else {
+      // Call API with the constructed query if any filter is selected and if language is not a number
+      searchingApi(query).then((data) => {
+        setTotal(data?.total_count);
+        setSearchingResult(data?.data);
+      });
+    }
     setSearchingResult1([]); // Reset previous results
   };
 
