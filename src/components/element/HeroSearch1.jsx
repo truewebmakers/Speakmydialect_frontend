@@ -145,7 +145,7 @@ export default function HeroSearch1({ isSearchingPage, searchValue }) {
                           <div className="info-product cursor-pointer">
                             <div
                               className="item_title"
-                              onClick={() => selectSearch(item?.id)}
+                              onClick={() => selectSearch(item?.name)}
                             >
                               {item?.name}
                             </div>

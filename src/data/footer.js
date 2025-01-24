@@ -52,7 +52,7 @@ export const quickLinks2 = [
 ];
 
 export const support = [
-  { id: 1, name: "Email: Info@speakmydialect.com.au", path: "/" },
+  { id: 1, name: "Email: speakmydialect@gmail.com", path: "/" },
 ];
 
 export const momney = ["US$ USD", "Euro", "Pound"];

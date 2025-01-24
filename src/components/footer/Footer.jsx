@@ -26,9 +26,9 @@ export default function Footer() {
                 </div>
                 <div className="footer-content">
                   <p className="footer-content-text">
-                    Speakmydialect acknowledges the Traditional Owners of
-                    Country throughout Australia. We pay our respects to Elders
-                    past and present.
+                    At Speakmydialect, we specialise in providing interpreting
+                    services to support local community members and
+                    organisations to bridge communication and language barriers.
                   </p>
                 </div>
               </div>
@@ -107,7 +107,7 @@ export default function Footer() {
                   Support
                 </h5>
                 <ul className="ps-0">
-                  {support.map((item, i) => (
+                  {support?.map((item, i) => (
                     <li key={i}>
                       <Link to={item.path}>{item.name}</Link>
                     </li>

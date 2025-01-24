@@ -218,7 +218,7 @@ export default function Skill() {
               <div className="row align-items-center">
                 <div className="col-sm-3 mb20">
                   <SelectInput
-                    label="Skill"
+                    label="Language"
                     defaultSelect={{
                       option: skill?.language?.option || "Select",
                       value: skill?.language?.value || null,
