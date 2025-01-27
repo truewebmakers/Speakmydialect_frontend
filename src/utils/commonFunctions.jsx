@@ -31,10 +31,11 @@ export const getCountries = async (setCountryList) => {
 
 export const getDialects = async (setDialectListing) => {
   try {
-    const formattedArray = dialectData?.map((lang, index) => ({
-      id: index + 1,
-      dialect: lang,
-    }));
+    const formattedArray = dialectData;
+    // const formattedArray = dialectData?.map((lang, index) => ({
+    //   id: index + 1,
+    //   dialect: lang,
+    // }));
     // const response = await UseApi(apiUrls.getDialects, apiMethods.GET);
     // if (response?.status === 200 || response?.status === 201) {
     //   const dialectData = response?.data?.data;

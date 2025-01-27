@@ -270,29 +270,54 @@ export const languageData = [
 ];
 
 export const dialectData = [
-  "Egypt",
-  "MiddleEast",
-  "South Sundanese",
-  "Sundanese",
-  "Turkey",
-  "Lingala",
-  "Abyei",
-  "Aweil",
-  "Bor",
-  "Acholi",
-  "Bari",
-  "Kuku",
-  "Madi",
-  "Pojulu",
-  "Amharic",
-  "Oromo",
-  "Greek",
-  "Thok Naath",
-  "Garre",
-  "Congolese",
-  "Kenyan",
-  "Tanzanian",
-  "Ugandan",
+  {
+    languageId: 1,
+    dialect: "Egypt",
+  },
+  {
+    languageId: 1,
+    dialect: "MiddleEast",
+  },
+  {
+    languageId: 2,
+    dialect: "Lingala",
+  },
+  {
+    languageId: 3,
+    dialect: "South Sundanese",
+  },
+  {
+    languageId: 3,
+    dialect: "Aweil",
+  },
+  {
+    languageId: 4,
+    dialect: "Bari",
+  },
+  {
+    languageId: 5,
+    dialect: "Amharic",
+  },
+  {
+    languageId: 5,
+    dialect: "Oromo",
+  },
+  {
+    languageId: 6,
+    dialect: "Turkey",
+  },
+  {
+    languageId: 7,
+    dialect: "Thok Naath",
+  },
+  {
+    languageId: 8,
+    dialect: "Garre",
+  },
+  {
+    languageId: 9,
+    dialect: "Tanzanian",
+  },
 ];
 
 export const planFeatures = [
