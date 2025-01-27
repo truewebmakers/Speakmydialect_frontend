@@ -2918,6 +2918,9 @@ span.mb25.me-4.badge-success {
   width: 80%;
   z-index: 1;
 }
+.make-left {
+  right: 14%;
+}
 
 @media (max-width: 1199.98px) {
   .home1-banner-content {
@@ -5078,7 +5081,7 @@ section {
 }
 
 .cta-about-v1 {
-  background-image: url(../images/background/cta-about-banner.jpg);
+  background-image: url(../images/background/About_Us_SMD.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 300px;
@@ -14519,11 +14522,10 @@ hr {
   margin-left: 50px;
 }
 
-
 .category-list a .text-wrap {
   word-break: break-word; /* Ensures long text breaks properly */
-  text-align: right;      /* Aligns the address text to the right */
-  white-space: pre-wrap;  /* Allows wrapping and preserves spacing */
+  text-align: right; /* Aligns the address text to the right */
+  white-space: pre-wrap; /* Allows wrapping and preserves spacing */
 }
 
 .category-list a {

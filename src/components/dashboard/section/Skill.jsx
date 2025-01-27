@@ -135,7 +135,6 @@ export default function Skill() {
     const fetchData = async () => {
       const storedLanguages = sessionStorage.getItem("languages");
       const storedDialect = sessionStorage.getItem("dialect");
-
       if (storedLanguages?.length > 0) {
         setLanguageListing(JSON.parse(storedLanguages));
         getSkills();
@@ -239,10 +238,14 @@ export default function Skill() {
                       option: skill?.dialect?.option || "Select",
                       value: skill?.dialect?.value || null,
                     }}
-                    data={dialectOptions?.map((item) => ({
-                      option: item?.dialect,
-                      value: item?.dialect,
-                    }))}
+                    data={dialectOptions
+                      ?.filter(
+                        (item) => item?.languageId === skill?.language?.value
+                      )
+                      ?.map((item) => ({
+                        option: item?.dialect,
+                        value: item?.dialect,
+                      }))}
                     handler={(option, value) =>
                       handleFieldChange(index, "dialect", option, value)
                     }

@@ -10,8 +10,15 @@ export default function Breadcumb2({ title, brief }) {
           pathname !== "/blog-2" && pathname !== "/blog-3" ? "" : "pt0"
         }`}
       >
-        <div className="cta-about-v1 mx-auto maxw1700 pt120 pb120 position-relative overflow-hidden d-flex align-items-center mx20-lg">
-          <div className="container">
+        <div
+          className="cta-about-v1 mx-auto maxw1700 pt120 pb120 position-relative overflow-hidden d-flex align-items-center mx20-lg"
+          style={{
+            borderBottom: "1px solid #eadfdf",
+            zIndex: "999",
+            marginBottom: "5px",
+          }}
+        >
+          {/* <div className="container">
             <div className="row">
               <div className="col-xl-5">
                 <div className="position-relative">
@@ -20,7 +27,7 @@ export default function Breadcumb2({ title, brief }) {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </>

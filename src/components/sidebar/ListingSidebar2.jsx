@@ -7,7 +7,6 @@ import ProjectTypeOption1 from "../option/ProjectTypeOption1";
 import SpeakOption1 from "../option/SpeakOption1";
 import {
   getCountries,
-  getDialects,
   getLanguages,
   getSelectedDialect,
 } from "@/utils/commonFunctions";

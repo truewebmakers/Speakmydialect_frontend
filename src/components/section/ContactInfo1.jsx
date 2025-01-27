@@ -154,7 +154,7 @@ export default function ContactInfo1() {
                     <span className="flaticon-mail" />
                     <div className="details d-flex align-items-center">
                       <p className="mb-0 text" style={{ fontSize: "17px" }}>
-                        Info@speakmydialect.com.au
+                        speakmydialect@gmail.com
                       </p>
                     </div>
                   </div>
