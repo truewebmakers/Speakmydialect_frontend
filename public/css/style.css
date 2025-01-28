@@ -14544,3 +14544,10 @@ hr {
   color: #6c757d; /* Adjust to match the style of your design */
   font-size: 14px; /* Optional: adjust font size */
 }
+
+@media only screen and (max-width: 600px) {
+.stylehome1 .ml100{
+  margin-left:0 !important; 
+}
+
+}

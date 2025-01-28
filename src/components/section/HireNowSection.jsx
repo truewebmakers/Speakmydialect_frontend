@@ -195,7 +195,7 @@ export default function HireNowSection({ translatorProfile }) {
       <div className="container">
         <div className="row wow fadeInUp" data-wow-delay="300ms">
           <div className="col-lg-4"></div>
-          <div className="col-lg-6 ml100">
+          <div className="col-lg-6 ">
             <div className="contact-page-form default-box-shadow1 bdrs8 bdr1 p50 mb30-md bgc-white">
               <h4 className="form-title mb25">Book your Interpreter Now</h4>
               <p className="text mb30">
