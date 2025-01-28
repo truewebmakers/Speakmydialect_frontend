@@ -272,27 +272,71 @@ export const languageData = [
 export const dialectData = [
   {
     languageId: 1,
-    dialect: "Egypt",
+    dialect: "Egyptian",
   },
   {
     languageId: 1,
-    dialect: "MiddleEast",
+    dialect: "South Sudanese",
+  },
+  {
+    languageId: 1,
+    dialect: "Sudanese",
+  },
+  {
+    languageId: 1,
+    dialect: "Turkish",
+  },
+  {
+    languageId: 1,
+    dialect: "Moroccan",
   },
   {
     languageId: 2,
     dialect: "Lingala",
   },
   {
-    languageId: 3,
-    dialect: "South Sundanese",
+    languageId: 2,
+    dialect: "Swahili",
+  },
+  {
+    languageId: 2,
+    dialect: "French",
   },
   {
     languageId: 3,
     dialect: "Aweil",
   },
   {
+    languageId: 3,
+    dialect: "Bor",
+  },
+  {
+    languageId: 3,
+    dialect: "Abyel",
+  },
+  {
+    languageId: 3,
+    dialect: "Agar",
+  },
+  {
     languageId: 4,
     dialect: "Bari",
+  },
+  {
+    languageId: 4,
+    dialect: "Acholi",
+  },
+  {
+    languageId: 4,
+    dialect: "Kuku",
+  },
+  {
+    languageId: 4,
+    dialect: "Pojulu",
+  },
+  {
+    languageId: 4,
+    dialect: "Madi",
   },
   {
     languageId: 5,
@@ -304,19 +348,103 @@ export const dialectData = [
   },
   {
     languageId: 6,
-    dialect: "Turkey",
-  },
-  {
-    languageId: 7,
     dialect: "Thok Naath",
   },
   {
-    languageId: 8,
+    languageId: 6,
+    dialect: "Lou",
+  },
+  {
+    languageId: 7,
+    dialect: "Oromo",
+  },
+  {
+    languageId: 7,
+    dialect: "Amharic",
+  },
+  {
+    languageId: 7,
     dialect: "Garre",
   },
   {
-    languageId: 9,
+    languageId: 8,
     dialect: "Tanzanian",
+  },
+  {
+    languageId: 8,
+    dialect: "Kenyan",
+  },
+  {
+    languageId: 8,
+    dialect: "Ugandan",
+  },
+  {
+    languageId: 9,
+    dialect: "Yoruba, Igbo, Pidgin English",
+  },
+  {
+    languageId: 9,
+    dialect: "Igbo",
+  },
+  {
+    languageId: 9,
+    dialect: "Pidgin",
+  },
+  {
+    languageId: 9,
+    dialect: "English",
+  },
+  {
+    languageId: 10,
+    dialect: "Punjabi",
+  },
+  {
+    languageId: 10,
+    dialect: "Urdu",
+  },
+  {
+    languageId: 10,
+    dialect: "Hindi",
+  },
+  {
+    languageId: 10,
+    dialect: "Tamil",
+  },
+  {
+    languageId: 11,
+    dialect: "Persian",
+  },
+  {
+    languageId: 11,
+    dialect: "Farsi",
+  },
+  {
+    languageId: 12,
+    dialect: " Karen",
+  },
+  {
+    languageId: 12,
+    dialect: "Kachin",
+  },
+  {
+    languageId: 12,
+    dialect: "Chin",
+  },
+  {
+    languageId: 12,
+    dialect: "Burmese",
+  },
+  {
+    languageId: 13,
+    dialect: "Standard Chinese",
+  },
+  {
+    languageId: 13,
+    dialect: "Mandarin",
+  },
+  {
+    languageId: 13,
+    dialect: "Middle Chinese",
   },
 ];
 

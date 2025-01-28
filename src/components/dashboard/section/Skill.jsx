@@ -142,13 +142,8 @@ export default function Skill() {
         await getLanguages(setLanguageListing);
         getSkills();
       }
-      if (storedDialect?.length > 0) {
-        setDialectOptions(JSON.parse(storedDialect));
-        getSkills();
-      } else {
-        await getDialects(setDialectOptions);
-        getSkills();
-      }
+      await getDialects(setDialectOptions);
+      getSkills();
     };
     fetchData();
   }, []);
