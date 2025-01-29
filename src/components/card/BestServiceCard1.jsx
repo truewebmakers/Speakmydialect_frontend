@@ -9,7 +9,7 @@ export default function BestServiceCard1({ data }) {
 
   return (
     <>
-      <div className={`listing-style1 `}>
+      <div className={`listing-style1 Pah`}>
         <div className="list-thumb">
           <img
             className="w-100 h-auto object-fit-cover"

@@ -15,6 +15,11 @@ export default function TrendingServiceCard1({ data }) {
   const [countryList, setCountryList] = useState([]);
   const [languageList, setLanguageList] = useState([]);
 
+
+  const handleClick = (id) => {
+    location.href="/profile/"+id
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const storedCountries = sessionStorage.getItem("countries");
@@ -81,7 +86,7 @@ export default function TrendingServiceCard1({ data }) {
             alt="interpreter Photo"
           />
           <h5 className="list-title">
-            <Link to={`/service-single/${data.id}`}>
+            <Link to={`/profile/${data.uuid}`}>
               {CapitalizeFirstLetter(data?.fname)}{" "}
               {CapitalizeFirstLetter(data?.lname)}
             </Link>
@@ -112,11 +117,11 @@ export default function TrendingServiceCard1({ data }) {
         <hr className="my-2" />
         <div className="list-meta d-flex justify-content-between align-items-center mt15">
           <div className="budget">
-            <img src="/images/location.png" height={23} width={23} />{" "}
+            {/* <img src="/images/location.png" height={23} width={23} />{" "}
             {data?.user_meta?.location && countryList?.length > 0
               ? getCountryName(data?.user_meta?.location, countryList)
-              : "Location not specified "}
-            <br />
+              : "Location not specified "} */}
+            {/* <br /> */}
             <img src="/images/gender.png" height={23} width={23} />{" "}
             {CapitalizeFirstLetter(data?.user_meta?.gender) || ""}
           </div>

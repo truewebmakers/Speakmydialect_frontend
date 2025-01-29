@@ -33,7 +33,7 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div className="col-sm-6 col-lg-3" style={{ paddingLeft: "124px" }}>
+            <div className="col-sm-6 col-lg-3" >
               <div
                 className={`link-style1 mb-4 mb-sm-5 ${
                   pathname === "/home-4"
@@ -61,7 +61,7 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
-            <div className="col-sm-6 col-lg-3" style={{ paddingLeft: "60px" }}>
+            <div className="col-sm-6 col-lg-3"  >
               <div
                 className={`link-style1 mb-4 mb-sm-5 ${
                   pathname === "/home-4"
@@ -135,8 +135,8 @@ export default function Footer() {
         </div>
         <div className="container white-bdrt1 py-4">
           <div className="row align-items-center">
-            <div className="col-md-6">
-              <div className="text-center text-lg-start">
+            <div className="col-md-12">
+              <div className="text-center  ">
                 <p
                   className={`copyright-text mb-2 mb-md-0  ${
                     pathname === "/home-11" ? "text-white" : "text-white-light"

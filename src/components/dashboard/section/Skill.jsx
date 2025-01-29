@@ -263,7 +263,7 @@ export default function Skill() {
                   />
                 </div>
 
-                <div className="col-sm-3 mb20">
+                <div className="col-sm-2 mb20">
                   <label className="heading-color ff-heading fw500 mb10">
                     Status
                   </label>
@@ -280,7 +280,7 @@ export default function Skill() {
                   </div>
                 </div>
                 {index >= 0 && (
-                  <div className="col-sm-3 mb20">
+                  <div className="col-sm-1 mb20">
                     <div className="del-edit">
                       <div className="d-flex">
                         <a

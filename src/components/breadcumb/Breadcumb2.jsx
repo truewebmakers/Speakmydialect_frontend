@@ -7,7 +7,7 @@ export default function Breadcumb2({ title, brief }) {
     <>
       <section
         className={` ${
-          pathname !== "/blog-2" && pathname !== "/blog-3" ? "" : "pt0"
+          pathname !== "/blog-2" && pathname !== "/blog-3" ? "about-page" : "pt0"
         }`}
       >
         <div
