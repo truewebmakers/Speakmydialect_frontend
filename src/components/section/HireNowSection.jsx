@@ -35,6 +35,7 @@ export default function HireNowSection({ translatorProfile }) {
     end_time: "",
     duration: { hours: 0, minutes: 0 }, // Duration fields
   });
+  const [selectedSlots, setSelectedSlots] = useState([]); // New state for multiple slots
 
   const { user, profileData } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,6 +73,28 @@ export default function HireNowSection({ translatorProfile }) {
     setHireNowForm({ ...hireNowForm, [name]: value });
   };
 
+  const handleSlotSelection = (slot) => {
+    const isSelected = selectedSlots?.some(
+      (selectedSlot) =>
+        selectedSlot?.start_time === slot?.start_time &&
+        selectedSlot?.end_time === slot?.end_time
+    );
+    if (isSelected) {
+      setSelectedSlots(
+        selectedSlots?.filter(
+          (selectedSlot) =>
+            selectedSlot?.start_time !== slot?.start_time ||
+            selectedSlot?.end_time !== slot?.end_time
+        )
+      );
+    } else {
+      setSelectedSlots([
+        ...selectedSlots,
+        { start_time: slot.start_time, end_time: slot.end_time },
+      ]);
+    }
+  };
+
   const addBooking = async () => {
     const formErrors = validateBookingForm(hireNowForm);
     if (Object.keys(formErrors)?.length > 0) {
@@ -99,9 +122,8 @@ export default function HireNowSection({ translatorProfile }) {
           hours: "",
           minutes: "",
         },
-        start_time: hireNowForm?.start_time,
-        end_time: hireNowForm?.end_time,
         day: selectedDay,
+        slots: selectedSlots,
       };
       const response = await UseApi(
         apiUrls.addBooking,
@@ -112,19 +134,15 @@ export default function HireNowSection({ translatorProfile }) {
       if (response?.status === 201 || response?.status === 200) {
         const data = {
           jobId: response?.data?.data?.id,
-          description: `Title is: ${hireNowForm?.job_title}, Start time is: ${hireNowForm?.start_time}, End time is: ${hireNowForm?.end_time}`,
+          description: `Title is: ${hireNowForm?.job_title}`,
           clientUserName: user?.userInfo?.username,
           clientEmail: user?.userInfo?.email,
           presentRate: response?.data?.data?.present_rate,
           startDate: hireNowForm?.start_at,
           endDate: hireNowForm?.end_at,
-          duration: {
-            hours: "",
-            minutes: "",
-          },
+          duration: response?.data?.duration_in_minutes,
           day: selectedDay,
-          start_time: hireNowForm?.start_time,
-          end_time: hireNowForm?.end_time,
+          slots: selectedSlots,
         };
         navigate(routes.PayNow, { state: data });
         setIsLoading(false);
@@ -139,8 +157,6 @@ export default function HireNowSection({ translatorProfile }) {
           payment_status: { option: "Select", value: null },
           start_at: "",
           end_at: "",
-          start_time: "",
-          end_time: "",
           job_title: "",
           duration: { hours: 0, minutes: 0 },
         });
@@ -317,22 +333,22 @@ export default function HireNowSection({ translatorProfile }) {
                             <button
                               key={index}
                               className={`btn btn-outline-primary ${
-                                slot?.start_time === hireNowForm?.start_time
+                                selectedSlots?.some(
+                                  (selectedSlot) =>
+                                    selectedSlot?.start_time ===
+                                    slot?.start_time
+                                )
                                   ? "active"
                                   : ""
                               }`}
                               onClick={(e) => {
                                 e.preventDefault();
-                                setHireNowForm({
-                                  ...hireNowForm,
-                                  start_time: slot?.start_time,
-                                  end_time: slot?.end_time,
-                                });
+                                handleSlotSelection(slot); // Call the new handler
                               }}
                             >
                               {`${formatTo12Hour(
-                                slot?.start_time
-                              )} - ${formatTo12Hour(slot?.end_time)}`}
+                                slot.start_time
+                              )} - ${formatTo12Hour(slot.end_time)}`}
                             </button>
                           ))}
                         </div>
@@ -357,8 +373,6 @@ export default function HireNowSection({ translatorProfile }) {
                           isLoading ||
                           !hireNowForm?.job_title ||
                           !hireNowForm?.availability?.value ||
-                          !hireNowForm?.start_time ||
-                          !hireNowForm?.end_time ||
                           timeSlots?.length === 0
                         }
                       >

@@ -20,13 +20,13 @@ const PayNowForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (state?.presentRate && state?.start_time && state?.end_time) {
-      const { presentRate, end_time, start_time } = state;
+    if (state?.presentRate && state?.slots && state?.duration) {
+      const { presentRate, slots, duration } = state;
       setCalculating(true);
       const { amountToReceive, totalAmount } = calculatePayment(
         presentRate,
-        start_time,
-        end_time
+        slots,
+        duration
       );
       setAmountToReceive(amountToReceive);
       setTotalAmount(totalAmount);
