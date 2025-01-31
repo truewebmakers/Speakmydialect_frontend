@@ -8,7 +8,7 @@ import { Tooltip } from "react-tooltip";
 import Loader from "@/components/common/loader";
 import { getDialects, getLanguages } from "@/utils/commonFunctions";
 
-export default function Skill() {
+export default function Skill({ userId }) {
   const [skills, setSkills] = useState([]);
   const [languageListing, setLanguageListing] = useState([]);
   const [dialectOptions, setDialectOptions] = useState([]); // Store dialect options for each language
@@ -86,7 +86,7 @@ export default function Skill() {
         Authorization: `Bearer ${user?.token}`,
       };
       const response = await UseApi(
-        apiUrls.getSkills + user?.userInfo?.id,
+        apiUrls.getSkills + (userId || user?.userInfo?.id),
         apiMethods.GET,
         null,
         headers
@@ -176,7 +176,7 @@ export default function Skill() {
         })),
       };
       const response = await UseApi(
-        apiUrls.updateUserSkill + user?.userInfo?.id,
+        apiUrls.updateUserSkill + (userId || user?.userInfo?.id),
         apiMethods.POST,
         bodyData,
         headers

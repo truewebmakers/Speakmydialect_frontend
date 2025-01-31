@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import Loader from "@/components/common/loader";
 import { getCountries } from "@/utils/commonFunctions";
 
-export default function TranslatorProfileDetails() {
+export default function TranslatorProfileDetails({ userId }) {
   const [profileDetails, setProfileDetails] = useState({
     fname: "",
     lname: "",
@@ -144,7 +144,7 @@ export default function TranslatorProfileDetails() {
       };
 
       const response = await UseApi(
-        apiUrls.updateProfile + user?.userInfo?.id,
+        apiUrls.updateProfile + (userId || user?.userInfo?.id),
         apiMethods.POST,
         bodyData,
         headers

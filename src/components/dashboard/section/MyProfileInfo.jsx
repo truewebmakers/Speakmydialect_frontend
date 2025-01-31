@@ -10,14 +10,23 @@ import { getProfileDetails } from "@/redux/auth";
 import { getProfileData } from "@/utils/commonFunctions";
 import TranslatorProfileDetails from "./TranslatorProfileDetails";
 import UserAvailability from "./UserAvailability";
+import { useLocation } from "react-router-dom";
 
 export default function MyProfileInfo() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const params = useLocation();
+  const isSuperAdmin = params?.search?.includes("superaccess");
+  const clientProfileType = params?.search
+    ? params?.search?.split("type=")[1]
+    : null;
+  const userId = params?.search
+    ? params?.search?.split("id=")[1]?.split("&")[0]
+    : user?.userInfo?.id;
 
   useEffect(() => {
     const fetchData = async () => {
-      let res = await getProfileData(user?.userInfo?.id, user?.token);
+      let res = await getProfileData(userId, user?.token);
       dispatch(getProfileDetails(res));
     };
     fetchData();
@@ -40,20 +49,28 @@ export default function MyProfileInfo() {
         <div className="row">
           <div className="col-xl-12">
             {/* Profile Details will be visible to everone */}
-            {user?.userInfo?.user_type == "client" && <ClientProfileDetails />}
+            {(user?.userInfo?.user_type == "client" ||
+              (isSuperAdmin &&
+                clientProfileType == "client" &&
+                user?.userInfo?.id == 1)) && (
+              <ClientProfileDetails userId={userId} />
+            )}
 
             {/* Only Transaltor can see skills, education & work Expierence modules */}
-            {user?.userInfo?.user_type == "translator" && (
+            {(user?.userInfo?.user_type == "translator" ||
+              (isSuperAdmin &&
+                clientProfileType == "translator" &&
+                user?.userInfo?.id == 1)) && (
               <>
-                <TranslatorProfileDetails />
-                <Skill />
-                <UserAvailability />
-                <Education />
-                <WorkExperience />
+                <TranslatorProfileDetails userId={userId} />
+                <Skill userId={userId} />
+                <UserAvailability userId={userId} />
+                <Education userId={userId} />
+                <WorkExperience userId={userId} />
               </>
             )}
             {/* Change Password will be visible to all  */}
-            <ChangePassword />
+            <ChangePassword userId={userId} />
           </div>
         </div>
       </div>

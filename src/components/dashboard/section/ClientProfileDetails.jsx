@@ -9,7 +9,7 @@ import Loader from "@/components/common/loader";
 import { getCountries } from "@/utils/commonFunctions";
 import { useNavigate } from "react-router-dom";
 
-export default function ClientProfileDetails() {
+export default function ClientProfileDetails({ userId }) {
   const [profileDetails, setProfileDetails] = useState({
     fname: "",
     lname: "",
@@ -165,7 +165,7 @@ export default function ClientProfileDetails() {
       };
       // Call signup API
       const response = await UseApi(
-        apiUrls.updateProfile + user?.userInfo?.id,
+        apiUrls.updateProfile + (userId || user?.userInfo?.id),
         apiMethods.POST,
         bodyData,
         headers

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-export default function ChangePassword() {
+export default function ChangePassword({ userId }) {
   const [pass, setPass] = useState({
     oldPassword: "",
     newPassword: "",
@@ -72,7 +72,7 @@ export default function ChangePassword() {
       };
       // Call API
       const response = await UseApi(
-        apiUrls.changePassword + user?.userInfo?.id,
+        apiUrls.changePassword + (userId || user?.userInfo?.id),
         apiMethods.POST,
         bodyData,
         headers

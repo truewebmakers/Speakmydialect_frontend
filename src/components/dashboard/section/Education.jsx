@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import AddEducationModal from "../modal/AddEducationModal";
 import { Tooltip } from "react-tooltip";
 
-export default function Education() {
+export default function Education({ userId }) {
   const [educationList, setEducationList] = useState([]);
   const [currentEducation, setCurrentEducation] = useState({
     degree_name: "",
@@ -72,7 +72,7 @@ export default function Education() {
         Authorization: `Bearer ${user?.token}`,
       };
       const response = await UseApi(
-        apiUrls.getEducation + user?.userInfo?.id,
+        apiUrls.getEducation + (userId || user?.userInfo?.id),
         apiMethods.GET,
         null,
         headers
@@ -160,7 +160,7 @@ export default function Education() {
         any_info: currentEducation?.any_info,
       };
       const response = await UseApi(
-        apiUrls.addEducation + user?.userInfo?.id,
+        apiUrls.addEducation + (userId || user?.userInfo?.id),
         apiMethods.POST,
         bodyData,
         headers

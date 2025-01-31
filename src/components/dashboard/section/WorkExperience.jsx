@@ -8,7 +8,7 @@ import { formatDate } from "@/utils/helper";
 import AddExperienceModal from "../modal/AddExperienceModal";
 import { getCountries, getCountryName } from "@/utils/commonFunctions";
 
-export default function WorkExperience() {
+export default function WorkExperience({ userId }) {
   const [experienceList, setExperienceList] = useState([]);
   const [currentExperience, setCurrentExperience] = useState({
     title: "",
@@ -116,7 +116,7 @@ export default function WorkExperience() {
         Authorization: `Bearer ${user?.token}`,
       };
       const response = await UseApi(
-        apiUrls.getExperience + user?.userInfo?.id,
+        apiUrls.getExperience + (userId || user?.userInfo?.id),
         apiMethods.GET,
         null,
         headers
@@ -208,7 +208,7 @@ export default function WorkExperience() {
         job_description: currentExperience?.job_description,
       };
       const response = await UseApi(
-        apiUrls.addExperience + user?.userInfo?.id,
+        apiUrls.addExperience + (userId || user?.userInfo?.id),
         apiMethods.POST,
         bodyData,
         headers

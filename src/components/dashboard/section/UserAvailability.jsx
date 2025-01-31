@@ -6,7 +6,7 @@ import UseApi from "@/hook/useApi"; // Custom API hook
 import { apiMethods, apiUrls } from "@/constants/constant"; // API constants
 import moment from "moment";
 
-export default function UserAvailability() {
+export default function UserAvailability({ userId }) {
   const [availability, setAvailability] = useState({
     Monday: [{ start: "", end: "" }],
     Tuesday: [{ start: "", end: "" }],
@@ -39,7 +39,7 @@ export default function UserAvailability() {
 
     try {
       const response = await UseApi(
-        apiUrls.getUserAvailability + user?.userInfo?.id,
+        apiUrls.getUserAvailability + (userId || user?.userInfo?.id),
         apiMethods.GET,
         null,
         headers
@@ -157,7 +157,7 @@ export default function UserAvailability() {
     });
 
     const bodyData = {
-      translator_id: user?.userInfo?.id,
+      translator_id: userId || user?.userInfo?.id,
       availability: formattedAvailability,
       slot_duration: parseInt(duration),
     };
