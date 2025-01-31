@@ -73,6 +73,12 @@ export const clientNavigation = [
 
 export const adminNavigation = [
   {
+    id: 0,
+    name: "Users",
+    icon: "fa-regular fa-users",
+    path: "/admin/users",
+  },
+  {
     id: 1,
     name: "User Approvals",
     icon: "fa-regular fa-user", // Updated icon for multiple users

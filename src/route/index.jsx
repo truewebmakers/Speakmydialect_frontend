@@ -26,6 +26,7 @@ import ChooseUserType from "@/pages/auth/register/chooseUserType";
 import PrivacyPage from "@/pages/privacy";
 import PayNow from "@/pages/pay_now/Pay";
 import ContactInquiry from "@/pages/admin/contactInquiry";
+import Users from "@/pages/admin/users.jsx";
 
 const AppRoutes = () => {
   const { user } = useSelector((state) => state.auth);
@@ -96,6 +97,15 @@ const AppRoutes = () => {
           }
         />
         <Route
+          path={routes.MyProfileSuperAdminAccess}
+          element={
+            <ProtectedRoute>
+              <DasbPageMyProfile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path={routes.Dashboard}
           element={
             <ProtectedRoute>
@@ -135,6 +145,15 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path={routes.Users}
+          element={
+            <ProtectedRoute>
+              <Users />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path={routes.contactInquiry}
           element={

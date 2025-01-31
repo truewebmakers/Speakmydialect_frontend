@@ -12,6 +12,7 @@ export const header3 = [
   "/privacy",
   "/search",
   "/admin/userApprovals",
+  "/admin/users",
   "/admin/contactInquiry",
   "/invoice",
   "/pay",

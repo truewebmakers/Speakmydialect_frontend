@@ -66,6 +66,7 @@ export const apiUrls = {
   getContactInquiries: "/admin/get-contactform-entries",
   checkProfileCompletion: "/translators/profile-incomplete/",
   getAvailableSlots: "/admin/translator/availability/get-slots?translator_id=",
+  UserTypes: "/admin/get-all-users?user_type=",
 };
 
 export const metaData = {
@@ -149,6 +150,8 @@ export const routes = {
   Home: "/",
   Login: "/login",
   MyProfile: "/my-profile",
+  MyProfileSuperAdminAccess:
+    "/my-profile?superaccess=true&id=:id&type=:userType",
   Register: "/register",
   TranslatorRegister: "/register-translator",
   ClientRegister: "/register-client",
@@ -171,6 +174,7 @@ export const routes = {
   Nothing: "*",
   HireNow: "/hire/:id",
   UserApprovals: "/admin/userApprovals",
+  Users: "/admin/users",
   contactInquiry: "/admin/contactInquiry",
   PayoutManagement: "/admin/payoutManagement",
   PayNow: "/pay",

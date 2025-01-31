@@ -1110,6 +1110,17 @@ span.mb25.me-4.badge-success {
   position: relative;
   margin-top: 25px;
 }
+.dashboard_title_area1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 57rem;
+}
+
+.button_group {
+  display: flex;
+  gap: 10px; /* Adjust spacing between buttons */
+}
 
 .statistics_funfact {
   background-color: #ffffff;
@@ -1287,7 +1298,7 @@ span.mb25.me-4.badge-success {
 }
 
 .pending-style.style7 {
-  background-color: #f1faff;
+  /* background-color: #f1faff; */
   color: #29ea49;
 }
 
@@ -8112,6 +8123,25 @@ textarea {
   -o-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
+.ud-btn1 {
+  border-radius: 4px;
+  display: inline-block;
+  font-family: var(--title-font-family);
+  font-weight: 700;
+  font-size: 15px;
+  font-style: normal;
+  letter-spacing: 0em;
+  padding: 13px 35px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  z-index: 0;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
 
 .ud-btn i {
   margin-left: 10px;
@@ -14546,23 +14576,22 @@ hr {
 }
 
 @media only screen and (max-width: 600px) {
-  .stylehome1 .ml100{
-    margin-left:0 !important; 
+  .stylehome1 .ml100 {
+    margin-left: 0 !important;
   }
 
-  .logo{
+  .logo {
     margin-left: 0;
   }
   .footer-content-text {
     margin-top: 2%;
     margin-left: 0%;
     color: rgba(255, 255, 255, 0.7);
+  }
 }
-}
 
-
-
-.about-page .cta-about-v1.mx-auto.maxw1700.pt120.pb120.position-relative.overflow-hidden.d-flex.align-items-center.mx20-lg {
+.about-page
+  .cta-about-v1.mx-auto.maxw1700.pt120.pb120.position-relative.overflow-hidden.d-flex.align-items-center.mx20-lg {
   padding: 250px !important;
 }
 
