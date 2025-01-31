@@ -8,7 +8,7 @@ export default function UsersCard({ data, userType }) {
   console.log(data, "dadadad");
 
   const handleEditProfile = (id) => {
-    navigate(`/my-profile?superaccess=true&id=${id}&type=${userType}`);
+    // navigate(`/my-profile?superaccess=true&id=${id}&type=${userType}`);
   };
 
   return (
