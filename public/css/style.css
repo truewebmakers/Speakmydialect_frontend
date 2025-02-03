@@ -303,10 +303,10 @@ li {
   border-radius: 30px;
   overflow: hidden;
 }
-
+/* 
 .home2-footer-radius {
   border-radius: 0 90px 0 0;
-}
+} */
 
 .footer-widget {
   position: relative;
@@ -2747,7 +2747,7 @@ span.mb25.me-4.badge-success {
 
 .left-top-img {
   position: absolute;
-  left: -60px;
+  /* left: -60px; */
   top: 0;
 }
 
@@ -2758,7 +2758,7 @@ span.mb25.me-4.badge-success {
 }
 
 .right-bottom-img {
-  bottom: -50px;
+  bottom: 0;
   position: absolute;
   right: 0;
 }
@@ -14599,4 +14599,36 @@ span.copyright-text.mb-2.mb-md-0.text-white-light.ff-heading {
   font-size: 12px;
   text-align: center;
   text-align-last: justify;
+}
+
+
+/* Default styles */
+.d-flex {
+  display: flex;
+  gap: 10px; /* Adds spacing between elements */
+}
+
+.form-control {
+  flex: 1; /* Allow elements to grow and shrink */
+  min-width: 150px; /* Minimum width for select and input */
+}
+
+.ud-btn {
+  white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+  .d-flex {
+    flex-direction: column; /* Stack elements vertically */
+  }
+
+  .form-control,
+  .ud-btn {
+    width: 100% !important; /* Full width on mobile */
+    max-width: 100% !important; /* Override inline styles */
+  }
+  button.ud-btn.btn-thm.default-box-shadow2.SendOTPBtn {
+    width: 30% !important;
+}
 }

@@ -76,7 +76,7 @@ export default function ClientProfileDetails({ userId }) {
   const handleOnChange = (e) => {
     const { value, name } = e.target;
     if (name === "phone_number") {
-      if ((value === "" || value.length <= 10) && !isNaN(value)) {
+      if ((value === "" || value.length <= 100) && !isNaN(value)) {
         setProfileDetails({ ...profileDetails, phone_number: value });
       }
     } else {
@@ -369,7 +369,7 @@ export default function ClientProfileDetails({ userId }) {
               <div className="col-md-12">
                 <div className="mb10">
                   <label className="heading-color ff-heading fw500 mb10">
-                    About you (Min. 10 characters)
+                    About you (Min. 100 characters)
                   </label>
                   <textarea
                     cols={30}

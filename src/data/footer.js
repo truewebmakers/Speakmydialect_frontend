@@ -9,22 +9,22 @@ export const quickLinks1 = [
   {
     id: 1,
     name: "Home",
-    path: "https://speakmydialect.com.au/",
+    path: "/",
   },
   {
     id: 2,
     name: "Search",
-    path: "https://speakmydialect.com.au/search",
+    path: "/search",
   },
   {
     id: 3,
     name: "About Us",
-    path: "https://speakmydialect.com.au/about",
+    path: "/about",
   },
   {
     id: 4,
     name: "Privacy Policy",
-    path: "https://speakmydialect.com.au/privacy",
+    path: "/privacy",
   },
 ];
 
@@ -32,27 +32,27 @@ export const quickLinks2 = [
   {
     id: 1,
     name: "Sign Up",
-    path: "https://speakmydialect.com.au/register",
+    path: "/register",
   },
   {
     id: 2,
     name: "Sign In",
-    path: "https://speakmydialect.com.au/login",
+    path: "/login",
   },
   {
     id: 3,
     name: "Contact Us",
-    path: "https://speakmydialect.com.au/contact",
+    path: "/contact",
   },
   {
     id: 4,
     name: "Terms & Conditions",
-    path: "https://speakmydialect.com.au/terms",
+    path: "/terms",
   },
 ];
 
 export const support = [
-  { id: 1, name: "Email: speakmydialect@gmail.com", path: "/" },
+  { id: 1, name: "Email: speakmydialect@gmail.com", path: "mailto:speakmydialect@gmail.com" },
 ];
 
 export const momney = ["US$ USD", "Euro", "Pound"];

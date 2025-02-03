@@ -73,7 +73,7 @@ const AccountCreationForm = ({
 
       {/* Other form fields for Last Name, Email, Password, etc. */}
 
-      <div className="mb25">
+      <div className="mb25 otpFrm">
         <label className="form-label fw500 dark-color">Phone Number</label>
         <div className="d-flex">
           <select
@@ -101,7 +101,7 @@ const AccountCreationForm = ({
           />
           <button
             type="button"
-            className="ud-btn btn-thm default-box-shadow2"
+            className="ud-btn btn-thm default-box-shadow2 SendOTPBtn"
             onClick={(e) => handleSendOtp(e)}
             disabled={data?.phoneNumber?.length !== 10}
           >

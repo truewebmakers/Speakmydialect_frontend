@@ -326,7 +326,7 @@ export default function RegisterPage() {
                         <p style={{ color: "red" }}>{error.lastName}</p>
                       )}
                     </div>
-                    <div className="mb25">
+                    <div className="mb25 otpFrm">
                       <label className="form-label fw500 dark-color">
                         Phone Number
                       </label>
@@ -348,7 +348,7 @@ export default function RegisterPage() {
                           style={{
                             position: "relative",
                             display: "inline-block",
-                            marginLeft: "10px",
+                            // marginLeft: "10px",
                           }}
                         >
                           <input
@@ -363,7 +363,7 @@ export default function RegisterPage() {
                           />
                           <button
                             type="button"
-                            className="ud-btn btn-thm default-box-shadow2"
+                            className="ud-btn btn-thm default-box-shadow2 SendOTPBtn"
                             style={{
                               position: "absolute",
                               right: "10px",

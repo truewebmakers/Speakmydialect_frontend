@@ -614,3 +614,22 @@ p {
 .time-slots button {
   font-size: 14px;
 }
+/* Default behavior (desktop and larger screens) */
+.skill-tags span {
+  display: inline-block; /* Or use block depending on your layout */
+}
+
+/* Mobile view - show only the first 4 items */
+@media (max-width: 768px) {
+  .skill-tags span {
+    display: none; /* Hide all children by default */
+  }
+
+  /* Show only the first 4 children on mobile */
+  .skill-tags span:nth-child(-n+4) {
+    display: inline-block; /* Or block depending on layout */
+  }
+  section.our-register {
+    padding: 0px;
+}
+}

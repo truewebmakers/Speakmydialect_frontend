@@ -46,7 +46,7 @@ export default function TranslatorProfileDetails({ userId }) {
   const handleOnChange = (e) => {
     const { value, name } = e.target;
     if (name === "phone_number") {
-      if ((value == "" || value?.length <= 10) && !isNaN(value)) {
+      if ((value == "" || value?.length <= 100) && !isNaN(value)) {
         setProfileDetails({ ...profileDetails, phone_number: value });
       }
     } else {
@@ -110,8 +110,8 @@ export default function TranslatorProfileDetails({ userId }) {
 
   // Validation function
   const validateForm = () => {
-    if (profileDetails?.intro?.length < 10) {
-      setIntroError("Intro must be at least 10 characters.");
+    if (profileDetails?.intro?.length < 100) {
+      setIntroError("Intro must be at least 100 characters.");
       return false;
     }
     setIntroError(""); // Reset error if valid
@@ -375,7 +375,7 @@ export default function TranslatorProfileDetails({ userId }) {
               <div className="col-md-12">
                 <div className="mb10">
                   <label className="heading-color ff-heading fw500 mb10">
-                    About you (Min. 10 characters)
+                    About you (Min. 100 characters)
                   </label>
                   <textarea
                     cols={30}

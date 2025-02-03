@@ -80,9 +80,9 @@ export default function PayoutForm() {
       return "Account holder name must contain only letters and spaces.";
     }
 
-    if (!/^\d{9}$/.test(account_number)) {
-      return "Account number must be numeric & can't be more than 9 digits.";
-    }
+    // if (!/^\d{8}$/.test(account_number)) {
+    //   return "Account number must be numeric & can't be more than 8 digits.";
+    // }
 
     if (!/^\d{6}$/.test(bsb)) {
       return "BSB must be exactly 6 digits.";
