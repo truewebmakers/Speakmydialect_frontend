@@ -45,39 +45,43 @@ export default function UsersInfo() {
             <DashboardNavigation />
           </div>
         </div>
-        <div className="row align-items-center justify-content-between pb40">
-          <div className="col-xl-4">
-            <div className="dashboard_title_area1">
-              <h2 className="dashboard_title">Users</h2>
-              <div className="button_group">
-                <button
-                  className="ud-btn1"
-                  style={{
-                    backgroundColor:
-                      userType == "client" ? "#9393de" : "#ceceea",
-                    color: "black",
-                    border: " 2px solid #ababdb",
-                  }}
-                  onClick={() => setUserType("client")}
-                >
-                  Client
-                </button>
-                <button
-                  className="ud-btn1"
-                  style={{
-                    backgroundColor:
-                      userType == "translator" ? "#9393de" : "#ceceea",
-                    color: "black",
-                    border: " 2px solid #ababdb",
-                  }}
-                  onClick={() => setUserType("translator")}
-                >
-                  Interpreter
-                </button>
-              </div>
-            </div>
+        <div className="row align-items-center justify-content-between pb-4">
+      <div className="col-12">
+        <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
+          <h2 className="dashboard-title mb-3 mb-md-0">Users</h2>
+          <div className="d-flex">
+            <button
+              className="btn me-2"
+              style={{
+                backgroundColor: userType === "client" ? "#5bbb7b" : "#5bbb7b",
+                color: userType === "client" ? "#000" : "#fff",
+                border: "2px solid #5bbb7b",
+                padding: "8px 16px",
+                borderRadius: "4px",
+                fontSize: "14px",
+              }}
+              onClick={() => setUserType("client")}
+            >
+              Client
+            </button>
+            <button
+              className="btn"
+              style={{
+                backgroundColor: userType === "translator" ? "#5bbb7b" : "#5bbb7b",
+                color: userType === "translator" ? "#000" : "#fff",
+                border: "2px solid #5bbb7b",
+                padding: "8px 16px",
+                borderRadius: "4px",
+                fontSize: "14px",
+              }}
+              onClick={() => setUserType("translator")}
+            >
+              Interpreter
+            </button>
           </div>
         </div>
+      </div>
+    </div>
         {userApproval?.length ? (
           <div className="row">
             <div className="col-xl-12">
