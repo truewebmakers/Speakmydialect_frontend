@@ -14619,9 +14619,7 @@ span.copyright-text.mb-2.mb-md-0.text-white-light.ff-heading {
 
 /* Media queries for smaller screens */
 @media (max-width: 768px) {
-  .d-flex {
-    flex-direction: column; /* Stack elements vertically */
-  }
+ 
 
   .form-control,
   .ud-btn {

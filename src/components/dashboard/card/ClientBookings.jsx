@@ -1,6 +1,6 @@
 import { apiMethods, apiUrls } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
-import { calculatePayment, formatTo12Hour } from "@/utils/commonFunctions";
+import { calculatePayment, formatTo12Hour,formatDateTime } from "@/utils/commonFunctions";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 import { useEffect, useState } from "react";
@@ -23,6 +23,7 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
         headers
       );
       if (response?.status === 200 || response?.status === 201) {
+          console.log("data",response.data)
         toast.success(response?.data?.message);
         getData();
       }
@@ -127,7 +128,7 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
             {data?.payment_status === "none"
               ? "Not Paid"
               : data?.payment_status === "escrow"
-              ? "Payment Escrow"
+              ? "Paid"
               : data?.payment_status === "hold"
               ? "Payment on hold"
               : data?.payment_status === "dispute"
@@ -140,14 +141,25 @@ export default function ClientBookings({ data, i, currentTab, getData }) {
             <b>
               {CapitalizeFirstLetter(data?.payment_type) + " Rate: " ||
                 "Not Mentioned Yet"}
-            </b>
-            $
-            {calculatePayment(
-              data?.present_rate,
-              data?.start_time,
-              data?.end_time
-            )?.amountToReceive || "Not specified yet"}
-          </p>
+            </b>  ${calculatePayment(data?.present_rate, data.slots)?.amountToReceive || "Not specified yet"}  </p>
+            <p><b>Slots Timings: </b>
+            <br/>
+          <span>
+            {data.slots?.map((slot, index) => {
+              return (
+                <>
+                <span key={slot.id}> 
+                  <b>{index+1}</b>).   
+                    <span></span> {formatDateTime(slot.start_at)} <b>To</b> {formatDateTime(slot.end_at)}
+                  <b>{index !== data.slots.length - 1 && ''}  </b>
+                </span>
+                <br/>
+                </>
+              );
+            })}
+          </span>
+        </p>
+
         </div>
       </td>
       {currentTab?.type === "completed_booking" ? (

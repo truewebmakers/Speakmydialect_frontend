@@ -1,6 +1,6 @@
 import { apiMethods, apiUrls } from "@/constants/constant";
 import UseApi from "@/hook/useApi";
-import { calculatePayment, formatTo12Hour } from "@/utils/commonFunctions";
+import { calculatePayment, formatTo12Hour,formatDateTime } from "@/utils/commonFunctions";
 import { CapitalizeFirstLetter } from "@/utils/helper";
 import moment from "moment";
 import { useSelector } from "react-redux";
@@ -59,7 +59,7 @@ export default function TranslatorBooking({ data, i, currentTab, getData }) {
         </div>
       </th>
       <td className="vam">
-        <div className="d-flex flex-column">
+        <div className="d-flex1 flex-column">
           <p className="mb-0">
             <b>Start At:</b>{" "}
             {moment(data?.start_at).format("ll") +
@@ -90,7 +90,7 @@ export default function TranslatorBooking({ data, i, currentTab, getData }) {
             {data?.payment_status === "none"
               ? "Not Paid"
               : data?.payment_status === "escrow"
-              ? "Payment Escrow"
+              ? "Paid"
               : data?.payment_status === "hold"
               ? "Payment on hold"
               : data?.payment_status === "dispute"
@@ -104,18 +104,31 @@ export default function TranslatorBooking({ data, i, currentTab, getData }) {
               {CapitalizeFirstLetter(data?.payment_type) + " Rate: " ||
                 "Not Mentioned Yet"}
             </b>
-            $
-            {calculatePayment(
-              data?.present_rate,
-              data?.start_time,
-              data?.end_time
-            )?.amountToReceive || "Not specified yet"}
+            
+            ${calculatePayment(data?.present_rate, data.slots)?.amountToReceive || "Not specified yet"} 
           </p>
+          <p><b>Slots Timings: </b>
+            <br/>
+          <span>
+            {data.slots?.map((slot, index) => {
+              return (
+                <>
+                <span key={slot.id}> 
+                  <b>{index+1}</b>).   
+                    <span></span> {formatDateTime(slot.start_at)} <b>To</b> {formatDateTime(slot.end_at)}
+                  <b>{index !== data.slots.length - 1 && ''}  </b>
+                </span>
+                <br/>
+                </>
+              );
+            })}
+          </span>
+        </p>
         </div>
       </td>
       {currentTab?.type === "new_booking" ? (
         <td className="vam">
-          <a
+          <a 
             className="ud-btn btn-thm-border"
             onClick={() => changeBookingStatus("accept", data?.id)}
           >
