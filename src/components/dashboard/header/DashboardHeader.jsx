@@ -29,6 +29,7 @@ export default function DashboardHeader() {
         null,
         headers
       );
+      localStorage.setItem("profile_locked",data?.profile_locked); 
       if (data?.status == false) {
         setProfileCompletionMessage(data?.message);
       } else {

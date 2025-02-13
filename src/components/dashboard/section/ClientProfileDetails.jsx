@@ -98,6 +98,8 @@ export default function ClientProfileDetails({ userId }) {
 
   useEffect(() => {
     if (profileData) {
+
+      // console.log("profileDetails",profileData)
       // Enter Profile Details
       setProfileDetails({
         fname: profileData?.fname || "",
@@ -111,7 +113,9 @@ export default function ClientProfileDetails({ userId }) {
         fix_rate: "77" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
-        address: profileData?.user_meta?.address || "",
+        address: profileData?.user_meta?.address || "", 
+        profile_locked : profileData?.profile_locked
+
       });
       // Enter Gender
       setGender({
@@ -261,6 +265,7 @@ export default function ClientProfileDetails({ userId }) {
                     value={profileDetails?.fname}
                     autoComplete="off"
                     onChange={handleOnChange}
+                    disabled={(profileDetails?.profile_locked) ? true : false }
                   />
                 </div>
               </div>
@@ -277,6 +282,7 @@ export default function ClientProfileDetails({ userId }) {
                     value={profileDetails?.lname}
                     autoComplete="off"
                     onChange={handleOnChange}
+                    disabled={(profileDetails?.profile_locked) ? true : false }
                   />
                 </div>
               </div>
@@ -296,6 +302,7 @@ export default function ClientProfileDetails({ userId }) {
                       onChange={handleOnChange}
                       readOnly={true}
                       style={{ cursor: "not-allowed" }}
+                      disabled={(profileDetails?.profile_locked) ? true : false }
                     />
                     {/* Display "Verified" text if the phone number has a value */}
                     {profileData?.otp_verified_at !== null ? (
@@ -322,6 +329,7 @@ export default function ClientProfileDetails({ userId }) {
                       onChange={handleOnChange}
                       readOnly={true}
                       style={{ cursor: "not-allowed" }}
+                      disabled={(profileDetails?.profile_locked) ? true : false }
                     />
                     {/* Display "Verified" text if the email has a value */}
                     {profileData?.email_verified_at !== null ? (
@@ -346,6 +354,7 @@ export default function ClientProfileDetails({ userId }) {
                       { option: "Other", value: "other" },
                     ]}
                     handler={genderHandler}
+                    disabled={(profileDetails?.profile_locked) ? true : false }
                   />
                 </div>
               </div>
@@ -363,6 +372,7 @@ export default function ClientProfileDetails({ userId }) {
                     autoComplete="off"
                     onChange={handleOnChange}
                     ref={addressInputRef} // Attach the ref here
+                    disabled={(profileDetails?.profile_locked) ? true : false }
                   />
                 </div>
               </div>
@@ -379,6 +389,7 @@ export default function ClientProfileDetails({ userId }) {
                     value={profileDetails?.intro}
                     autoComplete="off"
                     onChange={handleOnChange}
+                    disabled={(profileDetails?.profile_locked) ? true : false }
                   />
                 </div>
               </div>

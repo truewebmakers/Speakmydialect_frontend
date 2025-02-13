@@ -10,6 +10,7 @@ import { getDialects, getLanguages } from "@/utils/commonFunctions";
 
 export default function Skill({ userId }) {
   const [skills, setSkills] = useState([]);
+  const [ProfileLock, setProfileLock] = useState();
   const [languageListing, setLanguageListing] = useState([]);
   const [dialectOptions, setDialectOptions] = useState([]); // Store dialect options for each language
   const { user } = useSelector((state) => state.auth);
@@ -95,7 +96,9 @@ export default function Skill({ userId }) {
         const skillsData = response?.data?.data;
         const storedLanguages = sessionStorage.getItem("languages");
         const storedDialect = sessionStorage.getItem("dialect");
-
+        console.log('sad',skillsData[0].user.profile_locked)
+         
+       
         const formattedSkills = skillsData?.map((skill) => ({
           id: skill.id,
           language: {
@@ -123,7 +126,8 @@ export default function Skill({ userId }) {
           },
           status: skill?.status,
         }));
-
+        setProfileLock();
+      
         setSkills(formattedSkills);
       }
     } catch (error) {
@@ -191,19 +195,23 @@ export default function Skill({ userId }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }; 
 
   return (
     <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
       <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between align-items-center">
         <h5 className="list-title">Dialect Known</h5>
-        <a
-          className="add-more-btn text-thm d-flex align-items-center"
-          onClick={handleAddLanguage}
-        >
-          <i className="add-icon far fa-plus mr10" />
-          Add Dialect
-        </a>
+        {
+        (ProfileLock == 'Yes')&&
+          <a
+            className="add-more-btn text-thm d-flex align-items-center"
+            onClick={handleAddLanguage}
+          >
+            <i className="add-icon far fa-plus mr10" />
+            Add Dialect
+          </a>
+        }
+        
       </div>
       <div className="col-lg-14">
         <div className="row">

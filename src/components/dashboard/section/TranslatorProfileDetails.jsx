@@ -81,6 +81,7 @@ export default function TranslatorProfileDetails({ userId }) {
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
         address: profileData?.user_meta?.address || "",
+        profile_locked : profileData?.profile_locked
       });
       setGender({
         option: CapitalizeFirstLetter(profileData?.user_meta?.gender),
@@ -141,6 +142,7 @@ export default function TranslatorProfileDetails({ userId }) {
         gender: getGender?.value,
         location: getCountry?.value,
         address: profileDetails?.address,
+    
       };
 
       const response = await UseApi(
@@ -266,6 +268,7 @@ export default function TranslatorProfileDetails({ userId }) {
                     value={profileDetails?.fname}
                     autoComplete="off"
                     onChange={handleOnChange}
+                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                   />
                 </div>
               </div>
@@ -282,6 +285,7 @@ export default function TranslatorProfileDetails({ userId }) {
                     value={profileDetails?.lname}
                     autoComplete="off"
                     onChange={handleOnChange}
+                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                   />
                 </div>
               </div>
@@ -301,6 +305,7 @@ export default function TranslatorProfileDetails({ userId }) {
                       onChange={handleOnChange}
                       readOnly={true}
                       style={{ cursor: "not-allowed" }}
+                      disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                     />
                     {/* Display "Verified" text if the phone number has a value */}
                     {profileData?.otp_verified_at !== null ? (
@@ -328,6 +333,7 @@ export default function TranslatorProfileDetails({ userId }) {
                       onChange={handleOnChange}
                       readOnly={true}
                       style={{ cursor: "not-allowed" }}
+                      disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                     />
                     {/* Display "Verified" text if the email has a value */}
                     {profileData?.email_verified_at !== null ? (
@@ -369,6 +375,7 @@ export default function TranslatorProfileDetails({ userId }) {
                     autoComplete="off"
                     onChange={handleOnChange}
                     ref={addressInputRef} // Attach the ref here
+                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                   />
                 </div>
               </div>
@@ -385,6 +392,7 @@ export default function TranslatorProfileDetails({ userId }) {
                     value={profileDetails?.intro}
                     autoComplete="off"
                     onChange={handleOnChange}
+                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                   />
                   {introError && <p className="text-danger">{introError}</p>}
                 </div>

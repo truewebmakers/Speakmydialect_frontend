@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import Loader from "../common/loader";
 import "./index.css";
-import { calculatePayment } from "@/utils/commonFunctions";
+import { calculatePayment,calculatePaymentForPaymentForm } from "@/utils/commonFunctions";
 
 const PayNowForm = () => {
   const [totalAmount, setTotalAmount] = useState(0);
@@ -23,13 +23,25 @@ const PayNowForm = () => {
     if (state?.presentRate && state?.slots && state?.duration) {
       const { presentRate, slots, duration } = state;
       setCalculating(true);
-      const { amountToReceive, totalAmount } = calculatePayment(
+      // const { amountToReceive, totalAmount } = calculatePayment(
+      //   presentRate,
+      //   slots,
+      //   duration
+      // );
+
+      const calsData = calculatePaymentForPaymentForm(
         presentRate,
-        slots,
-        duration
-      );
-      setAmountToReceive(amountToReceive);
-      setTotalAmount(totalAmount);
+        slots
+      ); 
+      
+      
+
+      
+      
+      console.log("slots aa", calsData)
+      
+      setAmountToReceive(calsData.amountToReceive);
+      setTotalAmount(calsData.totalAmount);
       setCalculating(false);
     }
   }, [state]);
@@ -105,18 +117,19 @@ const PayNowForm = () => {
                   Download Receipt
                 </a>
               )}
-              <p>
+              {/* <p>
                 <b>Stripe Processing Fee Percentage:</b> 3.50% (approx.)
-              </p>
-              <p>
+              </p> */}
+              {/* <p>
                 <b>Tax Percentage:</b> 0.38%
-              </p>
+              </p> */}
               <p>
                 <b>Amount to Receive:</b> ${amountToReceive}
               </p>
               <p>
                 <b>Total Amount Charged:</b>{" "}
                 {calculating ? <Loader /> : `$${totalAmount}`}
+                 &nbsp; (Tax Included)
               </p>
             </div>
 

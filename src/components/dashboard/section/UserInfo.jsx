@@ -1,7 +1,7 @@
 import DashboardNavigation from "../header/DashboardNavigation";
 import UseApi from "@/hook/useApi";
 import { apiMethods, apiUrls } from "@/constants/constant";
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"; 
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import PageNotFound from "@/components/section/PageNotFound";
@@ -23,7 +23,7 @@ export default function UsersInfo() {
         headers
       );
       if (response?.status == 200 || response?.status == 201) {
-        console.log(response, "ddddddddddddd");
+        
 
         const users = response?.data?.data;
         setUserApproval(users);

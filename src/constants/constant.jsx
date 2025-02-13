@@ -67,6 +67,7 @@ export const apiUrls = {
   checkProfileCompletion: "/translators/profile-incomplete/",
   getAvailableSlots: "/admin/translator/availability/get-slots?translator_id=",
   UserTypes: "/admin/get-all-users?user_type=",
+  UpdateLockUnlockStatus: "/admin/update/lock/",
 };
 
 export const metaData = {
