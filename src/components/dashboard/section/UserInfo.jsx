@@ -37,6 +37,15 @@ export default function UsersInfo() {
     fetchData();
   }, [userType]);
 
+  const handleProfileLockChange = (id, newLockStatus) => {
+    // Update the lock status for the user with the given ID
+    setUserApproval((prevUsers) =>
+      prevUsers.map((user) =>
+        user.id === id ? { ...user, profile_locked: newLockStatus } : user
+      )
+    );
+  };
+
   return (
     <>
       <div className="dashboard__content hover-bgc-color">
@@ -99,7 +108,7 @@ export default function UsersInfo() {
                     </thead>
                     <tbody className="t-body">
                       {userApproval?.map((item, i) => (
-                        <UsersCard key={i} data={item} userType={userType} />
+                        <UsersCard key={i} data={item} userType={userType} profileLocked={item.profile_locked} onProfileLockChange={handleProfileLockChange} />
                       ))}
                     </tbody>
                   </table>
