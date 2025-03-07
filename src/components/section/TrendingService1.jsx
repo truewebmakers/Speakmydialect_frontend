@@ -32,7 +32,7 @@ export default function TrendingService1() {
             <div className="col-lg-9">
               <div className="main-title">
                 <h2 className="title">Interpreters</h2>
-                <p className="paragraph">Most viewed interpreters</p>
+                {/* <p className="paragraph">Most viewed interpreters</p> */}
               </div>
             </div>
           </div>

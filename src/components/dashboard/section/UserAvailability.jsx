@@ -208,9 +208,9 @@ export default function UserAvailability({ userId }) {
             value={duration}
           >
             <option>Choose Time Duration</option>
+            <option value={30}>30 mints (30mints)</option>
             <option value={60}>60 mints (1hrs)</option>
-            <option value={120}>120 mints (2hrs)</option>
-            <option value={180}>180 mints (3hrs)</option>
+            <option value={120}>120 mints (2hrs)</option> 
           </select>
         </div>
       </div>

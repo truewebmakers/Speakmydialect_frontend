@@ -24,6 +24,8 @@ export default function ListingSidebar2() {
       const storedLanguages = sessionStorage.getItem("languages");
       const storedDialect = sessionStorage.getItem("dialect");
 
+
+      // console.log("storedCountries",storedCountries)
       if (storedCountries?.length > 0) {
         setCountryList(JSON.parse(storedCountries));
       } else {

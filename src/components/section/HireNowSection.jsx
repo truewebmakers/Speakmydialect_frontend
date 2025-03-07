@@ -52,6 +52,8 @@ export default function HireNowSection({ translatorProfile }) {
   const [timeSlots, setTimeSlots] = useState([]);
   const [getSlotsLoading, setGetSlotsLoading] = useState("idle");
   const [selectedDay, setSelectedDay] = useState("");
+  const [validationMessage, setValidationMessage] = useState("");
+
 
   const handleFieldChange = (field, option, value) => {
     setHireNowForm({
@@ -96,6 +98,11 @@ export default function HireNowSection({ translatorProfile }) {
   };
 
   const addBooking = async () => {
+    if (!validateSelectedSlots()) {
+      return; // Stop if validation fails
+    }
+
+
     const formErrors = validateBookingForm(hireNowForm);
     if (Object.keys(formErrors)?.length > 0) {
       setError(formErrors);
@@ -206,6 +213,27 @@ export default function HireNowSection({ translatorProfile }) {
     }
   };
 
+  const calculateTotalDuration = (slots) => {
+    let totalMinutes = 0;
+    slots.forEach((slot) => {
+      const startTime = moment(slot.start_time, "HH:mm");
+      const endTime = moment(slot.end_time, "HH:mm");
+      const duration = moment.duration(endTime.diff(startTime));
+      totalMinutes += duration.asMinutes();
+    });
+    return totalMinutes;
+  };
+  const validateSelectedSlots = () => {
+    const totalMinutes = calculateTotalDuration(selectedSlots);
+    if (totalMinutes < 120) {
+      // 120 minutes = 2 hours
+      setValidationMessage("Please select at least 2 hours of slots.");
+      return false;
+    } else {
+      setValidationMessage("");
+      return true;
+    }
+  };
   return (
     <section className="pt-0">
       <div className="container">
@@ -364,6 +392,9 @@ export default function HireNowSection({ translatorProfile }) {
                   ) : null}
 
                   <div className="col-md-12">
+                  {validationMessage && (
+                      <p style={{ color: "red" }}>{validationMessage}</p>
+                    )}
                     <div>
                       <button
                         type="button"

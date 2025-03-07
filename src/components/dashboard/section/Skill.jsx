@@ -201,8 +201,6 @@ export default function Skill({ userId }) {
     <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
       <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between align-items-center">
         <h5 className="list-title">Dialect Known</h5>
-        {
-        (ProfileLock == 'Yes')&&
           <a
             className="add-more-btn text-thm d-flex align-items-center"
             onClick={handleAddLanguage}
@@ -210,7 +208,7 @@ export default function Skill({ userId }) {
             <i className="add-icon far fa-plus mr10" />
             Add Dialect
           </a>
-        }
+        
         
       </div>
       <div className="col-lg-14">

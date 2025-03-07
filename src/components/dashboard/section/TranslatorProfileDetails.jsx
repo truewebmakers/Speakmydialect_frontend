@@ -19,6 +19,7 @@ export default function TranslatorProfileDetails({ userId }) {
     intro: "",
     address: "",
   });
+  // const storedCountries = sessionStorage.getItem("countries");
   const { user, profileData } = useSelector((state) => state.auth);
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadPic, setUploadedPic] = useState(null);
@@ -27,8 +28,7 @@ export default function TranslatorProfileDetails({ userId }) {
   const [countryList, setCountryList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [introError, setIntroError] = useState(""); // State to store intro error
-  const addressInputRef = useRef(null); // Create a ref for the address input
-
+  const addressInputRef = useRef(null); // Create a ref for the address
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setUploadedPic(file); // Store the File object directly, this will be sent to API
@@ -81,7 +81,7 @@ export default function TranslatorProfileDetails({ userId }) {
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
         address: profileData?.user_meta?.address || "",
-        profile_locked : profileData?.profile_locked
+        profile_locked: profileData?.profile_locked,
       });
       setGender({
         option: CapitalizeFirstLetter(profileData?.user_meta?.gender),
@@ -142,7 +142,6 @@ export default function TranslatorProfileDetails({ userId }) {
         gender: getGender?.value,
         location: getCountry?.value,
         address: profileDetails?.address,
-    
       };
 
       const response = await UseApi(
@@ -268,7 +267,9 @@ export default function TranslatorProfileDetails({ userId }) {
                     value={profileDetails?.fname}
                     autoComplete="off"
                     onChange={handleOnChange}
-                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
+                    disabled={
+                      profileDetails?.profile_locked == "Yes" ? true : false
+                    }
                   />
                 </div>
               </div>
@@ -285,7 +286,9 @@ export default function TranslatorProfileDetails({ userId }) {
                     value={profileDetails?.lname}
                     autoComplete="off"
                     onChange={handleOnChange}
-                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
+                    disabled={
+                      profileDetails?.profile_locked == "Yes" ? true : false
+                    }
                   />
                 </div>
               </div>
@@ -305,7 +308,9 @@ export default function TranslatorProfileDetails({ userId }) {
                       onChange={handleOnChange}
                       readOnly={true}
                       style={{ cursor: "not-allowed" }}
-                      disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
+                      disabled={
+                        profileDetails?.profile_locked == "Yes" ? true : false
+                      }
                     />
                     {/* Display "Verified" text if the phone number has a value */}
                     {profileData?.otp_verified_at !== null ? (
@@ -333,7 +338,9 @@ export default function TranslatorProfileDetails({ userId }) {
                       onChange={handleOnChange}
                       readOnly={true}
                       style={{ cursor: "not-allowed" }}
-                      disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
+                      disabled={
+                        profileDetails?.profile_locked == "Yes" ? true : false
+                      }
                     />
                     {/* Display "Verified" text if the email has a value */}
                     {profileData?.email_verified_at !== null ? (
@@ -344,6 +351,7 @@ export default function TranslatorProfileDetails({ userId }) {
                   </div>
                 </div>
               </div>
+
               <div className="col-sm-6">
                 <div className="mb20">
                   <SelectInput
@@ -361,6 +369,22 @@ export default function TranslatorProfileDetails({ userId }) {
                   />
                 </div>
               </div>
+
+              <div className="col-sm-6">
+                <div className="mb20">
+                  <SelectInput
+                    label="Location"
+                    defaultSelect={getCountry} 
+                    data={countryList.map((country) => ({
+                      option: country.name, 
+                      value: country.id, 
+                    }))} 
+                    handler={(option, value) => setCountry({ option, value })} 
+                    disable={profileDetails?.profile_locked === "Yes"} 
+                  />
+                </div>
+              </div>
+
               <div className="col-sm-6">
                 <div className="mb20">
                   <label className="heading-color ff-heading fw500 mb10">
@@ -375,7 +399,9 @@ export default function TranslatorProfileDetails({ userId }) {
                     autoComplete="off"
                     onChange={handleOnChange}
                     ref={addressInputRef} // Attach the ref here
-                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
+                    disabled={
+                      profileDetails?.profile_locked == "Yes" ? true : false
+                    }
                   />
                 </div>
               </div>
@@ -392,11 +418,14 @@ export default function TranslatorProfileDetails({ userId }) {
                     value={profileDetails?.intro}
                     autoComplete="off"
                     onChange={handleOnChange}
-                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
+                    disabled={
+                      profileDetails?.profile_locked == "Yes" ? true : false
+                    }
                   />
                   {introError && <p className="text-danger">{introError}</p>}
                 </div>
               </div>
+
               <div className="col-md-12">
                 <div className="text-start">
                   <button

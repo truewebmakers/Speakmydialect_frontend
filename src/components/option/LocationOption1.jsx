@@ -24,8 +24,7 @@ export default function LocationOption1({ data }) {
       setSearchParams("");
     }
   }, [getLocation]);
-
-  // Filtering data based on search input
+ 
   const filteredData = data?.filter((item) =>
     item?.name?.toLowerCase()?.includes(search?.toLowerCase())
   );
@@ -37,8 +36,7 @@ export default function LocationOption1({ data }) {
         search={search}
         placeholder="Search For Location"
       />
-
-      {/* Show location list only if there's a search term */}
+ 
       {search && (
         <div className="checkbox-style1 mb15">
           {filteredData?.map((item, i) => (
@@ -46,8 +44,8 @@ export default function LocationOption1({ data }) {
               {item?.name}
               <input
                 type="checkbox"
-                checked={getLocation === item?.id} // Check if current item is the selected location
-                onChange={() => locationHandler(item?.id)} // Set or unset the selected location
+                checked={getLocation === item?.id}  
+                onChange={() => locationHandler(item?.id)}  
               />
               <span className="checkmark" />
             </label>

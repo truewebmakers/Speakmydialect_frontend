@@ -265,7 +265,7 @@ export default function ClientProfileDetails({ userId }) {
                     value={profileDetails?.fname}
                     autoComplete="off"
                     onChange={handleOnChange}
-                    disabled={(profileDetails?.profile_locked) ? true : false }
+                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                   />
                 </div>
               </div>
@@ -282,7 +282,7 @@ export default function ClientProfileDetails({ userId }) {
                     value={profileDetails?.lname}
                     autoComplete="off"
                     onChange={handleOnChange}
-                    disabled={(profileDetails?.profile_locked) ? true : false }
+                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                   />
                 </div>
               </div>
@@ -302,7 +302,7 @@ export default function ClientProfileDetails({ userId }) {
                       onChange={handleOnChange}
                       readOnly={true}
                       style={{ cursor: "not-allowed" }}
-                      disabled={(profileDetails?.profile_locked) ? true : false }
+                      disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                     />
                     {/* Display "Verified" text if the phone number has a value */}
                     {profileData?.otp_verified_at !== null ? (
@@ -329,7 +329,7 @@ export default function ClientProfileDetails({ userId }) {
                       onChange={handleOnChange}
                       readOnly={true}
                       style={{ cursor: "not-allowed" }}
-                      disabled={(profileDetails?.profile_locked) ? true : false }
+                      disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                     />
                     {/* Display "Verified" text if the email has a value */}
                     {profileData?.email_verified_at !== null ? (
@@ -354,7 +354,7 @@ export default function ClientProfileDetails({ userId }) {
                       { option: "Other", value: "other" },
                     ]}
                     handler={genderHandler}
-                    disabled={(profileDetails?.profile_locked) ? true : false }
+                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                   />
                 </div>
               </div>
@@ -372,14 +372,14 @@ export default function ClientProfileDetails({ userId }) {
                     autoComplete="off"
                     onChange={handleOnChange}
                     ref={addressInputRef} // Attach the ref here
-                    disabled={(profileDetails?.profile_locked) ? true : false }
+                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                   />
                 </div>
               </div>
               <div className="col-md-12">
                 <div className="mb10">
                   <label className="heading-color ff-heading fw500 mb10">
-                    About you (Min. 100 characters)
+                    About you (Min. 100 characters) 
                   </label>
                   <textarea
                     cols={30}
@@ -389,7 +389,7 @@ export default function ClientProfileDetails({ userId }) {
                     value={profileDetails?.intro}
                     autoComplete="off"
                     onChange={handleOnChange}
-                    disabled={(profileDetails?.profile_locked) ? true : false }
+                    disabled={(profileDetails?.profile_locked == 'Yes') ? true : false }
                   />
                 </div>
               </div>
