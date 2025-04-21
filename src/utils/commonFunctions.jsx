@@ -48,7 +48,7 @@ export const getDialects = async (setDialectListing) => {
 };
 
 export const getSelectedDialect = async (setDialectListing, id) => {
-  try {
+  try { 
     const response = await UseApi(apiUrls.getDialects + id, apiMethods.GET);
     if (response?.status === 200 || response?.status === 201) {
       const dialectData = response?.data?.data;
@@ -56,7 +56,7 @@ export const getSelectedDialect = async (setDialectListing, id) => {
         id: index + 1,
         name: lang?.dialect,
       }));
-
+  
       setDialectListing(formattedArray);
     }
   } catch (error) {

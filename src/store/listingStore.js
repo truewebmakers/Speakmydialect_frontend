@@ -54,6 +54,14 @@ const listingStore = create((set) => ({
         return { getDesginTool: [] };
       }
     }),
+  setCountry: (payload) =>
+    set((state) => {
+      if (payload?.length !== 0) {
+        return { getSpeak: payload }; // Store the selected language as a string
+      } else {
+        return { getSpeak: "" }; // Handle case for no selection
+      }
+    }),
   setSpeak: (payload) =>
     set((state) => {
       if (payload?.length !== 0) {

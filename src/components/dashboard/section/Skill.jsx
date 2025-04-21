@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { Tooltip } from "react-tooltip";
 import Loader from "@/components/common/loader";
 import { getDialects, getLanguages } from "@/utils/commonFunctions";
-
+import { CountryMList } from "@/constants/CountryList";
 export default function Skill({ userId }) {
   const [skills, setSkills] = useState([]);
   const [ProfileLock, setProfileLock] = useState();
@@ -15,6 +15,10 @@ export default function Skill({ userId }) {
   const [dialectOptions, setDialectOptions] = useState([]); // Store dialect options for each language
   const { user } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
+  const [countrySelect, setCountrySelect] = useState({
+    option: "Select",
+    value: null,
+  }); // Add this at the top with other states
 
   const handleFieldChange = (index, field, option, value) => {
     const newSkills = [...skills];
@@ -35,6 +39,7 @@ export default function Skill({ userId }) {
     toast.info("New Skill? Add It Here!");
     setSkills([
       {
+        country: { option: "Select", value: null },
         language: { option: "Select", value: null },
         level: { option: "Select", value: null },
         dialect: { option: "Select", value: null },
@@ -96,11 +101,16 @@ export default function Skill({ userId }) {
         const skillsData = response?.data?.data;
         const storedLanguages = sessionStorage.getItem("languages");
         const storedDialect = sessionStorage.getItem("dialect");
-        console.log('sad',skillsData[0].user.profile_locked)
-         
-       
+        console.log("sad", skillsData);
+
         const formattedSkills = skillsData?.map((skill) => ({
           id: skill.id,
+          country: {
+            option:
+              CountryMList?.find((country) => country?.id === skill?.country)?.name ||
+              "Select",
+            value: skill?.country || null,
+          },
           language: {
             option:
               (storedLanguages &&
@@ -127,7 +137,7 @@ export default function Skill({ userId }) {
           status: skill?.status,
         }));
         setProfileLock();
-      
+
         setSkills(formattedSkills);
       }
     } catch (error) {
@@ -173,6 +183,7 @@ export default function Skill({ userId }) {
       };
       const bodyData = {
         skills: skills?.map((skill) => ({
+          country: skill?.country?.value,
           language: skill?.language?.value,
           level: skill?.level?.value,
           status: skill?.status?.toLowerCase(),
@@ -195,28 +206,44 @@ export default function Skill({ userId }) {
     } finally {
       setIsLoading(false);
     }
-  }; 
+  };
 
   return (
     <div className="ps-widget bgc-white bdrs4 p30 mb30 position-relative">
       <div className="bdrb1 pb15 mb30 d-sm-flex justify-content-between align-items-center">
         <h5 className="list-title">Dialect Known</h5>
-          <a
-            className="add-more-btn text-thm d-flex align-items-center"
-            onClick={handleAddLanguage}
-          >
-            <i className="add-icon far fa-plus mr10" />
-            Add Dialect
-          </a>
-        
-        
+        <a
+          className="add-more-btn text-thm d-flex align-items-center"
+          onClick={handleAddLanguage}
+        >
+          <i className="add-icon far fa-plus mr10" />
+          Add Dialect
+        </a>
       </div>
       <div className="col-lg-14">
         <div className="row">
           {skills?.map((skill, index) => (
             <form key={index} className="form-style1">
               <div className="row align-items-center">
-                <div className="col-sm-3 mb20">
+                <div className="col-sm-2">
+                  <div className="mb20">
+                    <SelectInput
+                      label="Select Country"
+                      defaultSelect={{
+                        option: skill?.country?.option || "Select",
+                        value: skill?.country?.value || null,
+                      }}
+                      data={CountryMList.map((country) => ({
+                        option: country.name,
+                        value: country.id,
+                      }))}
+                      handler={(option, value) =>
+                        handleFieldChange(index, "country", option, value)
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-2 mb20">
                   <SelectInput
                     label="Language"
                     defaultSelect={{
@@ -232,7 +259,7 @@ export default function Skill({ userId }) {
                     }
                   />
                 </div>
-                <div className="col-sm-3 mb20">
+                <div className="col-sm-2 mb20">
                   <SelectInput
                     label="Dialect"
                     defaultSelect={{
@@ -252,7 +279,7 @@ export default function Skill({ userId }) {
                     }
                   />
                 </div>
-                <div className="col-sm-3 mb20">
+                <div className="col-sm-2 mb20">
                   <SelectInput
                     label="Level"
                     defaultSelect={{

@@ -1,6 +1,6 @@
 import listingStore from "@/store/listingStore";
 import { useSearchParams } from "react-router-dom";
-import SelectInput from "../dashboard/option/SelectInput";
+import SelectInputDefault from "../dashboard/option/SelectInputDefault";
 import { useEffect, useState } from "react";
 
 export default function DialectOption1({ data }) {
@@ -29,7 +29,7 @@ export default function DialectOption1({ data }) {
 
   return (
     <div className="card-body px-0 pt-0">
-      <SelectInput
+      <SelectInputDefault
         defaultSelect={defaultSelect} // Pass the prepared defaultSelect object
         data={
           data?.length > 0

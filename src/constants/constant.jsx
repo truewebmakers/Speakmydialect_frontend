@@ -13,7 +13,7 @@ export const env = {
 };
 
 export const apiKey = "AIzaSyBcOYeXlEwDhSyJO86CPq8C_PH54cjvN6M";
-
+ 
 export const apiUrls = {
   signup: "/signup",
   login: "/login",
@@ -43,7 +43,7 @@ export const apiUrls = {
   editExperience: "/admin/experience/update/",
   changePassword: "/admin/update/password/",
   getSearchingSuggestions: "/language/search/suggestion?language=",
-  serachingApi: "/translators/search?language=",
+  serachingApi: "/translators/search",
   getTranslatorProfile: "/get-profile/",
   addBooking: "/admin/booking/add",
   getTranslatorAllJobs: "/admin/booking/get/translator/",
@@ -385,7 +385,7 @@ export const dialectData = [
   },
   {
     languageId: 9,
-    dialect: "Yoruba, Igbo, Pidgin English",
+    dialect: "Yoruba",
   },
   {
     languageId: 9,

@@ -633,3 +633,8 @@ p {
     padding: 0px;
 }
 }
+
+
+.skill-tags.d-flex.align-items-center.justify-content-start {
+  flex-wrap: wrap;
+}

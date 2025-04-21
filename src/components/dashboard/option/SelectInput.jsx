@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SelectInput({
   label,
@@ -10,15 +10,23 @@ export default function SelectInput({
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
   const [filteredData, setFilteredData] = useState(data); // State for filtered data
 
-  // Update the filteredData when the searchTerm changes
+  // Update the filteredData when the searchTerm changes or data changes
+  useEffect(() => {
+    // Reset the filteredData when the searchTerm is cleared
+    if (searchTerm === "") {
+      setFilteredData(data);
+    } else {
+      setFilteredData(
+        data.filter((item) =>
+          item.option.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    }
+  }, [searchTerm, data]); // Trigger effect on searchTerm or data change
+
+  // Handle search input change
   const handleSearch = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    setFilteredData(
-      data.filter((item) =>
-        item.option.toLowerCase().includes(value.toLowerCase())
-      )
-    );
+    setSearchTerm(e.target.value);
   };
 
   return (
@@ -58,7 +66,11 @@ export default function SelectInput({
                 {filteredData?.map((item, i) => (
                   <li
                     key={i}
-                    className={`${defaultSelect?.value !== null && item?.value === defaultSelect?.value ? "selected active" : ""}`}
+                    className={`${
+                      defaultSelect?.value !== null && item?.value === defaultSelect?.value
+                        ? "selected active"
+                        : ""
+                    }`}
                   >
                     <a
                       onClick={() => {

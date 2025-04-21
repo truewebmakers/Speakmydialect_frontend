@@ -11,12 +11,15 @@ import {
   getSelectedDialect,
 } from "@/utils/commonFunctions";
 import DialectOption1 from "../option/DialectOption";
+import { CountryMList } from "@/constants/CountryList";
+
 
 export default function ListingSidebar2() {
-  const [countryList, setCountryList] = useState([]);
+  const [countryList, setCountryList] = useState(['Africa','Burma','China','India','Iran','Philippines','Samoa','Cambodia']); 
   const [languageListing, setLanguageListing] = useState([]);
   const [dialectListing, setDialectListing] = useState([]);
   const [speakId, setSpeakId] = useState(0);
+  const [countryId, setCountryId] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +27,7 @@ export default function ListingSidebar2() {
       const storedLanguages = sessionStorage.getItem("languages");
       const storedDialect = sessionStorage.getItem("dialect");
 
-
+      console.log("CountryMList",CountryMList)
       // console.log("storedCountries",storedCountries)
       if (storedCountries?.length > 0) {
         setCountryList(JSON.parse(storedCountries));
@@ -79,6 +82,22 @@ export default function ListingSidebar2() {
             </div>
           </div>
           <div className="card mb20">
+            <h4>Country</h4>
+            <div
+              id="collapse3"
+              className="collapse show"
+              aria-labelledby="heading3"
+              data-parent="#accordionExample"
+            >
+              <div
+                className="card-body card-body px-0 pt-0"
+                style={{ marginTop: "-25px" }}
+              >
+                <SpeakOption1 data={CountryMList} setSpeakId={setCountryId} label = "Select Country" />
+              </div>
+            </div>
+          </div>
+          <div className="card mb20">
             <h4>Languange</h4>
             <div
               id="collapse3"
@@ -90,7 +109,7 @@ export default function ListingSidebar2() {
                 className="card-body card-body px-0 pt-0"
                 style={{ marginTop: "-25px" }}
               >
-                <SpeakOption1 data={languageListing} setSpeakId={setSpeakId} />
+                <SpeakOption1 data={languageListing} setSpeakId={setSpeakId} label = "Select Languange"  />
               </div>
             </div>
           </div>

@@ -7,6 +7,7 @@ import { CapitalizeFirstLetter } from "@/utils/helper";
 import { useSelector } from "react-redux";
 import Loader from "@/components/common/loader";
 import { getCountries } from "@/utils/commonFunctions";
+import { CountryMList } from "@/constants/CountryList";
 
 export default function TranslatorProfileDetails({ userId }) {
   const [profileDetails, setProfileDetails] = useState({
@@ -25,6 +26,8 @@ export default function TranslatorProfileDetails({ userId }) {
   const [uploadPic, setUploadedPic] = useState(null);
   const [getGender, setGender] = useState({ option: "Select", value: null });
   const [getCountry, setCountry] = useState({ option: "Australia", value: 14 });
+  const [countrySelect, setCountrySelect] = useState({ option: "Select", value: null }); // Add this at the top with other states
+
   const [countryList, setCountryList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [introError, setIntroError] = useState(""); // State to store intro error
@@ -140,6 +143,7 @@ export default function TranslatorProfileDetails({ userId }) {
         intro: profileDetails.intro,
         profile_pic: uploadPic,
         gender: getGender?.value,
+        // country: countrySelect?.value,
         location: getCountry?.value,
         address: profileDetails?.address,
       };
@@ -384,6 +388,8 @@ export default function TranslatorProfileDetails({ userId }) {
                   />
                 </div>
               </div>
+
+            
 
               <div className="col-sm-6">
                 <div className="mb20">

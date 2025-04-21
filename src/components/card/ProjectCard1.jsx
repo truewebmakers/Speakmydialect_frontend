@@ -64,6 +64,15 @@ export default function ProjectCard1({ data }) {
                 : data?.user_meta?.location && countryList?.length > 0
                 ? getCountryName(data?.user_meta?.location, countryList)
                 : "Location not specified"}
+              {/* Conditionally display the pipeline and country */}
+              {data?.user_meta?.location &&
+                getCountryName(data?.user_meta?.location, countryList) !=
+                  "Jindera" && (
+                  <>
+                    {" "}
+                    | {getCountryName(data?.user_meta?.location, countryList)}
+                  </>
+                )}
             </p>
             <p className="mb-0 fz14 list-inline-item mb5-sm pe-1">
               <i className="flaticon-gender fz16 vam text-thm2 me-1 bdrl1 pl15 pl0-xs bdrn-xs" />{" "}
@@ -77,15 +86,17 @@ export default function ProjectCard1({ data }) {
             </p>
             <div className="skill-tags d-flex align-items-center justify-content-start">
               {data?.user_skills?.length > 0 && // Check if user_skills is not empty
-                data.user_skills.map((item, i) =>
-                  getLanguageName(item?.language, languageList) ? ( // Check if item?.language is not empty or null
+                data.user_skills
+                  .map((item) => getLanguageName(item?.language, languageList)) // Get the language name
+                  .filter(
+                    (value, index, self) =>
+                      value && self.indexOf(value) === index
+                  ) // Filter out duplicates
+                  .map((language, i) => (
                     <span key={i} className={`tag asd${i === 1 ? "mx10" : ""}`}>
-                      {getLanguageName(item?.language, languageList)}
+                      {language}
                     </span>
-                  ) : (
-                    ""
-                  )
-                )}
+                  ))}
             </div>
           </div>
         </div>
