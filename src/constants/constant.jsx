@@ -13,7 +13,7 @@ export const env = {
 };
 
 export const apiKey = "AIzaSyBcOYeXlEwDhSyJO86CPq8C_PH54cjvN6M";
- 
+
 export const apiUrls = {
   signup: "/signup",
   login: "/login",
@@ -262,16 +262,154 @@ export const ordersManagementTab = [
   },
 ];
 
+export const countryToLanguageMap = {
+  Africa: [
+    "Arabic",
+    "Congo",
+    "Dinka",
+    "Equatorian",
+    "Greek",
+    "Nuer",
+    "Somali",
+    "Swahili",
+    "Nigerian",
+    "Bari",
+    "Yoruba",
+    "Igbo",
+    "Lingala",
+  ],
+  India: ["Punjabi", "Hindi", "Telugu", "Tamil", "Gujarati", "Marathi", "Urdu"],
+  Iran: ["Persian"],
+  Burma: ["Burmese", "Chin", "Kachin", "Karen"],
+  China: ["Mandarin", "Cantonese"],
+  Philippines: ["Fillipino"], // Add as needed
+  Samoa: ["Samoan"], // Add as needed
+  Cambodia: ["Khmer"], // Add as needed
+};
+
 export const languageData = [
-  "Arabic",
-  "Congo",
-  "Dinka",
-  "Equatorian",
-  "Ethiopia",
-  "Greek",
-  "Nuer",
-  "Somali",
-  "Swahili",
+  {
+    id: 1,
+    iso: "Ar",
+    name: "Arabic",
+    created_at: "2024-12-23T15:03:11.000000Z",
+  },
+  {
+    id: 2,
+    iso: "Co",
+    name: "Congo",
+    created_at: "2024-12-23T15:03:11.000000Z",
+  },
+  {
+    id: 3,
+    iso: null,
+    name: "Dinka",
+    created_at: "2024-12-23T15:03:32.000000Z",
+  },
+  {
+    id: 4,
+    iso: null,
+    name: "Equatorian",
+    created_at: "2024-12-23T15:03:32.000000Z",
+  },
+  {
+    id: 5,
+    iso: null,
+    name: "Greek",
+    created_at: "2024-12-23T15:03:59.000000Z",
+  },
+  { id: 6, iso: null, name: "Nuer", created_at: "2024-12-23T15:03:59.000000Z" },
+  {
+    id: 7,
+    iso: null,
+    name: "Somali",
+    created_at: "2024-12-23T15:03:59.000000Z",
+  },
+  {
+    id: 8,
+    iso: null,
+    name: "Swahili",
+    created_at: "2024-12-23T15:03:59.000000Z",
+  },
+  {
+    id: 9,
+    iso: null,
+    name: "Nigerian",
+    created_at: "2025-01-22T08:32:58.000000Z",
+  },
+  {
+    id: 10,
+    iso: null,
+    name: "Indian",
+    created_at: "2025-01-22T08:33:22.000000Z",
+  },
+  {
+    id: 11,
+    iso: null,
+    name: "Iran",
+    created_at: "2025-01-22T08:33:44.000000Z",
+  },
+  {
+    id: 12,
+    iso: null,
+    name: "Burmese",
+    created_at: "2025-01-22T08:33:44.000000Z",
+  },
+  {
+    id: 13,
+    iso: null,
+    name: "Chinese",
+    created_at: "2025-01-22T08:33:59.000000Z",
+  },
+
+  // Newly added
+  {
+    id: 14,
+    iso: null,
+    name: "Punjabi",
+    created_at: "2025-04-21T00:00:00.000Z",
+  },
+  { id: 15, iso: null, name: "Hindi", created_at: "2025-04-21T00:00:00.000Z" },
+  { id: 16, iso: null, name: "Tamil", created_at: "2025-04-21T00:00:00.000Z" },
+  {
+    id: 17,
+    iso: null,
+    name: "Gujarati",
+    created_at: "2025-04-21T00:00:00.000Z",
+  },
+  {
+    id: 18,
+    iso: null,
+    name: "Marathi",
+    created_at: "2025-04-21T00:00:00.000Z",
+  },
+  { id: 19, iso: null, name: "Urdu", created_at: "2025-04-21T00:00:00.000Z" },
+  {
+    id: 20,
+    iso: null,
+    name: "Persian",
+    created_at: "2025-04-21T00:00:00.000Z",
+  },
+  {
+    id: 24,
+    iso: null,
+    name: "Mandarin",
+    created_at: "2025-04-21T00:00:00.000Z",
+  },
+  {
+    id: 25,
+    iso: null,
+    name: "Cantonese",
+    created_at: "2025-04-21T00:00:00.000Z",
+  },
+  {
+    id: 26,
+    iso: null,
+    name: "Fillipino",
+    created_at: "2025-04-21T00:00:00.000Z",
+  },
+  { id: 27, iso: null, name: "Samoan", created_at: "2025-04-21T00:00:00.000Z" },
+  { id: 28, iso: null, name: "Khmer", created_at: "2025-04-21T00:00:00.000Z" },
 ];
 
 export const dialectData = [
@@ -425,7 +563,7 @@ export const dialectData = [
   },
   {
     languageId: 12,
-    dialect: " Karen",
+    dialect: "Karen",
   },
   {
     languageId: 12,
@@ -451,6 +589,45 @@ export const dialectData = [
     languageId: 13,
     dialect: "Middle Chinese",
   },
+  // New India-related languages
+  { languageId: 14, dialect: "Eastern Punjabi" },
+  { languageId: 14, dialect: "Western Punjabi" },
+  { languageId: 15, dialect: "Standard Hindi" },
+  { languageId: 15, dialect: "Awadhi" },
+  { languageId: 16, dialect: "Sri Lankan Tamil" },
+  { languageId: 16, dialect: "Chennai Tamil" },
+  { languageId: 17, dialect: "Surti" },
+  { languageId: 17, dialect: "Kathiyawadi" },
+  { languageId: 18, dialect: "Varhadi" },
+  { languageId: 18, dialect: "Deshi" },
+  { languageId: 19, dialect: "Dakhini Urdu" },
+  { languageId: 19, dialect: "Standard Urdu" },
+
+  // Iran
+  { languageId: 20, dialect: "Farsi" },
+  { languageId: 20, dialect: "Dari" },
+
+  // Burma
+  { languageId: 21, dialect: "Hakha Chin" },
+  { languageId: 22, dialect: "Jinghpaw" },
+  { languageId: 23, dialect: "Sgaw Karen" },
+
+  // China
+  { languageId: 24, dialect: "Beijing Mandarin" },
+  { languageId: 24, dialect: "Sichuan Mandarin" },
+  { languageId: 25, dialect: "Guangzhou Cantonese" },
+
+  // Philippines
+  { languageId: 26, dialect: "Tagalog" },
+  { languageId: 26, dialect: "Cebuano" },
+
+  // Samoa
+  { languageId: 27, dialect: "Upolu" },
+  { languageId: 27, dialect: "Savai'i" },
+
+  // Cambodia
+  { languageId: 28, dialect: "Central Khmer" },
+  { languageId: 28, dialect: "Northern Khmer" },
 ];
 
 export const planFeatures = [

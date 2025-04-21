@@ -6,8 +6,13 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Tooltip } from "react-tooltip";
 import Loader from "@/components/common/loader";
-import { getDialects, getLanguages } from "@/utils/commonFunctions";
+import {
+  getDialects,
+  getLanguages,
+  getLanguagesForCountry,
+} from "@/utils/commonFunctions";
 import { CountryMList } from "@/constants/CountryList";
+
 export default function Skill({ userId }) {
   const [skills, setSkills] = useState([]);
   const [ProfileLock, setProfileLock] = useState();
@@ -101,14 +106,12 @@ export default function Skill({ userId }) {
         const skillsData = response?.data?.data;
         const storedLanguages = sessionStorage.getItem("languages");
         const storedDialect = sessionStorage.getItem("dialect");
-        console.log("sad", skillsData);
-
         const formattedSkills = skillsData?.map((skill) => ({
           id: skill.id,
           country: {
             option:
-              CountryMList?.find((country) => country?.id === skill?.country)?.name ||
-              "Select",
+              CountryMList?.find((country) => country?.id === skill?.country)
+                ?.name || "Select",
             value: skill?.country || null,
           },
           language: {
@@ -144,7 +147,6 @@ export default function Skill({ userId }) {
       toast.error("Error fetching skills");
     }
   };
-
   useEffect(() => {
     const fetchData = async () => {
       const storedLanguages = sessionStorage.getItem("languages");
@@ -250,10 +252,12 @@ export default function Skill({ userId }) {
                       option: skill?.language?.option || "Select",
                       value: skill?.language?.value || null,
                     }}
-                    data={languageListing?.map((item) => ({
-                      option: item?.name,
-                      value: item?.id,
-                    }))}
+                    data={getLanguagesForCountry(skill?.country?.value)?.map(
+                      (item) => ({
+                        option: item?.name,
+                        value: item?.id,
+                      })
+                    )}
                     handler={(option, value) =>
                       handleFieldChange(index, "language", option, value)
                     }

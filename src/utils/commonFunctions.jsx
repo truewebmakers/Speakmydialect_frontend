@@ -1,4 +1,11 @@
-import { apiMethods, apiUrls, dialectData } from "@/constants/constant";
+import {
+  apiMethods,
+  apiUrls,
+  countryToLanguageMap,
+  dialectData,
+  languageData,
+} from "@/constants/constant";
+import { CountryMList } from "@/constants/CountryList";
 import UseApi from "@/hook/useApi";
 import { getProfileDetails } from "@/redux/auth";
 import moment from "moment";
@@ -47,8 +54,14 @@ export const getDialects = async (setDialectListing) => {
   }
 };
 
+export const getLanguagesForCountry = (countryId) => {
+  const countryName = CountryMList.find((c) => c.id === countryId)?.name;
+  const languageNames = countryToLanguageMap[countryName] || [];
+  return languageData.filter((lang) => languageNames?.includes(lang.name));
+};
+
 export const getSelectedDialect = async (setDialectListing, id) => {
-  try { 
+  try {
     const response = await UseApi(apiUrls.getDialects + id, apiMethods.GET);
     if (response?.status === 200 || response?.status === 201) {
       const dialectData = response?.data?.data;
@@ -56,7 +69,7 @@ export const getSelectedDialect = async (setDialectListing, id) => {
         id: index + 1,
         name: lang?.dialect,
       }));
-  
+
       setDialectListing(formattedArray);
     }
   } catch (error) {
@@ -64,20 +77,34 @@ export const getSelectedDialect = async (setDialectListing, id) => {
   }
 };
 
-export const getLanguages = async (setLanguageListing) => {
+// export const getLanguages = async (setLanguageListing) => {
+//   try {
+//     const response = await UseApi(apiUrls.getLanguages, apiMethods.GET);
+//     if (response?.status === 200 || response?.status === 201) {
+//       const languageData = response?.data?.data;
+//       const formattedArray = languageData?.map((lang, index) => ({
+//         id: lang?.id,
+//         name: lang?.name,
+//       }));
+//       setLanguageListing(formattedArray);
+//       sessionStorage.setItem("languages", JSON.stringify(formattedArray));
+//     }
+//   } catch (error) {
+//     toast.error("Error fetching languages");
+//   }
+// };
+
+export const getLanguages = (setLanguageListing) => {
   try {
-    const response = await UseApi(apiUrls.getLanguages, apiMethods.GET);
-    if (response?.status === 200 || response?.status === 201) {
-      const languageData = response?.data?.data;
-      const formattedArray = languageData?.map((lang, index) => ({
-        id: lang?.id,
-        name: lang?.name,
-      }));
-      setLanguageListing(formattedArray);
-      sessionStorage.setItem("languages", JSON.stringify(formattedArray));
-    }
+    const formattedArray = languageData?.map((lang) => ({
+      id: lang?.id,
+      name: lang?.name,
+    }));
+
+    setLanguageListing(formattedArray);
+    sessionStorage.setItem("languages", JSON.stringify(formattedArray));
   } catch (error) {
-    toast.error("Error fetching languages");
+    toast.error("Error loading languages from constants");
   }
 };
 
@@ -111,12 +138,12 @@ export const getProfileData = async (id, token) => {
 
 export const formatDateTime = (dateStr) => {
   const date = new Date(dateStr);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = date.getFullYear();
   let hours = date.getHours();
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const ampm = hours >= 12 ? "PM" : "AM";
 
   // Convert to 12-hour format
   hours = hours % 12;
@@ -125,19 +152,16 @@ export const formatDateTime = (dateStr) => {
   return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
 };
 
-
-
 export const calculatePayment = (presentRate = 0, slots) => {
   const feePercentage = 0.035;
   const fixedFee = 0.3;
-    console.log("slots in s",slots)
+  console.log("slots in s", slots);
   // Initialize total duration in minutes
   let totalDuration = 0;
 
   // Loop through each slot and calculate the time difference between start_at and end_at
-  slots?.forEach(slot => {
-
-    console.log("slot",slot)
+  slots?.forEach((slot) => {
+    console.log("slot", slot);
     const startTime = new Date(slot.start_at);
     const endTime = new Date(slot.end_at);
 
@@ -166,24 +190,24 @@ export const calculatePaymentForPaymentForm = (presentRate = 0, slots) => {
   const feePercentage = 0.035;
   const fixedFee = 0.3;
   console.log("slots in s", slots);
-  
+
   // Initialize total duration in minutes
   let totalDuration = 0;
 
   // Get today's date in YYYY-MM-DD format
   const currentDate = new Date();
-  const formattedDate = currentDate.toISOString().split('T')[0]; // Extract date (YYYY-MM-DD)
-  
+  const formattedDate = currentDate.toISOString().split("T")[0]; // Extract date (YYYY-MM-DD)
+
   // Function to format the time in "YYYY-MM-DD HH:MM:SS"
   const formatDateTime = (time) => {
-    const timeParts = time.split(':');
-    const hours = timeParts[0].padStart(2, '0'); // Ensure hours are 2 digits
-    const minutes = timeParts[1].padStart(2, '0'); // Ensure minutes are 2 digits
+    const timeParts = time.split(":");
+    const hours = timeParts[0].padStart(2, "0"); // Ensure hours are 2 digits
+    const minutes = timeParts[1].padStart(2, "0"); // Ensure minutes are 2 digits
     return `${formattedDate} ${hours}:${minutes}:00`; // Adding ":00" for seconds
   };
 
   // Loop through each slot and calculate the time difference between start_at and end_at
-  slots?.forEach(slot => {
+  slots?.forEach((slot) => {
     // Combine date and time for start_time and end_time
     const startTimeString = formatDateTime(slot.start_time);
     const endTimeString = formatDateTime(slot.end_time);
@@ -218,8 +242,6 @@ export const calculatePaymentForPaymentForm = (presentRate = 0, slots) => {
     hours: hoursDiff.toFixed(2),
   };
 };
-
- 
 
 // export const calculatePayment = (presentRate = 0, slots, duration) => {
 //   const feePercentage = 0.035;
