@@ -8,6 +8,7 @@ const listingStore = create((set) => ({
   getBestSeller: "best-seller",
   getDesginTool: [],
   getSpeak: "",
+  getCountry: "",
   getSearch: "",
   getCategory: "",
   getProjectType: [],
@@ -57,9 +58,9 @@ const listingStore = create((set) => ({
   setCountry: (payload) =>
     set((state) => {
       if (payload?.length !== 0) {
-        return { getSpeak: payload }; // Store the selected language as a string
+        return { getCountry: payload }; // Store the selected country as a string
       } else {
-        return { getSpeak: "" }; // Handle case for no selection
+        return { getCountry: "" }; // Handle case for no selection
       }
     }),
   setSpeak: (payload) =>
