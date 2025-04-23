@@ -28,6 +28,7 @@ export default function ClearButton() {
     englishLevel,
     jobType,
     noOfEmployee, 
+    setCountry 
   } = listingStore();
 
   const { priceRange, priceRangeHandler } = priceStore();
@@ -35,6 +36,7 @@ export default function ClearButton() {
   const clearHandler = () => {
     setDeliveryTime(""); 
     setLevel([]);
+    setCountry([]);
     setLocation([]);
     setBestSeller("best-seller");
     setDesginTool([]);
