@@ -1,47 +1,58 @@
 import { useEffect, useState } from "react";
 import ClearButton from "../button/ClearButton";
-import BudgetOption2 from "../option/BudgetOption2";
-import CategoryOption1 from "../option/CategoryOption1";
 import LocationOption1 from "../option/LocationOption1";
-import ProjectTypeOption1 from "../option/ProjectTypeOption1";
 import SpeakOption1 from "../option/SpeakOption1";
 import {
   getCountries,
-  getLanguages,
+  getLanguagesForCountry,
   getSelectedDialect,
 } from "@/utils/commonFunctions";
 import DialectOption1 from "../option/DialectOption";
 import { CountryMList } from "@/constants/CountryList";
-
+import LocationSelection from "../option/LocationsOption1";
 
 export default function ListingSidebar2() {
-  const [countryList, setCountryList] = useState(['Africa','Burma','China','India','Iran','Philippines','Samoa','Cambodia']); 
+  const [countryList, setCountryList] = useState([
+    "Africa",
+    "Burma",
+    "China",
+    "India",
+    "Iran",
+    "Philippines",
+    "Samoa",
+    "Cambodia",
+  ]);
   const [languageListing, setLanguageListing] = useState([]);
   const [dialectListing, setDialectListing] = useState([]);
   const [speakId, setSpeakId] = useState(0);
   const [countryId, setCountryId] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCountryData = async () => {
       const storedCountries = sessionStorage.getItem("countries");
-      const storedLanguages = sessionStorage.getItem("languages");
-      const storedDialect = sessionStorage.getItem("dialect");
 
-      console.log("CountryMList",CountryMList)
-      // console.log("storedCountries",storedCountries)
       if (storedCountries?.length > 0) {
         setCountryList(JSON.parse(storedCountries));
       } else {
         getCountries(setCountryList);
       }
-      if (storedLanguages?.length > 0) {
-        setLanguageListing(JSON.parse(storedLanguages));
+    };
+    fetchCountryData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = () => {
+      const countryName =
+        CountryMList.find((c) => c.id === countryId)?.id || null;
+      if (countryName) {
+        const langs = getLanguagesForCountry(countryName); // returns [{ id, name }]
+        setLanguageListing(langs || []);
       } else {
-        await getLanguages(setLanguageListing);
+        setLanguageListing([]);
       }
     };
     fetchData();
-  }, []);
+  }, [countryId]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,7 +104,12 @@ export default function ListingSidebar2() {
                 className="card-body card-body px-0 pt-0"
                 style={{ marginTop: "-25px" }}
               >
-                <SpeakOption1 data={CountryMList} setSpeakId={setCountryId} label = "Select Country" />
+                <LocationSelection
+                  data={CountryMList}
+                  setCountryId={setCountryId}
+                  setSpeakId={setSpeakId}
+                  label="Select Country"
+                />
               </div>
             </div>
           </div>
@@ -109,7 +125,11 @@ export default function ListingSidebar2() {
                 className="card-body card-body px-0 pt-0"
                 style={{ marginTop: "-25px" }}
               >
-                <SpeakOption1 data={languageListing} setSpeakId={setSpeakId} label = "Select Languange"  />
+                <SpeakOption1
+                  data={languageListing}
+                  setSpeakId={setSpeakId}
+                  label="Select Languange"
+                />
               </div>
             </div>
           </div>

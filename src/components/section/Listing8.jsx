@@ -12,6 +12,7 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
   const getProjectType = listingStore((state) => state.getProjectType);
   const getLocation = listingStore((state) => state.getLocation);
   const getSpeak = listingStore((state) => state.getSpeak);
+  const getCountry = listingStore((state) => state.getCountry);
   const getDialect = listingStore((state) => state.getDialect);
   const [searchingResult, setSearchingResult] = useState([]);
   const [total, setTotal] = useState(0);
@@ -21,6 +22,7 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
     const query = {
       location: getLocation || undefined,
       language: getSpeak || undefined,
+      country: getCountry || undefined,
       level: getCategory || undefined,
       type: getProjectType.length > 0 ? getProjectType : undefined,
       dialect: getDialect || undefined,
@@ -72,7 +74,14 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
     // Fetch data whenever filters change or currentPage changes
     setCurrentPage(1); // Reset to first page when filters change
     fetchData(1); // Fetch data for the first page
-  }, [getLocation, getSpeak, getCategory, getProjectType, getDialect]);
+  }, [
+    getLocation,
+    getSpeak,
+    getCountry,
+    getCategory,
+    getProjectType,
+    getDialect,
+  ]);
 
   // Fetch data for the current page whenever currentPage changes
   useEffect(() => {
