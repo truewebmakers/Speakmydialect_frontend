@@ -14632,6 +14632,8 @@ span.copyright-text.mb-2.mb-md-0.text-white-light.ff-heading {
 }
 
 .row.search-listing {
-  height: 670px;
-  overflow: scroll;
+  max-height : 670px;
+  height: auto;
+  overflow: auto;
+
 }

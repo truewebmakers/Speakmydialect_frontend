@@ -2,81 +2,78 @@ import listingStore from "@/store/listingStore";
 import priceStore from "@/store/priceStore";
 
 export default function ClearButton() {
-  // set handlers
-  const setDeliveryTime = listingStore((state) => state.setDeliveryTime);
-  const setLevel = listingStore((state) => state.setLevel);
-  const setLocation = listingStore((state) => state.setLocation);
-  const setBestSeller = listingStore((state) => state.setBestSeller);
-  const setDesginTool = listingStore((state) => state.setDesginTool);
-  const setSpeak = listingStore((state) => state.setSpeak);
-  const setDialect = listingStore((state) => state.setDialect);
-  const setPriceRange = priceStore((state) => state.priceRangeHandler);
-  const setSearch = listingStore((state) => state.setSearch);
-  const setCategory = listingStore((state) => state.setCategory);
-  const setProjectType = listingStore((state) => state.setProjectType);
-  const setEnglishLevel = listingStore((state) => state.setEnglishLevel);
-  const setJobType = listingStore((state) => state.setJobType);
-  const setNoOfEmployee = listingStore((state) => state.setNoOfEmployee);
+  const {
+    setDeliveryTime,
+    setLevel,
+    setLocation,
+    setBestSeller,
+    setDesginTool,
+    setSpeak,
+    setDialect,
+    setSearch,
+    setCategory,
+    setProjectType,
+    setEnglishLevel,
+    setJobType,
+    setNoOfEmployee,
+    deliveryTime,
+    level,
+    location,
+    bestSeller,
+    desginTool,
+    speak,
+    search,
+    category,
+    projectType,
+    englishLevel,
+    jobType,
+    noOfEmployee, 
+  } = listingStore();
 
-  // get state
-  const getDeliveryTime = listingStore((state) => state.getDeliveryTime);
-  const getLevel = listingStore((state) => state.getLevel);
-  const getLocation = listingStore((state) => state.getLocation);
-  const getBestSeller = listingStore((state) => state.getBestSeller);
-  const getDesginTool = listingStore((state) => state.getDesginTool);
-  const getSpeak = listingStore((state) => state.getSpeak);
-  const getPriceRange = priceStore((state) => state.priceRange);
-  const getSearch = listingStore((state) => state.getSearch);
-  const getCategory = listingStore((state) => state.getCategory);
-  const getProjectType = listingStore((state) => state.getProjectType);
-  const getEnglishLevel = listingStore((state) => state.getEnglishLevel);
-  const getJobType = listingStore((state) => state.getJobType);
-  const getNoOfEmployee = listingStore((state) => state.getNoOfEmployee);
+  const { priceRange, priceRangeHandler } = priceStore();
 
-  // clear handler
   const clearHandler = () => {
-    setDeliveryTime("");
+    setDeliveryTime(""); 
     setLevel([]);
     setLocation([]);
     setBestSeller("best-seller");
     setDesginTool([]);
     setSpeak([]);
     setDialect([]);
-    setPriceRange(0, 100000);
     setSearch("");
     setCategory([]);
     setProjectType([]);
     setEnglishLevel([]);
     setJobType([]);
     setNoOfEmployee([]);
+    priceRangeHandler(0, 100000);
+    console.log("Filters cleared!");
   };
 
+  const shouldShowClear =
+    deliveryTime !== "" ||
+    level.length > 0 ||
+    location.length > 0 ||
+    bestSeller !== "best-seller" ||
+    desginTool.length > 0 ||
+    speak.length > 0 ||
+    search !== "" ||
+    category.length > 0 ||
+    projectType.length > 0 ||
+    englishLevel.length > 0 ||
+    jobType.length > 0 ||
+    noOfEmployee.length > 0 ||
+    priceRange.min !== 0 ||
+    priceRange.max !== 100000;
+
   return (
-    <>
-      {getDeliveryTime !== "" ||
-      getLevel?.length !== 0 ||
-      getLocation?.length !== 0 ||
-      getSearch !== "" ||
-      getBestSeller !== "best-seller" ||
-      getDesginTool?.length !== 0 ||
-      getSpeak?.length !== 0 ||
-      getPriceRange.min !== 0 ||
-      getPriceRange.max !== 100000 ||
-      getCategory?.length !== 0 ||
-      getProjectType?.length !== 0 ||
-      getEnglishLevel?.length !== 0 ||
-      getJobType?.length !== 0 ||
-      getNoOfEmployee?.length !== 0 ? (
-        <button
-          onClick={clearHandler}
-          className="ud-btn btn-thm ui-clear-btn w-100"
-        >
-          Clear
-          <i className="fal fa-arrow-right-long"></i>
-        </button>
-      ) : (
-        ""
-      )}
-    </>
+    shouldShowClear && (
+      <button
+        onClick={clearHandler}
+        className="ud-btn btn-thm ui-clear-btn w-100"
+      >
+        Clear <i className="fal fa-arrow-right-long"></i>
+      </button>
+    )
   );
 }

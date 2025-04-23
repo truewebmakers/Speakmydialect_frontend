@@ -133,6 +133,7 @@ export default function ListingSidebar2() {
               </div>
             </div>
           </div>
+         
           <div className="card mb20">
             <h4>Dialect</h4>
             <div
@@ -146,10 +147,11 @@ export default function ListingSidebar2() {
                 style={{ marginTop: "-25px" }}
               >
                 <DialectOption1 data={dialectListing} />
+               
               </div>
             </div>
           </div>
-        </div>
+        </div> 
         <ClearButton />
       </div>
     </>
