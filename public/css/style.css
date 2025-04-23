@@ -14630,3 +14630,8 @@ span.copyright-text.mb-2.mb-md-0.text-white-light.ff-heading {
     width: 30% !important;
 }
 }
+
+.row.search-listing {
+  height: 670px;
+  overflow: scroll;
+}

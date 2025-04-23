@@ -100,7 +100,7 @@ export default function Listing8({ searchingResult1, setSearchingResult1 }) {
             <ListingSidebar2 setSearchingResult={setSearchingResult} />
           </div>
           <div className="col-lg-9">
-            <div className="row">{content}</div>
+            <div className="row search-listing">{content}</div>
             {searchingResult?.length === 0 &&
               searchingResult1?.length === 0 && <NoDataFound />}
             {total > pageLimit && (

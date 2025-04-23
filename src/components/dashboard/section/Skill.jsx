@@ -230,7 +230,7 @@ export default function Skill({ userId }) {
                 <div className="col-sm-2">
                   <div className="mb20">
                     <SelectInput
-                      label="Select Country"
+                      label="Country"
                       defaultSelect={{
                         option: skill?.country?.option || "Select",
                         value: skill?.country?.value || null,
