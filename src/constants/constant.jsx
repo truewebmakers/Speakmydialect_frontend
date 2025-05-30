@@ -77,13 +77,18 @@ export const skillStatus = [
   { id: 1, name: "Active" },
   { id: 2, name: "Inactive" },
 ];
-export const skillLevel = [
-  { id: 1, name: "Basic" },
-  { id: 2, name: "Bilingual" },
-  { id: 3, name: "Fluent" },
-  { id: 4, name: "Native" },
-];
+// export const skillLevel = [
+//   { id: 1, name: "Basic" },
+//   { id: 2, name: "Bilingual" },
+//   { id: 3, name: "Fluent" },
+//   { id: 4, name: "Native" },
+// ];
 
+
+export const skillLevel = [
+  { id: 1, name: "Naati  Certified",value: "naati_certified" },
+  { id: 2, name: "Community Based",value: "community_based" }, 
+];
 export const experienceLocationType = [
   { id: 1, name: "On-site", value: "on-site" },
   { id: 2, name: "Hybrid", value: "hybrid" },
@@ -265,370 +270,488 @@ export const ordersManagementTab = [
 export const countryToLanguageMap = {
   Africa: [
     "Arabic",
-    "Congo",
-    "Dinka",
-    "Equatorian",
-    "Greek",
-    "Nuer",
-    "Somali",
     "Swahili",
-    "Nigerian",
+    "Dinka",
     "Bari",
+    "Somali",
+    "Pidgin English",
     "Yoruba",
-    "Igbo",
+    "Kikongo",
+    "French",
     "Lingala",
   ],
-  India: ["Punjabi", "Hindi", "Telugu", "Tamil", "Gujarati", "Marathi", "Urdu"],
-  Iran: ["Persian"],
-  Burma: ["Burmese", "Chin", "Kachin", "Karen"],
-  China: ["Mandarin", "Cantonese"],
-  Philippines: ["Fillipino"], // Add as needed
-  Samoa: ["Samoan"], // Add as needed
-  Cambodia: ["Khmer"], // Add as needed
+  India: [
+    "Punjabi",
+    "Urdu",
+    "Hindi",
+    "Tamil",
+    "Gujarati",
+    "Marathi",
+    "Telugu",
+  ],
+  Iran: ["Persian","Afghanistan"], 
+  Afghanistan: ["Dari"],
+  // Burma: ["Karen", "Kachin", "Chin", "Burmese"],
+  Burma: ["Karen"],
+  China: ["Chinese"],
+  Samoa: ["Samoan"],
+  Philippines: ["Pilipino","Cebuano"],
+  Cambodia: ["Khmer"],
 };
-
 export const languageData = [
-  {
-    id: 1,
-    iso: "Ar",
-    name: "Arabic",
-    created_at: "2024-12-23T15:03:11.000000Z",
-  },
-  {
-    id: 2,
-    iso: "Co",
-    name: "Congo",
-    created_at: "2024-12-23T15:03:11.000000Z",
-  },
-  {
-    id: 3,
-    iso: null,
-    name: "Dinka",
-    created_at: "2024-12-23T15:03:32.000000Z",
-  },
-  {
-    id: 4,
-    iso: null,
-    name: "Equatorian",
-    created_at: "2024-12-23T15:03:32.000000Z",
-  },
-  {
-    id: 5,
-    iso: null,
-    name: "Greek",
-    created_at: "2024-12-23T15:03:59.000000Z",
-  },
-  { id: 6, iso: null, name: "Nuer", created_at: "2024-12-23T15:03:59.000000Z" },
-  {
-    id: 7,
-    iso: null,
-    name: "Somali",
-    created_at: "2024-12-23T15:03:59.000000Z",
-  },
-  {
-    id: 8,
-    iso: null,
-    name: "Swahili",
-    created_at: "2024-12-23T15:03:59.000000Z",
-  },
-  {
-    id: 9,
-    iso: null,
-    name: "Nigerian",
-    created_at: "2025-01-22T08:32:58.000000Z",
-  },
-  {
-    id: 10,
-    iso: null,
-    name: "Indian",
-    created_at: "2025-01-22T08:33:22.000000Z",
-  },
-  {
-    id: 11,
-    iso: null,
-    name: "Iran",
-    created_at: "2025-01-22T08:33:44.000000Z",
-  },
-  {
-    id: 12,
-    iso: null,
-    name: "Burmese",
-    created_at: "2025-01-22T08:33:44.000000Z",
-  },
-  {
-    id: 13,
-    iso: null,
-    name: "Chinese",
-    created_at: "2025-01-22T08:33:59.000000Z",
-  },
+  { id: 1, iso: null, name: "Arabic", created_at: "2025-05-30T00:00:00Z" },
+  { id: 2, iso: null, name: "Swahili", created_at: "2025-05-30T00:00:00Z" },
+  { id: 3, iso: null, name: "Dinka", created_at: "2025-05-30T00:00:00Z" },
+  { id: 4, iso: null, name: "Bari", created_at: "2025-05-30T00:00:00Z" },
+  { id: 5, iso: null, name: "Somali", created_at: "2025-05-30T00:00:00Z" },
+  { id: 6, iso: null, name: "Pidgin English", created_at: "2025-05-30T00:00:00Z" },
+  { id: 7, iso: null, name: "Yoruba", created_at: "2025-05-30T00:00:00Z" },
+  { id: 8, iso: null, name: "Kikongo", created_at: "2025-05-30T00:00:00Z" },
+  { id: 9, iso: null, name: "French", created_at: "2025-05-30T00:00:00Z" },
+  { id: 10, iso: null, name: "Lingala", created_at: "2025-05-30T00:00:00Z" },
 
-  // Newly added
-  {
-    id: 14,
-    iso: null,
-    name: "Punjabi",
-    created_at: "2025-04-21T00:00:00.000Z",
-  },
-  { id: 15, iso: null, name: "Hindi", created_at: "2025-04-21T00:00:00.000Z" },
-  { id: 16, iso: null, name: "Tamil", created_at: "2025-04-21T00:00:00.000Z" },
-  {
-    id: 17,
-    iso: null,
-    name: "Gujarati",
-    created_at: "2025-04-21T00:00:00.000Z",
-  },
-  {
-    id: 18,
-    iso: null,
-    name: "Marathi",
-    created_at: "2025-04-21T00:00:00.000Z",
-  },
-  { id: 19, iso: null, name: "Urdu", created_at: "2025-04-21T00:00:00.000Z" },
-  {
-    id: 20,
-    iso: null,
-    name: "Persian",
-    created_at: "2025-04-21T00:00:00.000Z",
-  },
-  {
-    id: 24,
-    iso: null,
-    name: "Mandarin",
-    created_at: "2025-04-21T00:00:00.000Z",
-  },
-  {
-    id: 25,
-    iso: null,
-    name: "Cantonese",
-    created_at: "2025-04-21T00:00:00.000Z",
-  },
-  {
-    id: 26,
-    iso: null,
-    name: "Fillipino",
-    created_at: "2025-04-21T00:00:00.000Z",
-  },
-  { id: 27, iso: null, name: "Samoan", created_at: "2025-04-21T00:00:00.000Z" },
-  { id: 28, iso: null, name: "Khmer", created_at: "2025-04-21T00:00:00.000Z" },
+  { id: 11, iso: null, name: "Punjabi", created_at: "2025-05-30T00:00:00Z" },
+  { id: 12, iso: null, name: "Urdu", created_at: "2025-05-30T00:00:00Z" },
+  { id: 13, iso: null, name: "Hindi", created_at: "2025-05-30T00:00:00Z" },
+  { id: 14, iso: null, name: "Tamil", created_at: "2025-05-30T00:00:00Z" },
+  { id: 15, iso: null, name: "Gujarati", created_at: "2025-05-30T00:00:00Z" },
+  { id: 16, iso: null, name: "Marathi", created_at: "2025-05-30T00:00:00Z" },
+  { id: 17, iso: null, name: "Telugu", created_at: "2025-05-30T00:00:00Z" },
+
+  { id: 18, iso: null, name: "Persian", created_at: "2025-05-30T00:00:00Z" },
+  { id: 19, iso: null, name: "Afghanistan", created_at: "2025-05-30T00:00:00Z" }, 
+
+  { id: 20, iso: null, name: "Karen", created_at: "2025-05-30T00:00:00Z" },
+  { id: 21, iso: null, name: "Kachin", created_at: "2025-05-30T00:00:00Z" },
+  { id: 22, iso: null, name: "Chin", created_at: "2025-05-30T00:00:00Z" },
+  { id: 23, iso: null, name: "Burmese", created_at: "2025-05-30T00:00:00Z" },
+
+  { id: 24, iso: null, name: "Chinese", created_at: "2025-05-30T00:00:00Z" },
+
+  { id: 25, iso: null, name: "Samoan", created_at: "2025-05-30T00:00:00Z" },
+  { id: 26, iso: null, name: "Pilipino", created_at: "2025-05-30T00:00:00Z" },
+  { id: 26, iso: null, name: "Cebuano", created_at: "2025-05-30T00:00:00Z" },
+  { id: 27, iso: null, name: "Khmer", created_at: "2025-05-30T00:00:00Z" },
 ];
 
 export const dialectData = [
-  {
-    languageId: 1,
-    dialect: "Egyptian",
-  },
-  {
-    languageId: 1,
-    dialect: "South Sudanese",
-  },
-  {
-    languageId: 1,
-    dialect: "Sudanese",
-  },
-  {
-    languageId: 1,
-    dialect: "Turkish",
-  },
-  {
-    languageId: 1,
-    dialect: "Moroccan",
-  },
-  {
-    languageId: 2,
-    dialect: "Lingala",
-  },
-  {
-    languageId: 2,
-    dialect: "Swahili",
-  },
-  {
-    languageId: 2,
-    dialect: "French",
-  },
-  {
-    languageId: 3,
-    dialect: "Aweil",
-  },
-  {
-    languageId: 3,
-    dialect: "Bor",
-  },
-  {
-    languageId: 3,
-    dialect: "Abyel",
-  },
-  {
-    languageId: 3,
-    dialect: "Agar",
-  },
-  {
-    languageId: 4,
-    dialect: "Bari",
-  },
-  {
-    languageId: 4,
-    dialect: "Acholi",
-  },
-  {
-    languageId: 4,
-    dialect: "Kuku",
-  },
-  {
-    languageId: 4,
-    dialect: "Pojulu",
-  },
-  {
-    languageId: 4,
-    dialect: "Madi",
-  },
-  {
-    languageId: 5,
-    dialect: "Amharic",
-  },
-  {
-    languageId: 5,
-    dialect: "Oromo",
-  },
-  {
-    languageId: 6,
-    dialect: "Thok Naath",
-  },
-  {
-    languageId: 6,
-    dialect: "Lou",
-  },
-  {
-    languageId: 7,
-    dialect: "Oromo",
-  },
-  {
-    languageId: 7,
-    dialect: "Amharic",
-  },
-  {
-    languageId: 7,
-    dialect: "Garre",
-  },
-  {
-    languageId: 8,
-    dialect: "Tanzanian",
-  },
-  {
-    languageId: 8,
-    dialect: "Kenyan",
-  },
-  {
-    languageId: 8,
-    dialect: "Ugandan",
-  },
-  {
-    languageId: 9,
-    dialect: "Yoruba",
-  },
-  {
-    languageId: 9,
-    dialect: "Igbo",
-  },
-  {
-    languageId: 9,
-    dialect: "Pidgin",
-  },
-  {
-    languageId: 9,
-    dialect: "English",
-  },
-  {
-    languageId: 10,
-    dialect: "Punjabi",
-  },
-  {
-    languageId: 10,
-    dialect: "Urdu",
-  },
-  {
-    languageId: 10,
-    dialect: "Hindi",
-  },
-  {
-    languageId: 10,
-    dialect: "Tamil",
-  },
-  {
-    languageId: 11,
-    dialect: "Persian",
-  },
-  {
-    languageId: 11,
-    dialect: "Farsi",
-  },
-  {
-    languageId: 12,
-    dialect: "Karen",
-  },
-  {
-    languageId: 12,
-    dialect: "Kachin",
-  },
-  {
-    languageId: 12,
-    dialect: "Chin",
-  },
-  {
-    languageId: 12,
-    dialect: "Burmese",
-  },
-  {
-    languageId: 13,
-    dialect: "Standard Chinese",
-  },
-  {
-    languageId: 13,
-    dialect: "Mandarin",
-  },
-  {
-    languageId: 13,
-    dialect: "Middle Chinese",
-  },
-  // New India-related languages
-  { languageId: 14, dialect: "Eastern Punjabi" },
-  { languageId: 14, dialect: "Western Punjabi" },
-  { languageId: 15, dialect: "Standard Hindi" },
-  { languageId: 15, dialect: "Awadhi" },
-  { languageId: 16, dialect: "Sri Lankan Tamil" },
-  { languageId: 16, dialect: "Chennai Tamil" },
-  { languageId: 17, dialect: "Surti" },
-  { languageId: 17, dialect: "Kathiyawadi" },
-  { languageId: 18, dialect: "Varhadi" },
-  { languageId: 18, dialect: "Deshi" },
-  { languageId: 19, dialect: "Dakhini Urdu" },
-  { languageId: 19, dialect: "Standard Urdu" },
+  { languageId: 1, dialect: "Juba-Arabic" },
+  { languageId: 1, dialect: "Egyptian" },
+  { languageId: 1, dialect: "Middle East" },
+  { languageId: 1, dialect: "Moroccan" },
+  { languageId: 1, dialect: "Sudanese" },
+  { languageId: 1, dialect: "Turkish" },
+  { languageId: 1, dialect: "Iraq" },
 
-  // Iran
-  { languageId: 20, dialect: "Farsi" },
-  { languageId: 20, dialect: "Dari" },
+  { languageId: 2, dialect: "Ugandan" },
+  { languageId: 2, dialect: "Kenyan" },
+  { languageId: 2, dialect: "Congolese" },
+  { languageId: 2, dialect: "Tanzanian" },
+  { languageId: 2, dialect: "Rwanda" },
 
-  // Burma
-  { languageId: 21, dialect: "Hakha Chin" },
-  { languageId: 22, dialect: "Jinghpaw" },
-  { languageId: 23, dialect: "Sgaw Karen" },
+  { languageId: 3, dialect: "Aweil" },
+  { languageId: 3, dialect: "Bor" },
+  { languageId: 3, dialect: "Abyei" },
+  { languageId: 3, dialect: "Agar" },
 
-  // China
-  { languageId: 24, dialect: "Beijing Mandarin" },
-  { languageId: 24, dialect: "Sichuan Mandarin" },
-  { languageId: 25, dialect: "Guangzhou Cantonese" },
+  { languageId: 4, dialect: "Kuku" },
+  { languageId: 4, dialect: "Pojulu" },
+  { languageId: 4, dialect: "Madi" },
+  { languageId: 4, dialect: "Acholi" },
 
-  // Philippines
+  { languageId: 5, dialect: "Oromo" },
+  { languageId: 5, dialect: "Amharic" },
+  { languageId: 5, dialect: "Garre" },
+
+  { languageId: 18, dialect: "Farsi" },
+  { languageId: 19, dialect: "Dari" },
+  { languageId: 20, dialect: "Kachin" },
+  { languageId: 20, dialect: "Chin" },
+  { languageId: 20, dialect: "Burmese" },
+
+  { languageId: 24, dialect: "Mandarin" },
+  { languageId: 24, dialect: "Middle Chinese" },
+
   { languageId: 26, dialect: "Tagalog" },
   { languageId: 26, dialect: "Cebuano" },
-
-  // Samoa
-  { languageId: 27, dialect: "Upolu" },
-  { languageId: 27, dialect: "Savai'i" },
-
-  // Cambodia
-  { languageId: 28, dialect: "Central Khmer" },
-  { languageId: 28, dialect: "Northern Khmer" },
 ];
+
+
+// export const countryToLanguageMap = {
+//   Africa: [
+//     "Arabic",
+//     "Congo",
+//     "Dinka",
+//     "Equatorian",
+//     "Greek",
+//     "Nuer",
+//     "Somali",
+//     "Swahili",
+//     "Nigerian",
+//     "Bari",
+//     "Yoruba",
+//     "Igbo",
+//     "Lingala",
+//   ],
+//   India: ["Punjabi", "Hindi", "Telugu", "Tamil", "Gujarati", "Marathi", "Urdu"],
+//   Iran: ["Persian"],
+//   Burma: ["Burmese", "Chin", "Kachin", "Karen"],
+//   China: ["Mandarin", "Cantonese"],
+//   Philippines: ["Fillipino"], // Add as needed
+//   Samoa: ["Samoan"], // Add as needed
+//   Cambodia: ["Khmer"], // Add as needed
+// };
+
+// export const languageData = [
+//   {
+//     id: 1,
+//     iso: "Ar",
+//     name: "Arabic",
+//     created_at: "2024-12-23T15:03:11.000000Z",
+//   },
+//   {
+//     id: 2,
+//     iso: null,
+//     name: "Swahili",
+//     created_at: "2024-12-23T15:03:11.000000Z",
+//   },
+//   {
+//     id: 3,
+//     iso: null,
+//     name: "Dinka",
+//     created_at: "2024-12-23T15:03:32.000000Z",
+//   },
+//   {
+//     id: 4,
+//     iso: null,
+//     name: "Equatorian",
+//     created_at: "2024-12-23T15:03:32.000000Z",
+//   },
+//   {
+//     id: 5,
+//     iso: null,
+//     name: "Greek",
+//     created_at: "2024-12-23T15:03:59.000000Z",
+//   },
+//   { id: 6, iso: null, name: "Nuer", created_at: "2024-12-23T15:03:59.000000Z" },
+//   {
+//     id: 7,
+//     iso: null,
+//     name: "Somali",
+//     created_at: "2024-12-23T15:03:59.000000Z",
+//   },
+//   {
+//     id: 8,
+//     iso: null,
+//     name: "Swahili",
+//     created_at: "2024-12-23T15:03:59.000000Z",
+//   },
+//   {
+//     id: 9,
+//     iso: null,
+//     name: "Nigerian",
+//     created_at: "2025-01-22T08:32:58.000000Z",
+//   },
+//   {
+//     id: 10,
+//     iso: null,
+//     name: "Indian",
+//     created_at: "2025-01-22T08:33:22.000000Z",
+//   },
+//   {
+//     id: 11,
+//     iso: null,
+//     name: "Iran",
+//     created_at: "2025-01-22T08:33:44.000000Z",
+//   },
+//   {
+//     id: 12,
+//     iso: null,
+//     name: "Burmese",
+//     created_at: "2025-01-22T08:33:44.000000Z",
+//   },
+//   {
+//     id: 13,
+//     iso: null,
+//     name: "Chinese",
+//     created_at: "2025-01-22T08:33:59.000000Z",
+//   },
+
+//   // Newly added
+//   {
+//     id: 14,
+//     iso: null,
+//     name: "Punjabi",
+//     created_at: "2025-04-21T00:00:00.000Z",
+//   },
+//   { id: 15, iso: null, name: "Hindi", created_at: "2025-04-21T00:00:00.000Z" },
+//   { id: 16, iso: null, name: "Tamil", created_at: "2025-04-21T00:00:00.000Z" },
+//   {
+//     id: 17,
+//     iso: null,
+//     name: "Gujarati",
+//     created_at: "2025-04-21T00:00:00.000Z",
+//   },
+//   {
+//     id: 18,
+//     iso: null,
+//     name: "Marathi",
+//     created_at: "2025-04-21T00:00:00.000Z",
+//   },
+//   { id: 19, iso: null, name: "Urdu", created_at: "2025-04-21T00:00:00.000Z" },
+//   {
+//     id: 20,
+//     iso: null,
+//     name: "Persian",
+//     created_at: "2025-04-21T00:00:00.000Z",
+//   },
+//   {
+//     id: 24,
+//     iso: null,
+//     name: "Mandarin",
+//     created_at: "2025-04-21T00:00:00.000Z",
+//   },
+//   {
+//     id: 25,
+//     iso: null,
+//     name: "Cantonese",
+//     created_at: "2025-04-21T00:00:00.000Z",
+//   },
+//   {
+//     id: 26,
+//     iso: null,
+//     name: "Fillipino",
+//     created_at: "2025-04-21T00:00:00.000Z",
+//   },
+//   { id: 27, iso: null, name: "Samoan", created_at: "2025-04-21T00:00:00.000Z" },
+//   { id: 28, iso: null, name: "Khmer", created_at: "2025-04-21T00:00:00.000Z" },
+// ];
+
+// export const dialectData = [
+//   {
+//     languageId: 1,
+//     dialect: "Juba-Arabic",
+//   },
+//   {
+//     languageId: 1,
+//     dialect: "Egyptian",
+//   },
+//   {
+//     languageId: 1,
+//     dialect: "Middle East",
+//   },
+//   {
+//     languageId: 1,
+//     dialect: "Moroccan",
+//   },
+//   {
+//     languageId: 1,
+//     dialect: "Sudanese",
+//   },
+//   {
+//     languageId: 1,
+//     dialect: "Turkish",
+//   },
+//   {
+//     languageId: 1,
+//     dialect: "Iraq",
+//   },
+//   {
+//     languageId: 2,
+//     dialect: "Lingala",
+//   },
+//   {
+//     languageId: 2,
+//     dialect: "Swahili",
+//   },
+//   {
+//     languageId: 2,
+//     dialect: "French",
+//   },
+//   {
+//     languageId: 3,
+//     dialect: "Aweil",
+//   },
+//   {
+//     languageId: 3,
+//     dialect: "Bor",
+//   },
+//   {
+//     languageId: 3,
+//     dialect: "Abyel",
+//   },
+//   {
+//     languageId: 3,
+//     dialect: "Agar",
+//   },
+//   {
+//     languageId: 4,
+//     dialect: "Bari",
+//   },
+//   {
+//     languageId: 4,
+//     dialect: "Acholi",
+//   },
+//   {
+//     languageId: 4,
+//     dialect: "Kuku",
+//   },
+//   {
+//     languageId: 4,
+//     dialect: "Pojulu",
+//   },
+//   {
+//     languageId: 4,
+//     dialect: "Madi",
+//   },
+//   {
+//     languageId: 5,
+//     dialect: "Amharic",
+//   },
+//   {
+//     languageId: 5,
+//     dialect: "Oromo",
+//   },
+//   {
+//     languageId: 6,
+//     dialect: "Thok Naath",
+//   },
+//   {
+//     languageId: 6,
+//     dialect: "Lou",
+//   },
+//   {
+//     languageId: 7,
+//     dialect: "Oromo",
+//   },
+//   {
+//     languageId: 7,
+//     dialect: "Amharic",
+//   },
+//   {
+//     languageId: 7,
+//     dialect: "Garre",
+//   },
+//   {
+//     languageId: 8,
+//     dialect: "Tanzanian",
+//   },
+//   {
+//     languageId: 8,
+//     dialect: "Kenyan",
+//   },
+//   {
+//     languageId: 8,
+//     dialect: "Ugandan",
+//   },
+//   {
+//     languageId: 9,
+//     dialect: "Yoruba",
+//   },
+//   {
+//     languageId: 9,
+//     dialect: "Igbo",
+//   },
+//   {
+//     languageId: 9,
+//     dialect: "Pidgin",
+//   },
+//   {
+//     languageId: 9,
+//     dialect: "English",
+//   },
+//   {
+//     languageId: 10,
+//     dialect: "Punjabi",
+//   },
+//   {
+//     languageId: 10,
+//     dialect: "Urdu",
+//   },
+//   {
+//     languageId: 10,
+//     dialect: "Hindi",
+//   },
+//   {
+//     languageId: 10,
+//     dialect: "Tamil",
+//   },
+//   {
+//     languageId: 11,
+//     dialect: "Persian",
+//   },
+//   {
+//     languageId: 11,
+//     dialect: "Farsi",
+//   },
+//   {
+//     languageId: 12,
+//     dialect: "Karen",
+//   },
+//   {
+//     languageId: 12,
+//     dialect: "Kachin",
+//   },
+//   {
+//     languageId: 12,
+//     dialect: "Chin",
+//   },
+//   {
+//     languageId: 12,
+//     dialect: "Burmese",
+//   },
+//   {
+//     languageId: 13,
+//     dialect: "Standard Chinese",
+//   },
+//   {
+//     languageId: 13,
+//     dialect: "Mandarin",
+//   },
+//   {
+//     languageId: 13,
+//     dialect: "Middle Chinese",
+//   },
+//   // New India-related languages
+//   { languageId: 14, dialect: "Eastern Punjabi" },
+//   { languageId: 14, dialect: "Western Punjabi" },
+//   { languageId: 15, dialect: "Standard Hindi" },
+//   { languageId: 15, dialect: "Awadhi" },
+//   { languageId: 16, dialect: "Sri Lankan Tamil" },
+//   { languageId: 16, dialect: "Chennai Tamil" },
+//   { languageId: 17, dialect: "Surti" },
+//   { languageId: 17, dialect: "Kathiyawadi" },
+//   { languageId: 18, dialect: "Varhadi" },
+//   { languageId: 18, dialect: "Deshi" },
+//   { languageId: 19, dialect: "Dakhini Urdu" },
+//   { languageId: 19, dialect: "Standard Urdu" },
+
+//   // Iran
+//   { languageId: 20, dialect: "Farsi" },
+//   { languageId: 20, dialect: "Dari" },
+
+//   // Burma
+//   { languageId: 21, dialect: "Hakha Chin" },
+//   { languageId: 22, dialect: "Jinghpaw" },
+//   { languageId: 23, dialect: "Sgaw Karen" },
+
+//   // China
+//   { languageId: 24, dialect: "Beijing Mandarin" },
+//   { languageId: 24, dialect: "Sichuan Mandarin" },
+//   { languageId: 25, dialect: "Guangzhou Cantonese" },
+
+//   // Philippines
+//   { languageId: 26, dialect: "Tagalog" },
+//   { languageId: 26, dialect: "Cebuano" },
+
+//   // Samoa
+//   { languageId: 27, dialect: "Upolu" },
+//   { languageId: 27, dialect: "Savai'i" },
+
+//   // Cambodia
+//   { languageId: 28, dialect: "Central Khmer" },
+//   { languageId: 28, dialect: "Northern Khmer" },
+// ];
 
 export const planFeatures = [
   "Business Name",

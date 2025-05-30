@@ -30,8 +30,8 @@ export default function CategoryOption1() {
           {item?.name}
           <input
             type="checkbox"
-            onChange={() => categoryHandler(item?.name)}
-            checked={getCategory === item?.name} // Check if current item is the selected category
+            onChange={() => categoryHandler(item?.value)}
+            checked={getCategory === item?.value} // Check if current item is the selected category
           />
           <span className="checkmark" />
         </label>

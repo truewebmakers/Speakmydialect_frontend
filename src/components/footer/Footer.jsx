@@ -53,7 +53,7 @@ export default function Footer() {
                 <ul className="ps-0">
                   {quickLinks1.map((item, i) => (
                     <li key={i}>
-                      <Link to={item.path} target="_blank">
+                      <Link to={item.path}>
                         {item.name}
                       </Link>
                     </li>
@@ -76,12 +76,12 @@ export default function Footer() {
                     pathname !== "/home-4" ? "text-white" : ""
                   }`}
                 >
-                  Quick Links
+                  Quick Links 
                 </h5>
                 <ul className="ps-0">
                   {quickLinks2.map((item, i) => (
                     <li key={i}>
-                      <Link to={item.path} target="_blank">
+                      <Link to={item.path}> 
                         {item.name}
                       </Link>
                     </li>

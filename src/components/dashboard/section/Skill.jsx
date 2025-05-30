@@ -26,6 +26,7 @@ export default function Skill({ userId }) {
   }); // Add this at the top with other states
 
   const handleFieldChange = (index, field, option, value) => {
+    
     const newSkills = [...skills];
     newSkills[index][field] = {
       option: option,
@@ -284,20 +285,23 @@ export default function Skill({ userId }) {
                   />
                 </div>
                 <div className="col-sm-2 mb20">
-                  <SelectInput
-                    label="Level"
-                    defaultSelect={{
-                      option: skill?.level?.option || "Select",
-                      value: skill?.level?.value || null,
-                    }}
-                    data={skillLevel?.map((item) => ({
-                      option: item?.name,
-                      value: item?.name.toLowerCase(),
-                    }))}
-                    handler={(option, value) =>
-                      handleFieldChange(index, "level", option, value)
-                    }
-                  />
+                <SelectInput
+                  label="Level"
+                  defaultSelect={{
+                    option: skillLevel.find(
+                      (item) => item.value.toLowerCase() === skill?.level?.value?.toLowerCase()
+                    )?.name || "Select",
+                    value: skill?.level?.value || null,
+                  }}
+                  data={skillLevel.map((item) => ({
+                    option: item.name,
+                    value: item.value.toLowerCase(),
+                  }))}
+                  handler={(option, value) =>
+                    handleFieldChange(index, "level", option, value)
+                  }
+                />
+
                 </div>
 
                 <div className="col-sm-2 mb20">

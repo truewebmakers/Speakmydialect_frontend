@@ -4,8 +4,8 @@ export const CountryMList = [
     { id: 3, name: "China", value: "China" },
     { id: 4, name: "India", value: "India" },
     { id: 5, name: "Iran", value: "Iran" },
-    { id: 5, name: "Philippines", value: "Philippines" },
-    { id: 5, name: "Samoa", value: "Samoa" },
-    { id: 5, name: "Cambodia", value: "Cambodia" },
+    { id: 6, name: "Philippines", value: "Philippines" },
+    { id: 7, name: "Samoa", value: "Samoa" },
+    { id: 8, name: "Cambodia", value: "Cambodia" }, 
   ];
  

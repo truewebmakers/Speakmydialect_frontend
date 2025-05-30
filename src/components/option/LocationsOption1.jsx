@@ -17,6 +17,7 @@ export default function LocationSelection({
 
   // Language Handler
   const speakHandler = (option, value) => {
+     
     setCountryId(value);
     setCountry(value);
     setSearchParams("");
