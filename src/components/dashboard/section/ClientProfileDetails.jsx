@@ -15,7 +15,7 @@ export default function ClientProfileDetails({ userId }) {
     lname: "",
     phone_number: "",
     email: "",
-    fix_rate: "77",
+    fix_rate: "87",
     hourly_rate: 0,
     intro: "",
     address: "",
@@ -110,7 +110,7 @@ export default function ClientProfileDetails({ userId }) {
           ? profileData?.phone_number
           : "",
         email: profileData?.email || "",
-        fix_rate: "77" || "",
+        fix_rate: "87" || "",
         hourly_rate: 0 || "",
         intro: profileData?.user_meta?.intro || "",
         address: profileData?.user_meta?.address || "", 

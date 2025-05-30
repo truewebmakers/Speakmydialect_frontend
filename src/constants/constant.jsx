@@ -5,7 +5,7 @@ export const apiMethods = {
   DELETE: "delete",
 };
 
-export const fixRate = 77;
+export const fixRate = 87;
 export const pageLimit = 20;
 
 export const env = {

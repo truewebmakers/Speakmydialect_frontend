@@ -10,6 +10,7 @@ import {
 import DialectOption1 from "../option/DialectOption";
 import { CountryMList } from "@/constants/CountryList";
 import LocationSelection from "../option/LocationsOption1";
+import CategoryOption1 from "../option/CategoryOption1";
 
 export default function ListingSidebar2() {
   const [countryList, setCountryList] = useState([
@@ -65,7 +66,7 @@ export default function ListingSidebar2() {
     <>
       <div className="list-sidebar-style1 d-none d-lg-block">
         <div className="accordion" id="accordionExample">
-          {/* <div className="card mb20 mt-0">
+          <div className="card mb20 mt-0">
             <h4>Level</h4>
             <div
               id="collapse0"
@@ -77,7 +78,7 @@ export default function ListingSidebar2() {
                 <CategoryOption1 />
               </div>
             </div>
-          </div> */}
+          </div>
 
           <div className="card mb20">
             <h4>Location</h4>
